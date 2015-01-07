@@ -1,5 +1,10 @@
 # CenturyLink Cloud Price Estimator
 
+A simple calculator for estimating monthly cost of using CenturyLink Cloud products and services.
+A built version of this tool is viewable here:
+
+http://www.centurylinkcloud.com/estimator
+
 ## Installation
 
 This project uses:
