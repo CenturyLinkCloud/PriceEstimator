@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<head>
+
+	<title>Testing</title>
+
+	<script> // Check URL, load jQuery or Zepto
+		var script=document.createElement("script");0>window.location.href.indexOf("zepto")?
+		script.src="http://code.jquery.com/jquery-1.10.2.js":
+		script.src="http://cdnjs.cloudflare.com/ajax/libs/zepto/1.0/zepto.js";
+		document.write(script.outerHTML);
+	</script>
+	<style>
+
+		body {
+			padding: 20px;
+		}
+		#qunit {
+			width: 400px;
+			margin: 0 auto;
+		}
+
+	</style>
+
+	<link href="http://code.jquery.com/qunit/qunit-1.12.0.css" rel="stylesheet">
+	<script src="http://code.jquery.com/qunit/qunit-1.12.0.js"></script>
+	<script src="../../classVal/jquery.classval.js"></script>
+
+</head>
+
+<body>
+
+	<div id="qunit"></div>
+	<div id="qunit-fixture"></div>
+
+	<style>/* #qunit-fixture { position: static; } *//* Shameless in-test debugging */</style>
+
+	<script>
+		var Q = $("#qunit-fixture");
+	</script>
+
+	<script src="test.js"></script>
+
+</body>

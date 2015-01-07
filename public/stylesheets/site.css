@@ -1,0 +1,99 @@
+.header {
+  background-color: #000000;
+  min-height: 40px;
+  min-width: 1012px;
+  padding: 20px 0;
+  position: relative;
+  z-index: 10;
+}
+.header .btn-inverse {
+  background-color: #00853f;
+  color: #ffffff;
+}
+.header .btn-inverse:hover {
+  background-color: #0d8001;
+  color: #ffffff;
+}
+.header-phone {
+  margin: 15px 10px 0 0;
+  float: left;
+  color: #aaa;
+}
+.header .lpChatTextLink {
+    color: #fff;
+}
+.header .lpChatTextLink:hover {
+    text-decoration: none;
+}
+
+
+.header .navbar {
+  background-color: #000000;
+}
+
+.page-title {
+  background-color: white;
+  padding: 40px 0 30px 0;
+}
+
+.page-title.estimator {
+	background: #000;
+}
+
+.page-title.estimator h1 {
+	margin-bottom: 15px;
+	color: #fff;
+}
+
+.page-form {
+  margin-top: 25px;
+}
+.bottom-border {
+  border-bottom: 1px solid #c9c9c9;
+  margin: 20px 0;
+}
+#main-body {
+  margin-top: 50px;
+}
+.affix .brand {
+  display: none;
+}
+.text-light {
+  color: #a5a5a5;
+}
+.faq {
+  font-size: 12px;
+  line-height: 16px;
+}
+.faq2 {
+  font-size: 12px;
+}
+.page-footer {
+  line-height: 20px;
+  font-size: 13px;
+  color: #747474;
+  min-height: 50px;
+  min-width: 1012px;
+  padding-top: 25px;
+  position: relative;
+  z-index: 5;
+  margin-top: 50px;
+}
+.page-footer a {
+  color: #8c8c8d;
+}
+.page-footer a:hover {
+  color: #d3d3d3;
+  text-decoration: none;
+}
+
+
+.remote-validating {
+    height: 33px;
+    width: 33px;
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}

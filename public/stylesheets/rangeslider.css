@@ -1,0 +1,36 @@
+.rangeslider,
+.rangeslider__fill {
+  position: relative;
+  background: #CCCCCC;
+  border: none;
+  display: block;
+  height: 10px;
+  width: 100%;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+  z-index: 20
+}
+
+.rangeslider {
+  position: relative;
+}
+
+.rangeslider__fill {
+  background: #A7D66C;
+  position: absolute;
+  top: 0;
+}
+
+.rangeslider__handle {
+  background: white;
+  border: 3px solid #999999;
+  cursor: pointer;
+  display: inline-block;
+  width: 20px;
+  z-index: 21;
+  height: 20px;
+  position: absolute;
+  top: -5px;
+  -o-border-radius: 20px;
+  border-radius: 20px;
+}

@@ -1,0 +1,16 @@
+%td.table-cell.add-managed-app-cell{colspan: @colspan}
+  .add-managed-button
+    %span.plus
+    managed application 
+    %span.down-arrow
+
+    .managed-app-options
+      %a.redhat-app{:href => "#", data: {key: "apache", name: "Apache HTTP Server"}} Apache HTTP Server
+      %a.redhat-app{:href => "#", data: {key: "cloudera-cdh5-basic", name: "Cloudera CDH5 Basic"}} Cloudera CDH5 Basic
+      %a.redhat-app{:href => "#", data: {key: "cloudera-cdh5-basic-hbase", name: "Cloudera CDH5 Basic + HBase"}} Cloudera CDH5 Basic + HBase
+      %a.redhat-app{:href => "#", data: {key: "mysql", name: "MySQL"}} MySQL
+      %a.redhat-app{:href => "#", data: {key: "tomcat", name: "Tomcat"}} Tomcat
+      %a.windows-app{:href => "#", data: {key: "active-directory", name: "Active Directory"}} Active Directory
+      %a.windows-app{:href => "#", data: {key: "ms-sql", name: "MS SQL"}} MS SQL
+      %a.windows-app{:href => "#", data: {key: "iis", name: "MS IIS"}} MS IIS
+      / %a{:href => "#", data: {key: "ssl", name: "GeoTrust Quick SSL Certificate"}} GeoTrust Quick SSL Certificate

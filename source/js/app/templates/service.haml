@@ -1,0 +1,34 @@
+%form
+  .service__info
+    %h4= @model.get("title")
+    - if @model.get("description")
+      .service__description
+        %p
+          = @model.get("description")
+          - if @model.get("link")
+            %br
+            %a{href: @model.get("link"), target: "_blank"} more info
+
+  .service__inputs{class: @model.get("input")}
+    - if @model.get("input") is "slider"
+      .quantity-wrapper
+        %span.quantity
+          = @model.get("quantity")
+        GB
+      %input.range-slider{type: "range", name: "quantity", min: 0, max: 10000, value: @model.get("quantity")}
+    - else
+      %span.select
+      QTY
+        %select{name: "quantity"}
+          %option 0
+          %option 1
+          %option 2
+          %option 3
+          %option 4
+          %option 5
+
+        x
+        = accounting.formatMoney @model.get("pricing")
+
+    %span.price
+      = accounting.formatMoney @model.totalPricePerMonth

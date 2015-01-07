@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>CenturyLink Cloud Cost Estimator</title>
+    <meta charset="UTF-8" />
+    <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    
+    <%= stylesheet_link_tag "bootstrap" %>
+    <%= stylesheet_link_tag "site" %>
+    <%= stylesheet_link_tag "activate" %>
+    <%= stylesheet_link_tag "rangeslider" %>
+    <%= stylesheet_link_tag "main" %>
+
+    <script type="text/javascript" src="//use.typekit.net/ytc4emj.js"></script>
+    <script type="text/javascript">try { Typekit.load(); } catch (e) { }</script>
+
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	
+	  ga('create', 'UA-45856849-1', 'auto');
+	  ga('send', 'pageview');
+	
+	</script>
+</head>
+<body>
+
+
+    <section class="header">
+        <div class="main navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <div class="brand">
+                        <a href="/" class="logo">
+                            <%= image_tag "/images/logo.png" %>
+                        </a>
+                    </div>
+                    <div class="pull-right">
+                        <a href="/contact" class="btn btn-inverse">Contact</a>
+                        <!-- <span class="btn btn-inverse" id="lpButDivID-1393532216480"></span> -->
+                        <div class="header-phone" style="">1.877.388.4373</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+<section class="page-title estimator">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <h1>Pay only for what you use</h1>
+                <p class="lead">Estimate your monthly bill using our cost estimator</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="page-form">
+
+    <section class="green-section" id="monthly-total">
+        <div class="container">
+        <h3>Estimated Monthly Total</h3>
+        <div class="total-box">
+            <span class="price">$0.00</span>
+            <span class="estimated">estimated / month</span>
+
+            <div class="buttons pull-right">
+            	<a href="/contact/" class="btn btn-discuss">contact</a>
+                <!-- <span id="lpButDivID-1393532216480" class="btn btn-discuss"></span>
+                <script type="text/javascript" charset="UTF-8" src="https://sales.liveperson.net/hc/56948775/?cmd=mTagRepstate&site=56948775&buttonID=46&divID=lpButDivID-1393532216480&bt=3&c=1"></script>
+                 -->
+            </div>
+        </div>
+        
+        </div>
+    </section>
+
+    <%= image_tag "/images/spinner.gif", class: "spinner" %>
+
+    <div class="container main-container">
+      <%= yield %>
+    </div>
+</section>
+
+    <section class="page-footer">
+        <div class="container">
+            <div class="row copyright">
+                <div class="span6">
+                    &copy; 2014 CenturyLink, Inc. All rights reserved. All other trademarks cited here are the properties of their respective owners.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <%= javascript_include_tag  "https://code.jquery.com/jquery-1.11.2.min.js" %>
+    <%= javascript_include_tag  "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js" %>
+    <%= javascript_include_tag  "vendor", "all" %>
+
+    <script language='javascript'>
+        var lpMTagConfig = {
+            'lpServer': "sales.liveperson.net",
+            'lpNumber': "56948775",
+            'lpProtocol': (document.location.toString().indexOf('https:') == 0) ? 'https' : 'http'
+        };
+        function lpAddMonitorTag(src) {
+            if (typeof (src) == 'undefined' || typeof (src) == 'object') {
+                src = lpMTagConfig.lpMTagSrc ? lpMTagConfig.lpMTagSrc : '/hcp/html/mTag.js';
+            } if (src.indexOf('http') != 0) {
+                src = lpMTagConfig.lpProtocol + "://" + lpMTagConfig.lpServer + src + '?site=' + lpMTagConfig.lpNumber;
+            } else {
+                if (src.indexOf('site=') < 0) {
+                    if (src.indexOf('?') < 0) src = src + '?'; else src = src + '&'; src = src + 'site=' + lpMTagConfig.lpNumber;
+                }
+            };
+            var s = document.createElement('script');
+            s.setAttribute('type', 'text/javascript');
+            s.setAttribute('charset', 'iso-8859-1');
+            s.setAttribute('src', src);
+            document.getElementsByTagName('head').item(0).appendChild(s);
+        }
+        if (window.attachEvent)
+            window.attachEvent('onload', lpAddMonitorTag); else window.addEventListener("load", lpAddMonitorTag, false);
+    </script>
+
+    </body>
+</html>

@@ -1,0 +1,47 @@
+%td.table-cell.quantity-cell
+  %input.number{name: "quantity", value: @model.get("quantity"), type: "text"}
+
+%td.table-cell.usage-cell
+  %input.number{name: "usage", value: @model.get("usage"), type: "text"}
+  %select{name: "usagePeriod"}
+    %option{value: "hours_per_month",  selected: @model.get('usagePeriod') == 'hours_per_month' } hrs / month
+    %option{value: "percentage_of_month", selected: @model.get('usagePeriod') == 'percentage_of_month' } % / month
+    %option{value: "hours_per_week", selected: @model.get('usagePeriod') == 'hours_per_week'} hrs / week
+    %option{value: "hours_per_day", selected: @model.get('usagePeriod') == 'hours_per_day'} hrs / day
+
+- if @model.get("type") is "hyperscale"
+  %input{type: "hidden", value: "hyperscale"}
+- else
+  %td.table-cell.type-cell
+    %select{name: "type"}
+      %option{value: "standard",  selected: @model.get('type') == 'standard' } standard
+      %option{value: "premium",  selected: @model.get('type') == 'premium' } premium
+
+%td.table-cell.os-cell
+  %select{name: "os"}
+    %option{value: "linux",  selected: @model.get('os') == 'linux' } Linux
+    %option{value: "redhat",  selected: @model.get('os') == 'redhat' } Red Hat
+    %option{value: "windows",  selected: @model.get('os') == 'windows' } Windows
+
+%td.table-cell.managed-cell
+  %input.managed-check{type: "checkbox", name: "managed"}
+
+%td.table-cell.cpu-cell.range-cell
+  %input.cpu-text-input{data: {name: "cpu"}}
+  %input.range-slider{name: "cpu", type:"range", min: 1, max: 16, value: @model.get("cpu")}
+
+%td.table-cell.memory-cell.range-cell
+  %input.memory-text-input{data: {name: "memory"}}
+  %input.range-slider{name: "memory", type:"range", min: 1, max: 128, value: @model.get("memory")}
+
+%td.table-cell.storage-cell.range-cell
+  %input.storage-text-input{data: {name: "storage"}}
+  - if @model.get("type") is "hyperscale"
+    %input.range-slider{name: "storage", type:"range", min: 1, max: 1024, step: 1, value: @model.get("storage")}
+  - else
+    %input.range-slider{name: "storage", type:"range", min: 1, max: 4000, step: 1, value: @model.get("storage")}
+
+%td.table-cell.price-cell
+  %span.price
+    = accounting.formatMoney(@model.totalPricePerMonth())
+  %a.remove-button{href: "#"} X

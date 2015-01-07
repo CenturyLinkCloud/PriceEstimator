@@ -1,0 +1,8 @@
+[
+  {
+    "key": "object-storage",
+    "title": "Object Storage",
+    "description": "Flexible, scalable storage that's S3 compatible. Highly available large file storage accessible via HTTP, with automatic multi-site replication.",
+    "input": "slider"
+  }
+]

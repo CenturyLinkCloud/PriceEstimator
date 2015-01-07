@@ -1,0 +1,14 @@
+{
+  "name": "classval",
+  "homepage": "https://github.com/leongersen/classVal",
+  "version": "0.1.0",
+  "_release": "0.1.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.1.0",
+    "commit": "4d8f7a6879e82b17eabfe1fc95d323f023a65e0e"
+  },
+  "_source": "git://github.com/leongersen/classVal.git",
+  "_target": ">= 0.1.0",
+  "_originalSource": "classval"
+}

@@ -1,0 +1,31 @@
+[
+  {
+    "type": "server",
+    "options": {
+      "os" : {
+        "linux" : 0,
+        "redhat": 0.04,
+        "windows": 0.04
+        },
+      "memory" : 0.015,
+      "cpu" : 0.01,
+      "storage": {
+        "standard": 0.15,
+        "premium": 0.5,
+        "hyperscale": 0.4
+      }
+    }
+  },
+  {
+    "type": "vpn",
+    "price": 45
+  },
+  {
+    "type": "object-storage",
+    "price": 35
+  },
+  {
+    "type": "load-balancer",
+    "price": 65
+  }
+]
