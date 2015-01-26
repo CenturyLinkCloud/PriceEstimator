@@ -23,7 +23,7 @@
       "cloudera-cdh5-basic": 0.83,
       "cloudera-cdh5-basic-hbase": 1.28,
       "tomcat": 0.83,
-      "mysql": 0.36,
+      "mysql": 0.76,
       "ssl": 84
     }
   },
