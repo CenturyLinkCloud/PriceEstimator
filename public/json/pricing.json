@@ -22,6 +22,7 @@
       "apache": 0.21,
       "cloudera-cdh5-basic": 0.83,
       "cloudera-cdh5-basic-hbase": 1.28,
+      "safehaven": 0.0548,
       "tomcat": 0.83,
       "mysql": 0.76,
       "ssl": 84
