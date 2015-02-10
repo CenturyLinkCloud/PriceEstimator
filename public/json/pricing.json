@@ -25,6 +25,8 @@
       "safehaven": 0.0548,
       "tomcat": 0.83,
       "mysql": 0.76,
+      "mysql-replication-master-master": 0.5556,
+      "mysql-replication-master-slave": 0.3472,
       "ssl": 84
     }
   },
