@@ -656,7 +656,7 @@ ServerView = Backbone.View.extend({
   onManagedCheckboxChanged: function(e) {
     var $check;
     $check = $(e.currentTarget);
-    if ($check.attr("checked")) {
+    if ($check.is(":checked")) {
       return this.addMangedApps();
     } else {
       return this.removeAllManagedAppsAndAddButton();

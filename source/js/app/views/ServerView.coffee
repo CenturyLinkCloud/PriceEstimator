@@ -71,7 +71,7 @@ ServerView = Backbone.View.extend
 
   onManagedCheckboxChanged: (e) ->
     $check = $(e.currentTarget)
-    if $check.attr("checked")
+    if $check.is(":checked")
       @addMangedApps()
     else 
       @removeAllManagedAppsAndAddButton()
