@@ -206,7 +206,7 @@ textarea {
 }
 body {
   margin: 0;
-  font-family: "proxima-nova", sans-serif;
+  font-family: "open sans", sans-serif;
   font-size: 15px;
   font-weight: 400;
   line-height: 25px;
@@ -665,7 +665,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "proxima-nova", sans-serif;
+  font-family: "open sans", sans-serif;
   color: #404040;
   text-rendering: optimizelegibility;
 }
@@ -962,7 +962,7 @@ input,
 button,
 select,
 textarea {
-  font-family: "proxima-nova", sans-serif;
+  font-family: "open sans", sans-serif;
 }
 label {
   display: block;
@@ -2652,7 +2652,7 @@ button.close {
   -webkit-appearance: none;
 }
 .btn {
-  font-family: "proxima-nova", sans-serif;
+  font-family: "open sans", sans-serif;
   font-weight: 400;
   text-transform: uppercase;
   display: inline-block;
@@ -3495,7 +3495,7 @@ input[type="submit"].btn.btn-mini {
   position: relative;
   top: 0;
   left: 0;
-  font-family: "proxima-nova", sans-serif !important;
+  font-family: "open sans", sans-serif !important;
   font-size: 18px;
   width: 100%;
   z-index: 2;
