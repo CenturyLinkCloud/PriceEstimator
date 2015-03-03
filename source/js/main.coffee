@@ -31,7 +31,7 @@ App =
 
     @monthlyTotalView = new MonthlyTotalView(app: @)
     @supportView = new SupportView(app: @)
-    @pricingMaps = new PricingMapsCollection([], { datacenter: "usa" })
+    @pricingMaps = new PricingMapsCollection([], { datacenter: "united_states" })
 
     @pricingMaps.on "sync", =>
       @onPricingMapsSynced()

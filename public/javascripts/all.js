@@ -557,6 +557,14 @@ MonthlyTotalView = Backbone.View.extend({
         return _this.updateTotal();
       };
     })(this));
+    $.getJSON("json/pricing/index.json", function(data) {
+      console.log(data);
+      return $.each(data, function() {
+        var label;
+        label = this.replace("_", " ");
+        return $(".datacenter", this.$el).append("<option value='" + this + "'>" + label + "</option>");
+      });
+    });
     return $(window).scroll((function(_this) {
       return function() {
         return _this.positionHeader();
@@ -1011,7 +1019,7 @@ App = {
       app: this
     });
     this.pricingMaps = new PricingMapsCollection([], {
-      datacenter: "usa"
+      datacenter: "united_states"
     });
     return this.pricingMaps.on("sync", (function(_this) {
       return function() {

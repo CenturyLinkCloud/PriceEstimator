@@ -11,6 +11,12 @@ MonthlyTotalView = Backbone.View.extend
     @options.app.on "totalPriceUpdated", =>
       @updateTotal()
 
+    $.getJSON "json/pricing/index.json", (data) ->
+      console.log data
+      $.each data, ->
+        label = @replace("_", " ")
+        $(".datacenter", @$el).append("<option value='" + @ + "'>" + label + "</option>")
+
     $(window).scroll => @positionHeader()
 
   updateTotal: ->

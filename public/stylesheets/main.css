@@ -166,7 +166,7 @@ input[type=text], input[type=number] {
       text-decoration: none;
       background: #686868; }
 
-/* Tables 
+/* Tables
 ----------------------------------------------------- */
 .table {
   display: table;
@@ -378,12 +378,18 @@ input[type=text], input[type=number] {
   overflow: hidden;
   z-index: 100; }
   .green-section h3 {
-    font-size: 20px;
     color: white;
     float: left;
-    width: 30%;
+    font-size: 20px;
+    line-height: 20px;
     position: relative;
-    top: 12px; }
+    top: 6px; }
+  .green-section .datacenter {
+    clear: both;
+    float: left;
+    margin: 5px 0 0;
+    text-transform: capitalize;
+    width: 100%; }
   .green-section .lpChatTextLinkText {
     color: white; }
   .green-section .buttons .btn-discuss {
@@ -411,7 +417,7 @@ input[type=text], input[type=number] {
       word-wrap: break-word; }
     .green-section .total-box .estimated {
       color: #addd6c;
-      width: 50px;
+      width: 60px;
       margin-left: 10px;
       display: inline-block;
       line-height: 1.2; }
