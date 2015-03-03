@@ -2,9 +2,9 @@ PricingModel = require '../models/PricingMapModel.coffee'
 
 PricingMapsCollection = Backbone.Collection.extend
   model: PricingModel
-  url: "json/pricing.json"
 
-  initialize: ->
+  initialize: (models, options) ->
+    @url = "json/pricing/" + options.datacenter + ".json"
     @fetch()
 
   forKey: (type) ->

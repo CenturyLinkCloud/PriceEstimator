@@ -1,5 +1,5 @@
 ServerModel = Backbone.Model.extend
-    
+
   HOURS_PER_DAY: "hours_per_day"
   HOURS_PER_WEEK: "hours_per_week"
   HOURS_PER_MONTH: "hours_per_month"
@@ -29,11 +29,14 @@ ServerModel = Backbone.Model.extend
     pricing = @.get("pricingMap").attributes.options
     @.set("pricing", pricing)
 
-  totalCpuPerHour: ->  
+  updatePricing: (pricingMap) ->
+    @.set("pricing", pricingMap.attributes.options)
+
+  totalCpuPerHour: ->
     @.get("cpu") * @.get("pricing").cpu
 
-  totalMemoryPerHour: ->  
-    @.get("memory") * @.get("pricing").memory  
+  totalMemoryPerHour: ->
+    @.get("memory") * @.get("pricing").memory
 
   totalOSPerHour: ->
     os = @.get("os")
@@ -59,7 +62,7 @@ ServerModel = Backbone.Model.extend
     @.get("storage") * @.get("pricing").storage[type] * @.get("quantity")
 
   managedAppPricePerMonth: (managedAppKey, instances) ->
-    appPerHour = @.get("pricing")[managedAppKey] 
+    appPerHour = @.get("pricing")[managedAppKey]
     return @priceForMonth(appPerHour) * @.get("quantity") * instances
 
   managedAppsPricePerMonth: ->
@@ -75,7 +78,7 @@ ServerModel = Backbone.Model.extend
   totalPricePerMonth: ->
     utilityPerMonth = 0
     utilityPerMonth = @priceForMonth(@utilityPricePerHourTotal())
-    return utilityPerMonth + @storagePricePerMonth() 
+    return utilityPerMonth + @storagePricePerMonth()
 
   totalPricePerMonthWithApps: ->
     return @totalPricePerMonth + @managedAppsPricePerMonth()

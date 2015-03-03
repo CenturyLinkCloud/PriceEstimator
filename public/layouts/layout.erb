@@ -8,7 +8,7 @@
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    
+
     <%= stylesheet_link_tag "bootstrap" %>
     <%= stylesheet_link_tag "site" %>
     <%= stylesheet_link_tag "activate" %>
@@ -22,10 +22,10 @@
 	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-	
+
 	  ga('create', 'UA-45856849-1', 'auto');
 	  ga('send', 'pageview');
-	
+
 	</script>
 </head>
 <body>
@@ -49,7 +49,7 @@
             </div>
         </div>
     </section>
-    
+
 <section class="page-title estimator">
     <div class="container">
         <div class="row">
@@ -67,6 +67,10 @@
     <section class="green-section" id="monthly-total">
         <div class="container">
         <h3>Estimated Monthly Total</h3>
+        <select class="datacenter">
+            <option value="usa" selected>USA</option>
+            <option value="singapore">Singapore</option>
+        </select>
         <div class="total-box">
             <span class="price">$0.00</span>
             <span class="estimated">estimated / month</span>
@@ -78,7 +82,7 @@
                  -->
             </div>
         </div>
-        
+
         </div>
     </section>
 

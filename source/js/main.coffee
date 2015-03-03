@@ -23,7 +23,7 @@ ServiceModel = require './app/models/ServiceModel.coffee'
 # Init
 #--------------------------------------------------------
 
-App = 
+App =
   initialized: false
 
   init: ->
@@ -31,8 +31,8 @@ App =
 
     @monthlyTotalView = new MonthlyTotalView(app: @)
     @supportView = new SupportView(app: @)
-    @pricingMaps = new PricingMapsCollection()
-    
+    @pricingMaps = new PricingMapsCollection([], { datacenter: "usa" })
+
     @pricingMaps.on "sync", =>
       @onPricingMapsSynced()
 
@@ -62,7 +62,7 @@ App =
 
   initNetworkServices: ->
     @networkingServices.initPricing(@pricingMaps)
-    
+
     @networkingServicesView = new ServicesView
       collection: @networkingServices
       el: "#networking-services"
@@ -75,7 +75,7 @@ App =
 
   initAdditionalServices: ->
     @additionalServices.initPricing(@pricingMaps)
-    
+
     @additionalServicesView = new ServicesView
       collection: @additionalServices
       el: "#additional-services"
@@ -91,7 +91,7 @@ App =
 
   initBandwidthServices: ->
     @bandwidthServices.initPricing(@pricingMaps)
-    
+
     @bandwidthServicesView = new ServicesView
       collection: @bandwidthServices
       el: "#bandwidth"
@@ -120,7 +120,7 @@ App =
 
     @hyperscaleServersCollection.on "change remove add", =>
       @updateTotalPrice()
-    
+
     @hyperscaleServersView = new ServersView
       collection: @hyperscaleServersCollection
       el: "#hyperscale-servers"
@@ -131,10 +131,10 @@ App =
   updateTotalPrice: ->
     return unless @initialized
 
-    @totalPrice = @serversCollection.subtotal() + 
-                  @hyperscaleServersCollection.subtotal() + 
+    @totalPrice = @serversCollection.subtotal() +
+                  @hyperscaleServersCollection.subtotal() +
                   @networkingServices.subtotal() +
-                  @additionalServices.subtotal() + 
+                  @additionalServices.subtotal() +
                   @bandwidthServices.subtotal()
 
     @oSSubtotal = @serversCollection.oSSubtotal() + @hyperscaleServersCollection.oSSubtotal()
@@ -143,8 +143,23 @@ App =
 
     @trigger("totalPriceUpdated")
 
-    
 
+  setPricingMap: (datacenter) ->
+
+    # Create new pricing map based on new database pricing info
+    @pricingMaps = new PricingMapsCollection([], { datacenter: datacenter })
+    @pricingMaps.on "sync", =>
+
+      # Update pricing map stored on the views (impacts new models)
+      @hyperscaleServersView.options.pricingMap = @pricingMaps.forKey("server")
+      @serversView.options.pricingMap = @pricingMaps.forKey("server")
+
+      # Update pricing map stored on collections (impacts existing models)
+      @serversCollection.initPricing(@pricingMaps)
+      @hyperscaleServersCollection.initPricing(@pricingMaps)
+      @networkingServices.initPricing(@pricingMaps)
+      @additionalServices.initPricing(@pricingMaps)
+      @bandwidthServices.initPricing(@pricingMaps)
 
 #--------------------------------------------------------
 # DOM Ready
@@ -152,4 +167,3 @@ App =
 
 $ ->
   App.init()
-  

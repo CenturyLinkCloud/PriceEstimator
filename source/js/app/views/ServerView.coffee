@@ -2,7 +2,7 @@ AddManagedAppView = require './AddManagedAppView.coffee'
 ManagedAppView = require './ManagedAppView.coffee'
 
 ServerView = Backbone.View.extend
-  
+
   tagName: "tr"
   className: "table-row"
 
@@ -35,7 +35,7 @@ ServerView = Backbone.View.extend
       $('.range-slider', @$el).rangeslider
         polyfill: false
       $('.range-slider', @$el).css("opacity", 1)
-    
+
     return @
 
   close: ->
@@ -51,7 +51,7 @@ ServerView = Backbone.View.extend
   ensureNumber: (e) ->
     charCode = (if (e.which) then e.which else e.keyCode)
     return not (charCode > 31 and (charCode < 48 or charCode > 57))
-  
+
   onSliderTextChanged: (e) ->
     $this = $(e.currentTarget)
     name = $this.data("name")
@@ -73,7 +73,7 @@ ServerView = Backbone.View.extend
     $check = $(e.currentTarget)
     if $check.is(":checked")
       @addMangedApps()
-    else 
+    else
       @removeAllManagedAppsAndAddButton()
 
   addMangedApps: ->

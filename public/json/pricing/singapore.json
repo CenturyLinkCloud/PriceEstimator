@@ -1,0 +1,70 @@
+[
+  {
+    "type": "server",
+    "options": {
+      "os" : {
+        "linux" : 0.04,
+        "redhat": 0.04,
+        "redhat-managed": 0.21,
+        "windows": 0.04,
+        "windows-managed": 0.21
+        },
+      "memory" : 0.015,
+      "cpu" : 0.01,
+      "storage": {
+        "standard": 1.0,
+        "premium": 1.25,
+        "hyperscale": 1.5
+      },
+      "iis": 0.21,
+      "active-directory": 0.275,
+      "ms-sql": 0.7,
+      "apache": 0.21,
+      "cloudera-cdh5-basic": 0.83,
+      "cloudera-cdh5-basic-hbase": 1.28,
+      "cloudera-enterprise-data-hub": 1.64,
+      "tomcat": 0.83,
+      "mysql": 0.76,
+      "mysql-replication-master-master": 0.5556,
+      "mysql-replication-master-slave": 0.3472,
+      "ssl": 84
+    }
+  },
+  {
+    "type": "vpn",
+    "price": 90
+  },
+  {
+    "type": "firewall",
+    "price": 45
+  },
+  {
+    "type": "shared-load-balancer",
+    "price": 28.80
+  },
+  {
+    "type": "dedicated-load-balancer-200",
+    "description": "$260 + $61.40 (VM - 2 cpu, 4gb ram, 20gb storage)",
+    "price": 321.40
+
+  },
+  {
+    "type": "dedicated-load-balancer-1000",
+    "description": "$780 + $61.40 (VM - 2 cpu, 4gb ram, 20gb storage)",
+    "price": 841.40
+  },
+  {
+    "type": "external-ip-address",
+    "price": 2
+  },
+  {
+    "type": "object-storage",
+    "price": 0.3
+  },
+  {
+    "type": "bandwidth",
+    "price": 0.1
+  }
+]
+
+

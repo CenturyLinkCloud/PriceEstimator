@@ -1,9 +1,9 @@
 MonthlyTotalView = Backbone.View.extend
-  
+
   el: "#monthly-total"
 
   events:
-    "click .add-button": "addServer"
+    "change .datacenter": "changeDatacenter"
 
   initialize: (options) ->
     @options = options || {};
@@ -22,7 +22,7 @@ MonthlyTotalView = Backbone.View.extend
     else
       @$el.css("position", "absolute")
 
-      
-    
+  changeDatacenter: (e) ->
+    @options.app.setPricingMap $(e.target).val()
 
 module.exports = MonthlyTotalView
