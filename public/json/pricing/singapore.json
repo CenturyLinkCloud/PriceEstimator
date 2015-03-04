@@ -3,18 +3,18 @@
     "type": "server",
     "options": {
       "os" : {
-        "linux" : 0.04,
+        "linux" : 0,
         "redhat": 0.04,
         "redhat-managed": 0.21,
         "windows": 0.04,
         "windows-managed": 0.21
         },
-      "memory" : 0.015,
-      "cpu" : 0.01,
+      "memory" : 0.01725,
+      "cpu" : 0.01150,
       "storage": {
-        "standard": 1.0,
-        "premium": 1.25,
-        "hyperscale": 1.5
+        "standard": 0.15,
+        "premium": 0.5,
+        "hyperscale": 0.4
       },
       "iis": 0.21,
       "active-directory": 0.275,
@@ -32,7 +32,7 @@
   },
   {
     "type": "vpn",
-    "price": 90
+    "price": 45
   },
   {
     "type": "firewall",
@@ -59,11 +59,11 @@
   },
   {
     "type": "object-storage",
-    "price": 0.3
+    "price": 0.15
   },
   {
     "type": "bandwidth",
-    "price": 0.1
+    "price": 0.05750
   }
 ]
 
