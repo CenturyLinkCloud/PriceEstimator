@@ -30,77 +30,7 @@
 </head>
 <body>
 
-
-    <section class="header">
-        <div class="main navbar navbar-static-top">
-            <div class="navbar-inner">
-                <div class="container">
-                    <div class="brand">
-                        <a href="/" class="logo">
-                            <%= image_tag "/images/logo.png" %>
-                        </a>
-                    </div>
-                    <div class="pull-right">
-                        <a href="/contact" class="btn btn-inverse">Contact</a>
-                        <!-- <span class="btn btn-inverse" id="lpButDivID-1393532216480"></span> -->
-                        <div class="header-phone" style="">1.877.388.4373</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-<section class="page-title estimator">
-    <div class="container">
-        <div class="row">
-            <div class="span12">
-                <h1>Pay only for what you use</h1>
-                <p class="lead">Estimate your monthly bill using our cost estimator</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-<section class="page-form">
-
-    <section class="green-section" id="monthly-total">
-        <div class="container">
-        <div class="pull-left">
-            <h3>Estimated Monthly Total</h3>
-            <select class="datacenter"></select>
-        </div>
-        <div class="total-box">
-            <span class="price">$0.00</span>
-            <span class="estimated">estimated / month</span>
-
-            <div class="buttons pull-right">
-            	<a href="/contact/" class="btn btn-discuss">contact</a>
-                <!-- <span id="lpButDivID-1393532216480" class="btn btn-discuss"></span>
-                <script type="text/javascript" charset="UTF-8" src="https://sales.liveperson.net/hc/56948775/?cmd=mTagRepstate&site=56948775&buttonID=46&divID=lpButDivID-1393532216480&bt=3&c=1"></script>
-                 -->
-            </div>
-        </div>
-
-        </div>
-    </section>
-
-    <%= image_tag "/images/spinner.gif", class: "spinner" %>
-
-    <div class="container main-container">
-      <%= yield %>
-    </div>
-</section>
-
-    <section class="page-footer">
-        <div class="container">
-            <div class="row copyright">
-                <div class="span6">
-                    &copy; 2014 CenturyLink, Inc. All rights reserved. All other trademarks cited here are the properties of their respective owners.
-                </div>
-            </div>
-        </div>
-    </section>
+    <%= yield %>
 
     <%= javascript_include_tag  "https://code.jquery.com/jquery-1.11.2.min.js" %>
     <%= javascript_include_tag  "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js" %>
