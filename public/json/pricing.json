@@ -18,7 +18,7 @@
       },
       "iis": 0.21,
       "active-directory": 0.275,
-      "ms-sql": 0.7,
+      "ms-sql": 0.48,
       "apache": 0.21,
       "cloudera-cdh5-basic": 0.83,
       "cloudera-cdh5-basic-hbase": 1.28,
@@ -45,8 +45,8 @@
   {
     "type": "dedicated-load-balancer-200",
     "description": "$260 + $61.40 (VM - 2 cpu, 4gb ram, 20gb storage)",
-    "price": 321.40 
-    
+    "price": 321.40
+
   },
   {
     "type": "dedicated-load-balancer-1000",
@@ -66,5 +66,3 @@
     "price": 0.05
   }
 ]
-
-
