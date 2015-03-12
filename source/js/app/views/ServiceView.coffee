@@ -1,5 +1,5 @@
 ServiceView = Backbone.View.extend
-  
+
   className: "service"
 
   events:
@@ -30,6 +30,7 @@ ServiceView = Backbone.View.extend
     @model.set(data)
 
   onModelChange: (model) ->
+    $(".cost", @$el).html(accounting.formatMoney(model.get("pricing")))
     $(".price", @$el).html(accounting.formatMoney(model.totalPricePerMonth()))
     $(".quantity", @$el).html(model.get("quantity"))
     if model.get("quantity") > 0

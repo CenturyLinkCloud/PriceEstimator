@@ -5,7 +5,6 @@ html {
 
 * {
   -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box; }
 
 body {
@@ -49,7 +48,6 @@ input[type=text], input[type=number] {
   opacity: 0; }
   .main-container.visible {
     opacity: 1;
-    -webkit-transition: opacity 300ms;
     transition: opacity 300ms; }
 
 .page-form {
@@ -100,7 +98,6 @@ input[type=text], input[type=number] {
     height: 11px;
     margin-right: 3px; }
   .add-button:hover, .add-managed-button:hover {
-    -webkit-transition: background 200ms;
     transition: background 200ms;
     text-decoration: none;
     background: #274D36;
@@ -160,7 +157,6 @@ input[type=text], input[type=number] {
     display: block;
     padding: 4px 8px;
     background: #959595;
-    -webkit-transition: background 200ms;
     transition: background 200ms; }
     .managed-app-options a:first-child {
       border-radius: 3px 3px 0 0; }
@@ -170,7 +166,7 @@ input[type=text], input[type=number] {
       text-decoration: none;
       background: #686868; }
 
-/* Tables 
+/* Tables
 ----------------------------------------------------- */
 .table {
   display: table;
@@ -189,7 +185,6 @@ input[type=text], input[type=number] {
   color: black;
   border-bottom: 1px solid #D3D3D0;
   padding: 10px 5px;
-  -webkit-transition: border 200ms;
   transition: border 200ms;
   width: 240px; }
   .support-table td p {
@@ -383,12 +378,18 @@ input[type=text], input[type=number] {
   overflow: hidden;
   z-index: 100; }
   .green-section h3 {
-    font-size: 20px;
     color: white;
     float: left;
-    width: 30%;
+    font-size: 20px;
+    line-height: 20px;
     position: relative;
-    top: 12px; }
+    top: 6px; }
+  .green-section .datacenter {
+    clear: both;
+    float: left;
+    margin: 5px 0 0;
+    text-transform: capitalize;
+    width: 100%; }
   .green-section .lpChatTextLinkText {
     color: white; }
   .green-section .buttons .btn-discuss {
@@ -416,7 +417,7 @@ input[type=text], input[type=number] {
       word-wrap: break-word; }
     .green-section .total-box .estimated {
       color: #addd6c;
-      width: 50px;
+      width: 60px;
       margin-left: 10px;
       display: inline-block;
       line-height: 1.2; }
@@ -432,7 +433,6 @@ input[type=text], input[type=number] {
   width: 314px;
   margin: 10px 30px 20px 0;
   display: inline-block;
-  -webkit-transition: border 200ms;
   transition: border 200ms; }
   .service:nth-child(3), .service:nth-child(6) {
     margin-right: 0; }
@@ -468,7 +468,6 @@ input[type=text], input[type=number] {
     padding: 0 20px;
     font-size: 14px;
     opacity: 0;
-    -webkit-transition: opacity 200ms;
     transition: opacity 200ms; }
   .service .service__inputs {
     padding: 10px;

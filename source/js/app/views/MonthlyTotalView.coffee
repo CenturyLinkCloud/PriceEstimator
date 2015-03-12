@@ -1,15 +1,21 @@
 MonthlyTotalView = Backbone.View.extend
-  
+
   el: "#monthly-total"
 
   events:
-    "click .add-button": "addServer"
+    "change .datacenter": "changeDatacenter"
 
   initialize: (options) ->
     @options = options || {};
 
     @options.app.on "totalPriceUpdated", =>
       @updateTotal()
+
+    $.getJSON "json/pricing/index.json", (data) ->
+      console.log data
+      $.each data, ->
+        label = @replace("_", " ")
+        $(".datacenter", @$el).append("<option value='" + @ + "'>" + label + "</option>")
 
     $(window).scroll => @positionHeader()
 
@@ -22,7 +28,7 @@ MonthlyTotalView = Backbone.View.extend
     else
       @$el.css("position", "absolute")
 
-      
-    
+  changeDatacenter: (e) ->
+    @options.app.setPricingMap $(e.target).val()
 
 module.exports = MonthlyTotalView

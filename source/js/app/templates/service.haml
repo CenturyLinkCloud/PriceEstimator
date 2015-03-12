@@ -28,7 +28,8 @@
           %option 5
 
         x
-        = accounting.formatMoney @model.get("pricing")
+        %span.cost
+          = accounting.formatMoney @model.get("pricing")
 
     %span.price
       = accounting.formatMoney @model.totalPricePerMonth

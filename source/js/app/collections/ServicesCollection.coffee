@@ -15,7 +15,6 @@ ServicesCollection = Backbone.Collection.extend
       pricingMap = pricingMaps.forKey service.get("key")
       service.initPricing(pricingMap)
 
-
   subtotal: ->
     _.reduce @models, (memo, service) ->
       memo + service.totalPricePerMonth()

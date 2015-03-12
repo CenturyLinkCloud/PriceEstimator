@@ -15,8 +15,8 @@ PricingModel = require('../models/PricingMapModel.coffee');
 
 PricingMapsCollection = Backbone.Collection.extend({
   model: PricingModel,
-  url: "json/pricing.json",
-  initialize: function() {
+  initialize: function(models, options) {
+    this.url = "json/pricing/" + options.datacenter + ".json";
     return this.fetch();
   },
   forKey: function(type) {
@@ -45,6 +45,15 @@ ServersCollection = Backbone.Collection.extend({
     return _.reduce(this.models, function(memo, server) {
       return memo + server.totalOSPricePerMonth();
     }, 0);
+  },
+  initPricing: function(pricingMaps) {
+    return this.each((function(_this) {
+      return function(server) {
+        var pricingMap;
+        pricingMap = pricingMaps.forKey("server");
+        return server.updatePricing(pricingMap);
+      };
+    })(this));
   }
 });
 
@@ -125,6 +134,9 @@ ServerModel = Backbone.Model.extend({
     var pricing;
     pricing = this.get("pricingMap").attributes.options;
     return this.set("pricing", pricing);
+  },
+  updatePricing: function(pricingMap) {
+    return this.set("pricing", pricingMap.attributes.options);
   },
   totalCpuPerHour: function() {
     return this.get("cpu") * this.get("pricing").cpu;
@@ -236,7 +248,6 @@ ServiceModel = Backbone.Model.extend({
     input: "select",
     quantity: 0
   },
-  initialize: function() {},
   initPricing: function(pricingMap) {
     return this.set("pricing", pricingMap.get('price'));
   },
@@ -408,8 +419,9 @@ if (this.model.get("input") === "slider") {
   $o.push("        " + $e($c(this.model.get("quantity"))));
   $o.push("      </span>\n      GB\n    </div>\n    <input class='range-slider' type='range' name='quantity' min='" + ($e($c(0))) + "' max='" + ($e($c(10000))) + "' value='" + ($e($c(this.model.get("quantity")))) + "'>");
 } else {
-  $o.push("    <span class='select'></span>\n    QTY\n      <select name='quantity'>\n        <option>0</option>\n        <option>1</option>\n        <option>2</option>\n        <option>3</option>\n        <option>4</option>\n        <option>5</option>\n      </select>\n      x");
-  $o.push("      " + $e($c(accounting.formatMoney(this.model.get("pricing")))));
+  $o.push("    <span class='select'></span>\n    QTY\n      <select name='quantity'>\n        <option>0</option>\n        <option>1</option>\n        <option>2</option>\n        <option>3</option>\n        <option>4</option>\n        <option>5</option>\n      </select>\n      x\n      <span class='cost'>");
+  $o.push("        " + $e($c(accounting.formatMoney(this.model.get("pricing")))));
+  $o.push("      </span>");
 }
 
 $o.push("    <span class='price'>");
@@ -536,7 +548,7 @@ var MonthlyTotalView;
 MonthlyTotalView = Backbone.View.extend({
   el: "#monthly-total",
   events: {
-    "click .add-button": "addServer"
+    "change .datacenter": "changeDatacenter"
   },
   initialize: function(options) {
     this.options = options || {};
@@ -545,6 +557,14 @@ MonthlyTotalView = Backbone.View.extend({
         return _this.updateTotal();
       };
     })(this));
+    $.getJSON("json/pricing/index.json", function(data) {
+      console.log(data);
+      return $.each(data, function() {
+        var label;
+        label = this.replace("_", " ");
+        return $(".datacenter", this.$el).append("<option value='" + this + "'>" + label + "</option>");
+      });
+    });
     return $(window).scroll((function(_this) {
       return function() {
         return _this.positionHeader();
@@ -560,6 +580,9 @@ MonthlyTotalView = Backbone.View.extend({
     } else {
       return this.$el.css("position", "absolute");
     }
+  },
+  changeDatacenter: function(e) {
+    return this.options.app.setPricingMap($(e.target).val());
   }
 });
 
@@ -834,6 +857,7 @@ ServiceView = Backbone.View.extend({
     return this.model.set(data);
   },
   onModelChange: function(model) {
+    $(".cost", this.$el).html(accounting.formatMoney(model.get("pricing")));
     $(".price", this.$el).html(accounting.formatMoney(model.totalPricePerMonth()));
     $(".quantity", this.$el).html(model.get("quantity"));
     if (model.get("quantity") > 0) {
@@ -994,7 +1018,9 @@ App = {
     this.supportView = new SupportView({
       app: this
     });
-    this.pricingMaps = new PricingMapsCollection();
+    this.pricingMaps = new PricingMapsCollection([], {
+      datacenter: "united_states"
+    });
     return this.pricingMaps.on("sync", (function(_this) {
       return function() {
         return _this.onPricingMapsSynced();
@@ -1108,6 +1134,22 @@ App = {
     this.oSSubtotal = this.serversCollection.oSSubtotal() + this.hyperscaleServersCollection.oSSubtotal();
     this.totalPriceWithSupport = this.totalPrice + this.supportView.updateSubtotal();
     return this.trigger("totalPriceUpdated");
+  },
+  setPricingMap: function(datacenter) {
+    this.pricingMaps = new PricingMapsCollection([], {
+      datacenter: datacenter
+    });
+    return this.pricingMaps.on("sync", (function(_this) {
+      return function() {
+        _this.hyperscaleServersView.options.pricingMap = _this.pricingMaps.forKey("server");
+        _this.serversView.options.pricingMap = _this.pricingMaps.forKey("server");
+        _this.serversCollection.initPricing(_this.pricingMaps);
+        _this.hyperscaleServersCollection.initPricing(_this.pricingMaps);
+        _this.networkingServices.initPricing(_this.pricingMaps);
+        _this.additionalServices.initPricing(_this.pricingMaps);
+        return _this.bandwidthServices.initPricing(_this.pricingMaps);
+      };
+    })(this));
   }
 };
 
