@@ -18,7 +18,8 @@ ServicesView = Backbone.View.extend
 
   addServices: ->
     @collection.each (service) =>
-      serviceView = new ServiceView(model: service)
+      disabled = service.get('disabled')
+      serviceView = new ServiceView(model: service, disabled: disabled)
       $(".services", @$el).append serviceView.render().el  
   
   updateSubtotal: ->

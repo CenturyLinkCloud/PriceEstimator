@@ -17,7 +17,7 @@ ServerView = Backbone.View.extend
     "keypress input:not([name])": "ensureNumber"
     "input input:not([name])": "onSliderTextChanged"
 
-  initialize: ->
+  initialize: (options) ->
     @appViews = []
 
     @listenTo @model, 'change', (model) =>
@@ -28,7 +28,10 @@ ServerView = Backbone.View.extend
 
   render: ->
     template = require("../templates/server.haml")
-    @$el.html template(model: @model)
+    managedDisabled = @model.get("pricingMap").get("options").os["redhat-managed"] is "disabled"
+    disabledClass = ""
+    disabledClass = "disabled" if managedDisabled
+    @$el.html template(model: @model, disabledClass: disabledClass)
     @$el.attr("id", @model.cid)
 
     _.defer =>

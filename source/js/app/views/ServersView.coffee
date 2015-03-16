@@ -21,7 +21,11 @@ ServersView = Backbone.View.extend
     @updateSubtotal()
 
     @serverViews = []
-    
+
+    if @options.hyperscale
+      if @options.pricingMap.get("options").storage.hyperscale is "disabled"
+        @$el.addClass("disabled")
+
     $('.has-tooltip', @$el).tooltip()
 
   addServer: (e) ->

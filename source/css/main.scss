@@ -372,6 +372,11 @@ input[type=text], input[type=number] {
 
 .managed-cell {
   width: 65px;
+  
+  &.disabled {
+    opacity: 0.2;
+    pointer-events: none
+  }
 }
 
 .usage-cell {
@@ -511,6 +516,12 @@ input[type=text], input[type=number] {
 }
 
 
+.calculator-section.disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+
 /* Total Section
 ----------------------------------------------------- */
 
@@ -627,6 +638,11 @@ input[type=text], input[type=number] {
   form {
     margin: 0;
   }
+
+  &.disabled {
+    opacity: 0.3;
+    pointer-events: none;
+  } 
 
   .service__info {
     padding: 10px;
