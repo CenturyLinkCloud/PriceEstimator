@@ -586,9 +586,9 @@ MonthlyTotalView = Backbone.View.extend({
       return function(data) {
         return $.each(data, function(index, location) {
           var label, selected;
-          label = location.replace("_", " ");
-          selected = options.datacenter === location ? "selected" : "";
-          return $(".datacenter", _this.$el).append("<option value='" + location + "' " + selected + ">" + label + "</option>");
+          label = location[1].replace("_", " ");
+          selected = options.datacenter === location[0] ? "selected" : "";
+          return $(".datacenter", _this.$el).append("<option value='" + location[0] + "' " + selected + ">" + label + "</option>");
         });
       };
     })(this));

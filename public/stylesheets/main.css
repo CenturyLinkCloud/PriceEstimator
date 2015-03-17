@@ -476,16 +476,25 @@ input[type=text], input[type=number] {
     position: relative;
     top: 6px; }
   /* line 547, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
-  .green-section .datacenter {
-    clear: both;
-    float: left;
-    margin: 5px 0 0;
-    text-transform: capitalize;
-    width: 100%; }
-  /* line 555, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+  .green-section .datacenter-select {
+    clear: both; }
+    /* line 549, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+    .green-section .datacenter-select span {
+      color: white;
+      font-size: 14px;
+      position: relative;
+      top: 2px;
+      margin-right: 4px; }
+    /* line 557, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+    .green-section .datacenter-select .datacenter {
+      clear: both;
+      display: inline-block;
+      margin: 5px 0 0;
+      text-transform: capitalize; }
+  /* line 565, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
   .green-section .lpChatTextLinkText {
     color: white; }
-  /* line 560, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+  /* line 570, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
   .green-section .buttons .btn-discuss {
     background: #284e36;
     border: 2px solid #108442;
@@ -495,24 +504,24 @@ input[type=text], input[type=number] {
     position: relative;
     top: 4px;
     text-align: center; }
-    /* line 570, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+    /* line 580, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
     .green-section .buttons .btn-discuss:hover {
       background: #108442; }
-  /* line 576, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+  /* line 586, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
   .green-section .total-box {
     float: right;
-    width: 60%;
+    width: 55%;
     border-radius: 6px;
     padding: 15px;
     background: #284e36; }
-    /* line 583, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+    /* line 593, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
     .green-section .total-box .price {
       line-height: 1;
       color: white;
       font-size: 42px;
       margin-bottom: 20px;
       word-wrap: break-word; }
-    /* line 591, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+    /* line 601, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
     .green-section .total-box .estimated {
       color: #addd6c;
       width: 60px;
@@ -522,11 +531,11 @@ input[type=text], input[type=number] {
 
 /* Services
 ----------------------------------------------------- */
-/* line 605, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+/* line 615, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
 .services {
   margin-top: -10px; }
 
-/* line 609, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+/* line 619, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
 .service {
   text-align: center;
   border: solid 5px #d3d3d0;
@@ -534,10 +543,10 @@ input[type=text], input[type=number] {
   margin: 10px 30px 20px 0;
   display: inline-block;
   transition: border 200ms; }
-  /* line 617, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+  /* line 627, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
   .service:nth-child(3), .service:nth-child(6) {
     margin-right: 0; }
-  /* line 621, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+  /* line 631, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
   .service select {
     width: 50px;
     position: relative;
@@ -545,21 +554,21 @@ input[type=text], input[type=number] {
     margin-left: 4px;
     margin-right: 4px;
     display: inline-block; }
-  /* line 630, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+  /* line 640, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
   .service h4 {
     font-size: 18px;
     display: table-cell;
     vertical-align: middle;
     padding: 0 20px;
     width: 100%; }
-  /* line 638, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+  /* line 648, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
   .service form {
     margin: 0; }
-  /* line 642, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+  /* line 652, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
   .service.disabled {
     opacity: 0.3;
     pointer-events: none; }
-  /* line 647, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+  /* line 657, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
   .service .service__info {
     padding: 10px;
     background: #f0f0ee;
@@ -567,7 +576,7 @@ input[type=text], input[type=number] {
     height: 110px;
     width: 100%;
     display: table; }
-  /* line 656, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+  /* line 666, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
   .service .service__description {
     background: #f0f0ee;
     position: absolute;
@@ -579,61 +588,61 @@ input[type=text], input[type=number] {
     font-size: 14px;
     opacity: 0;
     transition: opacity 200ms; }
-  /* line 669, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+  /* line 679, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
   .service .service__inputs {
     padding: 10px;
     text-align: left;
     padding-left: 20px;
     position: relative;
     width: 100%; }
-    /* line 676, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+    /* line 686, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
     .service .service__inputs .price {
       text-align: right;
       position: absolute;
       right: 20px;
       top: 20px; }
-    /* line 683, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+    /* line 693, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
     .service .service__inputs .quantity-wrapper {
       display: inline-block;
       width: 65px; }
-    /* line 688, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+    /* line 698, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
     .service .service__inputs input[type=range] {
       position: relative;
       z-index: 10;
       margin-left: 6px;
       margin-right: 5px;
       top: -1px; }
-    /* line 697, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+    /* line 707, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
     .service .service__inputs.slider .price {
       top: 14px; }
-  /* line 704, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+  /* line 714, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
   .service.object-storage input[type=range], .service.object-storage .rangeslider {
     width: 114px; }
-  /* line 709, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+  /* line 719, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
   .service.bandwidth {
     width: 658px; }
-    /* line 712, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+    /* line 722, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
     .service.bandwidth .service__info {
       height: 60px; }
-    /* line 716, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+    /* line 726, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
     .service.bandwidth input[type=range], .service.bandwidth .rangeslider {
       width: 440px; }
-    /* line 720, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+    /* line 730, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
     .service.bandwidth .service__info {
       min-height: 0; }
-  /* line 725, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+  /* line 735, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
   .service.active {
     border-color: #a5d867; }
-  /* line 730, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+  /* line 740, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
   .service:hover .service__description {
     opacity: 1; }
 
 /* Included Section
 ----------------------------------------------------- */
-/* line 741, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+/* line 751, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
 #included {
   overflow: hidden; }
-  /* line 743, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+  /* line 753, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
   #included ul {
     list-style: none;
     margin: 0;
@@ -642,7 +651,7 @@ input[type=text], input[type=number] {
     margin-bottom: 40px;
     width: 33%;
     float: left; }
-  /* line 753, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+  /* line 763, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
   #included li {
     list-style: none;
     width: 100%;
@@ -651,27 +660,27 @@ input[type=text], input[type=number] {
     margin-left: 0;
     margin: 10px 0;
     padding-right: 40px; }
-  /* line 763, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+  /* line 773, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
   #included p {
     font-size: 14px;
     clear: both;
     text-align: left;
     width: 800px; }
 
-/* line 772, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+/* line 782, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
 #bandwidth > p {
   width: 630px; }
 
 /* Support
 ----------------------------------------------------- */
-/* line 783, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+/* line 793, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
 #support > p {
   width: 220px; }
-/* line 787, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+/* line 797, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
 #support .support-table {
   margin-top: -50px; }
 
-/* line 792, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+/* line 802, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
 .support-select {
   background: #f0f0ee;
   border: solid 5px #d3d3d0;
@@ -681,16 +690,16 @@ input[type=text], input[type=number] {
   height: 204px;
   text-align: center;
   cursor: pointer; }
-  /* line 802, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+  /* line 812, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
   .support-select h4 {
     line-height: 60px; }
-  /* line 806, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+  /* line 816, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
   .support-select .status-label-wrapper {
     background: white;
     padding: 24px 0;
     padding-bottom: 10px;
     height: 134px; }
-  /* line 813, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+  /* line 823, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
   .support-select .status-label {
     display: inline-block;
     background: #D3D3D0;
@@ -701,18 +710,18 @@ input[type=text], input[type=number] {
     line-height: 1;
     font-size: 13px;
     letter-spacing: 1px; }
-  /* line 825, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+  /* line 835, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
   .support-select p {
     margin-top: 20px;
     margin-bottom: 0;
     font-size: 12px;
     padding: 0 10px; }
-  /* line 832, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+  /* line 842, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
   .support-select:hover {
     text-decoration: none; }
-  /* line 836, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+  /* line 846, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
   .support-select.selected {
     border-color: #a5d867; }
-    /* line 839, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
+    /* line 849, /Users/matt/Work/clc/PriceEstimator/source/css/main.scss */
     .support-select.selected .status-label {
       background: #a5d867; }

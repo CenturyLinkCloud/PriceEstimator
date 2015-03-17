@@ -13,9 +13,9 @@ MonthlyTotalView = Backbone.View.extend
 
     $.getJSON "json/pricing/index.json", (data) =>
       $.each data, (index, location) =>
-        label = location.replace("_", " ")
-        selected = if options.datacenter is location then "selected" else ""
-        $(".datacenter", @$el).append("<option value='#{location}' #{selected}>#{label}</option>")
+        label = location[1].replace("_", " ")
+        selected = if options.datacenter is location[0] then "selected" else ""
+        $(".datacenter", @$el).append("<option value='#{location[0]}' #{selected}>#{label}</option>")
 
     $(window).scroll => @positionHeader()
 
