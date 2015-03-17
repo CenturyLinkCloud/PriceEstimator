@@ -30,9 +30,9 @@ MonthlyTotalView = Backbone.View.extend
 
   changeDatacenter: (e) ->
     # @options.app.setPricingMap $(e.target).val()
-    href = window.location.href
+    href = window.top.location.href
     href = href.replace(/\?datacenter=.*/, "")
     href = "#{href}?datacenter=#{$(e.target).val()}"
-    window.location.href = href
+    window.top.location.href = href
 
 module.exports = MonthlyTotalView

@@ -610,10 +610,10 @@ MonthlyTotalView = Backbone.View.extend({
   },
   changeDatacenter: function(e) {
     var href;
-    href = window.location.href;
+    href = window.top.location.href;
     href = href.replace(/\?datacenter=.*/, "");
     href = "" + href + "?datacenter=" + ($(e.target).val());
-    return window.location.href = href;
+    return window.top.location.href = href;
   }
 });
 
