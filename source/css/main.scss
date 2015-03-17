@@ -60,6 +60,10 @@ input[type=text], input[type=number] {
 /* Major layout
 ----------------------------------------------------- */
 
+.container {
+  width: 1170px !important;
+}
+
 .main-container {
   opacity: 0;
 
