@@ -9,12 +9,12 @@
         "redhat-managed": "disabled",
         "windows-managed": "disabled"
         },
-      "memory" : 0.01725,
+      "memory" : 0.0173,
       "cpu" : 0.01150,
       "storage": {
         "standard": 0.1752,
         "premium": 0.5913,
-        "hyperscale": "disabled"
+        "hyperscale": 0.4672
       },
       "iis": 0.21,
       "active-directory": 0.275,
@@ -67,5 +67,3 @@
     "price": 0.05750
   }
 ]
-
-
