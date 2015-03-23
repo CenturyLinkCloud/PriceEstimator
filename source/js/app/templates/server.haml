@@ -23,7 +23,7 @@
     %option{value: "redhat",  selected: @model.get('os') == 'redhat' } Red Hat
     %option{value: "windows",  selected: @model.get('os') == 'windows' } Windows
 
-%td.table-cell.managed-cell
+%td.table-cell.managed-cell{class: @disabledClass}
   %input.managed-check{type: "checkbox", name: "managed"}
 
 %td.table-cell.cpu-cell.range-cell

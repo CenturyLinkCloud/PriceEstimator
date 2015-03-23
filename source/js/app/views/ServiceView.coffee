@@ -7,7 +7,9 @@ ServiceView = Backbone.View.extend
     "change input": "onFormChanged"
     "input input": "onFormChanged"
 
-  initialize: ->
+  initialize: (options) ->
+    @options = options || {};
+
     @model.on "change", (model) =>
       @onModelChange(model)
 
@@ -16,6 +18,7 @@ ServiceView = Backbone.View.extend
     @$el.html template(model: @model)
     @$el.attr("id", @model.cid)
     @$el.addClass(@model.get("key"))
+    @$el.addClass("disabled") if @options.disabled
 
     _.defer =>
       $('.range-slider', @$el).rangeslider

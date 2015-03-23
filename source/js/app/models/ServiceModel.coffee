@@ -5,9 +5,11 @@ ServiceModel = Backbone.Model.extend
     description: ""
     input: "select"
     quantity: 0
+    disabled: false
 
   initPricing: (pricingMap) ->
     @.set "pricing", pricingMap.get('price')
+    @.set "disabled", pricingMap.get('disabled')
 
   totalPricePerMonth: ->
     @.get("pricing") * @.get("quantity")

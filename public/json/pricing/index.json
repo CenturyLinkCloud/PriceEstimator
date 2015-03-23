@@ -1,4 +1,15 @@
 [
-  "united_states",
-  "singapore"
+  ["NY1", "US East (New York) - NY1"],
+  ["VA1", "US East (Sterling) - VA1"],
+  ["IL1", "US Central (Chicago) - IL1"],
+  ["UT1", "US Central (Salt Lake City) - UT1"],
+  ["UC1", "US West (Santa Clara) - UC1"],
+  ["WA1", "US West (Seattle) - WA1"],
+  ["CA3", "Canada (Toronto) - CA3"],
+  ["CA2", "Canada (Toronto) - CA2"],
+  ["CA1", "Canada (Vancouver) - CA1"],
+  ["DE1", "Germany (Frankfurt) - DE1"],
+  ["GB1", "Great Britain (Portsmouth) - GB1"],
+  ["GB3", "Great Britain (Slough) - GB3"],
+  ["SG1", "APAC (Singapore) - SG1"]
 ]

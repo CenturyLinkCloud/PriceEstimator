@@ -3,7 +3,9 @@
     .container
       .pull-left
         %h3 Estimated Monthly Total
-        %select.datacenter
+        .datacenter-select
+          %span Data Center:
+          %select.datacenter
       .total-box
         %span.price $0.00
         %span.estimated estimated / month
@@ -198,9 +200,9 @@
 
         %tr
           %td Response Time (SLA)
-          %td < 8 hours
-          %td < 60 minutes
-          %td < 30 minutes
+          %td &lt; 8 hours
+          %td &lt; 60 minutes
+          %td &lt; 30 minutes
 
         %tr
           %td Service Management

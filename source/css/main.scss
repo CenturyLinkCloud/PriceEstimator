@@ -60,6 +60,10 @@ input[type=text], input[type=number] {
 /* Major layout
 ----------------------------------------------------- */
 
+.container {
+  width: 1170px !important;
+}
+
 .main-container {
   opacity: 0;
 
@@ -372,6 +376,11 @@ input[type=text], input[type=number] {
 
 .managed-cell {
   width: 65px;
+  
+  &.disabled {
+    opacity: 0.2;
+    pointer-events: none
+  }
 }
 
 .usage-cell {
@@ -511,6 +520,12 @@ input[type=text], input[type=number] {
 }
 
 
+.calculator-section.disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+
 /* Total Section
 ----------------------------------------------------- */
 
@@ -533,12 +548,22 @@ input[type=text], input[type=number] {
     top: 6px;
   }
 
-  .datacenter {
+  .datacenter-select {
     clear: both;
-    float: left;
-    margin: 5px 0 0;
-    text-transform: capitalize;
-    width: 100%;
+    span {
+      color:white;    
+      font-size: 14px;
+      position: relative;
+      top: 2px;
+      margin-right: 4px;
+    } 
+
+    .datacenter {
+      clear: both;
+      display: inline-block;  
+      margin: 5px 0 0;
+      text-transform: capitalize;
+    }
   }
 
   .lpChatTextLinkText {
@@ -564,7 +589,7 @@ input[type=text], input[type=number] {
 
   .total-box {
     float: right;
-    width: 60%;
+    width: 55%;
     border-radius: 6px;
     padding: 15px;
     background: #284e36;
@@ -627,6 +652,11 @@ input[type=text], input[type=number] {
   form {
     margin: 0;
   }
+
+  &.disabled {
+    opacity: 0.3;
+    pointer-events: none;
+  } 
 
   .service__info {
     padding: 10px;

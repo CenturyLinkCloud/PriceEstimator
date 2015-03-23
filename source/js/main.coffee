@@ -17,7 +17,7 @@ PricingMapsCollection = require './app/collections/PricingMapsCollection.coffee'
 ServersCollection = require './app/collections/ServersCollection.coffee'
 ServicesCollection = require './app/collections/ServicesCollection.coffee'
 ServiceModel = require './app/models/ServiceModel.coffee'
-
+Utils = require './app/Utils.coffee'
 
 #--------------------------------------------------------
 # Init
@@ -28,10 +28,14 @@ App =
 
   init: ->
     _.extend(@, Backbone.Events)
+    
+    datacenter = Utils.getUrlParameter("datacenter") 
+    dc = datacenter || "NY1"
 
-    @monthlyTotalView = new MonthlyTotalView(app: @)
+    @monthlyTotalView = new MonthlyTotalView(app: @, datacenter: dc)
+
     @supportView = new SupportView(app: @)
-    @pricingMaps = new PricingMapsCollection([], { datacenter: "united_states" })
+    @pricingMaps = new PricingMapsCollection([], { datacenter: dc })
 
     @pricingMaps.on "sync", =>
       @onPricingMapsSynced()
@@ -112,8 +116,6 @@ App =
       collection: @serversCollection
       el: "#servers"
       pricingMap: @pricingMaps.forKey("server")
-
-    # @serversView.addServer()
 
   initHyperscaleServers: ->
     @hyperscaleServersCollection = new ServersCollection

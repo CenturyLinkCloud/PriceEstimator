@@ -9,6 +9,28 @@ module.exports = Config;
 
 
 },{}],2:[function(require,module,exports){
+var Utils;
+
+Utils = {
+  getUrlParameter: function(sParam) {
+    var i, sPageURL, sParameterName, sURLVariables;
+    sPageURL = window.location.search.substring(1);
+    sURLVariables = sPageURL.split('&');
+    i = 0;
+    while (i < sURLVariables.length) {
+      sParameterName = sURLVariables[i].split('=');
+      if (sParameterName[0] === sParam) {
+        return sParameterName[1];
+      }
+      i++;
+    }
+  }
+};
+
+module.exports = Utils;
+
+
+},{}],3:[function(require,module,exports){
 var PricingMapsCollection, PricingModel;
 
 PricingModel = require('../models/PricingMapModel.coffee');
@@ -16,6 +38,7 @@ PricingModel = require('../models/PricingMapModel.coffee');
 PricingMapsCollection = Backbone.Collection.extend({
   model: PricingModel,
   initialize: function(models, options) {
+    window.currentDatacenter = options.datacenter;
     this.url = "json/pricing/" + options.datacenter + ".json";
     return this.fetch();
   },
@@ -29,7 +52,7 @@ PricingMapsCollection = Backbone.Collection.extend({
 module.exports = PricingMapsCollection;
 
 
-},{"../models/PricingMapModel.coffee":5}],3:[function(require,module,exports){
+},{"../models/PricingMapModel.coffee":6}],4:[function(require,module,exports){
 var ServerModel, ServersCollection;
 
 ServerModel = require('../models/ServerModel.coffee');
@@ -60,7 +83,7 @@ ServersCollection = Backbone.Collection.extend({
 module.exports = ServersCollection;
 
 
-},{"../models/ServerModel.coffee":6}],4:[function(require,module,exports){
+},{"../models/ServerModel.coffee":7}],5:[function(require,module,exports){
 var ServiceModel, ServicesCollection;
 
 ServiceModel = require('../models/ServiceModel.coffee');
@@ -93,7 +116,7 @@ ServicesCollection = Backbone.Collection.extend({
 module.exports = ServicesCollection;
 
 
-},{"../models/ServiceModel.coffee":7}],5:[function(require,module,exports){
+},{"../models/ServiceModel.coffee":8}],6:[function(require,module,exports){
 var PricingMapModel;
 
 PricingMapModel = Backbone.Model.extend({
@@ -103,7 +126,7 @@ PricingMapModel = Backbone.Model.extend({
 module.exports = PricingMapModel;
 
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 var ServerModel;
 
 ServerModel = Backbone.Model.extend({
@@ -238,7 +261,7 @@ ServerModel = Backbone.Model.extend({
 module.exports = ServerModel;
 
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 var ServiceModel;
 
 ServiceModel = Backbone.Model.extend({
@@ -246,10 +269,12 @@ ServiceModel = Backbone.Model.extend({
     title: "",
     description: "",
     input: "select",
-    quantity: 0
+    quantity: 0,
+    disabled: false
   },
   initPricing: function(pricingMap) {
-    return this.set("pricing", pricingMap.get('price'));
+    this.set("pricing", pricingMap.get('price'));
+    return this.set("disabled", pricingMap.get('disabled'));
   },
   totalPricePerMonth: function() {
     return this.get("pricing") * this.get("quantity");
@@ -259,7 +284,7 @@ ServiceModel = Backbone.Model.extend({
 module.exports = ServiceModel;
 
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 module.exports = function(options) {
 return (function() {
 var $c, $e, $o;
@@ -289,7 +314,7 @@ return $o.join("\n").replace(/\s(\w+)='true'/mg, ' $1').replace(/\s(\w+)='fa
 
 }).call(options)
 };
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 module.exports = function(options) {
 return (function() {
 var $c, $e, $o;
@@ -327,7 +352,7 @@ return $o.join("\n").replace(/\s(\w+)='true'/mg, ' $1').replace(/\s(\w+)='fa
 
 }).call(options)
 };
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 module.exports = function(options) {
 return (function() {
 var $c, $e, $o;
@@ -359,7 +384,7 @@ if (this.model.get("type") === "hyperscale") {
   $o.push("<td class='table-cell type-cell'>\n  <select name='type'>\n    <option value='standard' selected='" + ($e($c(this.model.get('type') === 'standard'))) + "'>standard</option>\n    <option value='premium' selected='" + ($e($c(this.model.get('type') === 'premium'))) + "'>premium</option>\n  </select>\n</td>");
 }
 
-$o.push("<td class='os-cell table-cell'>\n  <select name='os'>\n    <option value='linux' selected='" + ($e($c(this.model.get('os') === 'linux'))) + "'>Linux</option>\n    <option value='redhat' selected='" + ($e($c(this.model.get('os') === 'redhat'))) + "'>Red Hat</option>\n    <option value='windows' selected='" + ($e($c(this.model.get('os') === 'windows'))) + "'>Windows</option>\n  </select>\n</td>\n<td class='managed-cell table-cell'>\n  <input class='managed-check' type='checkbox' name='managed'>\n</td>\n<td class='cpu-cell range-cell table-cell'>\n  <input class='cpu-text-input' data-name='cpu'>\n  <input class='range-slider' name='cpu' type='range' min='" + ($e($c(1))) + "' max='" + ($e($c(16))) + "' value='" + ($e($c(this.model.get("cpu")))) + "'>\n</td>\n<td class='memory-cell range-cell table-cell'>\n  <input class='memory-text-input' data-name='memory'>\n  <input class='range-slider' name='memory' type='range' min='" + ($e($c(1))) + "' max='" + ($e($c(128))) + "' value='" + ($e($c(this.model.get("memory")))) + "'>\n</td>\n<td class='range-cell storage-cell table-cell'>\n  <input class='storage-text-input' data-name='storage'>");
+$o.push("<td class='os-cell table-cell'>\n  <select name='os'>\n    <option value='linux' selected='" + ($e($c(this.model.get('os') === 'linux'))) + "'>Linux</option>\n    <option value='redhat' selected='" + ($e($c(this.model.get('os') === 'redhat'))) + "'>Red Hat</option>\n    <option value='windows' selected='" + ($e($c(this.model.get('os') === 'windows'))) + "'>Windows</option>\n  </select>\n</td>\n<td class='" + (['table-cell', 'managed-cell', "" + ($e($c(this.disabledClass)))].sort().join(' ').replace(/^\s+|\s+$/g, '')) + "'>\n  <input class='managed-check' type='checkbox' name='managed'>\n</td>\n<td class='cpu-cell range-cell table-cell'>\n  <input class='cpu-text-input' data-name='cpu'>\n  <input class='range-slider' name='cpu' type='range' min='" + ($e($c(1))) + "' max='" + ($e($c(16))) + "' value='" + ($e($c(this.model.get("cpu")))) + "'>\n</td>\n<td class='memory-cell range-cell table-cell'>\n  <input class='memory-text-input' data-name='memory'>\n  <input class='range-slider' name='memory' type='range' min='" + ($e($c(1))) + "' max='" + ($e($c(128))) + "' value='" + ($e($c(this.model.get("memory")))) + "'>\n</td>\n<td class='range-cell storage-cell table-cell'>\n  <input class='storage-text-input' data-name='storage'>");
 
 if (this.model.get("type") === "hyperscale") {
   $o.push("  <input class='range-slider' name='storage' type='range' min='" + ($e($c(1))) + "' max='" + ($e($c(1024))) + "' step='" + ($e($c(1))) + "' value='" + ($e($c(this.model.get("storage")))) + "'>");
@@ -377,7 +402,7 @@ return $o.join("\n").replace(/\s(\w+)='true'/mg, ' $1').replace(/\s(\w+)='fa
 
 }).call(options)
 };
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 module.exports = function(options) {
 return (function() {
 var $c, $e, $o;
@@ -434,7 +459,7 @@ return $o.join("\n").replace(/\s(\w+)='true'/mg, ' $1').replace(/\s(\w+)='fa
 
 }).call(options)
 };
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 var AddManagedAppView;
 
 AddManagedAppView = Backbone.View.extend({
@@ -478,7 +503,7 @@ AddManagedAppView = Backbone.View.extend({
 module.exports = AddManagedAppView;
 
 
-},{"../templates/addManagedApp.haml":8}],13:[function(require,module,exports){
+},{"../templates/addManagedApp.haml":9}],14:[function(require,module,exports){
 var ManagedAppView;
 
 ManagedAppView = Backbone.View.extend({
@@ -542,7 +567,7 @@ ManagedAppView = Backbone.View.extend({
 module.exports = ManagedAppView;
 
 
-},{"../templates/managedApp.haml":9}],14:[function(require,module,exports){
+},{"../templates/managedApp.haml":10}],15:[function(require,module,exports){
 var MonthlyTotalView;
 
 MonthlyTotalView = Backbone.View.extend({
@@ -557,14 +582,16 @@ MonthlyTotalView = Backbone.View.extend({
         return _this.updateTotal();
       };
     })(this));
-    $.getJSON("json/pricing/index.json", function(data) {
-      console.log(data);
-      return $.each(data, function() {
-        var label;
-        label = this.replace("_", " ");
-        return $(".datacenter", this.$el).append("<option value='" + this + "'>" + label + "</option>");
-      });
-    });
+    $.getJSON("json/pricing/index.json", (function(_this) {
+      return function(data) {
+        return $.each(data, function(index, location) {
+          var label, selected;
+          label = location[1].replace("_", " ");
+          selected = options.datacenter === location[0] ? "selected" : "";
+          return $(".datacenter", _this.$el).append("<option value='" + location[0] + "' " + selected + ">" + label + "</option>");
+        });
+      };
+    })(this));
     return $(window).scroll((function(_this) {
       return function() {
         return _this.positionHeader();
@@ -582,14 +609,18 @@ MonthlyTotalView = Backbone.View.extend({
     }
   },
   changeDatacenter: function(e) {
-    return this.options.app.setPricingMap($(e.target).val());
+    var href;
+    href = window.top.location.href;
+    href = href.replace(/\?datacenter=.*/, "");
+    href = "" + href + "?datacenter=" + ($(e.target).val());
+    return window.top.location.href = href;
   }
 });
 
 module.exports = MonthlyTotalView;
 
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 var AddManagedAppView, ManagedAppView, ServerView;
 
 AddManagedAppView = require('./AddManagedAppView.coffee');
@@ -610,7 +641,7 @@ ServerView = Backbone.View.extend({
     "keypress input:not([name])": "ensureNumber",
     "input input:not([name])": "onSliderTextChanged"
   },
-  initialize: function() {
+  initialize: function(options) {
     this.appViews = [];
     this.listenTo(this.model, 'change', (function(_this) {
       return function(model) {
@@ -624,10 +655,16 @@ ServerView = Backbone.View.extend({
     })(this));
   },
   render: function() {
-    var template;
+    var disabledClass, managedDisabled, template;
     template = require("../templates/server.haml");
+    managedDisabled = this.model.get("pricingMap").get("options").os["redhat-managed"] === "disabled";
+    disabledClass = "";
+    if (managedDisabled) {
+      disabledClass = "disabled";
+    }
     this.$el.html(template({
-      model: this.model
+      model: this.model,
+      disabledClass: disabledClass
     }));
     this.$el.attr("id", this.model.cid);
     _.defer((function(_this) {
@@ -751,7 +788,7 @@ ServerView = Backbone.View.extend({
 module.exports = ServerView;
 
 
-},{"../templates/server.haml":10,"./AddManagedAppView.coffee":12,"./ManagedAppView.coffee":13}],16:[function(require,module,exports){
+},{"../templates/server.haml":11,"./AddManagedAppView.coffee":13,"./ManagedAppView.coffee":14}],17:[function(require,module,exports){
 var ServerModel, ServerView, ServersView;
 
 ServerView = require('./ServerView.coffee');
@@ -781,6 +818,11 @@ ServersView = Backbone.View.extend({
     })(this));
     this.updateSubtotal();
     this.serverViews = [];
+    if (this.options.hyperscale) {
+      if (this.options.pricingMap.get("options").storage.hyperscale === "disabled") {
+        this.$el.addClass("disabled");
+      }
+    }
     return $('.has-tooltip', this.$el).tooltip();
   },
   addServer: function(e) {
@@ -815,7 +857,7 @@ ServersView = Backbone.View.extend({
 module.exports = ServersView;
 
 
-},{"../models/ServerModel.coffee":6,"./ServerView.coffee":15}],17:[function(require,module,exports){
+},{"../models/ServerModel.coffee":7,"./ServerView.coffee":16}],18:[function(require,module,exports){
 var ServiceView;
 
 ServiceView = Backbone.View.extend({
@@ -825,7 +867,8 @@ ServiceView = Backbone.View.extend({
     "change input": "onFormChanged",
     "input input": "onFormChanged"
   },
-  initialize: function() {
+  initialize: function(options) {
+    this.options = options || {};
     return this.model.on("change", (function(_this) {
       return function(model) {
         return _this.onModelChange(model);
@@ -840,6 +883,9 @@ ServiceView = Backbone.View.extend({
     }));
     this.$el.attr("id", this.model.cid);
     this.$el.addClass(this.model.get("key"));
+    if (this.options.disabled) {
+      this.$el.addClass("disabled");
+    }
     _.defer((function(_this) {
       return function() {
         $('.range-slider', _this.$el).rangeslider({
@@ -871,7 +917,7 @@ ServiceView = Backbone.View.extend({
 module.exports = ServiceView;
 
 
-},{"../templates/service.haml":11}],18:[function(require,module,exports){
+},{"../templates/service.haml":12}],19:[function(require,module,exports){
 var ServiceModel, ServiceView, ServicesView;
 
 ServiceView = require('./ServiceView.coffee');
@@ -898,9 +944,11 @@ ServicesView = Backbone.View.extend({
   addServices: function() {
     return this.collection.each((function(_this) {
       return function(service) {
-        var serviceView;
+        var disabled, serviceView;
+        disabled = service.get('disabled');
         serviceView = new ServiceView({
-          model: service
+          model: service,
+          disabled: disabled
         });
         return $(".services", _this.$el).append(serviceView.render().el);
       };
@@ -914,7 +962,7 @@ ServicesView = Backbone.View.extend({
 module.exports = ServicesView;
 
 
-},{"../models/ServiceModel.coffee":7,"./ServiceView.coffee":17}],19:[function(require,module,exports){
+},{"../models/ServiceModel.coffee":8,"./ServiceView.coffee":18}],20:[function(require,module,exports){
 var SupportView;
 
 SupportView = Backbone.View.extend({
@@ -987,8 +1035,8 @@ SupportView = Backbone.View.extend({
 module.exports = SupportView;
 
 
-},{}],20:[function(require,module,exports){
-var App, Config, MonthlyTotalView, PricingMapsCollection, ServersCollection, ServersView, ServiceModel, ServicesCollection, ServicesView, SupportView;
+},{}],21:[function(require,module,exports){
+var App, Config, MonthlyTotalView, PricingMapsCollection, ServersCollection, ServersView, ServiceModel, ServicesCollection, ServicesView, SupportView, Utils;
 
 Config = require('./app/Config.coffee');
 
@@ -1008,18 +1056,24 @@ ServicesCollection = require('./app/collections/ServicesCollection.coffee');
 
 ServiceModel = require('./app/models/ServiceModel.coffee');
 
+Utils = require('./app/Utils.coffee');
+
 App = {
   initialized: false,
   init: function() {
+    var datacenter, dc;
     _.extend(this, Backbone.Events);
+    datacenter = Utils.getUrlParameter("datacenter");
+    dc = datacenter || "NY1";
     this.monthlyTotalView = new MonthlyTotalView({
-      app: this
+      app: this,
+      datacenter: dc
     });
     this.supportView = new SupportView({
       app: this
     });
     this.pricingMaps = new PricingMapsCollection([], {
-      datacenter: "united_states"
+      datacenter: dc
     });
     return this.pricingMaps.on("sync", (function(_this) {
       return function() {
@@ -1158,4 +1212,4 @@ $(function() {
 });
 
 
-},{"./app/Config.coffee":1,"./app/collections/PricingMapsCollection.coffee":2,"./app/collections/ServersCollection.coffee":3,"./app/collections/ServicesCollection.coffee":4,"./app/models/ServiceModel.coffee":7,"./app/views/MonthlyTotalView.coffee":14,"./app/views/ServersView.coffee":16,"./app/views/ServicesView.coffee":18,"./app/views/SupportView.coffee":19}]},{},[20])
+},{"./app/Config.coffee":1,"./app/Utils.coffee":2,"./app/collections/PricingMapsCollection.coffee":3,"./app/collections/ServersCollection.coffee":4,"./app/collections/ServicesCollection.coffee":5,"./app/models/ServiceModel.coffee":8,"./app/views/MonthlyTotalView.coffee":15,"./app/views/ServersView.coffee":17,"./app/views/ServicesView.coffee":19,"./app/views/SupportView.coffee":20}]},{},[21])
