@@ -22,8 +22,8 @@ This project uses:
 - Run `middleman server` to run dev server at http://localhost:4567.
 - Run `grunt dev` to watch the front-end source files and recompile as necessary.
 
-To update prices, edit:
-https://github.com/CenturyLinkCloud/PriceEstimator/blob/master/public/json/pricing.json
+To update prices (each data center the service is offered), edit:
+https://github.com/CenturyLinkCloud/PriceEstimator/tree/master/public/json/pricing
 
 To update Managed Services, edit: https://github.com/CenturyLinkCloud/PriceEstimator/blob/master/source/js/app/templates/addManagedApp.haml
 
