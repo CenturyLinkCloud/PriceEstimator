@@ -22,7 +22,7 @@
       "apache": 0.21,
       "cloudera-cdh5-basic": 0.62,
       "cloudera-cdh5-basic-hbase": 0.96,
-      "cloudera-cdh5-basic-hbase": 1.23,
+      "cloudera-enterprise-data-hub": 1.23,
       "tomcat": 0.83,
       "mysql": 0.76,
       "mysql-replication-master-master": 0.5556,
