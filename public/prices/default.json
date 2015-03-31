@@ -48,6 +48,7 @@
         "description" : "",
         "products" : [
             {
+                "key": "networking:bandwidth",
                 "name": "Internet Bandwidth Data Transfer",
                 "descriptionHtml" : "Outbound only, inbound is free. Price per GB transferred",
                 "type" : "usage (GB)",

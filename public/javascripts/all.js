@@ -2,7 +2,8 @@
 var Config;
 
 Config = {
-  NAME: ""
+  NAME: "",
+  CLC_PRICING_URL_ROOT: "/prices/"
 };
 
 module.exports = Config;
@@ -35,23 +36,7 @@ var DEFAULT_SERVER_DATA, HOURS_IN_MONTH, PricingMapsCollection, PricingModel;
 
 PricingModel = require('../models/PricingMapModel.coffee');
 
-DEFAULT_SERVER_DATA = {
-  "type": "server",
-  "options": {
-    "os": {
-      "linux": 0,
-      "redhat": 0.04,
-      "windows": 0.04,
-      "redhat-managed": "disabled",
-      "windows-managed": "disabled"
-    },
-    "storage": {
-      "standard": 0.15,
-      "premium": 0.5,
-      "hyperscale": "disabled"
-    }
-  }
-};
+DEFAULT_SERVER_DATA = require('../data/server.coffee');
 
 HOURS_IN_MONTH = 730;
 
@@ -60,10 +45,18 @@ PricingMapsCollection = Backbone.Collection.extend({
   initialize: function(models, options) {
     window.currentDatacenter = options.datacenter;
     window.currentDatasource = options.datasource;
-    this.url = "/prices/" + options.datasource + ".json";
+    this.url = options.url;
     return this.fetch();
   },
   parse: function(data) {
+    return this._parsePricingData(data);
+  },
+  forKey: function(type) {
+    return _.first(this.where({
+      "type": type
+    }));
+  },
+  _parsePricingData: function(data) {
     var additional_services, output, server;
     output = [];
     additional_services = [];
@@ -113,20 +106,14 @@ PricingMapsCollection = Backbone.Collection.extend({
     _.each(additional_services, function(ser) {
       return output.push(ser);
     });
-    console.log(output);
     return output;
-  },
-  forKey: function(type) {
-    return _.first(this.where({
-      "type": type
-    }));
   }
 });
 
 module.exports = PricingMapsCollection;
 
 
-},{"../models/PricingMapModel.coffee":6}],4:[function(require,module,exports){
+},{"../data/server.coffee":6,"../models/PricingMapModel.coffee":7}],4:[function(require,module,exports){
 var ServerModel, ServersCollection;
 
 ServerModel = require('../models/ServerModel.coffee');
@@ -160,7 +147,7 @@ ServersCollection = Backbone.Collection.extend({
 module.exports = ServersCollection;
 
 
-},{"../models/ServerModel.coffee":7}],5:[function(require,module,exports){
+},{"../models/ServerModel.coffee":8}],5:[function(require,module,exports){
 var ServiceModel, ServicesCollection;
 
 ServiceModel = require('../models/ServiceModel.coffee');
@@ -193,7 +180,27 @@ ServicesCollection = Backbone.Collection.extend({
 module.exports = ServicesCollection;
 
 
-},{"../models/ServiceModel.coffee":8}],6:[function(require,module,exports){
+},{"../models/ServiceModel.coffee":9}],6:[function(require,module,exports){
+module.exports = {
+  type: "server",
+  options: {
+    os: {
+      linux: 0,
+      redhat: 0.04,
+      windows: 0.04,
+      "redhat-managed": "disabled",
+      "windows-managed": "disabled"
+    },
+    storage: {
+      standard: 0.15,
+      premium: 0.5,
+      "hyperscale": "disabled"
+    }
+  }
+};
+
+
+},{}],7:[function(require,module,exports){
 var PricingMapModel;
 
 PricingMapModel = Backbone.Model.extend({
@@ -206,7 +213,7 @@ PricingMapModel = Backbone.Model.extend({
 module.exports = PricingMapModel;
 
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 var ServerModel;
 
 ServerModel = Backbone.Model.extend({
@@ -344,7 +351,7 @@ ServerModel = Backbone.Model.extend({
 module.exports = ServerModel;
 
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 var ServiceModel;
 
 ServiceModel = Backbone.Model.extend({
@@ -370,7 +377,7 @@ ServiceModel = Backbone.Model.extend({
 module.exports = ServiceModel;
 
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 module.exports = function(options) {
 return (function() {
 var $c, $e, $o;
@@ -400,7 +407,7 @@ return $o.join("\n").replace(/\s(\w+)='true'/mg, ' $1').replace(/\s(\w+)='fa
 
 }).call(options)
 };
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 module.exports = function(options) {
 return (function() {
 var $c, $e, $o;
@@ -438,7 +445,7 @@ return $o.join("\n").replace(/\s(\w+)='true'/mg, ' $1').replace(/\s(\w+)='fa
 
 }).call(options)
 };
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 module.exports = function(options) {
 return (function() {
 var $c, $e, $o;
@@ -488,7 +495,7 @@ return $o.join("\n").replace(/\s(\w+)='true'/mg, ' $1').replace(/\s(\w+)='fa
 
 }).call(options)
 };
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 module.exports = function(options) {
 return (function() {
 var $c, $e, $o;
@@ -545,7 +552,7 @@ return $o.join("\n").replace(/\s(\w+)='true'/mg, ' $1').replace(/\s(\w+)='fa
 
 }).call(options)
 };
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 var AddManagedAppView;
 
 AddManagedAppView = Backbone.View.extend({
@@ -589,7 +596,7 @@ AddManagedAppView = Backbone.View.extend({
 module.exports = AddManagedAppView;
 
 
-},{"../templates/addManagedApp.haml":9}],14:[function(require,module,exports){
+},{"../templates/addManagedApp.haml":10}],15:[function(require,module,exports){
 var ManagedAppView;
 
 ManagedAppView = Backbone.View.extend({
@@ -653,7 +660,7 @@ ManagedAppView = Backbone.View.extend({
 module.exports = ManagedAppView;
 
 
-},{"../templates/managedApp.haml":10}],15:[function(require,module,exports){
+},{"../templates/managedApp.haml":11}],16:[function(require,module,exports){
 var MonthlyTotalView;
 
 MonthlyTotalView = Backbone.View.extend({
@@ -712,7 +719,7 @@ MonthlyTotalView = Backbone.View.extend({
 module.exports = MonthlyTotalView;
 
 
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 var AddManagedAppView, ManagedAppView, ServerView;
 
 AddManagedAppView = require('./AddManagedAppView.coffee');
@@ -880,7 +887,7 @@ ServerView = Backbone.View.extend({
 module.exports = ServerView;
 
 
-},{"../templates/server.haml":11,"./AddManagedAppView.coffee":13,"./ManagedAppView.coffee":14}],17:[function(require,module,exports){
+},{"../templates/server.haml":12,"./AddManagedAppView.coffee":14,"./ManagedAppView.coffee":15}],18:[function(require,module,exports){
 var ServerModel, ServerView, ServersView;
 
 ServerView = require('./ServerView.coffee');
@@ -949,7 +956,7 @@ ServersView = Backbone.View.extend({
 module.exports = ServersView;
 
 
-},{"../models/ServerModel.coffee":7,"./ServerView.coffee":16}],18:[function(require,module,exports){
+},{"../models/ServerModel.coffee":8,"./ServerView.coffee":17}],19:[function(require,module,exports){
 var ServiceView;
 
 ServiceView = Backbone.View.extend({
@@ -1009,7 +1016,7 @@ ServiceView = Backbone.View.extend({
 module.exports = ServiceView;
 
 
-},{"../templates/service.haml":12}],19:[function(require,module,exports){
+},{"../templates/service.haml":13}],20:[function(require,module,exports){
 var ServiceModel, ServiceView, ServicesView;
 
 ServiceView = require('./ServiceView.coffee');
@@ -1054,7 +1061,7 @@ ServicesView = Backbone.View.extend({
 module.exports = ServicesView;
 
 
-},{"../models/ServiceModel.coffee":8,"./ServiceView.coffee":18}],20:[function(require,module,exports){
+},{"../models/ServiceModel.coffee":9,"./ServiceView.coffee":19}],21:[function(require,module,exports){
 var SupportView;
 
 SupportView = Backbone.View.extend({
@@ -1127,8 +1134,8 @@ SupportView = Backbone.View.extend({
 module.exports = SupportView;
 
 
-},{}],21:[function(require,module,exports){
-var App, Config, MonthlyTotalView, PricingMapsCollection, ServersCollection, ServersView, ServiceModel, ServicesCollection, ServicesView, SupportView, Utils;
+},{}],22:[function(require,module,exports){
+var App, Config, MonthlyTotalView, PRICES_URL_ROOT, PricingMapsCollection, ServersCollection, ServersView, ServiceModel, ServicesCollection, ServicesView, SupportView, Utils;
 
 Config = require('./app/Config.coffee');
 
@@ -1150,6 +1157,8 @@ ServiceModel = require('./app/models/ServiceModel.coffee');
 
 Utils = require('./app/Utils.coffee');
 
+PRICES_URL_ROOT = "/prices/";
+
 App = {
   initialized: false,
   init: function() {
@@ -1169,7 +1178,8 @@ App = {
     });
     this.pricingMaps = new PricingMapsCollection([], {
       datacenter: dc,
-      datasource: ds
+      datasource: ds,
+      url: PRICES_URL_ROOT + ("" + ds + ".json")
     });
     return this.pricingMaps.on("sync", (function(_this) {
       return function() {
@@ -1264,7 +1274,6 @@ App = {
   },
   initHyperscaleServers: function() {
     this.hyperscaleServersCollection = new ServersCollection;
-    console.log(this.pricingMaps);
     this.hyperscaleServersCollection.on("change remove add", (function(_this) {
       return function() {
         return _this.updateTotalPrice();
@@ -1309,4 +1318,4 @@ $(function() {
 });
 
 
-},{"./app/Config.coffee":1,"./app/Utils.coffee":2,"./app/collections/PricingMapsCollection.coffee":3,"./app/collections/ServersCollection.coffee":4,"./app/collections/ServicesCollection.coffee":5,"./app/models/ServiceModel.coffee":8,"./app/views/MonthlyTotalView.coffee":15,"./app/views/ServersView.coffee":17,"./app/views/ServicesView.coffee":19,"./app/views/SupportView.coffee":20}]},{},[21])
+},{"./app/Config.coffee":1,"./app/Utils.coffee":2,"./app/collections/PricingMapsCollection.coffee":3,"./app/collections/ServersCollection.coffee":4,"./app/collections/ServicesCollection.coffee":5,"./app/models/ServiceModel.coffee":9,"./app/views/MonthlyTotalView.coffee":16,"./app/views/ServersView.coffee":18,"./app/views/ServicesView.coffee":20,"./app/views/SupportView.coffee":21}]},{},[22])

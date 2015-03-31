@@ -19,6 +19,8 @@ ServicesCollection = require './app/collections/ServicesCollection.coffee'
 ServiceModel = require './app/models/ServiceModel.coffee'
 Utils = require './app/Utils.coffee'
 
+PRICES_URL_ROOT = "/prices/"
+
 #--------------------------------------------------------
 # Init
 #--------------------------------------------------------
@@ -42,7 +44,10 @@ App =
     @supportView = new SupportView
       app: @
 
-    @pricingMaps = new PricingMapsCollection([],{datacenter: dc, datasource: ds})
+    @pricingMaps = new PricingMapsCollection [],
+      datacenter: dc
+      datasource: ds
+      url: PRICES_URL_ROOT + "#{ds}.json"
 
     @pricingMaps.on "sync", =>
       @onPricingMapsSynced()
@@ -126,7 +131,6 @@ App =
 
   initHyperscaleServers: ->
     @hyperscaleServersCollection = new ServersCollection
-    console.log @pricingMaps
     @hyperscaleServersCollection.on "change remove add", =>
       @updateTotalPrice()
 

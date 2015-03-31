@@ -1,21 +1,8 @@
 PricingModel = require '../models/PricingMapModel.coffee'
 
-DEFAULT_SERVER_DATA = 
-  "type": "server"
-  "options":
-    "os":
-      "linux": 0
-      "redhat": 0.04
-      "windows": 0.04
-      "redhat-managed": "disabled"
-      "windows-managed": "disabled"
-    "storage":
-      "standard": 0.15
-      "premium": 0.5
-      "hyperscale": "disabled"
+DEFAULT_SERVER_DATA = require '../data/server.coffee'
 
 HOURS_IN_MONTH = 730
-
 
 PricingMapsCollection = Backbone.Collection.extend
   model: PricingModel
@@ -23,12 +10,16 @@ PricingMapsCollection = Backbone.Collection.extend
   initialize: (models, options) ->
     window.currentDatacenter = options.datacenter
     window.currentDatasource = options.datasource
-    @url = "/prices/#{options.datasource}.json"
-    #@url = "/prices/#{options.datacenter.toLowerCase()}.json"
-    #@url = "json/pricing/" + options.datacenter + ".json"
+    @url = options.url
     @fetch()
 
   parse: (data) ->
+    return @_parsePricingData(data)
+
+  forKey: (type) ->
+    _.first @where("type": type)
+
+  _parsePricingData: (data) ->
     output = []
     additional_services = []
     server = _.clone(DEFAULT_SERVER_DATA)
@@ -60,16 +51,9 @@ PricingMapsCollection = Backbone.Collection.extend
     output.push(server)
 
     additional_services.push({type: 'bandwidth', price: 0.05})
-
     additional_services.push({type: 'object-storage', price: 0.15, disabled: true})
 
     _.each additional_services, (ser) -> output.push(ser)
-
-    console.log output
-
     return output
-
-  forKey: (type) ->
-    _.first @where("type": type)
 
 module.exports = PricingMapsCollection

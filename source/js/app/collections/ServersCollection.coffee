@@ -4,7 +4,6 @@ ServersCollection = Backbone.Collection.extend
   model: ServerModel
 
   parse: (data) ->
-    # console.log 'Servers Collection', data
     return data
 
   subtotal: ->
