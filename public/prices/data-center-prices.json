@@ -1,0 +1,132 @@
+[
+    {
+        "alias": "NY1",
+        "name": "US East (New York)",
+        "links": [
+            {
+                "rel": "pricing",
+                "href": "/prices/ny1.json"
+            }
+        ]
+    },
+    {
+        "alias": "VA1",
+        "name": "US East (Sterling)",
+        "links": [
+            {
+                "rel": "pricing",
+                "href": "/prices/va1.json"
+            }
+        ]
+    },
+    {
+        "alias": "IL1",
+        "name": "US Central (Chicago)",
+        "links": [
+            {
+                "rel": "pricing",
+                "href": "/prices/il1.json"
+            }
+        ]
+    },
+    {
+        "alias": "UT1",
+        "name": "US Central (Salt Lake City)",
+        "links": [
+            {
+                "rel": "pricing",
+                "href": "/prices/default.json"
+            }
+        ]
+    },
+    {
+        "alias": "UC1",
+        "name": "US West (Santa Clara)",
+        "links": [
+            {
+                "rel": "pricing",
+                "href": "/prices/uc1.json"
+            }
+        ]
+    },
+    {
+        "alias": "WA1",
+        "name": "US West (Seattle)",
+        "links": [
+            {
+                "rel": "pricing",
+                "href": "/prices/default.json"
+            }
+        ]
+    },
+    {
+        "alias": "CA3",
+        "name": "Canada (Toronto)",
+        "links": [
+            {
+                "rel": "pricing",
+                "href": "/prices/ca3.json"
+            }
+        ]
+    },
+    {
+        "alias": "CA2",
+        "name": "Canada (Toronto)",
+        "links": [
+            {
+                "rel": "pricing",
+                "href": "/prices/default.json"
+            }
+        ]
+    },
+    {
+        "alias": "CA1",
+        "name": "Canada (Vancouver)",
+        "links": [
+            {
+                "rel": "pricing",
+                "href": "/prices/default.json"
+            }
+        ]
+    },
+    {
+        "alias": "DE1",
+        "name": "Germany (Frankfurt)",
+        "links": [
+            {
+                "rel": "pricing",
+                "href": "/prices/default.json"
+            }
+        ]
+    },
+    {
+        "alias": "GB1",
+        "name": "Great Britain (Portsmouth)",
+        "links": [
+            {
+                "rel": "pricing",
+                "href": "/prices/default.json"
+            }
+        ]
+    },
+    {
+        "alias": "GB3",
+        "name": "Great Britain (Slough)",
+        "links": [
+            {
+                "rel": "pricing",
+                "href": "/prices/gb3.json"
+            }
+        ]
+    },
+    {
+        "alias": "SG1",
+        "name": "APAC (Singapore)",
+        "links": [
+            {
+                "rel": "pricing",
+                "href": "/prices/sg1.json"
+            }
+        ]
+    }
+]
