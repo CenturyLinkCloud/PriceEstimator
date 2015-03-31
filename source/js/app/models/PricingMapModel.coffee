@@ -1,8 +1,9 @@
 PricingMapModel = Backbone.Model.extend
 
   initialize: ->
-  parse: (response) ->
-    return response
+  parse: (data) ->
+    # console.log 'pricing map model', data
+    return data
 
 
 

@@ -15,6 +15,8 @@ MonthlyTotalView = Backbone.View.extend
       $.each data, (index, location) =>
         label = location.name.replace("_", " ")
         pricingSheetHref = location.links[0].href
+          .replace "/prices/", ""
+          .replace ".json", ""
         alias = location.alias.toUpperCase()
         selected = if options.datacenter is alias then "selected" else ""
         $option = $("<option value='#{alias}' #{selected}>#{label} - #{alias}</option>")
@@ -34,9 +36,12 @@ MonthlyTotalView = Backbone.View.extend
 
   changeDatacenter: (e) ->
     # @options.app.setPricingMap $(e.target).val()
+    $target = $(e.target)
     href = window.top.location.href
     href = href.replace(/\?datacenter=.*/, "")
-    href = "#{href}?datacenter=#{$(e.target).val()}"
+    $selected = $target.find('option:selected')
+    datasource = $selected.attr('data-pricing-map') || 'default'
+    href = "#{href}?datacenter=#{$target.val()}&datasource=#{datasource}"
     window.top.location.href = href
 
 module.exports = MonthlyTotalView

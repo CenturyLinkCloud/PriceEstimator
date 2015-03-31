@@ -25,9 +25,12 @@ ServerModel = Backbone.Model.extend
     @initPricing()
     @.set("managedApps", [])
 
+  parse: (data) ->
+    # console.log 'Server Model', data
+    return data
+
   initPricing: ->
     pricing = @.get("pricingMap").attributes.options
-    console.log 'pricing', pricing
     @.set("pricing", pricing)
 
   updatePricing: (pricingMap) ->

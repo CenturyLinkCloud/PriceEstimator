@@ -4,6 +4,7 @@
         "description" : "Pay for infrastructure resources by the hour with no long-term commitments. This frees you from the costs and complexities of planning, purchasing, and maintaining hardware and transforms what are commonly large fixed costs into much smaller variable costs.",
         "products" : [
             {
+                "key": "server:cpu",
                 "name": "Virtual CPU",
                 "descriptionHtml" : "2 Ghz+ Processor (up to 16 cpu)",
                 "type" : "hourly (allocated)",
@@ -11,6 +12,7 @@
                 "href": "/servers"
             },
             {
+                "key": "server:memory",
                 "name": "Virtual RAM",
                 "descriptionHtml" : "1 GB (up to 128GB)",
                 "type" : "hourly (allocated)",
@@ -18,6 +20,7 @@
                 "href": "/servers"
             },
             {
+                "key": "server:storage:standard",
                 "name": "Block Storage w/ Standard Backup",
                 "descriptionHtml" : "Persistent storage (single data center, 5 days of snapshot backup). Price per GB.",
                 "type" : "hourly (allocated)",
@@ -25,6 +28,7 @@
                 "href": "/block-storage"
             },
             {
+                "key": "server:storage:premium",
                 "name": "Block Storage w/ Premium Backup",
                 "descriptionHtml" : "Persistent storage (single data center, 5 days of snapshot backup). Price per GB.",
                 "type" : "hourly (allocated)",
@@ -46,6 +50,7 @@
                 "href": "/hyperscale"
             },
             {
+                "key": "server:storage:hyperscale",
                 "name": "Block Storage for Hyperscale",
                 "descriptionHtml" : "Persistent high performance storage: SSD based storage with sustained rates of 15k IOPS. Price per GB.",
                 "type" : "hourly (allocated)",
@@ -77,18 +82,21 @@
                 "monthly" : 0.05
             },
             {
+                "key": "networking-services:vpn",
                 "name": "VPN Connection",
                 "descriptionHtml" : "Site to Site VPN Connection (Does not include bandwidth)",
                 "type" : "monthly (fixed)",
                 "monthly" : 45.00
             },
             {
+                "key": "networking-services:firewall",
                 "name": "Private VLAN (Additional)",
                 "descriptionHtml" : "1 VLAN is automatically included with each acccount",
                 "type" : "monthly (fixed)",
                 "monthly" : 45.00
             },
             {
+                "key": "networking-services:external-ip-address",
                 "name": "Public IP Address",
                 "descriptionHtml" : "IP Address accessible by public internet",
                 "type" : "monthly (fixed)",
@@ -134,12 +142,14 @@
                 "type" : "no charge"
             },
             {
+                "key":"server:os:windows",
                 "name": "Microsoft Windows Server",
                 "descriptionHtml" : "per vCPU",
                 "type" : "hourly (allocated)",
                 "hourly" : 0.04
             },
             {
+                "key":"server:os:redhat",
                 "name": "Red Hat Enterprise Linux",
                 "descriptionHtml" : "per vCPU",
                 "type" : "hourly (allocated)",
@@ -270,12 +280,14 @@
         "description" : "Prices are for operating system management only. Software licensing is separate.",
         "products" : [
             {
+                "key": "server:os:windows-managed",
                 "name": "Managed Microsoft Windows Server",
                 "descriptionHtml" : "per server",
                 "type" : "hourly (used)",
                 "hourly" : 0.21
             },
             {
+                "key": "server:os:redhat-managed",
                 "name": "Managed Red Hat Enterprise Linux",
                 "descriptionHtml" : "per server",
                 "type" : "hourly (used)",
@@ -288,6 +300,7 @@
         "description" : "Prices are for application management only. Software licensing is separate.",
         "products" : [
             {
+                "key": "managed-apps:iis",
                 "name": "Managed Microsoft IIS",
                 "href" : "/managed-services/iis",
                 "descriptionHtml" : "per server",
@@ -295,6 +308,7 @@
                 "hourly" : 0.21
             },
             {
+                "key": "managed-apps:active-directory",
                 "name": "Managed Microsoft Active Directory",
                 "href": "managed-services/active-directory",
                 "descriptionHtml" : "per server",
@@ -302,6 +316,7 @@
                 "hourly" : 0.28
             },
             {
+                "key": "managed-apps:ms-sql",
                 "name": "Managed Microsoft SQL",
                 "descriptionHtml" : "per application instance",
                 "href" : "/managed-services/ms-sql",
@@ -309,6 +324,7 @@
                 "hourly" : 0.48
             },
             {
+                "key": "managed-apps:apache",
                 "name": "Managed Apache",
                 "descriptionHtml" : "per server",
                 "href" : "/managed-services/apache-server",
@@ -316,6 +332,7 @@
                 "hourly" : 0.21
             },
             {
+                "key": "managed-apps:tomcat",
                 "name": "Managed Tomcat",
                 "descriptionHtml" : "per server",
                 "href" : "/managed-services/tomcat",
@@ -323,6 +340,7 @@
                 "hourly" : 0.83
             },
             {
+                "key": "managed-apps:cloudera-cdh5-basic",
                 "name": "Managed Cloudera ",
                 "version": "CDH5 Basic",
                 "descriptionHtml" : "per server",
@@ -331,6 +349,7 @@
                 "hourly" : 0.62
             },
             {
+                "key": "managed-apps:cloudera-cdh5-basic-hbase",
                 "name": "Managed Cloudera ",
                 "version": "CDH5 Basic + HBase",
                 "descriptionHtml" : "per server",
@@ -339,6 +358,7 @@
                 "hourly" : 0.96
             },
             {
+                "key": "managed-apps:cloudera-enterprise-data-hub",
                 "name": "Managed Cloudera",
                 "version": "Enterprise Data Hub",
                 "descriptionHtml" : "per server",
@@ -347,6 +367,7 @@
                 "hourly" : 1.23
             },
             {
+                "key": "managed-apps:mysql",
                 "name": "Managed MySQL",
                 "descriptionHtml" : "per application instance",
                 "href" : "/managed-services/mysql",
@@ -354,6 +375,7 @@
                 "hourly" : 0.76
             },
             {
+                "key": "managed-apps:mysql-replication-master-master",    
                 "name": "Managed MySQL Replication",
                 "descriptionHtml" : "per application instance per hour",
                 "type" : "hourly (used)",
@@ -390,12 +412,14 @@
         "description" : "Self-service shared or dedicated load balancer options.",
         "products": [
             {
+                "key": "networking-services:shared-load-balancer",
                 "name": "Shared Load Balancer",
                 "descriptionHtml" : "Fully self-service shared load balancer",
                 "type" : "hourly (allocated)",
                 "hourly" : 0.04
             },
             {
+                "key": "networking-services:dedicated-load-balancer-200",
                 "name": "Citrix NetScaler VPX",
                 "version" : "200Mbps Standard",
                 "descriptionHtml" : "Dedicated Load Balancer (Virtual Appliance)",
@@ -412,6 +436,7 @@
                 "setupFee": 390.00
             },
             {
+                "key": "networking-services:dedicated-load-balancer-1000",
                 "name": "Citrix NetScaler VPX",
                 "version" : "1000Mbps Standard",
                 "descriptionHtml" : "Dedicated Load Balancer (Virtual Appliance)",

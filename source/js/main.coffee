@@ -29,13 +29,20 @@ App =
   init: ->
     _.extend(@, Backbone.Events)
     
-    datacenter = Utils.getUrlParameter("datacenter") 
+    datacenter = Utils.getUrlParameter("datacenter")
+    datasource = Utils.getUrlParameter("datasource")
     dc = datacenter || "NY1"
+    ds = datasource || "ny1"
 
-    @monthlyTotalView = new MonthlyTotalView(app: @, datacenter: dc)
+    @monthlyTotalView = new MonthlyTotalView
+      app: @
+      datacenter: dc
+      datasource: ds
 
-    @supportView = new SupportView(app: @)
-    @pricingMaps = new PricingMapsCollection([], { datacenter: dc })
+    @supportView = new SupportView
+      app: @
+
+    @pricingMaps = new PricingMapsCollection([],{datacenter: dc, datasource: ds})
 
     @pricingMaps.on "sync", =>
       @onPricingMapsSynced()
@@ -119,7 +126,7 @@ App =
 
   initHyperscaleServers: ->
     @hyperscaleServersCollection = new ServersCollection
-
+    console.log @pricingMaps
     @hyperscaleServersCollection.on "change remove add", =>
       @updateTotalPrice()
 

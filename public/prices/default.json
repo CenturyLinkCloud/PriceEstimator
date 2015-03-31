@@ -4,7 +4,7 @@
         "description" : "Pay for infrastructure resources by the hour with no long-term commitments. This frees you from the costs and complexities of planning, purchasing, and maintaining hardware and transforms what are commonly large fixed costs into much smaller variable costs.",
         "products" : [
             {
-                "id": "server:cpu",
+                "key": "server:cpu",
                 "name": "Virtual CPU",
                 "descriptionHtml" : "Standard Servers. 2 Ghz+ Processor (up to 16 cpu)",
                 "type" : "hourly (allocated)",
@@ -12,7 +12,7 @@
                 "href": "/servers"
             },
             {
-                "id": "server:memory",
+                "key": "server:memory",
                 "name": "Virtual RAM",
                 "descriptionHtml" : "Standard Servers. 1 GB (up to 128GB)",
                 "type" : "hourly (allocated)",
@@ -20,7 +20,7 @@
                 "href": "/servers"
             },
             {
-                "id": "server:storage:standard",
+                "key": "server:storage:standard",
                 "name": "Block Storage w/ Standard Backup",
                 "descriptionHtml" : "Persistent storage (single data center, 5 days of snapshot backup). Price per GB.",
                 "type" : "hourly (allocated)",
@@ -28,7 +28,7 @@
                 "href": "/block-storage"
             },
             {
-                "id": "server:storage:premium",
+                "key": "server:storage:premium",
                 "name": "Block Storage w/ Premium Backup",
                 "descriptionHtml" : "Persistent storage (single data center, 5 days of snapshot backup). Price per GB.",
                 "type" : "hourly (allocated)",
@@ -60,21 +60,21 @@
                 "monthly" : 0.05
             },
             {
-                "id": "networking-services:vpn",
+                "key": "networking-services:vpn",
                 "name": "VPN Connection",
                 "descriptionHtml" : "Site to Site VPN Connection (Does not include bandwidth)",
                 "type" : "monthly (fixed)",
                 "monthly" : 45.00
             },
             {
-                "id": "networking-services:firewall",
+                "key": "networking-services:firewall",
                 "name": "Private VLAN (Additional)",
                 "descriptionHtml" : "1 VLAN is automatically included with each acccount",
                 "type" : "monthly (fixed)",
                 "monthly" : 45.00
             },
             {
-                "id": "networking-services:external-ip-address",
+                "key": "networking-services:external-ip-address",
                 "name": "Public IP Address",
                 "descriptionHtml" : "IP Address accessible by public internet",
                 "type" : "monthly (fixed)",
@@ -116,19 +116,18 @@
                 "type" : "no charge"
             },
             {
-                "id": "server:os:linux",
                 "name": "Debian",
                 "type" : "no charge"
             },
             {
-                "id":"server:os:windows",
+                "key":"server:os:windows",
                 "name": "Microsoft Windows Server",
                 "descriptionHtml" : "per vCPU",
                 "type" : "hourly (allocated)",
                 "hourly" : 0.04
             },
             {
-                "id":"server:os:redhat",
+                "key":"server:os:redhat",
                 "name": "Red Hat Enterprise Linux",
                 "descriptionHtml" : "per vCPU",
                 "type" : "hourly (allocated)",
@@ -272,14 +271,14 @@
         "description" : "Self-service shared or dedicated load balancer options.",
         "products": [
             {
-                "id": "networking-services:shared-load-balancer",
+                "key": "networking-services:shared-load-balancer",
                 "name": "Shared Load Balancer",
                 "descriptionHtml" : "Fully self-service shared load balancer",
                 "type" : "hourly (allocated)",
                 "hourly" : 0.04
             },
             {
-                "id": "networking-services:dedicated-load-balancer-200",
+                "key": "networking-services:dedicated-load-balancer-200",
                 "name": "Citrix NetScaler VPX",
                 "version" : "200Mbps Standard",
                 "descriptionHtml" : "Dedicated Load Balancer (Virtual Appliance)",
@@ -296,7 +295,7 @@
                 "setupFee": 390.00
             },
             {
-                "id": "networking-services:dedicated-load-balancer-1000",
+                "key": "networking-services:dedicated-load-balancer-1000",
                 "name": "Citrix NetScaler VPX",
                 "version" : "1000Mbps Standard",
                 "descriptionHtml" : "Dedicated Load Balancer (Virtual Appliance)",

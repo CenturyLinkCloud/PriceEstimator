@@ -31,85 +31,86 @@ module.exports = Utils;
 
 
 },{}],3:[function(require,module,exports){
-var PricingMapsCollection, PricingModel;
+var DEFAULT_SERVER_DATA, HOURS_IN_MONTH, PricingMapsCollection, PricingModel;
 
 PricingModel = require('../models/PricingMapModel.coffee');
+
+DEFAULT_SERVER_DATA = {
+  "type": "server",
+  "options": {
+    "os": {
+      "linux": 0,
+      "redhat": 0.04,
+      "windows": 0.04,
+      "redhat-managed": "disabled",
+      "windows-managed": "disabled"
+    },
+    "storage": {
+      "standard": 0.15,
+      "premium": 0.5,
+      "hyperscale": "disabled"
+    }
+  }
+};
+
+HOURS_IN_MONTH = 730;
 
 PricingMapsCollection = Backbone.Collection.extend({
   model: PricingModel,
   initialize: function(models, options) {
     window.currentDatacenter = options.datacenter;
-    this.url = "/prices/default.json";
+    window.currentDatasource = options.datasource;
+    this.url = "/prices/" + options.datasource + ".json";
     return this.fetch();
   },
   parse: function(data) {
-    var additional, output, server;
+    var additional_services, output, server;
     output = [];
-    server = {
-      type: "server",
-      options: {
-        os: {
-          linux: 0,
-          redhat: 0,
-          windows: 0,
-          "redhat-managed": "disabled",
-          "windows-managed": "disabled"
-        },
-        storage: {
-          standard: 0,
-          premium: 0,
-          hyperscale: "disabled"
-        },
-        "iis": 0.21,
-        "active-directory": 0.275,
-        "ms-sql": 0.48,
-        "apache": 0.21,
-        "cloudera-cdh5-basic": 0.62,
-        "cloudera-cdh5-basic-hbase": 0.96,
-        "cloudera-enterprise-data-hub": 1.23,
-        "tomcat": 0.83,
-        "mysql": 0.76,
-        "mysql-replication-master-master": 0.5556,
-        "mysql-replication-master-slave": 0.3472,
-        "ssl": 84
-      }
-    };
-    additional = [];
+    additional_services = [];
+    server = _.clone(DEFAULT_SERVER_DATA);
     _.each(data, function(section) {
       if (section.products != null) {
         return _.each(section.products, function(product) {
           var ids, price, service;
-          if (_.has(product, 'id')) {
-            ids = product.id.split(":");
+          if (_.has(product, 'key')) {
+            ids = product.key.split(":");
             if (ids[0] === 'server') {
-              if (ids[1] === 'os' || ids[1] === 'storage') {
+              if (ids[1] === 'os') {
                 return server.options[ids[1]][ids[2]] = product.hourly || 0;
+              } else if (ids[1] === 'storage') {
+                return server.options[ids[1]][ids[2]] = product.hourly * HOURS_IN_MONTH;
               } else {
                 return server.options[ids[1]] = product.hourly || product.monthly;
               }
             } else if (ids[0] === 'networking-services') {
-              price = product.hourly || product.monthly;
+              if (ids[1] === 'shared-load-balancer') {
+                price = product.monthly || product.hourly * HOURS_IN_MONTH;
+              } else {
+                price = product.monthly;
+              }
               service = {
                 type: ids[1],
                 price: price
               };
-              return additional.push(service);
+              return additional_services.push(service);
+            } else if (ids[0] === 'managed-apps') {
+              return server.options[ids[1]] = product.hourly;
             }
           }
         });
       }
     });
     output.push(server);
-    additional.push({
+    additional_services.push({
       type: 'bandwidth',
       price: 0.05
     });
-    additional.push({
+    additional_services.push({
       type: 'object-storage',
       price: 0.15,
       disabled: true
     });
-    _.each(additional, function(ser) {
+    _.each(additional_services, function(ser) {
       return output.push(ser);
     });
     console.log(output);
@@ -132,6 +133,9 @@ ServerModel = require('../models/ServerModel.coffee');
 
 ServersCollection = Backbone.Collection.extend({
   model: ServerModel,
+  parse: function(data) {
+    return data;
+  },
   subtotal: function() {
     return _.reduce(this.models, function(memo, server) {
       return memo + server.totalPricePerMonth() + server.managedAppsPricePerMonth();
@@ -194,8 +198,8 @@ var PricingMapModel;
 
 PricingMapModel = Backbone.Model.extend({
   initialize: function() {},
-  parse: function(response) {
-    return response;
+  parse: function(data) {
+    return data;
   }
 });
 
@@ -229,10 +233,12 @@ ServerModel = Backbone.Model.extend({
     this.initPricing();
     return this.set("managedApps", []);
   },
+  parse: function(data) {
+    return data;
+  },
   initPricing: function() {
     var pricing;
     pricing = this.get("pricingMap").attributes.options;
-    console.log('pricing', pricing);
     return this.set("pricing", pricing);
   },
   updatePricing: function(pricingMap) {
@@ -352,6 +358,9 @@ ServiceModel = Backbone.Model.extend({
   initPricing: function(pricingMap) {
     this.set("pricing", pricingMap.get('price'));
     return this.set("disabled", pricingMap.get('disabled'));
+  },
+  parse: function(data) {
+    return data;
   },
   totalPricePerMonth: function() {
     return this.get("pricing") * this.get("quantity");
@@ -664,7 +673,7 @@ MonthlyTotalView = Backbone.View.extend({
         return $.each(data, function(index, location) {
           var $option, alias, label, pricingSheetHref, selected;
           label = location.name.replace("_", " ");
-          pricingSheetHref = location.links[0].href;
+          pricingSheetHref = location.links[0].href.replace("/prices/", "").replace(".json", "");
           alias = location.alias.toUpperCase();
           selected = options.datacenter === alias ? "selected" : "";
           $option = $("<option value='" + alias + "' " + selected + ">" + label + " - " + alias + "</option>").attr('data-pricing-map', pricingSheetHref);
@@ -689,10 +698,13 @@ MonthlyTotalView = Backbone.View.extend({
     }
   },
   changeDatacenter: function(e) {
-    var href;
+    var $selected, $target, datasource, href;
+    $target = $(e.target);
     href = window.top.location.href;
     href = href.replace(/\?datacenter=.*/, "");
-    href = "" + href + "?datacenter=" + ($(e.target).val());
+    $selected = $target.find('option:selected');
+    datasource = $selected.attr('data-pricing-map') || 'default';
+    href = "" + href + "?datacenter=" + ($target.val()) + "&datasource=" + datasource;
     return window.top.location.href = href;
   }
 });
@@ -1141,19 +1153,23 @@ Utils = require('./app/Utils.coffee');
 App = {
   initialized: false,
   init: function() {
-    var datacenter, dc;
+    var datacenter, datasource, dc, ds;
     _.extend(this, Backbone.Events);
     datacenter = Utils.getUrlParameter("datacenter");
+    datasource = Utils.getUrlParameter("datasource");
     dc = datacenter || "NY1";
+    ds = datasource || "ny1";
     this.monthlyTotalView = new MonthlyTotalView({
       app: this,
-      datacenter: dc
+      datacenter: dc,
+      datasource: ds
     });
     this.supportView = new SupportView({
       app: this
     });
     this.pricingMaps = new PricingMapsCollection([], {
-      datacenter: dc
+      datacenter: dc,
+      datasource: ds
     });
     return this.pricingMaps.on("sync", (function(_this) {
       return function() {
@@ -1248,6 +1264,7 @@ App = {
   },
   initHyperscaleServers: function() {
     this.hyperscaleServersCollection = new ServersCollection;
+    console.log(this.pricingMaps);
     this.hyperscaleServersCollection.on("change remove add", (function(_this) {
       return function() {
         return _this.updateTotalPrice();

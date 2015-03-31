@@ -11,6 +11,10 @@ ServiceModel = Backbone.Model.extend
     @.set "pricing", pricingMap.get('price')
     @.set "disabled", pricingMap.get('disabled')
 
+  parse: (data) ->
+    # console.log 'Service model', data
+    return data
+
   totalPricePerMonth: ->
     @.get("pricing") * @.get("quantity")
 

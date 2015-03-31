@@ -3,6 +3,10 @@ ServerModel = require '../models/ServerModel.coffee'
 ServersCollection = Backbone.Collection.extend
   model: ServerModel
 
+  parse: (data) ->
+    # console.log 'Servers Collection', data
+    return data
+
   subtotal: ->
     _.reduce @models, (memo, server) ->
       memo + server.totalPricePerMonth() + server.managedAppsPricePerMonth()
