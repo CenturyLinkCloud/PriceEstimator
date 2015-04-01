@@ -12,7 +12,6 @@ ServiceModel = Backbone.Model.extend
     @.set "disabled", pricingMap.get('disabled')
 
   parse: (data) ->
-    # console.log 'Service model', data
     return data
 
   totalPricePerMonth: ->

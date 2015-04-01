@@ -1,0 +1,69 @@
+{
+  "USD": {
+    "USD":{
+      "rate": 1.0,
+      "symbol": "$",
+      "id": "USD"
+    },
+    "CNY":{
+      "rate": 6.88259,
+      "symbol": "¥",
+      "id": "CNY"
+    },
+    "GBP":{
+      "rate": 0.74448,
+      "symbol": "¥",
+      "id": "GBP"
+    },
+    "AUD":{
+      "rate": 1.43924,
+      "symbol": "$",
+      "id": "AUD"
+    },
+    "CAD":{
+      "rate": 1.40624,
+      "symbol":"$",
+      "id": "CAD"
+    },
+    "HKD":{
+      "rate": 8.54238,
+      "symbol":"$",
+      "id": "HKD"
+    },
+    "JPY":{
+      "rate": 133.45057,
+      "symbol":"¥",
+      "id": "JPY"
+    },
+    "SGD":{
+      "rate": 1.5301,
+      "symbol":"$",
+      "id": "SGD"
+    },
+    "INR":{
+      "rate": 69.23851,
+      "symbol": "₹",
+      "id": "INR"
+    },
+    "KRW":{
+      "rate": 1246.78444,
+      "symbol": "₩",
+      "id": "KRW"
+    },
+    "TWD":{
+      "rate": 34.83854,
+      "symbol": "NT$",
+      "id": "TWD"
+    },
+    "EUR":{
+      "rate": 0.830647459,
+      "symbol": "&euro;",
+      "id": "EUR"
+    },
+    "BRL":{
+      "rate": 3.56763,
+      "symbol": "R$",
+      "id": "BRL"
+    }
+  }
+}

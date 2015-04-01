@@ -11,12 +11,12 @@ ManagedAppView = Backbone.View.extend
     "keypress input": "ensureNumber"
 
   initialize: (options) ->
-    @options = options || {};
+    @options = options || {}
 
   render: ->
     template = require("../templates/managedApp.haml")
     colspan = if @model.get("type") is "hyperscale" then 4 else 5
-    @$el.html template(app: @options.app, colspan: colspan)
+    @$el.html template(app: @options.app, colspan: colspan, mainApp: @options.mainApp)
     @$el.addClass("managed-row-for-server_#{@model.cid}")
     @updateQuantityAndPrice()
     return @
@@ -34,7 +34,9 @@ ManagedAppView = Backbone.View.extend
     price = @model.managedAppPricePerMonth(@options.app.key, @options.app.instances)
     instances = @options.app.instances || 1
     $(".managed-app-quantity", @$el).html(quantity)
-    $(".price", @$el).html(accounting.formatMoney(price))
+    $(".price", @$el).html(accounting.formatMoney(price),
+      symbol: @options.mainApp.currency.symbol
+    )
     $("input[name=usage]", @$el).val instances
 
   onFormChanged: ->

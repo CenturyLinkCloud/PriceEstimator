@@ -17,7 +17,7 @@ PricingMapsCollection = require './app/collections/PricingMapsCollection.coffee'
 ServersCollection = require './app/collections/ServersCollection.coffee'
 ServicesCollection = require './app/collections/ServicesCollection.coffee'
 ServiceModel = require './app/models/ServiceModel.coffee'
-Utils = require './app/Utils.coffee'
+Utils = require('./app/Utils.coffee')
 
 PRICES_URL_ROOT = "/prices/"
 
@@ -27,26 +27,36 @@ PRICES_URL_ROOT = "/prices/"
 
 App =
   initialized: false
+  currency:
+    symbol: ""
+    id: "USD"
+    rate: 1.0
 
   init: ->
     _.extend(@, Backbone.Events)
-    
+
     datacenter = Utils.getUrlParameter("datacenter")
     datasource = Utils.getUrlParameter("datasource")
+    currencyId = Utils.getUrlParameter("currency")
+
     dc = datacenter || "NY1"
     ds = datasource || "ny1"
+    currency = currencyId || "USD"
 
     @monthlyTotalView = new MonthlyTotalView
       app: @
       datacenter: dc
       datasource: ds
+      currency: currency
 
     @supportView = new SupportView
       app: @
 
     @pricingMaps = new PricingMapsCollection [],
+      app: @
       datacenter: dc
       datasource: ds
+      currency: currency
       url: PRICES_URL_ROOT + "#{ds}.json"
 
     @pricingMaps.on "sync", =>
@@ -80,6 +90,7 @@ App =
     @networkingServices.initPricing(@pricingMaps)
 
     @networkingServicesView = new ServicesView
+      app: @
       collection: @networkingServices
       el: "#networking-services"
 
@@ -93,11 +104,15 @@ App =
     @additionalServices.initPricing(@pricingMaps)
 
     @additionalServicesView = new ServicesView
+      app: @
       collection: @additionalServices
       el: "#additional-services"
 
     @additionalServices.on "change", =>
       @updateTotalPrice()
+
+    @.on 'currencyUpdated', =>
+      @additionalServices.initPricing(@pricingMaps)
 
     @initialized = true
     @updateTotalPrice()
@@ -109,6 +124,7 @@ App =
     @bandwidthServices.initPricing(@pricingMaps)
 
     @bandwidthServicesView = new ServicesView
+      app: @
       collection: @bandwidthServices
       el: "#bandwidth"
 
@@ -125,6 +141,7 @@ App =
       @updateTotalPrice()
 
     @serversView = new ServersView
+      app: @
       collection: @serversCollection
       el: "#servers"
       pricingMap: @pricingMaps.forKey("server")
@@ -135,6 +152,7 @@ App =
       @updateTotalPrice()
 
     @hyperscaleServersView = new ServersView
+      app: @
       collection: @hyperscaleServersCollection
       el: "#hyperscale-servers"
       pricingMap: @pricingMaps.forKey("server")
@@ -173,6 +191,8 @@ App =
       @networkingServices.initPricing(@pricingMaps)
       @additionalServices.initPricing(@pricingMaps)
       @bandwidthServices.initPricing(@pricingMaps)
+
+
 
 #--------------------------------------------------------
 # DOM Ready

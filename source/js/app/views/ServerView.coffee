@@ -18,6 +18,10 @@ ServerView = Backbone.View.extend
     "input input:not([name])": "onSliderTextChanged"
 
   initialize: (options) ->
+    @options = options || {}
+
+    @app = @options.app
+
     @appViews = []
 
     @listenTo @model, 'change', (model) =>
@@ -31,7 +35,7 @@ ServerView = Backbone.View.extend
     managedDisabled = @model.get("pricingMap").get("options").os["redhat-managed"] is "disabled"
     disabledClass = ""
     disabledClass = "disabled" if managedDisabled
-    @$el.html template(model: @model, disabledClass: disabledClass)
+    @$el.html template(model: @model, app: @app, disabledClass: disabledClass)
     @$el.attr("id", @model.cid)
 
     _.defer =>
@@ -98,12 +102,15 @@ ServerView = Backbone.View.extend
     @removeAllManagedApps()
     managedApps = model.get("managedApps")
     _.each managedApps, (app) =>
-      managedAppView = new ManagedAppView(model: model, app: app)
+      managedAppView = new ManagedAppView(model: model, app: app, mainApp: @app)
       @appViews.push managedAppView
       @addManagedAppView.$el.before(managedAppView.render().el)
 
   onModelChange: (model) ->
-    $(".price", @$el).html(accounting.formatMoney(model.totalPricePerMonth()))
+    newTotal = accounting.formatMoney(model.totalPricePerMonth(),
+      symbol: @app.currency.symbol
+    )
+    $(".price", @$el).html newTotal
 
     $(".cpu", @$el).html(model.get("cpu"))
     $(".memory", @$el).html(model.get("memory"))

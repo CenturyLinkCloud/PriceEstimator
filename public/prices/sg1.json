@@ -70,12 +70,14 @@
         "description" : "",
         "products" : [
             {
+                "key": "networking:bandwidth",
                 "name": "Internet Bandwidth Data Transfer",
                 "descriptionHtml" : "Outbound only, inbound is free. Price per GB transferred",
                 "type" : "usage (GB)",
                 "monthly" : 0.0575
             },
             {
+                "key": "networking:object-storage",
                 "name": "Object Storage Data Transfer",
                 "descriptionHtml" : "Inbound and outbound traffic. Price per GB transferred",
                 "type" : "usage (GB)",

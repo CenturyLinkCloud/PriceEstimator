@@ -6,9 +6,26 @@
         .datacenter-select
           %span Data Center:
           %select.datacenter
+
       .total-box
-        %span.price $0.00
+        %span.price &nbsp;0.00
         %span.estimated estimated / month
+        %span.datacenter-select
+          %span &nbsp;&nbsp;
+          %select.currency
+            / %option{:value => "USD", :selected => "selected"} USD
+            / %option{:value => "CNY"} CNY
+            / %option{:value => "GBP"} GBP
+            / %option{:value => "AUD"} AUD
+            / %option{:value => "CAD"} CAD
+            / %option{:value => "HKD"} HKD
+            / %option{:value => "JPY"} JPY
+            / %option{:value => "SGD"} SGD
+            / %option{:value => "INR"} INR
+            / %option{:value => "KRW"} KRW
+            / %option{:value => "TWD"} TWD
+            / %option{:value => "EUR"} EUR
+            / %option{:value => "BRL"} BRL
         .buttons.pull-right
           %a.btn.btn-discuss{:href => "/contact/"} contact
           /

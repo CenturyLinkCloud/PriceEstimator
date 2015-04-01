@@ -7,7 +7,7 @@ SupportView = Backbone.View.extend
     "click .support-select a": "onSupportSelectInnerLinkClick"
 
   initialize: (options) ->
-    @options = options || {};
+    @options = options || {}
     @selectPlan("developer")    
 
   onSupportSelectClick: (e) ->
@@ -71,8 +71,11 @@ SupportView = Backbone.View.extend
     return total
 
   updateSubtotal: ->
-    @supportPrice = @calculateSupportBill() 
-    $(".subtotal", @$el).html accounting.formatMoney(@supportPrice)
+    @supportPrice = @calculateSupportBill()
+    newSubtotal = accounting.formatMoney(@supportPrice,
+      symbol: @options.app.currency.symbol
+    )
+    $(".subtotal", @$el).html newSubtotal
     return @supportPrice
 
 module.exports = SupportView

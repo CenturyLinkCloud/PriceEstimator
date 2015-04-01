@@ -82,10 +82,12 @@ ServerModel = Backbone.Model.extend
   totalPricePerMonth: ->
     utilityPerMonth = 0
     utilityPerMonth = @priceForMonth(@utilityPricePerHourTotal())
-    return utilityPerMonth + @storagePricePerMonth()
+    total = utilityPerMonth + @storagePricePerMonth()
+    return total
 
   totalPricePerMonthWithApps: ->
-    return @totalPricePerMonth + @managedAppsPricePerMonth()
+    total = @totalPricePerMonth + @managedAppsPricePerMonth()
+    return total
 
   priceForMonth: (hourlyPrice) ->
     switch @.get("usagePeriod")

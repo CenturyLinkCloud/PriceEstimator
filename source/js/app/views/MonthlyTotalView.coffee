@@ -4,11 +4,14 @@ MonthlyTotalView = Backbone.View.extend
 
   events:
     "change .datacenter": "changeDatacenter"
+    "change .currency": "changeCurrency"
 
   initialize: (options) ->
-    @options = options || {};
+    @options = options || {}
 
-    @options.app.on "totalPriceUpdated", =>
+    @app = @options.app
+
+    @app.on "totalPriceUpdated", =>
       @updateTotal()
 
     $.getJSON "/prices/data-center-prices.json", (data) =>
@@ -23,10 +26,24 @@ MonthlyTotalView = Backbone.View.extend
           .attr('data-pricing-map', pricingSheetHref)
         $(".datacenter", @$el).append($option)
 
+    $.getJSON "/prices/exchange-rates.json", (currencies) =>
+      $.each currencies["USD"], (index, currency) =>
+        label = currency.id
+        rate = currency.rate
+        symbol = currency.symbol
+        selected = if options.currency is label then "selected" else ""
+        $option = $("<option value='#{label}' #{selected}>#{label}</option>")
+            .attr('data-currency-symbol', symbol)
+            .attr('data-currency-rate', rate)
+        $(".currency", @$el).append($option)
+
     $(window).scroll => @positionHeader()
 
   updateTotal: ->
-    $(".price", @$el).html accounting.formatMoney(@options.app.totalPriceWithSupport)
+    newTotal = accounting.formatMoney(@app.totalPriceWithSupport,
+      symbol: @app.currency.symbol
+    )
+    $(".price", @$el).html newTotal
 
   positionHeader: ->
     if $(window).scrollTop() > 289
@@ -35,13 +52,28 @@ MonthlyTotalView = Backbone.View.extend
       @$el.css("position", "absolute")
 
   changeDatacenter: (e) ->
-    # @options.app.setPricingMap $(e.target).val()
+    # @app.setPricingMap $(e.target).val()
     $target = $(e.target)
+    $currencies = $(".currency", @$el)
+    currency = $currencies.val() || "USD"
     href = window.top.location.href
     href = href.replace(/\?datacenter=.*/, "")
     $selected = $target.find('option:selected')
     datasource = $selected.attr('data-pricing-map') || 'default'
-    href = "#{href}?datacenter=#{$target.val()}&datasource=#{datasource}"
-    window.top.location.href = href
+    href = "#{href}?datacenter=#{$target.val()}&datasource=#{datasource}&currency=#{currency}"
+    return window.top.location.href = href
+
+  changeCurrency: (e) ->
+    $datacenters = $(".datacenter", @$el)
+    datacenter = $datacenters.val()
+    $selected_datacenter = $datacenters.find('option:selected')
+    datasource = $selected_datacenter.attr('data-pricing-map') || 'default'
+    $target = $(e.currentTarget)
+    currency = $target.val() || "USD"
+    href = window.top.location.href
+    href = href.replace(/\?datacenter=.*/, "")
+    href = "#{href}?datacenter=#{datacenter}&datasource=#{datasource}&currency=#{currency}"
+    return window.top.location.href = href
+
 
 module.exports = MonthlyTotalView

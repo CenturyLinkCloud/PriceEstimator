@@ -55,6 +55,7 @@
                 "monthly" : 0.05
             },
             {
+                "key": "networking:object-storage",
                 "name": "Object Storage Data Transfer",
                 "descriptionHtml" : "Inbound and outbound traffic. Price per GB transferred",
                 "type" : "usage (GB)",
