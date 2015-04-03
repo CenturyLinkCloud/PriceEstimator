@@ -65,15 +65,16 @@ ServerModel = Backbone.Model.extend
     type = @.get("type")
     @.get("storage") * @.get("pricing").storage[type] * @.get("quantity")
 
-  managedAppPricePerMonth: (managedAppKey, instances) ->
+  managedAppPricePerMonth: (managedAppKey, instances, software) ->
+    appSoftwareHourlyPrice = if software isnt "" then software else 0
     appPerHour = @.get("pricing")[managedAppKey]
-    return @priceForMonth(appPerHour) * @.get("quantity") * instances
+    return ((@priceForMonth(appPerHour) + @priceForMonth(appSoftwareHourlyPrice)) * @.get("quantity")) * instances
 
   managedAppsPricePerMonth: ->
     apps = @.get("managedApps")
     total = 0
     _.each apps, (app) =>
-      total += @managedAppPricePerMonth(app.key, app.instances)
+      total += @managedAppPricePerMonth(app.key, app.instances, app.software)
     return total
 
   totalOSPricePerMonth: ->
@@ -102,16 +103,17 @@ ServerModel = Backbone.Model.extend
 
   addManagedApp: (key, name) ->
     apps = @.get("managedApps")
-    apps.push {"key": key, "name": name, "instances": 1}
+    apps.push {"key": key, "name": name, "instances": 1, "software": ""}
     @.set("managedApps", apps)
     @.trigger "change", @
     @.trigger "change:managedApps", @
 
-  updateManagedAppIntances: (key, quantity) ->
+  updateManagedAppIntances: (key, quantity, software) ->
     apps = @.get("managedApps")
     _.each apps, (app) ->
       if app.key is key
         app.instances = quantity
+        app.software = software
     @.set("managedApps", apps)
     @.trigger "change:managedApps", @
 

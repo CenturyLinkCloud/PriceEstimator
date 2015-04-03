@@ -1,4 +1,5 @@
 PricingModel = require '../models/PricingMapModel.coffee'
+Config = require '../Config.coffee'
 
 DEFAULT_SERVER_DATA = require '../data/server.coffee'
 
@@ -14,17 +15,14 @@ PricingMapsCollection = Backbone.Collection.extend
     @app = options.app
     @url = options.url
     $.ajax
-      url: "/prices/exchange-rates.json"
+      url: Config.CURRENCY_FILE_PATH
       type: "GET"
       success: (data) =>
-        @currency = data["USD"][options.currency]
+        @currency = data[Config.DEFAULT_CURRENCY.id][options.currency]
         @app.currency = window.currency = @currency
         return @fetch()
       error: (error) =>
-        @currency = 
-          rate: 1.0
-          id: "USD"
-          symbol: "$"
+        @currency = Config.DEFAULT_CURRENCY
         @app.currency = window.currency = @currency
         return @fetch()
 
@@ -38,10 +36,17 @@ PricingMapsCollection = Backbone.Collection.extend
   _parsePricingData: (data) ->
     output = []
     additional_services = []
+    software_licenses = []
     server = _.clone(DEFAULT_SERVER_DATA)
-    _.each data, (section) ->
+    _.each data, (section) =>
+      if section.name is "Software"
+        _.each section.products, (product) =>
+          item = 
+            name: product.name
+            price: product.hourly
+          software_licenses.push(item)
       if section.products?
-        _.each section.products, (product) ->
+        _.each section.products, (product) =>
           if _.has(product,'key')
             ids = product.key.split(":")
             if ids[0] is 'server'
@@ -84,11 +89,8 @@ PricingMapsCollection = Backbone.Collection.extend
                   disabled: !enabled
                 additional_services.push(service)
 
+    server.options["software"] = software_licenses
     output.push(server)
-
-    # additional_services.push({type: 'bandwidth', price: 0.05})
-    # additional_services.push({type: 'object-storage', price: 0.15, disabled: true})
-
     _.each additional_services, (ser) -> output.push(ser)
     return output
 

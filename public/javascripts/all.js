@@ -3,7 +3,13 @@ var Config;
 
 Config = {
   NAME: "",
-  CLC_PRICING_URL_ROOT: "/prices/"
+  CLC_PRICING_URL_ROOT: "./prices/",
+  DEFAULT_CURRENCY: {
+    id: "USD",
+    rate: 1.0,
+    symbol: "$"
+  },
+  CURRENCY_FILE_PATH: "./currency/exchange-rates.json"
 };
 
 module.exports = Config;
@@ -32,9 +38,11 @@ module.exports = Utils;
 
 
 },{}],3:[function(require,module,exports){
-var DEFAULT_SERVER_DATA, HOURS_IN_MONTH, PricingMapsCollection, PricingModel;
+var Config, DEFAULT_SERVER_DATA, HOURS_IN_MONTH, PricingMapsCollection, PricingModel;
 
 PricingModel = require('../models/PricingMapModel.coffee');
+
+Config = require('../Config.coffee');
 
 DEFAULT_SERVER_DATA = require('../data/server.coffee');
 
@@ -49,22 +57,18 @@ PricingMapsCollection = Backbone.Collection.extend({
     this.app = options.app;
     this.url = options.url;
     return $.ajax({
-      url: "/prices/exchange-rates.json",
+      url: Config.CURRENCY_FILE_PATH,
       type: "GET",
       success: (function(_this) {
         return function(data) {
-          _this.currency = data["USD"][options.currency];
+          _this.currency = data[Config.DEFAULT_CURRENCY.id][options.currency];
           _this.app.currency = window.currency = _this.currency;
           return _this.fetch();
         };
       })(this),
       error: (function(_this) {
         return function(error) {
-          _this.currency = {
-            rate: 1.0,
-            id: "USD",
-            symbol: "$"
-          };
+          _this.currency = Config.DEFAULT_CURRENCY;
           _this.app.currency = window.currency = _this.currency;
           return _this.fetch();
         };
@@ -80,66 +84,80 @@ PricingMapsCollection = Backbone.Collection.extend({
     }));
   },
   _parsePricingData: function(data) {
-    var additional_services, output, server;
+    var additional_services, output, server, software_licenses;
     output = [];
     additional_services = [];
+    software_licenses = [];
     server = _.clone(DEFAULT_SERVER_DATA);
-    _.each(data, function(section) {
-      if (section.products != null) {
-        return _.each(section.products, function(product) {
-          var enabled, ids, price, service;
-          if (_.has(product, 'key')) {
-            ids = product.key.split(":");
-            if (ids[0] === 'server') {
-              if (ids[1] === 'os') {
-                price = product.hourly || 0;
-                return server.options[ids[1]][ids[2]] = price * this.currency.rate;
-              } else if (ids[1] === 'storage') {
-                price = product.hourly * HOURS_IN_MONTH;
-                return server.options[ids[1]][ids[2]] = price * this.currency.rate;
-              } else {
-                price = product.hourly || product.monthly;
-                return server.options[ids[1]] = price * this.currency.rate;
-              }
-            } else if (ids[0] === 'networking-services') {
-              if (ids[1] === 'shared-load-balancer') {
-                price = product.monthly || product.hourly * HOURS_IN_MONTH;
-                price *= this.currency.rate;
-              } else {
-                price = product.monthly;
-                price *= this.currency.rate;
-              }
-              service = {
-                type: ids[1],
-                price: price
-              };
-              return additional_services.push(service);
-            } else if (ids[0] === 'managed-apps') {
-              price = product.hourly;
-              return server.options[ids[1]] = price * this.currency.rate;
-            } else if (ids[0] === 'networking') {
-              if (ids[1] === 'bandwidth') {
-                price = product.monthly * this.currency.rate;
+    _.each(data, (function(_this) {
+      return function(section) {
+        if (section.name === "Software") {
+          _.each(section.products, function(product) {
+            var item;
+            item = {
+              name: product.name,
+              price: product.hourly
+            };
+            return software_licenses.push(item);
+          });
+        }
+        if (section.products != null) {
+          return _.each(section.products, function(product) {
+            var enabled, ids, price, service;
+            if (_.has(product, 'key')) {
+              ids = product.key.split(":");
+              if (ids[0] === 'server') {
+                if (ids[1] === 'os') {
+                  price = product.hourly || 0;
+                  return server.options[ids[1]][ids[2]] = price * _this.currency.rate;
+                } else if (ids[1] === 'storage') {
+                  price = product.hourly * HOURS_IN_MONTH;
+                  return server.options[ids[1]][ids[2]] = price * _this.currency.rate;
+                } else {
+                  price = product.hourly || product.monthly;
+                  return server.options[ids[1]] = price * _this.currency.rate;
+                }
+              } else if (ids[0] === 'networking-services') {
+                if (ids[1] === 'shared-load-balancer') {
+                  price = product.monthly || product.hourly * HOURS_IN_MONTH;
+                  price *= _this.currency.rate;
+                } else {
+                  price = product.monthly;
+                  price *= _this.currency.rate;
+                }
                 service = {
-                  type: 'bandwidth',
+                  type: ids[1],
                   price: price
                 };
                 return additional_services.push(service);
-              } else if (ids[1] === 'object-storage') {
-                price = product.monthly * this.currency.rate;
-                enabled = (ids[2] != null) && ids[2] === 'enabled';
-                service = {
-                  type: 'object-storage',
-                  price: price,
-                  disabled: !enabled
-                };
-                return additional_services.push(service);
+              } else if (ids[0] === 'managed-apps') {
+                price = product.hourly;
+                return server.options[ids[1]] = price * _this.currency.rate;
+              } else if (ids[0] === 'networking') {
+                if (ids[1] === 'bandwidth') {
+                  price = product.monthly * _this.currency.rate;
+                  service = {
+                    type: 'bandwidth',
+                    price: price
+                  };
+                  return additional_services.push(service);
+                } else if (ids[1] === 'object-storage') {
+                  price = product.monthly * _this.currency.rate;
+                  enabled = (ids[2] != null) && ids[2] === 'enabled';
+                  service = {
+                    type: 'object-storage',
+                    price: price,
+                    disabled: !enabled
+                  };
+                  return additional_services.push(service);
+                }
               }
             }
-          }
-        });
-      }
-    });
+          });
+        }
+      };
+    })(this));
+    server.options["software"] = software_licenses;
     output.push(server);
     _.each(additional_services, function(ser) {
       return output.push(ser);
@@ -151,7 +169,7 @@ PricingMapsCollection = Backbone.Collection.extend({
 module.exports = PricingMapsCollection;
 
 
-},{"../data/server.coffee":6,"../models/PricingMapModel.coffee":7}],4:[function(require,module,exports){
+},{"../Config.coffee":1,"../data/server.coffee":6,"../models/PricingMapModel.coffee":7}],4:[function(require,module,exports){
 var ServerModel, ServersCollection;
 
 ServerModel = require('../models/ServerModel.coffee');
@@ -321,10 +339,12 @@ ServerModel = Backbone.Model.extend({
     type = this.get("type");
     return this.get("storage") * this.get("pricing").storage[type] * this.get("quantity");
   },
-  managedAppPricePerMonth: function(managedAppKey, instances) {
-    var appPerHour;
+  managedAppPricePerMonth: function(managedAppKey, instances, software) {
+    var appPerHour, appSoftwareHourlyPrice;
+    appSoftwareHourlyPrice = software !== "" ? software : 0;
     appPerHour = this.get("pricing")[managedAppKey];
-    return this.priceForMonth(appPerHour) * this.get("quantity") * instances;
+    console.log(this.get("quantity"));
+    return ((this.priceForMonth(appPerHour) + this.priceForMonth(appSoftwareHourlyPrice)) * this.get("quantity")) * instances;
   },
   managedAppsPricePerMonth: function() {
     var apps, total;
@@ -332,7 +352,7 @@ ServerModel = Backbone.Model.extend({
     total = 0;
     _.each(apps, (function(_this) {
       return function(app) {
-        return total += _this.managedAppPricePerMonth(app.key, app.instances);
+        return total += _this.managedAppPricePerMonth(app.key, app.instances, app.software);
       };
     })(this));
     return total;
@@ -370,18 +390,20 @@ ServerModel = Backbone.Model.extend({
     apps.push({
       "key": key,
       "name": name,
-      "instances": 1
+      "instances": 1,
+      "software": ""
     });
     this.set("managedApps", apps);
     this.trigger("change", this);
     return this.trigger("change:managedApps", this);
   },
-  updateManagedAppIntances: function(key, quantity) {
+  updateManagedAppIntances: function(key, quantity, software) {
     var apps;
     apps = this.get("managedApps");
     _.each(apps, function(app) {
       if (app.key === key) {
-        return app.instances = quantity;
+        app.instances = quantity;
+        return app.software = software;
       }
     });
     this.set("managedApps", apps);
@@ -451,7 +473,7 @@ return $o.join("\n").replace(/\s(\w+)='true'/mg, ' $1').replace(/\s(\w+)='fa
 },{}],11:[function(require,module,exports){
 module.exports = function(options) {
 return (function() {
-var $c, $e, $o;
+var $c, $e, $o, soft, _i, _len, _ref;
 
 $e = function(text, escape) {
   return ("" + text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/'/g, '&#39;').replace(/\//g, '&#47;').replace(/"/g, '&quot;');
@@ -478,6 +500,16 @@ if (this.app.key === "mysql" || this.app.key === "ms-sql") {
   $o.push("    x\n    <input class='number' name='usage' value='" + ($e($c(1))) + "' type='text'>\n    instance(s) / server");
 } else {
   $o.push("    &nbsp;");
+}
+
+if (this.app.key === "ms-sql" || this.app.key === "iis" || this.app.key === "active-directory") {
+  $o.push("    <select class='software' name='software'>");
+  _ref = this.software;
+  for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+    soft = _ref[_i];
+    $o.push("      <option value='" + ($e($c(soft.price))) + "'>" + ($e($c(soft.name))) + "</option>");
+  }
+  $o.push("    </select>");
 }
 
 $o.push("  </td>\n</td>\n<td class='managed-app-cell table-cell' colspan='" + ($e($c(this.colspan))) + "'>\n  Managed " + this.app.name + "\n</td>\n<td class='price-cell table-cell' colspan='1'>\n  <span class='price'></span>\n  <a class='remove-button' href='#' data-key='" + ($e($c(this.app.key))) + "'>X</a>\n</td>");
@@ -653,6 +685,7 @@ ManagedAppView = Backbone.View.extend({
     return {
       "click .remove-button": "onRemoveClick",
       "change input": "onFormChanged",
+      "change select": "onFormChanged",
       "input input": "onFormChanged",
       "keyup input": "onFormChanged",
       "keypress input": "ensureNumber"
@@ -665,10 +698,12 @@ ManagedAppView = Backbone.View.extend({
     var colspan, template;
     template = require("../templates/managedApp.haml");
     colspan = this.model.get("type") === "hyperscale" ? 4 : 5;
+    console.log(this.options.app.key);
     this.$el.html(template({
       app: this.options.app,
       colspan: colspan,
-      mainApp: this.options.mainApp
+      mainApp: this.options.mainApp,
+      software: this.model.attributes.pricing.software
     }));
     this.$el.addClass("managed-row-for-server_" + this.model.cid);
     this.updateQuantityAndPrice();
@@ -687,7 +722,7 @@ ManagedAppView = Backbone.View.extend({
   updateQuantityAndPrice: function() {
     var instances, price, quantity;
     quantity = this.model.get("quantity");
-    price = this.model.managedAppPricePerMonth(this.options.app.key, this.options.app.instances);
+    price = this.model.managedAppPricePerMonth(this.options.app.key, this.options.app.instances, this.options.app.software);
     instances = this.options.app.instances || 1;
     $(".managed-app-quantity", this.$el).html(quantity);
     $(".price", this.$el).html(accounting.formatMoney(price), {
@@ -696,9 +731,10 @@ ManagedAppView = Backbone.View.extend({
     return $("input[name=usage]", this.$el).val(instances);
   },
   onFormChanged: function() {
-    var instances;
-    instances = $("input[name=usage]", this.$el).val();
-    return this.model.updateManagedAppIntances(this.options.app.key, instances);
+    var instances, software;
+    software = $("select[name=software]", this.$el).val();
+    instances = $("input[name=usage]", this.$el).val() || 1;
+    return this.model.updateManagedAppIntances(this.options.app.key, instances, software);
   },
   ensureNumber: function(e) {
     var charCode;
@@ -711,7 +747,9 @@ module.exports = ManagedAppView;
 
 
 },{"../templates/managedApp.haml":11}],16:[function(require,module,exports){
-var MonthlyTotalView;
+var Config, MonthlyTotalView;
+
+Config = require('../Config.coffee');
 
 MonthlyTotalView = Backbone.View.extend({
   el: "#monthly-total",
@@ -740,7 +778,7 @@ MonthlyTotalView = Backbone.View.extend({
         });
       };
     })(this));
-    $.getJSON("/prices/exchange-rates.json", (function(_this) {
+    $.getJSON(Config.CURRENCY_FILE_PATH, (function(_this) {
       return function(currencies) {
         return $.each(currencies["USD"], function(index, currency) {
           var $option, label, rate, selected, symbol;
@@ -777,7 +815,7 @@ MonthlyTotalView = Backbone.View.extend({
     var $currencies, $selected, $target, currency, datasource, href;
     $target = $(e.target);
     $currencies = $(".currency", this.$el);
-    currency = $currencies.val() || "USD";
+    currency = $currencies.val() || Config.DEFAULT_CURRENCY.id;
     href = window.top.location.href;
     href = href.replace(/\?datacenter=.*/, "");
     $selected = $target.find('option:selected');
@@ -792,7 +830,7 @@ MonthlyTotalView = Backbone.View.extend({
     $selected_datacenter = $datacenters.find('option:selected');
     datasource = $selected_datacenter.attr('data-pricing-map') || 'default';
     $target = $(e.currentTarget);
-    currency = $target.val() || "USD";
+    currency = $target.val() || Config.DEFAULT_CURRENCY.id;
     href = window.top.location.href;
     href = href.replace(/\?datacenter=.*/, "");
     href = "" + href + "?datacenter=" + datacenter + "&datasource=" + datasource + "&currency=" + currency;
@@ -803,7 +841,7 @@ MonthlyTotalView = Backbone.View.extend({
 module.exports = MonthlyTotalView;
 
 
-},{}],17:[function(require,module,exports){
+},{"../Config.coffee":1}],17:[function(require,module,exports){
 var AddManagedAppView, ManagedAppView, ServerView;
 
 AddManagedAppView = require('./AddManagedAppView.coffee');
@@ -1278,11 +1316,7 @@ PRICES_URL_ROOT = "/prices/";
 
 App = {
   initialized: false,
-  currency: {
-    symbol: "",
-    id: "USD",
-    rate: 1.0
-  },
+  currency: Config.DEFAULT_CURRENCY,
   init: function() {
     var currency, currencyId, datacenter, datasource, dc, ds;
     _.extend(this, Backbone.Events);
@@ -1291,7 +1325,7 @@ App = {
     currencyId = Utils.getUrlParameter("currency");
     dc = datacenter || "NY1";
     ds = datasource || "ny1";
-    currency = currencyId || "USD";
+    currency = currencyId || Config.DEFAULT_CURRENCY.id;
     this.monthlyTotalView = new MonthlyTotalView({
       app: this,
       datacenter: dc,

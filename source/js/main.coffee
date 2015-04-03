@@ -27,11 +27,7 @@ PRICES_URL_ROOT = "/prices/"
 
 App =
   initialized: false
-  currency:
-    symbol: ""
-    id: "USD"
-    rate: 1.0
-
+  currency: Config.DEFAULT_CURRENCY
   init: ->
     _.extend(@, Backbone.Events)
 
@@ -41,7 +37,7 @@ App =
 
     dc = datacenter || "NY1"
     ds = datasource || "ny1"
-    currency = currencyId || "USD"
+    currency = currencyId || Config.DEFAULT_CURRENCY.id
 
     @monthlyTotalView = new MonthlyTotalView
       app: @

@@ -1,3 +1,5 @@
+Config = require '../Config.coffee'
+
 MonthlyTotalView = Backbone.View.extend
 
   el: "#monthly-total"
@@ -26,7 +28,7 @@ MonthlyTotalView = Backbone.View.extend
           .attr('data-pricing-map', pricingSheetHref)
         $(".datacenter", @$el).append($option)
 
-    $.getJSON "/prices/exchange-rates.json", (currencies) =>
+    $.getJSON Config.CURRENCY_FILE_PATH, (currencies) =>
       $.each currencies["USD"], (index, currency) =>
         label = currency.id
         rate = currency.rate
@@ -55,7 +57,7 @@ MonthlyTotalView = Backbone.View.extend
     # @app.setPricingMap $(e.target).val()
     $target = $(e.target)
     $currencies = $(".currency", @$el)
-    currency = $currencies.val() || "USD"
+    currency = $currencies.val() || Config.DEFAULT_CURRENCY.id
     href = window.top.location.href
     href = href.replace(/\?datacenter=.*/, "")
     $selected = $target.find('option:selected')
@@ -69,7 +71,7 @@ MonthlyTotalView = Backbone.View.extend
     $selected_datacenter = $datacenters.find('option:selected')
     datasource = $selected_datacenter.attr('data-pricing-map') || 'default'
     $target = $(e.currentTarget)
-    currency = $target.val() || "USD"
+    currency = $target.val() || Config.DEFAULT_CURRENCY.id
     href = window.top.location.href
     href = href.replace(/\?datacenter=.*/, "")
     href = "#{href}?datacenter=#{datacenter}&datasource=#{datasource}&currency=#{currency}"

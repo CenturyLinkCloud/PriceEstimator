@@ -8,6 +8,11 @@
       instance(s) / server
     - else
       &nbsp;
+    - if @app.key is "ms-sql" or @app.key is "iis" or @app.key is "active-directory"
+      %select.software{name: "software"}
+        - for soft in @software
+          %option{value: soft.price} =soft.name
+
 
 %td.table-cell.managed-app-cell{colspan: @colspan}
   Managed #{@app.name}
