@@ -343,7 +343,6 @@ ServerModel = Backbone.Model.extend({
     var appPerHour, appSoftwareHourlyPrice;
     appSoftwareHourlyPrice = software !== "" ? software : 0;
     appPerHour = this.get("pricing")[managedAppKey];
-    console.log(this.get("quantity"));
     return ((this.priceForMonth(appPerHour) + this.priceForMonth(appSoftwareHourlyPrice)) * this.get("quantity")) * instances;
   },
   managedAppsPricePerMonth: function() {
@@ -758,6 +757,7 @@ MonthlyTotalView = Backbone.View.extend({
     "change .currency": "changeCurrency"
   },
   initialize: function(options) {
+    var mediaQueryList;
     this.options = options || {};
     this.app = this.options.app;
     this.app.on("totalPriceUpdated", (function(_this) {
@@ -789,6 +789,17 @@ MonthlyTotalView = Backbone.View.extend({
           $option = $("<option value='" + label + "' " + selected + ">" + label + "</option>").attr('data-currency-symbol', symbol).attr('data-currency-rate', rate);
           return $(".currency", _this.$el).append($option);
         });
+      };
+    })(this));
+    mediaQueryList = window.matchMedia('print');
+    mediaQueryList.addListener((function(_this) {
+      return function(mql) {
+        if (mql.matches) {
+          return _this.$el.css("position", "relative");
+        } else {
+          console.log('no more print');
+          return _this.positionHeader();
+        }
       };
     })(this));
     return $(window).scroll((function(_this) {

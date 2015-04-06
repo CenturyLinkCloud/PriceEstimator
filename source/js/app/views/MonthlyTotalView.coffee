@@ -38,7 +38,14 @@ MonthlyTotalView = Backbone.View.extend
             .attr('data-currency-symbol', symbol)
             .attr('data-currency-rate', rate)
         $(".currency", @$el).append($option)
-
+    
+    mediaQueryList = window.matchMedia('print')
+    mediaQueryList.addListener (mql) =>
+      if mql.matches
+        @$el.css("position", "relative")
+      else
+        console.log 'no more print'
+        return @positionHeader()
     $(window).scroll => @positionHeader()
 
   updateTotal: ->

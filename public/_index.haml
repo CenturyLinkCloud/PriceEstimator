@@ -13,21 +13,8 @@
         %span.datacenter-select
           %span &nbsp;&nbsp;
           %select.currency
-            / %option{:value => "USD", :selected => "selected"} USD
-            / %option{:value => "CNY"} CNY
-            / %option{:value => "GBP"} GBP
-            / %option{:value => "AUD"} AUD
-            / %option{:value => "CAD"} CAD
-            / %option{:value => "HKD"} HKD
-            / %option{:value => "JPY"} JPY
-            / %option{:value => "SGD"} SGD
-            / %option{:value => "INR"} INR
-            / %option{:value => "KRW"} KRW
-            / %option{:value => "TWD"} TWD
-            / %option{:value => "EUR"} EUR
-            / %option{:value => "BRL"} BRL
         .buttons.pull-right
-          %a.btn.btn-discuss{:href => "/contact/"} contact
+          %a.btn.btn-discuss.no-print{:href => "/contact/"} contact
           /
             <span id="lpButDivID-1393532216480" class="btn btn-discuss"></span>
             <script type="text/javascript" charset="UTF-8" src="https://sales.liveperson.net/hc/56948775/?cmd=mTagRepstate&amp;site=56948775&amp;buttonID=46&amp;divID=lpButDivID-1393532216480&amp;bt=3&amp;c=1"></script>
@@ -39,7 +26,7 @@
       %ul
         %li
           Scalable, elastic, self-service, pay as you go. No fixed instance sizes - build servers to custom specs.
-          <a href="/servers" target="_blank">More info</a>.
+          <a href="/servers" target="_blank" class="no-print">More info</a>.
         %li
           Managed services billed hourly, no minimums.
       .subtotal-wrapper
@@ -75,13 +62,13 @@
             STORAGE (GB)
           %th.table-header.price-cell MONTHLY COST
 
-      %a.add-button{href: "#"} <span class="plus"></span> Add Server
+      %a.add-button.no-print{href: "#"} <span class="plus"></span> Add Server
 
     #hyperscale-servers.server-table.calculator-section
       %h3 Hyperscale Instances
       %p
         Includes 100% Flash storage. Ideal for NoSQL workloads, Hadoop, and web-scale architectures.
-        <a href="/hyperscale" target="_blank">More info</a>.
+        <a href="/hyperscale" target="_blank" class="no-print">More info</a>.
       .subtotal-wrapper
         Sub-total
         .subtotal
@@ -109,7 +96,7 @@
             STORAGE (GB)
           .table-header.price-cell MONTHLY COST
 
-      %a.add-button{href: "#"} <span class="plus"></span> Add Hyperscale Instance
+      %a.add-button.no-print{href: "#"} <span class="plus"></span> Add Hyperscale Instance
 
     #networking-services.calculator-section.services-section
       %h3 Networking Services
@@ -131,7 +118,7 @@
 
     #bandwidth.calculator-section.services-section
       %h3 Bandwidth
-      %p Redundant, high-speed connectivity out of CenturyLink Cloud’s global network of data centers. All other bandwidth is free. <a href="/bandwidth">More info</a>.
+      %p Redundant, high-speed connectivity out of CenturyLink Cloud’s global network of data centers. All other bandwidth is free.<a class="no-print" href="/bandwidth">&nbsp;More info</a>.
       .subtotal-wrapper
         Sub-total
         .subtotal
@@ -140,7 +127,7 @@
 
     #support.calculator-section
       %h3 Support Tier
-      %p Choose from 3 tiers–Developer, Professional, and Enterprise. <a href="/support">Learn more about support</a>.
+      %p Choose from 3 tiers–Developer, Professional, and Enterprise.<a class="no-print" href="/support">&nbsp;Learn more about support</a>.
       .subtotal-wrapper
         Sub-total
         .subtotal
@@ -164,7 +151,7 @@
                 %p
                   Default option for contract based customers.
                   %br
-                  %a{href: "/contact",target: "_blank"} contact us for full quote
+                  %a.no-print{href: "/contact",target: "_blank"} contact us for full quote
           %td
             .support-select{data: {plan: "enterprise"}}
               %h4 Enterprise
@@ -173,7 +160,7 @@
                 %p
                   Estimate does not include designated support engineers.
                   %br
-                  %a{href: "/contact", target: "_blank"} contact us for full quote
+                  %a.no-print{href: "/contact", target: "_blank"} contact us for full quote
 
         %tr
           %td Price
@@ -257,4 +244,4 @@
         This Estimator is currently in Beta, and provides an estimate of usage charges for CenturyLink Cloud services based on information you provide.
         Monthly charges will be based on your actual usage of CenturyLink Cloud services, and may vary from the estimates the Estimator has provided.
         %br
-        %a{href: "/legal"} Legal & Privacy Policy
+        %a.no-print{href: "/legal"} Legal & Privacy Policy
