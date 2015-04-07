@@ -234,10 +234,15 @@ input[type=text], input[type=number] {
   table-layout: fixed;
   width: 100%;
   margin-bottom: 15px;
+  page-break-inside: avoid;
   select {
     position: relative;
     top: 6px;
     width: 90px;
+    
+    &.software {
+      width: 230px;
+    }
   }
 
   input[type=range] {
@@ -485,6 +490,7 @@ input[type=text], input[type=number] {
   line-height: 1.4;
   margin-top: 20px;
   margin-bottom: 50px;
+  page-break-inside: avoid;
   
   
 
@@ -557,6 +563,18 @@ input[type=text], input[type=number] {
     top: 6px;
   }
 
+  .currency-select {
+    margin-bottom: 0;
+    display: inline-block;
+    margin-left: 1em;
+    position: relative;
+    top: -7px;
+    
+    select.currency {
+      margin-bottom: 0;
+    }
+  }
+
   .datacenter-select {
     clear: both;
     span {
@@ -602,6 +620,7 @@ input[type=text], input[type=number] {
     border-radius: 6px;
     padding: 15px;
     background: #284e36;
+    max-height: 72px;
 
     .price {
       line-height: 1;
@@ -617,6 +636,18 @@ input[type=text], input[type=number] {
       margin-left: 10px;
       display: inline-block;
       line-height: 1.2;
+    }
+  }
+
+  &.clone {
+    padding: 0;
+    
+    .total-box {
+      padding: 0;
+      float: left;
+    }
+    .pull-left {
+      display: none;
     }
   }
 }
@@ -866,22 +897,32 @@ input[type=text], input[type=number] {
 }
 
 @media print {
+  h3 {
+    font-size: 24px;
+  }
 
   .page-form {
-    padding-top: 2em;
+    padding-top: 0;
     padding-left: 2em;
     padding-right: 2em;
+    min-width: 1012px;
   }
   #networking-services {
     page-break-before: always;
   }
   #monthly-total {
+    position: relative !important;
     display: block !important;
-    padding: 20px 0;
+    padding: 20px 0 20px 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    h3 {
+      font-size: 26px;
+    }
   }
   .total-box {
+    // display: none;
     width: auto !important;
-    margin-right: 1.5em;
   }
   .total-box .buttons {
     display: none;
@@ -900,11 +941,31 @@ input[type=text], input[type=number] {
   .tooltip, .service__description {
     display: none !important;
   }
+
+  .calculator-section .subtotal-wrapper {
+    top: 100%;
+    width: 100%;
+  }
+  .page-footer {
+    padding-left: 40px;
+  }
+  .add-managed-app-row {
+    display: none !important;
+  }
   
+  .rangeslider {
+    display: none !important;
+  }
+
+
+  table {
+    min-width: 100%;
+  }
 }
 
-.no-print {
-  @media print {
+
+@media print {
+  .no-print {
     display: none !important;
   }
 }
@@ -913,16 +974,19 @@ input[type=text], input[type=number] {
   display: none;
   
   &--block {
+    display: none;
     @media print {
       display: block;
     }
   }
   &--inline {
+    display: none;
     @media print {
       display: inline;
     }
   }
   &--inline-block {
+    display: none;
     @media print {
       display: inline-block;
     }
@@ -941,3 +1005,10 @@ input[type=text], input[type=number] {
     }
   }
 }
+
+.header.print-only--block {
+  .container {
+    width: 100%;
+  }
+}
+

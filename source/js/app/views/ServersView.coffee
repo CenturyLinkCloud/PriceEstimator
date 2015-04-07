@@ -46,6 +46,7 @@ ServersView = Backbone.View.extend
     @updateSubtotal()
 
   updateSubtotal: ->
+    console.log 'update?'
     newSubtotal = accounting.formatMoney(@collection.subtotal(),
       symbol: @app.currency.symbol
     )

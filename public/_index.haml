@@ -10,10 +10,10 @@
       .total-box
         %span.price &nbsp;0.00
         %span.estimated estimated / month
-        %span.datacenter-select
-          %span &nbsp;&nbsp;
+        %span.currency-select
           %select.currency
         .buttons.pull-right
+          %a.btn.btn-discuss.no-print.estimator-print{:href => "#", :title => "Print estimate"} print
           %a.btn.btn-discuss.no-print{:href => "/contact/"} contact
           /
             <span id="lpButDivID-1393532216480" class="btn btn-discuss"></span>
@@ -30,6 +30,7 @@
         %li
           Managed services billed hourly, no minimums.
       .subtotal-wrapper
+        %span.print-only--inline Servers and Managed Services&nbsp;|&nbsp;
         Sub-total
         .subtotal
           $0.00
@@ -70,6 +71,7 @@
         Includes 100% Flash storage. Ideal for NoSQL workloads, Hadoop, and web-scale architectures.
         <a href="/hyperscale" target="_blank" class="no-print">More info</a>.
       .subtotal-wrapper
+        %span.print-only--inline Hyperscale Instances&nbsp;|&nbsp;
         Sub-total
         .subtotal
           $0.00
@@ -102,6 +104,7 @@
       %h3 Networking Services
       %p Add additional networking services to your environment.
       .subtotal-wrapper
+        %span.print-only--inline Networking Services&nbsp;|&nbsp;
         Sub-total
         .subtotal
           $0.00
@@ -111,6 +114,7 @@
       %h3 Additional Services
       %p Add additional services to your environment.
       .subtotal-wrapper
+        %span.print-only--inline Additional Services&nbsp;|&nbsp;
         Sub-total
         .subtotal
           $0.00
@@ -120,6 +124,7 @@
       %h3 Bandwidth
       %p Redundant, high-speed connectivity out of CenturyLink Cloud’s global network of data centers. All other bandwidth is free.<a class="no-print" href="/bandwidth">&nbsp;More info</a>.
       .subtotal-wrapper
+        %span.print-only--inline Bandwidth&nbsp;|&nbsp;
         Sub-total
         .subtotal
           $0.00
@@ -129,6 +134,7 @@
       %h3 Support Tier
       %p Choose from 3 tiers–Developer, Professional, and Enterprise.<a class="no-print" href="/support">&nbsp;Learn more about support</a>.
       .subtotal-wrapper
+        %span.print-only--inline Support Tier&nbsp;|&nbsp;
         Sub-total
         .subtotal
           $0.00
@@ -245,3 +251,10 @@
         Monthly charges will be based on your actual usage of CenturyLink Cloud services, and may vary from the estimates the Estimator has provided.
         %br
         %a.no-print{href: "/legal"} Legal & Privacy Policy
+
+%section.page-footer.print-only--block
+  %div.container
+    %div.row.copyright
+      %div.span6
+        &copy; 2015 CenturyLink, Inc. All rights reserved. All other trademarks cited here are the properties of their respective owners.
+

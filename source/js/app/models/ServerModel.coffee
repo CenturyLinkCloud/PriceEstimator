@@ -103,10 +103,15 @@ ServerModel = Backbone.Model.extend
 
   addManagedApp: (key, name) ->
     apps = @.get("managedApps")
-    apps.push {"key": key, "name": name, "instances": 1, "software": ""}
-    @.set("managedApps", apps)
-    @.trigger "change", @
-    @.trigger "change:managedApps", @
+    exists = false
+    _.each apps, (app) ->
+      if app.key is key
+        exists = true
+    if exists is false
+      apps.push {"key": key, "name": name, "instances": 1, "software": ""}
+      @.set("managedApps", apps)
+      @.trigger "change", @
+      @.trigger "change:managedApps", @
 
   updateManagedAppIntances: (key, quantity, software) ->
     apps = @.get("managedApps")

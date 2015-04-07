@@ -384,17 +384,25 @@ ServerModel = Backbone.Model.extend({
     }
   },
   addManagedApp: function(key, name) {
-    var apps;
+    var apps, exists;
     apps = this.get("managedApps");
-    apps.push({
-      "key": key,
-      "name": name,
-      "instances": 1,
-      "software": ""
+    exists = false;
+    _.each(apps, function(app) {
+      if (app.key === key) {
+        return exists = true;
+      }
     });
-    this.set("managedApps", apps);
-    this.trigger("change", this);
-    return this.trigger("change:managedApps", this);
+    if (exists === false) {
+      apps.push({
+        "key": key,
+        "name": name,
+        "instances": 1,
+        "software": ""
+      });
+      this.set("managedApps", apps);
+      this.trigger("change", this);
+      return this.trigger("change:managedApps", this);
+    }
   },
   updateManagedAppIntances: function(key, quantity, software) {
     var apps;
@@ -493,25 +501,29 @@ $c = function(text) {
 
 $o = [];
 
-$o.push("<td class='managed-app-quantity-cell table-cell' colspan='1'>\n  <span class='managed-app-quantity'></span>\n  <td class='managed-app-usage-cell table-cell' colspan='2'>");
+$o.push("<td class='managed-app-quantity-cell table-cell' colspan='1'>\n  <span class='managed-app-quantity'></span>\n</td>\n<td class='managed-app-usage-cell table-cell' colspan='2'>");
 
 if (this.app.key === "mysql" || this.app.key === "ms-sql") {
-  $o.push("    x\n    <input class='number' name='usage' value='" + ($e($c(1))) + "' type='text'>\n    instance(s) / server");
+  $o.push("  x\n  <input class='number' name='usage' value='" + ($e($c(1))) + "' type='text'>\n  instance(s) / server");
 } else {
-  $o.push("    &nbsp;");
+  $o.push("  &nbsp;");
 }
 
+$o.push("</td>");
+
 if (this.app.key === "ms-sql" || this.app.key === "iis" || this.app.key === "active-directory") {
-  $o.push("    <select class='software' name='software'>");
+  $o.push("<td class='managed-app-cell table-cell' colspan='1'>\n  <select class='software' name='software'>");
   _ref = this.software;
   for (_i = 0, _len = _ref.length; _i < _len; _i++) {
     soft = _ref[_i];
-    $o.push("      <option value='" + ($e($c(soft.price))) + "'>" + ($e($c(soft.name))) + "</option>");
+    $o.push("    <option value='" + ($e($c(soft.price))) + "'>" + ($e($c(soft.name))) + "</option>");
   }
-  $o.push("    </select>");
+  $o.push("  </select>\n</td>\n<td class='managed-app-cell table-cell' colspan='" + ($e($c(this.colspan - 1))) + "'>\n  Managed " + this.app.name + "\n</td>");
+} else {
+  $o.push("<td class='managed-app-cell table-cell' colspan='" + ($e($c(this.colspan))) + "'>\n  Managed " + this.app.name + "\n</td>");
 }
 
-$o.push("  </td>\n</td>\n<td class='managed-app-cell table-cell' colspan='" + ($e($c(this.colspan))) + "'>\n  Managed " + this.app.name + "\n</td>\n<td class='price-cell table-cell' colspan='1'>\n  <span class='price'></span>\n  <a class='remove-button' href='#' data-key='" + ($e($c(this.app.key))) + "'>X</a>\n</td>");
+$o.push("<td class='price-cell table-cell' colspan='1'>\n  <span class='price'></span>\n  <a class='remove-button' href='#' data-key='" + ($e($c(this.app.key))) + "'>X</a>\n</td>");
 
 return $o.join("\n").replace(/\s(\w+)='true'/mg, ' $1').replace(/\s(\w+)='false'/mg, '').replace(/\s(?:id|class)=(['"])(\1)/mg, "");
 
@@ -697,7 +709,6 @@ ManagedAppView = Backbone.View.extend({
     var colspan, template;
     template = require("../templates/managedApp.haml");
     colspan = this.model.get("type") === "hyperscale" ? 4 : 5;
-    console.log(this.options.app.key);
     this.$el.html(template({
       app: this.options.app,
       colspan: colspan,
@@ -795,16 +806,43 @@ MonthlyTotalView = Backbone.View.extend({
     mediaQueryList.addListener((function(_this) {
       return function(mql) {
         if (mql.matches) {
-          return _this.$el.css("position", "relative");
+          return $('.green-section').clone().addClass('clone').css('position', 'relative').attr('id', '').appendTo('.page-form');
         } else {
-          console.log('no more print');
-          return _this.positionHeader();
+          return $('.green-section.clone').remove();
         }
       };
     })(this));
-    return $(window).scroll((function(_this) {
+    $(window.top).scroll((function(_this) {
       return function() {
         return _this.positionHeader();
+      };
+    })(this));
+    $(".estimator-print", this.$el).on('click', function(e) {
+      e.preventDefault();
+      return window.print();
+    });
+    this.commandKey = false;
+    $(document, '#estimator').on('keyup', (function(_this) {
+      return function(e) {
+        if (e.which === 91 || e.which === 93) {
+          return _this.commandKey = false;
+        }
+      };
+    })(this));
+    return $(document, '#estimator').on('keydown', (function(_this) {
+      return function(e) {
+        if (e.which === 91 || e.which === 93) {
+          _this.commandKey = true;
+        }
+        if (e.ctrlKey && e.which === 80) {
+          e.preventDefault();
+          window.print();
+          return false;
+        } else if (_this.commandKey && e.which === 80) {
+          e.preventDefault();
+          window.print();
+          return false;
+        }
       };
     })(this));
   },
@@ -1093,6 +1131,7 @@ ServersView = Backbone.View.extend({
   },
   updateSubtotal: function() {
     var newSubtotal;
+    console.log('update?');
     newSubtotal = accounting.formatMoney(this.collection.subtotal(), {
       symbol: this.app.currency.symbol
     });

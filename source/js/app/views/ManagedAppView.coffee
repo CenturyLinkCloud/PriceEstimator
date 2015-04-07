@@ -17,7 +17,6 @@ ManagedAppView = Backbone.View.extend
   render: ->
     template = require("../templates/managedApp.haml")
     colspan = if @model.get("type") is "hyperscale" then 4 else 5
-    console.log @options.app.key
     @$el.html template(app: @options.app, colspan: colspan, mainApp: @options.mainApp, software: @model.attributes.pricing.software)
     @$el.addClass("managed-row-for-server_#{@model.cid}")
     @updateQuantityAndPrice()

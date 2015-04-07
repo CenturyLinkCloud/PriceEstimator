@@ -38,15 +38,40 @@ MonthlyTotalView = Backbone.View.extend
             .attr('data-currency-symbol', symbol)
             .attr('data-currency-rate', rate)
         $(".currency", @$el).append($option)
-    
+
     mediaQueryList = window.matchMedia('print')
     mediaQueryList.addListener (mql) =>
-      if mql.matches
-        @$el.css("position", "relative")
+      if mql.matches  
+        $('.green-section').clone()
+          .addClass('clone')
+          .css('position', 'relative')
+          .attr('id','')
+          .appendTo('.page-form')
       else
-        console.log 'no more print'
-        return @positionHeader()
-    $(window).scroll => @positionHeader()
+        $('.green-section.clone').remove()
+
+    $(window.top).scroll => @positionHeader()
+    
+    $(".estimator-print", @$el).on 'click', (e) ->
+      e.preventDefault()
+      window.print()
+
+    @commandKey = false
+    $(document, '#estimator').on 'keyup', (e) =>
+      if e.which is 91 or e.which is 93
+        @commandKey = false
+
+    $(document, '#estimator').on 'keydown', (e) =>
+      if e.which is 91 or e.which is 93
+        @commandKey = true
+      if e.ctrlKey && e.which is 80
+        e.preventDefault()
+        window.print()
+        return false
+      else if @commandKey and e.which is 80
+        e.preventDefault()
+        window.print()
+        return false
 
   updateTotal: ->
     newTotal = accounting.formatMoney(@app.totalPriceWithSupport,

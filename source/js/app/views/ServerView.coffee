@@ -107,6 +107,7 @@ ServerView = Backbone.View.extend
       @addManagedAppView.$el.before(managedAppView.render().el)
 
   onModelChange: (model) ->
+
     newTotal = accounting.formatMoney(model.totalPricePerMonth(),
       symbol: @app.currency.symbol
     )
