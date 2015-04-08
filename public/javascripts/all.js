@@ -3,7 +3,8 @@ var Config;
 
 Config = {
   NAME: "",
-  CLC_PRICING_URL_ROOT: "./prices/",
+  CLC_PRICING_URL_ROOT: "/prices/",
+  CLC_DATACENTERS_LIST: "/prices/data-center-prices.json",
   DEFAULT_CURRENCY: {
     id: "USD",
     rate: 1.0,
@@ -93,10 +94,11 @@ PricingMapsCollection = Backbone.Collection.extend({
       return function(section) {
         if (section.name === "Software") {
           _.each(section.products, function(product) {
-            var item;
+            var item, software_price;
+            software_price = product.hourly * _this.currency.rate;
             item = {
               name: product.name,
-              price: product.hourly
+              price: software_price
             };
             return software_licenses.push(item);
           });
@@ -339,9 +341,14 @@ ServerModel = Backbone.Model.extend({
     type = this.get("type");
     return this.get("storage") * this.get("pricing").storage[type] * this.get("quantity");
   },
-  managedAppPricePerMonth: function(managedAppKey, instances, software) {
-    var appPerHour, appSoftwareHourlyPrice;
-    appSoftwareHourlyPrice = software !== "" ? software : 0;
+  managedAppPricePerMonth: function(managedAppKey, instances, softwareId) {
+    var appPerHour, appSoftwareHourlyPrice, softwarePricing, software_selection;
+    softwarePricing = this.get('pricing').software;
+    software_selection = _.findWhere(softwarePricing, {
+      name: softwareId
+    });
+    appSoftwareHourlyPrice = software_selection != null ? software_selection.price : 0;
+    appSoftwareHourlyPrice *= this.get("cpu") || 1;
     appPerHour = this.get("pricing")[managedAppKey];
     return ((this.priceForMonth(appPerHour) + this.priceForMonth(appSoftwareHourlyPrice)) * this.get("quantity")) * instances;
   },
@@ -351,7 +358,7 @@ ServerModel = Backbone.Model.extend({
     total = 0;
     _.each(apps, (function(_this) {
       return function(app) {
-        return total += _this.managedAppPricePerMonth(app.key, app.instances, app.software);
+        return total += _this.managedAppPricePerMonth(app.key, app.instances, app.softwareId);
       };
     })(this));
     return total;
@@ -393,24 +400,33 @@ ServerModel = Backbone.Model.extend({
       }
     });
     if (exists === false) {
-      apps.push({
-        "key": key,
-        "name": name,
-        "instances": 1,
-        "software": ""
-      });
+      if (key === 'ms-sql') {
+        apps.push({
+          "key": key,
+          "name": name,
+          "instances": 1,
+          "softwareId": "Microsoft SQL Server Standard Edition"
+        });
+      } else {
+        apps.push({
+          "key": key,
+          "name": name,
+          "instances": 1,
+          "softwareId": ""
+        });
+      }
       this.set("managedApps", apps);
       this.trigger("change", this);
       return this.trigger("change:managedApps", this);
     }
   },
-  updateManagedAppIntances: function(key, quantity, software) {
+  updateManagedAppIntances: function(key, quantity, softwareId) {
     var apps;
     apps = this.get("managedApps");
     _.each(apps, function(app) {
       if (app.key === key) {
         app.instances = quantity;
-        return app.software = software;
+        return app.softwareId = softwareId;
       }
     });
     this.set("managedApps", apps);
@@ -511,14 +527,18 @@ if (this.app.key === "mysql" || this.app.key === "ms-sql") {
 
 $o.push("</td>");
 
-if (this.app.key === "ms-sql" || this.app.key === "iis" || this.app.key === "active-directory") {
-  $o.push("<td class='managed-app-cell table-cell' colspan='1'>\n  <select class='software' name='software'>");
-  _ref = this.software;
+if (this.app.key === "ms-sql") {
+  $o.push("<td class='managed-app-cell table-cell' colspan='" + ($e($c(this.colspan))) + "'>\n  Managed " + this.app.name + " \n  <br>\n    <small>\n      <span class='managed-app-subnote managed-app-subnote--select'>with MS SQL Server Standard Edition License (per vCPU)</span>\n    </small>\n  <br>\n  <select class='hidden software' name='softwareId'>");
+  _ref = this.software_options;
   for (_i = 0, _len = _ref.length; _i < _len; _i++) {
     soft = _ref[_i];
-    $o.push("    <option value='" + ($e($c(soft.price))) + "'>" + ($e($c(soft.name))) + "</option>");
+    if (soft.name === this.app.softwareId) {
+      $o.push("    <option value='" + ($e($c(soft.name))) + "' selected>" + ($e($c(soft.name))) + "</option>");
+    } else {
+      $o.push("    <option value='" + ($e($c(soft.name))) + "'>" + ($e($c(soft.name))) + "</option>");
+    }
   }
-  $o.push("  </select>\n</td>\n<td class='managed-app-cell table-cell' colspan='" + ($e($c(this.colspan - 1))) + "'>\n  Managed " + this.app.name + "\n</td>");
+  $o.push("  </select>\n</td>");
 } else {
   $o.push("<td class='managed-app-cell table-cell' colspan='" + ($e($c(this.colspan))) + "'>\n  Managed " + this.app.name + "\n</td>");
 }
@@ -713,7 +733,7 @@ ManagedAppView = Backbone.View.extend({
       app: this.options.app,
       colspan: colspan,
       mainApp: this.options.mainApp,
-      software: this.model.attributes.pricing.software
+      software_options: this.model.attributes.pricing.software
     }));
     this.$el.addClass("managed-row-for-server_" + this.model.cid);
     this.updateQuantityAndPrice();
@@ -732,7 +752,7 @@ ManagedAppView = Backbone.View.extend({
   updateQuantityAndPrice: function() {
     var instances, price, quantity;
     quantity = this.model.get("quantity");
-    price = this.model.managedAppPricePerMonth(this.options.app.key, this.options.app.instances, this.options.app.software);
+    price = this.model.managedAppPricePerMonth(this.options.app.key, this.options.app.instances, this.options.app.softwareId);
     instances = this.options.app.instances || 1;
     $(".managed-app-quantity", this.$el).html(quantity);
     $(".price", this.$el).html(accounting.formatMoney(price), {
@@ -741,10 +761,10 @@ ManagedAppView = Backbone.View.extend({
     return $("input[name=usage]", this.$el).val(instances);
   },
   onFormChanged: function() {
-    var instances, software;
-    software = $("select[name=software]", this.$el).val();
+    var instances, softwareId;
+    softwareId = $("select[name=softwareId]", this.$el).val();
     instances = $("input[name=usage]", this.$el).val() || 1;
-    return this.model.updateManagedAppIntances(this.options.app.key, instances, software);
+    return this.model.updateManagedAppIntances(this.options.app.key, instances, softwareId);
   },
   ensureNumber: function(e) {
     var charCode;
@@ -776,7 +796,7 @@ MonthlyTotalView = Backbone.View.extend({
         return _this.updateTotal();
       };
     })(this));
-    $.getJSON("/prices/data-center-prices.json", (function(_this) {
+    $.getJSON(Config.CLC_DATACENTERS_LIST, (function(_this) {
       return function(data) {
         return $.each(data, function(index, location) {
           var $option, alias, label, pricingSheetHref, selected;

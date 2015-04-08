@@ -65,8 +65,11 @@ ServerModel = Backbone.Model.extend
     type = @.get("type")
     @.get("storage") * @.get("pricing").storage[type] * @.get("quantity")
 
-  managedAppPricePerMonth: (managedAppKey, instances, software) ->
-    appSoftwareHourlyPrice = if software isnt "" then software else 0
+  managedAppPricePerMonth: (managedAppKey, instances, softwareId) ->
+    softwarePricing = @.get('pricing').software
+    software_selection = _.findWhere(softwarePricing, {name: softwareId})
+    appSoftwareHourlyPrice = if software_selection? then software_selection.price else 0
+    appSoftwareHourlyPrice *= @.get("cpu") || 1
     appPerHour = @.get("pricing")[managedAppKey]
     return ((@priceForMonth(appPerHour) + @priceForMonth(appSoftwareHourlyPrice)) * @.get("quantity")) * instances
 
@@ -74,7 +77,7 @@ ServerModel = Backbone.Model.extend
     apps = @.get("managedApps")
     total = 0
     _.each apps, (app) =>
-      total += @managedAppPricePerMonth(app.key, app.instances, app.software)
+      total += @managedAppPricePerMonth(app.key, app.instances, app.softwareId)
     return total
 
   totalOSPricePerMonth: ->
@@ -108,17 +111,20 @@ ServerModel = Backbone.Model.extend
       if app.key is key
         exists = true
     if exists is false
-      apps.push {"key": key, "name": name, "instances": 1, "software": ""}
+      if key is 'ms-sql'
+        apps.push {"key": key, "name": name, "instances": 1, "softwareId": "Microsoft SQL Server Standard Edition"}
+      else
+        apps.push {"key": key, "name": name, "instances": 1, "softwareId": ""}
       @.set("managedApps", apps)
       @.trigger "change", @
       @.trigger "change:managedApps", @
 
-  updateManagedAppIntances: (key, quantity, software) ->
+  updateManagedAppIntances: (key, quantity, softwareId) ->
     apps = @.get("managedApps")
     _.each apps, (app) ->
       if app.key is key
         app.instances = quantity
-        app.software = software
+        app.softwareId = softwareId
     @.set("managedApps", apps)
     @.trigger "change:managedApps", @
 

@@ -16,7 +16,7 @@ MonthlyTotalView = Backbone.View.extend
     @app.on "totalPriceUpdated", =>
       @updateTotal()
 
-    $.getJSON "/prices/data-center-prices.json", (data) =>
+    $.getJSON Config.CLC_DATACENTERS_LIST, (data) =>
       $.each data, (index, location) =>
         label = location.name.replace("_", " ")
         pricingSheetHref = location.links[0].href

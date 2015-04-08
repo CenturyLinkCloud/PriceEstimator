@@ -223,11 +223,14 @@ input[type=text], input[type=number] {
     /* line 243, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
     .table select.software {
       width: 230px; }
-  /* line 248, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+      /* line 246, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+      .table select.software.hidden {
+        display: none; }
+  /* line 252, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .table input[type=range] {
     width: 100px; }
 
-/* line 254, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+/* line 258, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
 .support-table td {
   text-align: center;
   color: black;
@@ -235,34 +238,34 @@ input[type=text], input[type=number] {
   padding: 10px 5px;
   transition: border 200ms;
   width: 240px; }
-  /* line 262, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 266, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .support-table td p {
     color: black; }
-  /* line 266, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 270, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .support-table td:first-child {
     width: 270px;
     color: #807f83;
     text-align: right;
     text-transform: uppercase;
     letter-spacing: 1px; }
-/* line 276, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+/* line 280, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
 .support-table tr:last-child td {
   border-bottom: none; }
 
-/* line 282, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+/* line 286, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
 .table-row, .table-headers {
   display: table-row;
   width: 100%;
   background: #f0f0ee;
   font-size: 14px; }
-  /* line 288, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 292, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .table-row .table-header, .table-headers .table-header {
     vertical-align: bottom;
     background: #E5E5E5; }
-  /* line 293, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 297, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .table-row .table-cell, .table-headers .table-cell {
     vertical-align: middle; }
-  /* line 297, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 301, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .table-row .table-cell, .table-row .table-header, .table-headers .table-cell, .table-headers .table-header {
     position: relative;
     display: table-cell;
@@ -272,12 +275,12 @@ input[type=text], input[type=number] {
     line-height: 1.3;
     border-top: none;
     border-bottom: solid 1px #D3D3D0; }
-    /* line 307, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+    /* line 311, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
     .table-row .table-cell .tooltip-wrapper, .table-row .table-header .tooltip-wrapper, .table-headers .table-cell .tooltip-wrapper, .table-headers .table-header .tooltip-wrapper {
       position: relative;
       width: 100%;
       display: block; }
-    /* line 313, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+    /* line 317, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
     .table-row .table-cell .has-tooltip, .table-row .table-header .has-tooltip, .table-headers .table-cell .has-tooltip, .table-headers .table-header .has-tooltip {
       position: absolute;
       top: -6px;
@@ -286,131 +289,131 @@ input[type=text], input[type=number] {
       width: 100%;
       display: block;
       z-index: 10; }
-    /* line 323, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+    /* line 327, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
     .table-row .table-cell.managed-app-cell, .table-row .table-header.managed-app-cell, .table-headers .table-cell.managed-app-cell, .table-headers .table-header.managed-app-cell {
       text-align: center;
       position: relative;
       left: -96px;
       font-size: 16px; }
-    /* line 330, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+    /* line 334, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
     .table-row .table-cell.managed-app-quantity-cell, .table-row .table-header.managed-app-quantity-cell, .table-headers .table-cell.managed-app-quantity-cell, .table-headers .table-header.managed-app-quantity-cell {
       text-align: center; }
-    /* line 334, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+    /* line 338, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
     .table-row .table-cell.managed-app-usage-cell, .table-row .table-header.managed-app-usage-cell, .table-headers .table-cell.managed-app-usage-cell, .table-headers .table-header.managed-app-usage-cell {
       position: relative;
       left: -11px; }
-  /* line 340, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 344, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .table-row.is-managed, .table-headers.is-managed {
     background: #f0f0ee url(../images/dash.gif) repeat-x bottom left; }
-    /* line 343, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+    /* line 347, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
     .table-row.is-managed .table-cell, .table-headers.is-managed .table-cell {
       border-bottom: none; }
 
-/* line 349, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+/* line 353, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
 .table-row {
   height: 57px; }
 
-/* line 353, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+/* line 357, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
 .table-headers {
   background: #E5E5E5;
   color: #807f83; }
 
-/* line 359, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+/* line 363, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
 .table-header {
   vertical-align: bottom; }
 
-/* line 363, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+/* line 367, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
 .tooltip {
   width: 200px;
   z-index: 19; }
 
-/* line 368, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+/* line 372, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
 .rangeslider {
   display: inline-block;
   width: 60px; }
 
-/* line 373, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+/* line 377, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
 .quantity-cell {
   width: 31px; }
-  /* line 376, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 380, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .quantity-cell input {
     width: 30px; }
 
-/* line 381, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+/* line 385, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
 .type-cell {
   width: 94px; }
 
-/* line 385, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+/* line 389, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
 .os-cell {
   width: 81px; }
 
-/* line 389, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+/* line 393, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
 .managed-cell {
   width: 65px; }
-  /* line 392, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 396, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .managed-cell.disabled {
     opacity: 0.2;
     pointer-events: none; }
 
-/* line 398, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+/* line 402, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
 .usage-cell {
   width: 116px; }
-  /* line 401, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 405, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .usage-cell input {
     width: 35px; }
-  /* line 405, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 409, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .usage-cell select {
     width: 95px; }
 
-/* line 410, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+/* line 414, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
 .range-cell {
   width: 90px; }
-  /* line 413, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 417, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .range-cell span {
     display: inline-block;
     width: 14px;
     text-align: left;
     margin-right: 3px; }
-  /* line 420, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 424, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .range-cell input[type=range] {
     position: relative;
     top: -2px;
     opacity: 0; }
 
-/* line 428, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+/* line 432, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
 .memory-cell span {
   width: 20px; }
-/* line 432, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+/* line 436, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
 .memory-cell .memory-text-input {
   width: 35px;
   padding-left: 3px;
   margin-right: 2px;
   font-size: 12px; }
 
-/* line 442, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+/* line 446, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
 .cpu-cell span {
   width: 20px; }
-/* line 446, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+/* line 450, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
 .cpu-cell .cpu-text-input {
   width: 35px;
   padding-left: 3px;
   margin-right: 2px;
   font-size: 12px; }
 
-/* line 456, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+/* line 460, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
 .storage-cell span {
   width: 35px; }
-/* line 460, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+/* line 464, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
 .storage-cell .storage-text-input {
   width: 35px;
   padding-left: 3px;
   margin-right: 2px;
   font-size: 11px; }
 
-/* line 468, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+/* line 472, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
 .price-cell {
   width: 88px; }
-  /* line 470, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 474, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .price-cell .price {
     width: 78px;
     min-width: 20px;
@@ -418,35 +421,35 @@ input[type=text], input[type=number] {
     word-wrap: break-word;
     display: inline-block; }
 
-/* line 479, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+/* line 483, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
 .add-managed-app-cell {
   width: 120px; }
 
 /* Calculator Sections
 ----------------------------------------------------- */
-/* line 488, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+/* line 492, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
 .calculator-section {
   position: relative;
   line-height: 1.4;
   margin-top: 20px;
   margin-bottom: 50px;
   page-break-inside: avoid; }
-  /* line 497, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 501, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .calculator-section h3 {
     margin-bottom: 0;
     line-height: 1.4; }
-  /* line 502, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 506, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .calculator-section p {
     margin-top: 0;
     margin-bottom: 20px; }
-  /* line 507, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 511, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .calculator-section ul {
     color: #807f83;
     font-size: 15px; }
-    /* line 511, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+    /* line 515, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
     .calculator-section ul li {
       margin-bottom: 0; }
-  /* line 516, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 520, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .calculator-section .subtotal-wrapper {
     position: absolute;
     right: 0;
@@ -457,7 +460,7 @@ input[type=text], input[type=number] {
     width: 300px;
     text-align: right;
     overflow: hidden; }
-    /* line 527, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+    /* line 531, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
     .calculator-section .subtotal-wrapper .subtotal {
       margin-left: 7px;
       display: inline-block;
@@ -465,14 +468,14 @@ input[type=text], input[type=number] {
       color: #00853f;
       word-wrap: break-word; }
 
-/* line 538, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+/* line 542, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
 .calculator-section.disabled {
   opacity: 0.3;
   pointer-events: none; }
 
 /* Total Section
 ----------------------------------------------------- */
-/* line 547, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+/* line 551, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
 .green-section {
   position: absolute;
   top: 0;
@@ -482,7 +485,7 @@ input[type=text], input[type=number] {
   padding: 20px;
   overflow: hidden;
   z-index: 100; }
-  /* line 557, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 561, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .green-section h3 {
     color: white;
     float: left;
@@ -490,36 +493,36 @@ input[type=text], input[type=number] {
     line-height: 20px;
     position: relative;
     top: 6px; }
-  /* line 566, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 570, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .green-section .currency-select {
     margin-bottom: 0;
     display: inline-block;
     margin-left: 1em;
     position: relative;
     top: -7px; }
-    /* line 573, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+    /* line 577, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
     .green-section .currency-select select.currency {
       margin-bottom: 0; }
-  /* line 578, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 582, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .green-section .datacenter-select {
     clear: both; }
-    /* line 580, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+    /* line 584, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
     .green-section .datacenter-select span {
       color: white;
       font-size: 14px;
       position: relative;
       top: 2px;
       margin-right: 4px; }
-    /* line 588, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+    /* line 592, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
     .green-section .datacenter-select .datacenter {
       clear: both;
       display: inline-block;
       margin: 5px 0 0;
       text-transform: capitalize; }
-  /* line 596, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 600, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .green-section .lpChatTextLinkText {
     color: white; }
-  /* line 601, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 605, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .green-section .buttons .btn-discuss {
     background: #284e36;
     border: 2px solid #108442;
@@ -529,10 +532,10 @@ input[type=text], input[type=number] {
     position: relative;
     top: 4px;
     text-align: center; }
-    /* line 611, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+    /* line 615, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
     .green-section .buttons .btn-discuss:hover {
       background: #108442; }
-  /* line 617, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 621, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .green-section .total-box {
     float: right;
     width: 55%;
@@ -540,38 +543,38 @@ input[type=text], input[type=number] {
     padding: 15px;
     background: #284e36;
     max-height: 72px; }
-    /* line 625, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+    /* line 629, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
     .green-section .total-box .price {
       line-height: 1;
       color: white;
       font-size: 42px;
       margin-bottom: 20px;
       word-wrap: break-word; }
-    /* line 633, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+    /* line 637, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
     .green-section .total-box .estimated {
       color: #addd6c;
       width: 60px;
       margin-left: 10px;
       display: inline-block;
       line-height: 1.2; }
-  /* line 642, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 646, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .green-section.clone {
     padding: 0; }
-    /* line 645, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+    /* line 649, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
     .green-section.clone .total-box {
       padding: 0;
       float: left; }
-    /* line 649, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+    /* line 653, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
     .green-section.clone .pull-left {
       display: none; }
 
 /* Services
 ----------------------------------------------------- */
-/* line 659, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+/* line 663, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
 .services {
   margin-top: -10px; }
 
-/* line 663, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+/* line 667, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
 .service {
   text-align: center;
   border: solid 5px #d3d3d0;
@@ -579,10 +582,10 @@ input[type=text], input[type=number] {
   margin: 10px 30px 20px 0;
   display: inline-block;
   transition: border 200ms; }
-  /* line 671, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 675, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .service:nth-child(3), .service:nth-child(6) {
     margin-right: 0; }
-  /* line 675, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 679, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .service select {
     width: 50px;
     position: relative;
@@ -590,21 +593,21 @@ input[type=text], input[type=number] {
     margin-left: 4px;
     margin-right: 4px;
     display: inline-block; }
-  /* line 684, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 688, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .service h4 {
     font-size: 18px;
     display: table-cell;
     vertical-align: middle;
     padding: 0 20px;
     width: 100%; }
-  /* line 692, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 696, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .service form {
     margin: 0; }
-  /* line 696, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 700, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .service.disabled {
     opacity: 0.3;
     pointer-events: none; }
-  /* line 701, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 705, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .service .service__info {
     padding: 10px;
     background: #f0f0ee;
@@ -612,7 +615,7 @@ input[type=text], input[type=number] {
     height: 110px;
     width: 100%;
     display: table; }
-  /* line 710, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 714, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .service .service__description {
     background: #f0f0ee;
     position: absolute;
@@ -624,61 +627,61 @@ input[type=text], input[type=number] {
     font-size: 14px;
     opacity: 0;
     transition: opacity 200ms; }
-  /* line 723, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 727, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .service .service__inputs {
     padding: 10px;
     text-align: left;
     padding-left: 20px;
     position: relative;
     width: 100%; }
-    /* line 730, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+    /* line 734, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
     .service .service__inputs .price {
       text-align: right;
       position: absolute;
       right: 20px;
       top: 20px; }
-    /* line 737, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+    /* line 741, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
     .service .service__inputs .quantity-wrapper {
       display: inline-block;
       width: 65px; }
-    /* line 742, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+    /* line 746, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
     .service .service__inputs input[type=range] {
       position: relative;
       z-index: 10;
       margin-left: 6px;
       margin-right: 5px;
       top: -1px; }
-    /* line 751, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+    /* line 755, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
     .service .service__inputs.slider .price {
       top: 14px; }
-  /* line 758, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 762, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .service.object-storage input[type=range], .service.object-storage .rangeslider {
     width: 114px; }
-  /* line 763, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 767, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .service.bandwidth {
     width: 658px; }
-    /* line 766, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+    /* line 770, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
     .service.bandwidth .service__info {
       height: 60px; }
-    /* line 770, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+    /* line 774, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
     .service.bandwidth input[type=range], .service.bandwidth .rangeslider {
       width: 440px; }
-    /* line 774, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+    /* line 778, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
     .service.bandwidth .service__info {
       min-height: 0; }
-  /* line 779, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 783, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .service.active {
     border-color: #a5d867; }
-  /* line 784, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 788, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .service:hover .service__description {
     opacity: 1; }
 
 /* Included Section
 ----------------------------------------------------- */
-/* line 795, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+/* line 799, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
 #included {
   overflow: hidden; }
-  /* line 797, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 801, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   #included ul {
     list-style: none;
     margin: 0;
@@ -687,7 +690,7 @@ input[type=text], input[type=number] {
     margin-bottom: 40px;
     width: 33%;
     float: left; }
-  /* line 807, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 811, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   #included li {
     list-style: none;
     width: 100%;
@@ -696,27 +699,27 @@ input[type=text], input[type=number] {
     margin-left: 0;
     margin: 10px 0;
     padding-right: 40px; }
-  /* line 817, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 821, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   #included p {
     font-size: 14px;
     clear: both;
     text-align: left;
     width: 800px; }
 
-/* line 826, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+/* line 830, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
 #bandwidth > p {
   width: 630px; }
 
 /* Support
 ----------------------------------------------------- */
-/* line 837, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+/* line 841, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
 #support > p {
   width: 220px; }
-/* line 841, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+/* line 845, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
 #support .support-table {
   margin-top: -50px; }
 
-/* line 846, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+/* line 850, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
 .support-select {
   background: #f0f0ee;
   border: solid 5px #d3d3d0;
@@ -726,16 +729,16 @@ input[type=text], input[type=number] {
   height: 204px;
   text-align: center;
   cursor: pointer; }
-  /* line 856, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 860, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .support-select h4 {
     line-height: 60px; }
-  /* line 860, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 864, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .support-select .status-label-wrapper {
     background: white;
     padding: 24px 0;
     padding-bottom: 10px;
     height: 134px; }
-  /* line 867, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 871, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .support-select .status-label {
     display: inline-block;
     background: #D3D3D0;
@@ -746,101 +749,101 @@ input[type=text], input[type=number] {
     line-height: 1;
     font-size: 13px;
     letter-spacing: 1px; }
-  /* line 879, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 883, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .support-select p {
     margin-top: 20px;
     margin-bottom: 0;
     font-size: 12px;
     padding: 0 10px; }
-  /* line 886, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 890, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .support-select:hover {
     text-decoration: none; }
-  /* line 890, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 894, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .support-select.selected {
     border-color: #a5d867; }
-    /* line 893, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+    /* line 897, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
     .support-select.selected .status-label {
       background: #a5d867; }
 
 @media print {
-  /* line 900, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 904, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   h3 {
     font-size: 24px; }
-  /* line 904, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 908, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .page-form {
     padding-top: 0;
     padding-left: 2em;
     padding-right: 2em;
     min-width: 1012px; }
-  /* line 910, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 914, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   #networking-services {
     page-break-before: always; }
-  /* line 913, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 917, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   #monthly-total {
     position: relative !important;
     display: block !important;
     padding: 20px 0 20px 0;
     margin-bottom: 20px;
     border-bottom: 1px solid #ddd; }
-    /* line 919, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+    /* line 923, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
     #monthly-total h3 {
       font-size: 26px; }
-  /* line 923, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 927, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .total-box {
     width: auto !important; }
-  /* line 927, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 931, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .total-box .buttons {
     display: none; }
-  /* line 930, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 934, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   #support {
     page-break-before: always; }
-  /* line 933, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 937, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .service {
     width: 30%; }
-  /* line 937, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 941, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   #included {
     page-break-before: always; }
-  /* line 941, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 945, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .tooltip, .service__description {
     display: none !important; }
-  /* line 945, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 949, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .calculator-section .subtotal-wrapper {
     top: 100%;
     width: 100%; }
-  /* line 949, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 953, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .page-footer {
     padding-left: 40px; }
-  /* line 952, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 956, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .add-managed-app-row {
     display: none !important; }
-  /* line 956, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 960, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .rangeslider {
     display: none !important; }
-  /* line 961, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 965, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   table {
     min-width: 100%; } }
 
 @media print {
-  /* line 968, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 972, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .no-print {
     display: none !important; } }
 
-/* line 973, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+/* line 977, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
 .print-only {
   display: none; }
-  /* line 976, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 980, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .print-only--block {
     display: none; }
     @media print {
       .print-only--block {
         display: block; } }
-  /* line 982, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 986, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .print-only--inline {
     display: none; }
     @media print {
       .print-only--inline {
         display: inline; } }
-  /* line 988, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+  /* line 992, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
   .print-only--inline-block {
     display: none; }
     @media print {
@@ -854,6 +857,6 @@ input[type=text], input[type=number] {
   .print .break-after-always {
     page-after-before: always; } }
 
-/* line 1010, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+/* line 1014, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
 .header.print-only--block .container {
   width: 100%; }

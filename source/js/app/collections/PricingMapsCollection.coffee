@@ -41,9 +41,10 @@ PricingMapsCollection = Backbone.Collection.extend
     _.each data, (section) =>
       if section.name is "Software"
         _.each section.products, (product) =>
+          software_price = product.hourly * @currency.rate
           item = 
             name: product.name
-            price: product.hourly
+            price: software_price
           software_licenses.push(item)
       if section.products?
         _.each section.products, (product) =>

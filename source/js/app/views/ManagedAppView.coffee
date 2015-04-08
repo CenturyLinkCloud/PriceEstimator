@@ -17,7 +17,7 @@ ManagedAppView = Backbone.View.extend
   render: ->
     template = require("../templates/managedApp.haml")
     colspan = if @model.get("type") is "hyperscale" then 4 else 5
-    @$el.html template(app: @options.app, colspan: colspan, mainApp: @options.mainApp, software: @model.attributes.pricing.software)
+    @$el.html template(app: @options.app, colspan: colspan, mainApp: @options.mainApp, software_options: @model.attributes.pricing.software)
     @$el.addClass("managed-row-for-server_#{@model.cid}")
     @updateQuantityAndPrice()
     return @
@@ -32,7 +32,7 @@ ManagedAppView = Backbone.View.extend
 
   updateQuantityAndPrice: ->
     quantity = @model.get("quantity")
-    price = @model.managedAppPricePerMonth(@options.app.key, @options.app.instances, @options.app.software)
+    price = @model.managedAppPricePerMonth(@options.app.key, @options.app.instances, @options.app.softwareId)
     instances = @options.app.instances || 1
     $(".managed-app-quantity", @$el).html(quantity)
     $(".price", @$el).html(accounting.formatMoney(price),
@@ -41,9 +41,9 @@ ManagedAppView = Backbone.View.extend
     $("input[name=usage]", @$el).val instances
 
   onFormChanged: ->
-    software = $("select[name=software]", @$el).val()
+    softwareId = $("select[name=softwareId]", @$el).val()
     instances = $("input[name=usage]", @$el).val() || 1
-    @model.updateManagedAppIntances(@options.app.key, instances, software)
+    @model.updateManagedAppIntances(@options.app.key, instances, softwareId)
 
   ensureNumber: (e) ->
     charCode = (if (e.which) then e.which else e.keyCode)

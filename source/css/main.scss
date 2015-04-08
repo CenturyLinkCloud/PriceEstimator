@@ -242,6 +242,10 @@ input[type=text], input[type=number] {
     
     &.software {
       width: 230px;
+      
+      &.hidden {
+        display: none;
+      }
     }
   }
 
