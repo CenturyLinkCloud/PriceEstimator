@@ -19,7 +19,7 @@ ServicesCollection = require './app/collections/ServicesCollection.coffee'
 ServiceModel = require './app/models/ServiceModel.coffee'
 Utils = require('./app/Utils.coffee')
 
-PRICES_URL_ROOT = "/prices/"
+PRICES_URL_ROOT = Config.CLC_PRICING_URL_ROOT
 
 #--------------------------------------------------------
 # Init

@@ -105,9 +105,9 @@ ServerView = Backbone.View.extend
       managedAppView = new ManagedAppView(model: model, app: app, mainApp: @app)
       @appViews.push managedAppView
       @addManagedAppView.$el.before(managedAppView.render().el)
+      @onModelChange(model)
 
   onModelChange: (model) ->
-
     newTotal = accounting.formatMoney(model.totalPricePerMonth(),
       symbol: @app.currency.symbol
     )
@@ -133,6 +133,8 @@ ServerView = Backbone.View.extend
       appView.updateQuantityAndPrice()
 
     @addManagedAppView.updateOptions() if @addManagedAppView
+
+    @options.parentView.collection.trigger 'change'
 
 
 module.exports = ServerView

@@ -1028,7 +1028,8 @@ ServerView = Backbone.View.extend({
           mainApp: _this.app
         });
         _this.appViews.push(managedAppView);
-        return _this.addManagedAppView.$el.before(managedAppView.render().el);
+        _this.addManagedAppView.$el.before(managedAppView.render().el);
+        return _this.onModelChange(model);
       };
     })(this));
   },
@@ -1058,8 +1059,9 @@ ServerView = Backbone.View.extend({
       };
     })(this));
     if (this.addManagedAppView) {
-      return this.addManagedAppView.updateOptions();
+      this.addManagedAppView.updateOptions();
     }
+    return this.options.parentView.collection.trigger('change');
   }
 });
 
@@ -1119,7 +1121,8 @@ ServersView = Backbone.View.extend({
     var serverView;
     serverView = new ServerView({
       model: model,
-      app: this.app
+      app: this.app,
+      parentView: this
     });
     this.serverViews[model.cid] = serverView;
     $(".table", this.$el).append(serverView.render().el);
@@ -1131,7 +1134,6 @@ ServersView = Backbone.View.extend({
   },
   updateSubtotal: function() {
     var newSubtotal;
-    console.log('update?');
     newSubtotal = accounting.formatMoney(this.collection.subtotal(), {
       symbol: this.app.currency.symbol
     });
@@ -1362,7 +1364,7 @@ ServiceModel = require('./app/models/ServiceModel.coffee');
 
 Utils = require('./app/Utils.coffee');
 
-PRICES_URL_ROOT = "/prices/";
+PRICES_URL_ROOT = Config.CLC_PRICING_URL_ROOT;
 
 App = {
   initialized: false,

@@ -36,7 +36,7 @@ ServersView = Backbone.View.extend
     @collection.add(pricingMap: @options.pricingMap, type: type)
   
   onServerAdded: (model) ->
-    serverView = new ServerView(model: model, app: @app)
+    serverView = new ServerView(model: model, app: @app, parentView: @)
     @serverViews[model.cid] = serverView
     $(".table", @$el).append serverView.render().el
     @updateSubtotal()
@@ -46,7 +46,6 @@ ServersView = Backbone.View.extend
     @updateSubtotal()
 
   updateSubtotal: ->
-    console.log 'update?'
     newSubtotal = accounting.formatMoney(@collection.subtotal(),
       symbol: @app.currency.symbol
     )
