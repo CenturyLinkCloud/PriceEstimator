@@ -19,15 +19,13 @@ ServicesCollection = require './app/collections/ServicesCollection.coffee'
 ServiceModel = require './app/models/ServiceModel.coffee'
 Utils = require('./app/Utils.coffee')
 
-PRICES_URL_ROOT = Config.CLC_PRICING_URL_ROOT
-
 #--------------------------------------------------------
 # Init
 #--------------------------------------------------------
 
 App =
   initialized: false
-  currency: Config.DEFAULT_CURRENCY
+
   init: ->
     _.extend(@, Backbone.Events)
 
@@ -37,13 +35,13 @@ App =
 
     dc = datacenter || "NY1"
     ds = datasource || "ny1"
-    currency = currencyId || Config.DEFAULT_CURRENCY.id
+    @currency = currencyId || Config.DEFAULT_CURRENCY.id
 
     @monthlyTotalView = new MonthlyTotalView
       app: @
       datacenter: dc
       datasource: ds
-      currency: currency
+      currency: @currency
 
     @supportView = new SupportView
       app: @
@@ -52,8 +50,8 @@ App =
       app: @
       datacenter: dc
       datasource: ds
-      currency: currency
-      url: PRICES_URL_ROOT + "#{ds}.json"
+      currency: @currency
+      url: Config.CLC_PRICING_URL_ROOT + "#{ds}.json"
 
     @pricingMaps.on "sync", =>
       @onPricingMapsSynced()
@@ -195,4 +193,6 @@ App =
 #--------------------------------------------------------
 
 $ ->
-  App.init()
+  Config.init(App)
+
+  

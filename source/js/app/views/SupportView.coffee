@@ -1,13 +1,17 @@
 SupportView = Backbone.View.extend
   
   el: "#support"
-
+  supportPricing: 
+    ranges: [10000, 80000, 250000, 1000000]
+    percentages: [0.1, 0.07, 0.05, 0.03]
   events:
     "click .support-select": "onSupportSelectClick"
     "click .support-select a": "onSupportSelectInnerLinkClick"
 
   initialize: (options) ->
     @options = options || {}
+    $.getJSON './json/support-pricing.json', (data) =>
+      @supportPricing = data
     @selectPlan("developer")    
 
   onSupportSelectClick: (e) ->
@@ -46,8 +50,8 @@ SupportView = Backbone.View.extend
 
     amount = @options.app.totalPrice - @options.app.oSSubtotal || 0
 
-    ranges = [10000, 80000, 250000, 1000000]
-    percentages = [.1, .07, .05, .03]
+    ranges = @supportPricing.ranges
+    percentages = @supportPricing.percentages
 
     multipliers = _.map ranges, (range, index) ->
       previousRange = ranges[index-1] || null

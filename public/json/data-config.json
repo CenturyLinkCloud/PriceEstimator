@@ -1,0 +1,11 @@
+{
+  "pricingRootPath": "/prices/",
+  "datacentersFile": "/prices/data-center-prices.json",
+  "currencyFile": "./json/exchange-rates.json",
+  "defaultCurrency": {
+    "id": "USD",
+    "symbol": "$",
+    "rate": 1.0
+  },
+  "supportPricingFile": "./json/support-pricing.json"
+}

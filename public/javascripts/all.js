@@ -10,7 +10,21 @@ Config = {
     rate: 1.0,
     symbol: "$"
   },
-  CURRENCY_FILE_PATH: "./currency/exchange-rates.json"
+  CURRENCY_FILE_PATH: "./currency/exchange-rates.json",
+  init: function(_callback) {
+    return $.getJSON('./json/data-config.json', (function(_this) {
+      return function(data) {
+        var config;
+        config = data;
+        _this.CLC_PRICING_URL_ROOT = config.pricingRootPath;
+        _this.CLC_DATACENTERS_LIST = config.datacentersFile;
+        _this.DEFAULT_CURRENCY = config.defaultCurrency;
+        _this.CURRENCY_FILE_PATH = config.currencyFile;
+        _this.SUPPORT_PRICING = config.supportPricingFile;
+        return _callback.init();
+      };
+    })(this));
+  }
 };
 
 module.exports = Config;
@@ -1289,12 +1303,21 @@ var SupportView;
 
 SupportView = Backbone.View.extend({
   el: "#support",
+  supportPricing: {
+    ranges: [10000, 80000, 250000, 1000000],
+    percentages: [0.1, 0.07, 0.05, 0.03]
+  },
   events: {
     "click .support-select": "onSupportSelectClick",
     "click .support-select a": "onSupportSelectInnerLinkClick"
   },
   initialize: function(options) {
     this.options = options || {};
+    $.getJSON('./json/support-pricing.json', (function(_this) {
+      return function(data) {
+        return _this.supportPricing = data;
+      };
+    })(this));
     return this.selectPlan("developer");
   },
   onSupportSelectClick: function(e) {
@@ -1323,8 +1346,8 @@ SupportView = Backbone.View.extend({
       return 0;
     }
     amount = this.options.app.totalPrice - this.options.app.oSSubtotal || 0;
-    ranges = [10000, 80000, 250000, 1000000];
-    percentages = [.1, .07, .05, .03];
+    ranges = this.supportPricing.ranges;
+    percentages = this.supportPricing.percentages;
     multipliers = _.map(ranges, function(range, index) {
       var previousRange;
       previousRange = ranges[index - 1] || null;
@@ -1362,7 +1385,7 @@ module.exports = SupportView;
 
 
 },{}],22:[function(require,module,exports){
-var App, Config, MonthlyTotalView, PRICES_URL_ROOT, PricingMapsCollection, ServersCollection, ServersView, ServiceModel, ServicesCollection, ServicesView, SupportView, Utils;
+var App, Config, MonthlyTotalView, PricingMapsCollection, ServersCollection, ServersView, ServiceModel, ServicesCollection, ServicesView, SupportView, Utils;
 
 Config = require('./app/Config.coffee');
 
@@ -1384,25 +1407,22 @@ ServiceModel = require('./app/models/ServiceModel.coffee');
 
 Utils = require('./app/Utils.coffee');
 
-PRICES_URL_ROOT = Config.CLC_PRICING_URL_ROOT;
-
 App = {
   initialized: false,
-  currency: Config.DEFAULT_CURRENCY,
   init: function() {
-    var currency, currencyId, datacenter, datasource, dc, ds;
+    var currencyId, datacenter, datasource, dc, ds;
     _.extend(this, Backbone.Events);
     datacenter = Utils.getUrlParameter("datacenter");
     datasource = Utils.getUrlParameter("datasource");
     currencyId = Utils.getUrlParameter("currency");
     dc = datacenter || "NY1";
     ds = datasource || "ny1";
-    currency = currencyId || Config.DEFAULT_CURRENCY.id;
+    this.currency = currencyId || Config.DEFAULT_CURRENCY.id;
     this.monthlyTotalView = new MonthlyTotalView({
       app: this,
       datacenter: dc,
       datasource: ds,
-      currency: currency
+      currency: this.currency
     });
     this.supportView = new SupportView({
       app: this
@@ -1411,8 +1431,8 @@ App = {
       app: this,
       datacenter: dc,
       datasource: ds,
-      currency: currency,
-      url: PRICES_URL_ROOT + ("" + ds + ".json")
+      currency: this.currency,
+      url: Config.CLC_PRICING_URL_ROOT + ("" + ds + ".json")
     });
     return this.pricingMaps.on("sync", (function(_this) {
       return function() {
@@ -1557,7 +1577,7 @@ App = {
 };
 
 $(function() {
-  return App.init();
+  return Config.init(App);
 });
 
 
