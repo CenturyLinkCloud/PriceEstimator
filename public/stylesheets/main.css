@@ -860,3 +860,8 @@ input[type=text], input[type=number] {
 /* line 1014, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
 .header.print-only--block .container {
   width: 100%; }
+
+/* line 1020, /Users/kevinbleich/Documents/wintr2014/clc/PriceEstimator/source/css/main.scss */
+.cost sup {
+  top: -0.25em;
+  left: -0.25em; }

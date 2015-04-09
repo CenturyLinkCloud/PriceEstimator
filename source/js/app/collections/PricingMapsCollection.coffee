@@ -62,7 +62,10 @@ PricingMapsCollection = Backbone.Collection.extend
                 server.options[ids[1]] = price * @currency.rate
             else if ids[0] is 'networking-services'
               if ids[1] is 'shared-load-balancer'
-                price = product.monthly || product.hourly * HOURS_IN_MONTH
+                price = product.hourly * HOURS_IN_MONTH
+                price *= @currency.rate
+              else if ids[1] is 'dedicated-load-balancer-200' or ids[1] is 'dedicated-load-balancer-1000'
+                price = product.monthly
                 price *= @currency.rate
               else
                 price = product.monthly
@@ -70,6 +73,7 @@ PricingMapsCollection = Backbone.Collection.extend
               service = 
                 type: ids[1]
                 price: price
+                hasSetupFee: product.setupFee? 
               additional_services.push(service)
             else if ids[0] is 'managed-apps'
               price = product.hourly
@@ -80,6 +84,7 @@ PricingMapsCollection = Backbone.Collection.extend
                 service =
                   type: 'bandwidth'
                   price: price
+                  hasSetupFee: product.setupFee? 
                 additional_services.push(service)
               else if ids[1] is 'object-storage'
                 price = product.monthly * @currency.rate
@@ -88,6 +93,7 @@ PricingMapsCollection = Backbone.Collection.extend
                   type: 'object-storage'
                   price: price
                   disabled: !enabled
+                  hasSetupFee: product.setupFee? 
                 additional_services.push(service)
 
     server.options["software"] = software_licenses

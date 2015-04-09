@@ -41,7 +41,9 @@ ServiceView = Backbone.View.extend
     newPrice = accounting.formatMoney(model.totalPricePerMonth(),
       symbol: @app.currency.symbol
     )
-    $(".cost", @$el).html(newCost)
+    cost = newCost
+    cost += "&nbsp;<span><sup>*</sup></span>" if model.get("hasSetupFee")
+    $(".cost", @$el).html(cost)
     $(".price", @$el).html(newPrice)
     $(".quantity", @$el).html(model.get("quantity"))
     if model.get("quantity") > 0

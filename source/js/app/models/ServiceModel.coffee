@@ -10,12 +10,15 @@ ServiceModel = Backbone.Model.extend
   initPricing: (pricingMap) ->
     @.set "pricing", pricingMap.get('price')
     @.set "disabled", pricingMap.get('disabled')
+    @.set "hasSetupFee", pricingMap.get('hasSetupFee')
 
   parse: (data) ->
     return data
 
   totalPricePerMonth: ->
-    @.get("pricing") * @.get("quantity")
+    price = @.get("pricing")
+    quantity = @.get("quantity")
+    return price * quantity
 
 
 module.exports = ServiceModel

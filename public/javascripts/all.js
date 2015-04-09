@@ -136,7 +136,10 @@ PricingMapsCollection = Backbone.Collection.extend({
                 }
               } else if (ids[0] === 'networking-services') {
                 if (ids[1] === 'shared-load-balancer') {
-                  price = product.monthly || product.hourly * HOURS_IN_MONTH;
+                  price = product.hourly * HOURS_IN_MONTH;
+                  price *= _this.currency.rate;
+                } else if (ids[1] === 'dedicated-load-balancer-200' || ids[1] === 'dedicated-load-balancer-1000') {
+                  price = product.monthly;
                   price *= _this.currency.rate;
                 } else {
                   price = product.monthly;
@@ -144,7 +147,8 @@ PricingMapsCollection = Backbone.Collection.extend({
                 }
                 service = {
                   type: ids[1],
-                  price: price
+                  price: price,
+                  hasSetupFee: product.setupFee != null
                 };
                 return additional_services.push(service);
               } else if (ids[0] === 'managed-apps') {
@@ -155,7 +159,8 @@ PricingMapsCollection = Backbone.Collection.extend({
                   price = product.monthly * _this.currency.rate;
                   service = {
                     type: 'bandwidth',
-                    price: price
+                    price: price,
+                    hasSetupFee: product.setupFee != null
                   };
                   return additional_services.push(service);
                 } else if (ids[1] === 'object-storage') {
@@ -164,7 +169,8 @@ PricingMapsCollection = Backbone.Collection.extend({
                   service = {
                     type: 'object-storage',
                     price: price,
-                    disabled: !enabled
+                    disabled: !enabled,
+                    hasSetupFee: product.setupFee != null
                   };
                   return additional_services.push(service);
                 }
@@ -465,13 +471,17 @@ ServiceModel = Backbone.Model.extend({
   },
   initPricing: function(pricingMap) {
     this.set("pricing", pricingMap.get('price'));
-    return this.set("disabled", pricingMap.get('disabled'));
+    this.set("disabled", pricingMap.get('disabled'));
+    return this.set("hasSetupFee", pricingMap.get('hasSetupFee'));
   },
   parse: function(data) {
     return data;
   },
   totalPricePerMonth: function() {
-    return this.get("pricing") * this.get("quantity");
+    var price, quantity;
+    price = this.get("pricing");
+    quantity = this.get("quantity");
+    return price * quantity;
   }
 });
 
@@ -668,6 +678,9 @@ if (this.model.get("input") === "slider") {
   $o.push("        " + $e($c(accounting.formatMoney(this.model.get("pricing"), {
     "symbol": this.app.currency.symbol
   }))));
+  if (this.model.get("hasSetupFee")) {
+    $o.push("        <span>\n          <sup>\n            *\n          </sup>\n        </span>");
+  }
   $o.push("      </span>");
 }
 
@@ -1266,14 +1279,18 @@ ServiceView = Backbone.View.extend({
     return this.model.set(data);
   },
   onModelChange: function(model) {
-    var newCost, newPrice;
+    var cost, newCost, newPrice;
     newCost = accounting.formatMoney(model.get("pricing"), {
       symbol: this.app.currency.symbol
     });
     newPrice = accounting.formatMoney(model.totalPricePerMonth(), {
       symbol: this.app.currency.symbol
     });
-    $(".cost", this.$el).html(newCost);
+    cost = newCost;
+    if (model.get("hasSetupFee")) {
+      cost += "&nbsp;<span><sup>*</sup></span>";
+    }
+    $(".cost", this.$el).html(cost);
     $(".price", this.$el).html(newPrice);
     $(".quantity", this.$el).html(model.get("quantity"));
     if (model.get("quantity") > 0) {
