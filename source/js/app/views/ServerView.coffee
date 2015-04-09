@@ -30,6 +30,9 @@ ServerView = Backbone.View.extend
     @listenTo @model, 'change:managedApps', (model) =>
       @onManagedChanged(model)
 
+    @listenTo @model, 'change:os', (model) =>
+      model.set('managedApps', [])
+
   render: ->
     template = require("../templates/server.haml")
     managedDisabled = @model.get("pricingMap").get("options").os["redhat-managed"] is "disabled"

@@ -16,7 +16,7 @@ MonthlyTotalView = Backbone.View.extend
     @app.on "totalPriceUpdated", =>
       @updateTotal()
 
-    $.getJSON Config.CLC_DATACENTERS_LIST, (data) =>
+    $.getJSON Config.DATACENTERS_URL, (data) =>
       $.each data, (index, location) =>
         label = location.name.replace("_", " ")
         pricingSheetHref = location.links[0].href
@@ -28,7 +28,7 @@ MonthlyTotalView = Backbone.View.extend
           .attr('data-pricing-map', pricingSheetHref)
         $(".datacenter", @$el).append($option)
 
-    $.getJSON Config.CURRENCY_FILE_PATH, (currencies) =>
+    $.getJSON Config.CURRENCY_URL, (currencies) =>
       $.each currencies["USD"], (index, currency) =>
         label = currency.id
         rate = currency.rate

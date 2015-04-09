@@ -51,7 +51,7 @@ App =
       datacenter: dc
       datasource: ds
       currency: @currency
-      url: Config.CLC_PRICING_URL_ROOT + "#{ds}.json"
+      url: Config.PRICING_ROOT_PATH + "#{ds}.json"
 
     @pricingMaps.on "sync", =>
       @onPricingMapsSynced()

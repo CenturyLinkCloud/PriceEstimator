@@ -15,7 +15,7 @@ PricingMapsCollection = Backbone.Collection.extend
     @app = options.app
     @url = options.url
     $.ajax
-      url: Config.CURRENCY_FILE_PATH
+      url: Config.CURRENCY_URL
       type: "GET"
       success: (data) =>
         @currency = data[Config.DEFAULT_CURRENCY.id][options.currency]

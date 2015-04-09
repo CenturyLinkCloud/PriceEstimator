@@ -1,3 +1,5 @@
+Config = require '../Config.coffee'
+
 SupportView = Backbone.View.extend
   
   el: "#support"
@@ -10,7 +12,7 @@ SupportView = Backbone.View.extend
 
   initialize: (options) ->
     @options = options || {}
-    $.getJSON './json/support-pricing.json', (data) =>
+    $.getJSON Config.SUPPORT_PRICING_URL, (data) =>
       @supportPricing = data
     @selectPlan("developer")    
 

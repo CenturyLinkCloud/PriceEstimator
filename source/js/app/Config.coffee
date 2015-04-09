@@ -1,22 +1,23 @@
 Config = 
-  NAME: ""
-  CLC_PRICING_URL_ROOT: "/prices/"
-  CLC_DATACENTERS_LIST: "/prices/data-center-prices.json"
+  NAME: "CLC Pricing Estimator"
+  PRICING_ROOT_PATH: "/prices/"
+  DATACENTERS_URL: "/prices/data-center-prices.json"
+  CURRENCY_URL: "./json/exchange-rates.json"
   DEFAULT_CURRENCY:
     id: "USD"
     rate: 1.0
     symbol: "$"
-  CURRENCY_FILE_PATH: "./currency/exchange-rates.json"
 
-  init: (_callback) ->
+  init: (app) ->
     $.getJSON('./json/data-config.json', (data) =>
       config = data
-      @CLC_PRICING_URL_ROOT = config.pricingRootPath
-      @CLC_DATACENTERS_LIST = config.datacentersFile
+      @NAME = config.name
+      @PRICING_ROOT_PATH = config.pricingRootPath
+      @DATACENTERS_URL = config.datacentersUrl
+      @CURRENCY_URL = config.currencyUrl
+      @SUPPORT_PRICING_URL = config.supportPricingUrl
       @DEFAULT_CURRENCY = config.defaultCurrency
-      @CURRENCY_FILE_PATH = config.currencyFile
-      @SUPPORT_PRICING = config.supportPricingFile
-      return _callback.init()
+      return app.init()
     )
   
 

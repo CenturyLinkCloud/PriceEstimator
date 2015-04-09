@@ -2,26 +2,27 @@
 var Config;
 
 Config = {
-  NAME: "",
-  CLC_PRICING_URL_ROOT: "/prices/",
-  CLC_DATACENTERS_LIST: "/prices/data-center-prices.json",
+  NAME: "CLC Pricing Estimator",
+  PRICING_ROOT_PATH: "/prices/",
+  DATACENTERS_URL: "/prices/data-center-prices.json",
+  CURRENCY_URL: "./json/exchange-rates.json",
   DEFAULT_CURRENCY: {
     id: "USD",
     rate: 1.0,
     symbol: "$"
   },
-  CURRENCY_FILE_PATH: "./currency/exchange-rates.json",
-  init: function(_callback) {
+  init: function(app) {
     return $.getJSON('./json/data-config.json', (function(_this) {
       return function(data) {
         var config;
         config = data;
-        _this.CLC_PRICING_URL_ROOT = config.pricingRootPath;
-        _this.CLC_DATACENTERS_LIST = config.datacentersFile;
+        _this.NAME = config.name;
+        _this.PRICING_ROOT_PATH = config.pricingRootPath;
+        _this.DATACENTERS_URL = config.datacentersUrl;
+        _this.CURRENCY_URL = config.currencyUrl;
+        _this.SUPPORT_PRICING_URL = config.supportPricingUrl;
         _this.DEFAULT_CURRENCY = config.defaultCurrency;
-        _this.CURRENCY_FILE_PATH = config.currencyFile;
-        _this.SUPPORT_PRICING = config.supportPricingFile;
-        return _callback.init();
+        return app.init();
       };
     })(this));
   }
@@ -72,7 +73,7 @@ PricingMapsCollection = Backbone.Collection.extend({
     this.app = options.app;
     this.url = options.url;
     return $.ajax({
-      url: Config.CURRENCY_FILE_PATH,
+      url: Config.CURRENCY_URL,
       type: "GET",
       success: (function(_this) {
         return function(data) {
@@ -810,7 +811,7 @@ MonthlyTotalView = Backbone.View.extend({
         return _this.updateTotal();
       };
     })(this));
-    $.getJSON(Config.CLC_DATACENTERS_LIST, (function(_this) {
+    $.getJSON(Config.DATACENTERS_URL, (function(_this) {
       return function(data) {
         return $.each(data, function(index, location) {
           var $option, alias, label, pricingSheetHref, selected;
@@ -823,7 +824,7 @@ MonthlyTotalView = Backbone.View.extend({
         });
       };
     })(this));
-    $.getJSON(Config.CURRENCY_FILE_PATH, (function(_this) {
+    $.getJSON(Config.CURRENCY_URL, (function(_this) {
       return function(currencies) {
         return $.each(currencies["USD"], function(index, currency) {
           var $option, label, rate, selected, symbol;
@@ -954,9 +955,14 @@ ServerView = Backbone.View.extend({
         return _this.onModelChange(model);
       };
     })(this));
-    return this.listenTo(this.model, 'change:managedApps', (function(_this) {
+    this.listenTo(this.model, 'change:managedApps', (function(_this) {
       return function(model) {
         return _this.onManagedChanged(model);
+      };
+    })(this));
+    return this.listenTo(this.model, 'change:os', (function(_this) {
+      return function(model) {
+        return model.set('managedApps', []);
       };
     })(this));
   },
@@ -1299,7 +1305,9 @@ module.exports = ServicesView;
 
 
 },{"../models/ServiceModel.coffee":9,"./ServiceView.coffee":19}],21:[function(require,module,exports){
-var SupportView;
+var Config, SupportView;
+
+Config = require('../Config.coffee');
 
 SupportView = Backbone.View.extend({
   el: "#support",
@@ -1313,7 +1321,7 @@ SupportView = Backbone.View.extend({
   },
   initialize: function(options) {
     this.options = options || {};
-    $.getJSON('./json/support-pricing.json', (function(_this) {
+    $.getJSON(Config.SUPPORT_PRICING_URL, (function(_this) {
       return function(data) {
         return _this.supportPricing = data;
       };
@@ -1384,7 +1392,7 @@ SupportView = Backbone.View.extend({
 module.exports = SupportView;
 
 
-},{}],22:[function(require,module,exports){
+},{"../Config.coffee":1}],22:[function(require,module,exports){
 var App, Config, MonthlyTotalView, PricingMapsCollection, ServersCollection, ServersView, ServiceModel, ServicesCollection, ServicesView, SupportView, Utils;
 
 Config = require('./app/Config.coffee');
@@ -1432,7 +1440,7 @@ App = {
       datacenter: dc,
       datasource: ds,
       currency: this.currency,
-      url: Config.CLC_PRICING_URL_ROOT + ("" + ds + ".json")
+      url: Config.PRICING_ROOT_PATH + ("" + ds + ".json")
     });
     return this.pricingMaps.on("sync", (function(_this) {
       return function() {
