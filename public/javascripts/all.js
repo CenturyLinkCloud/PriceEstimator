@@ -502,7 +502,13 @@ $c = function(text) {
 
 $o = [];
 
-$o.push("<td class='add-managed-app-cell table-cell' colspan='" + ($e($c(this.colspan))) + "'>\n  <div class='add-managed-button'>\n    <span class='plus'></span>\n    managed application \n    <span class='down-arrow'></span>\n    <div class='managed-app-options'>\n      <a class='redhat-app' href='#' data-key='apache' data-name='Apache HTTP Server'>Apache HTTP Server</a>\n      <a class='redhat-app' href='#' data-key='cloudera-cdh5-basic' data-name='Cloudera CDH5 Basic'>Cloudera CDH5 Basic</a>\n      <a class='redhat-app' href='#' data-key='cloudera-cdh5-basic-hbase' data-name='Cloudera CDH5 Basic + HBase'>Cloudera CDH5 Basic + HBase</a>\n      <a class='redhat-app' href='#' data-key='cloudera-enterprise-data-hub' data-name='Cloudera Enterprise Data Hub'>Cloudera Enterprise Data Hub</a>\n      <a class='redhat-app' href='#' data-key='mysql' data-name='MySQL'>MySQL</a>\n      <a class='redhat-app' href='#' data-key='mysql-replication-master-master' data-name='MySQL Replication (Master/Master)'>MySQL Replication (Master/Master)</a>\n      <a class='redhat-app' href='#' data-key='mysql-replication-master-slave' data-name='MySQL Replication (Master/Slave)'>MySQL Replication (Master/Slave)</a>\n      <a class='redhat-app' href='#' data-key='tomcat' data-name='Tomcat'>Tomcat</a>\n      <a class='windows-app' href='#' data-key='active-directory' data-name='Active Directory'>Active Directory</a>\n      <a class='windows-app' href='#' data-key='ms-sql' data-name='MS SQL'>MS SQL</a>\n      <a class='windows-app' href='#' data-key='iis' data-name='MS IIS'>MS IIS</a>\n      <!-- %a{:href => \"#\", data: {key: \"ssl\", name: \"GeoTrust Quick SSL Certificate\"}} GeoTrust Quick SSL Certificate -->\n    </div>\n  </div>\n</td>");
+$o.push("<td class='add-managed-app-cell table-cell' colspan='" + ($e($c(this.colspan))) + "'>\n  <div class='add-managed-button'>\n    <span class='plus'></span>\n    managed application \n    <span class='down-arrow'></span>\n    <div class='managed-app-options'>\n      <a class='redhat-app' href='#' data-key='apache' data-name='Apache HTTP Server'>Apache HTTP Server</a>\n      <a class='redhat-app' href='#' data-key='cloudera-cdh5-basic' data-name='Cloudera CDH5 Basic'>Cloudera CDH5 Basic</a>\n      <a class='redhat-app' href='#' data-key='cloudera-cdh5-basic-hbase' data-name='Cloudera CDH5 Basic + HBase'>Cloudera CDH5 Basic + HBase</a>\n      <a class='redhat-app' href='#' data-key='cloudera-enterprise-data-hub' data-name='Cloudera Enterprise Data Hub'>Cloudera Enterprise Data Hub</a>\n      <a class='redhat-app' href='#' data-key='mysql' data-name='MySQL'>MySQL</a>");
+
+if (this.hasDualMySQL) {
+  $o.push("      <a class='redhat-app' href='#' data-key='mysql-replication-master-master' data-name='MySQL Replication (Master/Master)'>MySQL Replication (Master/Master)</a>\n      <a class='redhat-app' href='#' data-key='mysql-replication-master-slave' data-name='MySQL Replication (Master/Slave)'>MySQL Replication (Master/Slave)</a>");
+}
+
+$o.push("      <a class='redhat-app' href='#' data-key='tomcat' data-name='Tomcat'>Tomcat</a>\n      <a class='windows-app' href='#' data-key='active-directory' data-name='Active Directory'>Active Directory</a>\n      <a class='windows-app' href='#' data-key='ms-sql' data-name='MS SQL'>MS SQL</a>\n      <a class='windows-app' href='#' data-key='iis' data-name='MS IIS'>MS IIS</a>\n      <!-- %a{:href => \"#\", data: {key: \"ssl\", name: \"GeoTrust Quick SSL Certificate\"}} GeoTrust Quick SSL Certificate -->\n    </div>\n  </div>\n</td>");
 
 return $o.join("\n").replace(/\s(\w+)='true'/mg, ' $1').replace(/\s(\w+)='false'/mg, '').replace(/\s(?:id|class)=(['"])(\1)/mg, "");
 
@@ -683,13 +689,30 @@ var AddManagedAppView;
 AddManagedAppView = Backbone.View.extend({
   tagName: "tr",
   className: "table-row add-managed-app-row is-managed",
+  initialize: function() {
+    return this.listenTo(this.model, 'change:managedApps', (function(_this) {
+      return function(model) {
+        return _this.update();
+      };
+    })(this));
+  },
   render: function() {
-    var colspan, template;
-    template = require("../templates/addManagedApp.haml");
-    colspan = this.model.get("type") === "hyperscale" ? 8 : 9;
-    this.$el.html(template({
+    this.template = require("../templates/addManagedApp.haml");
+    this.colspan = this.model.get("type") === "hyperscale" ? 8 : 9;
+    this.$el.html(this.template({
       os: this.model.get("os"),
-      colspan: colspan
+      colspan: this.colspan,
+      hasDualMySQL: this.hasDualMySQL()
+    }));
+    this.$el.addClass("managed-app-add-button-for-server_" + this.model.cid);
+    this.updateOptions();
+    return this;
+  },
+  update: function() {
+    this.$el.html(this.template({
+      os: this.model.get("os"),
+      colspan: this.colspan,
+      hasDualMySQL: this.hasDualMySQL()
     }));
     this.$el.addClass("managed-app-add-button-for-server_" + this.model.cid);
     this.updateOptions();
@@ -699,6 +722,17 @@ AddManagedAppView = Backbone.View.extend({
     return {
       "click a": "addManagedApp"
     };
+  },
+  hasDualMySQL: function() {
+    var managedApps, mysqlInstances;
+    managedApps = this.model.get('managedApps') || [];
+    mysqlInstances = 0;
+    _.each(managedApps, function(app) {
+      if (app.key === 'mysql') {
+        return mysqlInstances = app.instances;
+      }
+    });
+    return mysqlInstances >= 2;
   },
   addManagedApp: function(e) {
     var key, name;

@@ -10,8 +10,9 @@
       %a.redhat-app{:href => "#", data: {key: "cloudera-cdh5-basic-hbase", name: "Cloudera CDH5 Basic + HBase"}} Cloudera CDH5 Basic + HBase
       %a.redhat-app{:href => "#", data: {key: "cloudera-enterprise-data-hub", name: "Cloudera Enterprise Data Hub"}} Cloudera Enterprise Data Hub
       %a.redhat-app{:href => "#", data: {key: "mysql", name: "MySQL"}} MySQL
-      %a.redhat-app{:href => "#", data: {key: "mysql-replication-master-master", name: "MySQL Replication (Master/Master)"}} MySQL Replication (Master/Master)
-      %a.redhat-app{:href => "#", data: {key: "mysql-replication-master-slave", name: "MySQL Replication (Master/Slave)"}} MySQL Replication (Master/Slave)
+      - if @hasDualMySQL
+        %a.redhat-app{:href => "#", data: {key: "mysql-replication-master-master", name: "MySQL Replication (Master/Master)"}} MySQL Replication (Master/Master)
+        %a.redhat-app{:href => "#", data: {key: "mysql-replication-master-slave", name: "MySQL Replication (Master/Slave)"}} MySQL Replication (Master/Slave)
       %a.redhat-app{:href => "#", data: {key: "tomcat", name: "Tomcat"}} Tomcat
       %a.windows-app{:href => "#", data: {key: "active-directory", name: "Active Directory"}} Active Directory
       %a.windows-app{:href => "#", data: {key: "ms-sql", name: "MS SQL"}} MS SQL
