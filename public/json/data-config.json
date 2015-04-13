@@ -1,0 +1,12 @@
+{
+  "name": "CLC Pricing Estimator",
+  "pricingRootPath": "/prices/",
+  "datacentersUrl": "/prices/data-center-prices.json",
+  "currencyUrl": "./json/exchange-rates.json",
+  "defaultCurrency": {
+    "id": "USD",
+    "symbol": "$",
+    "rate": 1.0
+  },
+  "supportPricingUrl": "./json/support-pricing.json"
+}

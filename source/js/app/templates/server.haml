@@ -43,5 +43,5 @@
 
 %td.table-cell.price-cell
   %span.price
-    = accounting.formatMoney(@model.totalPricePerMonth())
+    = accounting.formatMoney(@model.totalPricePerMonth(), {"symbol": @app.currency.symbol })
   %a.remove-button{href: "#"} X

@@ -25,6 +25,10 @@ ServerModel = Backbone.Model.extend
     @initPricing()
     @.set("managedApps", [])
 
+  parse: (data) ->
+    # console.log 'Server Model', data
+    return data
+
   initPricing: ->
     pricing = @.get("pricingMap").attributes.options
     @.set("pricing", pricing)
@@ -61,15 +65,19 @@ ServerModel = Backbone.Model.extend
     type = @.get("type")
     @.get("storage") * @.get("pricing").storage[type] * @.get("quantity")
 
-  managedAppPricePerMonth: (managedAppKey, instances) ->
+  managedAppPricePerMonth: (managedAppKey, instances, softwareId) ->
+    softwarePricing = @.get('pricing').software
+    software_selection = _.findWhere(softwarePricing, {name: softwareId})
+    appSoftwareHourlyPrice = if software_selection? then software_selection.price else 0
+    appSoftwareHourlyPrice *= @.get("cpu") || 1
     appPerHour = @.get("pricing")[managedAppKey]
-    return @priceForMonth(appPerHour) * @.get("quantity") * instances
+    return ((@priceForMonth(appPerHour) + @priceForMonth(appSoftwareHourlyPrice)) * @.get("quantity")) * instances
 
   managedAppsPricePerMonth: ->
     apps = @.get("managedApps")
     total = 0
     _.each apps, (app) =>
-      total += @managedAppPricePerMonth(app.key, app.instances)
+      total += @managedAppPricePerMonth(app.key, app.instances, app.softwareId)
     return total
 
   totalOSPricePerMonth: ->
@@ -78,10 +86,12 @@ ServerModel = Backbone.Model.extend
   totalPricePerMonth: ->
     utilityPerMonth = 0
     utilityPerMonth = @priceForMonth(@utilityPricePerHourTotal())
-    return utilityPerMonth + @storagePricePerMonth()
+    total = utilityPerMonth + @storagePricePerMonth()
+    return total
 
   totalPricePerMonthWithApps: ->
-    return @totalPricePerMonth + @managedAppsPricePerMonth()
+    total = @totalPricePerMonth + @managedAppsPricePerMonth()
+    return total
 
   priceForMonth: (hourlyPrice) ->
     switch @.get("usagePeriod")
@@ -96,16 +106,25 @@ ServerModel = Backbone.Model.extend
 
   addManagedApp: (key, name) ->
     apps = @.get("managedApps")
-    apps.push {"key": key, "name": name, "instances": 1}
-    @.set("managedApps", apps)
-    @.trigger "change", @
-    @.trigger "change:managedApps", @
+    exists = false
+    _.each apps, (app) ->
+      if app.key is key
+        exists = true
+    if exists is false
+      if key is 'ms-sql'
+        apps.push {"key": key, "name": name, "instances": 1, "softwareId": "Microsoft SQL Server Standard Edition"}
+      else
+        apps.push {"key": key, "name": name, "instances": 1, "softwareId": ""}
+      @.set("managedApps", apps)
+      @.trigger "change", @
+      @.trigger "change:managedApps", @
 
-  updateManagedAppIntances: (key, quantity) ->
+  updateManagedAppIntances: (key, quantity, softwareId) ->
     apps = @.get("managedApps")
     _.each apps, (app) ->
       if app.key is key
         app.instances = quantity
+        app.softwareId = softwareId
     @.set("managedApps", apps)
     @.trigger "change:managedApps", @
 

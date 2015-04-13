@@ -7,7 +7,9 @@ ServersView = Backbone.View.extend
     "click .add-button": "addServer"
 
   initialize: (options) ->
-    @options = options || {};
+    @options = options || {}
+
+    @app = @options.app
 
     @collection.on "add", (model, collection, options) =>
       @onServerAdded(model)
@@ -34,7 +36,7 @@ ServersView = Backbone.View.extend
     @collection.add(pricingMap: @options.pricingMap, type: type)
   
   onServerAdded: (model) ->
-    serverView = new ServerView(model: model)
+    serverView = new ServerView(model: model, app: @app, parentView: @)
     @serverViews[model.cid] = serverView
     $(".table", @$el).append serverView.render().el
     @updateSubtotal()
@@ -44,6 +46,9 @@ ServersView = Backbone.View.extend
     @updateSubtotal()
 
   updateSubtotal: ->
-    $(".subtotal", @$el).html accounting.formatMoney(@collection.subtotal())
+    newSubtotal = accounting.formatMoney(@collection.subtotal(),
+      symbol: @app.currency.symbol
+    )
+    $(".subtotal", @$el).html newSubtotal
 
 module.exports = ServersView

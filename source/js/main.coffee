@@ -17,7 +17,7 @@ PricingMapsCollection = require './app/collections/PricingMapsCollection.coffee'
 ServersCollection = require './app/collections/ServersCollection.coffee'
 ServicesCollection = require './app/collections/ServicesCollection.coffee'
 ServiceModel = require './app/models/ServiceModel.coffee'
-Utils = require './app/Utils.coffee'
+Utils = require('./app/Utils.coffee')
 
 #--------------------------------------------------------
 # Init
@@ -28,14 +28,30 @@ App =
 
   init: ->
     _.extend(@, Backbone.Events)
-    
-    datacenter = Utils.getUrlParameter("datacenter") 
+
+    datacenter = Utils.getUrlParameter("datacenter")
+    datasource = Utils.getUrlParameter("datasource")
+    currencyId = Utils.getUrlParameter("currency")
+
     dc = datacenter || "NY1"
+    ds = datasource || "ny1"
+    @currency = currencyId || Config.DEFAULT_CURRENCY.id
 
-    @monthlyTotalView = new MonthlyTotalView(app: @, datacenter: dc)
+    @monthlyTotalView = new MonthlyTotalView
+      app: @
+      datacenter: dc
+      datasource: ds
+      currency: @currency
 
-    @supportView = new SupportView(app: @)
-    @pricingMaps = new PricingMapsCollection([], { datacenter: dc })
+    @supportView = new SupportView
+      app: @
+
+    @pricingMaps = new PricingMapsCollection [],
+      app: @
+      datacenter: dc
+      datasource: ds
+      currency: @currency
+      url: Config.PRICING_ROOT_PATH + "#{ds}.json"
 
     @pricingMaps.on "sync", =>
       @onPricingMapsSynced()
@@ -68,6 +84,7 @@ App =
     @networkingServices.initPricing(@pricingMaps)
 
     @networkingServicesView = new ServicesView
+      app: @
       collection: @networkingServices
       el: "#networking-services"
 
@@ -81,11 +98,15 @@ App =
     @additionalServices.initPricing(@pricingMaps)
 
     @additionalServicesView = new ServicesView
+      app: @
       collection: @additionalServices
       el: "#additional-services"
 
     @additionalServices.on "change", =>
       @updateTotalPrice()
+
+    @.on 'currencyUpdated', =>
+      @additionalServices.initPricing(@pricingMaps)
 
     @initialized = true
     @updateTotalPrice()
@@ -97,6 +118,7 @@ App =
     @bandwidthServices.initPricing(@pricingMaps)
 
     @bandwidthServicesView = new ServicesView
+      app: @
       collection: @bandwidthServices
       el: "#bandwidth"
 
@@ -113,17 +135,18 @@ App =
       @updateTotalPrice()
 
     @serversView = new ServersView
+      app: @
       collection: @serversCollection
       el: "#servers"
       pricingMap: @pricingMaps.forKey("server")
 
   initHyperscaleServers: ->
     @hyperscaleServersCollection = new ServersCollection
-
     @hyperscaleServersCollection.on "change remove add", =>
       @updateTotalPrice()
 
     @hyperscaleServersView = new ServersView
+      app: @
       collection: @hyperscaleServersCollection
       el: "#hyperscale-servers"
       pricingMap: @pricingMaps.forKey("server")
@@ -163,9 +186,13 @@ App =
       @additionalServices.initPricing(@pricingMaps)
       @bandwidthServices.initPricing(@pricingMaps)
 
+
+
 #--------------------------------------------------------
 # DOM Ready
 #--------------------------------------------------------
 
 $ ->
-  App.init()
+  Config.init(App)
+
+  

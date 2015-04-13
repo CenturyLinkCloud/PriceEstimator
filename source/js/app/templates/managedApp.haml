@@ -1,16 +1,30 @@
 %td.table-cell.managed-app-quantity-cell{colspan: "1"}
   %span.managed-app-quantity
 
-  %td.table-cell.managed-app-usage-cell{colspan: "2"}
-    - if @app.key is "mysql" or @app.key is "ms-sql"
-      x
-      %input.number{name: "usage", value: 1, type: "text"}
-      instance(s) / server
-    - else
-      &nbsp;
-
-%td.table-cell.managed-app-cell{colspan: @colspan}
-  Managed #{@app.name}
+%td.table-cell.managed-app-usage-cell{colspan: "2"}
+  - if @app.key is "mysql" or @app.key is "ms-sql"
+    x
+    %input.number{name: "usage", value: 1, type: "text"}
+    instance(s) / server
+  - else
+    &nbsp;
+      
+- if @app.key is "ms-sql"
+  %td.table-cell.managed-app-cell{colspan: @colspan}
+    Managed #{@app.name} 
+    %br
+      %small
+        %span.managed-app-subnote.managed-app-subnote--select with MS SQL Server Standard Edition License (per vCPU)
+    %br
+    %select.software.hidden{name: "softwareId"}
+      - for soft in @software_options
+        - if soft.name is @app.softwareId
+          %option{value: soft.name, selected: true } =soft.name
+        - else
+          %option{value: soft.name} =soft.name
+- else
+  %td.table-cell.managed-app-cell{colspan: @colspan}
+    Managed #{@app.name}
 
 %td.table-cell.price-cell{colspan: "1"}
   %span.price

@@ -7,7 +7,7 @@ ServicesCollection = Backbone.Collection.extend
     return @.options.collectionUrl
 
   initialize: (options) ->
-    @options = options || {};
+    @options = options || {}
     @fetch()
 
   initPricing: (pricingMaps) ->

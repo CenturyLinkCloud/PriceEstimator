@@ -8,14 +8,16 @@ ServiceView = Backbone.View.extend
     "input input": "onFormChanged"
 
   initialize: (options) ->
-    @options = options || {};
+    @options = options || {}
+
+    @app = @options.app
 
     @model.on "change", (model) =>
       @onModelChange(model)
 
   render: ->
     template = require("../templates/service.haml")
-    @$el.html template(model: @model)
+    @$el.html template(model: @model, app: @app)
     @$el.attr("id", @model.cid)
     @$el.addClass(@model.get("key"))
     @$el.addClass("disabled") if @options.disabled
@@ -33,8 +35,16 @@ ServiceView = Backbone.View.extend
     @model.set(data)
 
   onModelChange: (model) ->
-    $(".cost", @$el).html(accounting.formatMoney(model.get("pricing")))
-    $(".price", @$el).html(accounting.formatMoney(model.totalPricePerMonth()))
+    newCost = accounting.formatMoney(model.get("pricing"),
+      symbol: @app.currency.symbol
+    )
+    newPrice = accounting.formatMoney(model.totalPricePerMonth(),
+      symbol: @app.currency.symbol
+    )
+    cost = newCost
+    cost += "&nbsp;<span><sup>*</sup></span>" if model.get("hasSetupFee")
+    $(".cost", @$el).html(cost)
+    $(".price", @$el).html(newPrice)
     $(".quantity", @$el).html(model.get("quantity"))
     if model.get("quantity") > 0
       @$el.addClass("active")

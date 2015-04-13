@@ -29,7 +29,11 @@
 
         x
         %span.cost
-          = accounting.formatMoney @model.get("pricing")
+          = accounting.formatMoney(@model.get("pricing"), {"symbol": @app.currency.symbol } )
+          - if @model.get("hasSetupFee")
+            %span 
+              %sup
+                *
 
     %span.price
-      = accounting.formatMoney @model.totalPricePerMonth
+      = accounting.formatMoney(@model.totalPricePerMonth, { "symbol": @app.currency.symbol } )
