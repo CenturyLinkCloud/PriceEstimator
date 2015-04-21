@@ -212,6 +212,11 @@ ServersCollection = Backbone.Collection.extend({
       return memo + server.totalOSPricePerMonth();
     }, 0);
   },
+  managedTotal: function() {
+    return _.reduce(this.models, function(memo, server) {
+      return memo + server.managedAppsPricePerMonth() + server.managedBasePricePerMonth();
+    }, 0);
+  },
   initPricing: function(pricingMaps) {
     return this.each((function(_this) {
       return function(server) {
@@ -350,6 +355,9 @@ ServerModel = Backbone.Model.extend({
     } else {
       return 0;
     }
+  },
+  managedBasePricePerMonth: function() {
+    return this.priceForMonth(this.managedBasePricePerHour());
   },
   utilityPricePerHourPerInstance: function() {
     return this.totalCpuPerHour() + this.totalMemoryPerHour() + this.totalOSPerHour() + this.managedBasePricePerHour();
@@ -1405,6 +1413,7 @@ SupportView = Backbone.View.extend({
       return 0;
     }
     amount = this.options.app.totalPrice - this.options.app.oSSubtotal || 0;
+    amount -= this.options.app.managedTotal;
     ranges = this.supportPricing.ranges;
     percentages = this.supportPricing.percentages;
     multipliers = _.map(ranges, function(range, index) {
@@ -1614,6 +1623,7 @@ App = {
     }
     this.totalPrice = this.serversCollection.subtotal() + this.hyperscaleServersCollection.subtotal() + this.networkingServices.subtotal() + this.additionalServices.subtotal() + this.bandwidthServices.subtotal();
     this.oSSubtotal = this.serversCollection.oSSubtotal() + this.hyperscaleServersCollection.oSSubtotal();
+    this.managedTotal = this.serversCollection.managedTotal();
     this.totalPriceWithSupport = this.totalPrice + this.supportView.updateSubtotal();
     return this.trigger("totalPriceUpdated");
   },

@@ -164,6 +164,8 @@ App =
 
     @oSSubtotal = @serversCollection.oSSubtotal() + @hyperscaleServersCollection.oSSubtotal()
 
+    @managedTotal = @serversCollection.managedTotal()
+
     @totalPriceWithSupport = @totalPrice + @supportView.updateSubtotal()
 
     @trigger("totalPriceUpdated")
