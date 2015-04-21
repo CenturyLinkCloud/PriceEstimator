@@ -17,7 +17,9 @@ Config =
       @CURRENCY_URL = config.currencyUrl
       @SUPPORT_PRICING_URL = config.supportPricingUrl
       @DEFAULT_CURRENCY = config.defaultCurrency
-      return app.init()
+      $.getJSON @CURRENCY_URL, (currencyData) ->
+        app.currencyData = currencyData
+        return app.init()
     )
   
 

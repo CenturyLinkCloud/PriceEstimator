@@ -31,11 +31,12 @@ App =
 
     datacenter = Utils.getUrlParameter("datacenter")
     datasource = Utils.getUrlParameter("datasource")
-    currencyId = Utils.getUrlParameter("currency")
+    currencyId = Utils.getUrlParameter("currency") || Config.DEFAULT_CURRENCY.id
 
     dc = datacenter || "NY1"
     ds = datasource || "ny1"
-    @currency = currencyId || Config.DEFAULT_CURRENCY.id
+
+    @currency = @currencyData['USD'][currencyId]
 
     @monthlyTotalView = new MonthlyTotalView
       app: @
@@ -52,6 +53,9 @@ App =
       datasource: ds
       currency: @currency
       url: Config.PRICING_ROOT_PATH + "#{ds}.json"
+
+    @currenyPricingMaps = []
+
 
     @pricingMaps.on "sync", =>
       @onPricingMapsSynced()

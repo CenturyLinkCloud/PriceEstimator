@@ -22,7 +22,10 @@ Config = {
         _this.CURRENCY_URL = config.currencyUrl;
         _this.SUPPORT_PRICING_URL = config.supportPricingUrl;
         _this.DEFAULT_CURRENCY = config.defaultCurrency;
-        return app.init();
+        return $.getJSON(_this.CURRENCY_URL, function(currencyData) {
+          app.currencyData = currencyData;
+          return app.init();
+        });
       };
     })(this));
   }
@@ -72,24 +75,8 @@ PricingMapsCollection = Backbone.Collection.extend({
     this.currencyId = options.currency;
     this.app = options.app;
     this.url = options.url;
-    return $.ajax({
-      url: Config.CURRENCY_URL,
-      type: "GET",
-      success: (function(_this) {
-        return function(data) {
-          _this.currency = data[Config.DEFAULT_CURRENCY.id][options.currency];
-          _this.app.currency = window.currency = _this.currency;
-          return _this.fetch();
-        };
-      })(this),
-      error: (function(_this) {
-        return function(error) {
-          _this.currency = Config.DEFAULT_CURRENCY;
-          _this.app.currency = window.currency = _this.currency;
-          return _this.fetch();
-        };
-      })(this)
-    });
+    this.currency = options.currency;
+    return this.fetch();
   },
   parse: function(data) {
     return this._parsePricingData(data);
@@ -879,17 +866,15 @@ MonthlyTotalView = Backbone.View.extend({
         });
       };
     })(this));
-    $.getJSON(Config.CURRENCY_URL, (function(_this) {
-      return function(currencies) {
-        return $.each(currencies["USD"], function(index, currency) {
-          var $option, label, rate, selected, symbol;
-          label = currency.id;
-          rate = currency.rate;
-          symbol = currency.symbol;
-          selected = options.currency === label ? "selected" : "";
-          $option = $("<option value='" + label + "' " + selected + ">" + label + "</option>").attr('data-currency-symbol', symbol).attr('data-currency-rate', rate);
-          return $(".currency", _this.$el).append($option);
-        });
+    $.each(this.app.currencyData['USD'], (function(_this) {
+      return function(index, currency) {
+        var $option, label, rate, selected, symbol;
+        label = currency.id;
+        rate = currency.rate;
+        symbol = currency.symbol;
+        selected = options.currency.id === label ? "selected" : "";
+        $option = $("<option value='" + label + "' " + selected + ">" + label + "</option>").attr('data-currency-symbol', symbol).attr('data-currency-rate', rate);
+        return $(".currency", _this.$el).append($option);
       };
     })(this));
     mediaQueryList = window.matchMedia('print');
@@ -1482,10 +1467,10 @@ App = {
     _.extend(this, Backbone.Events);
     datacenter = Utils.getUrlParameter("datacenter");
     datasource = Utils.getUrlParameter("datasource");
-    currencyId = Utils.getUrlParameter("currency");
+    currencyId = Utils.getUrlParameter("currency") || Config.DEFAULT_CURRENCY.id;
     dc = datacenter || "NY1";
     ds = datasource || "ny1";
-    this.currency = currencyId || Config.DEFAULT_CURRENCY.id;
+    this.currency = this.currencyData['USD'][currencyId];
     this.monthlyTotalView = new MonthlyTotalView({
       app: this,
       datacenter: dc,
@@ -1502,6 +1487,7 @@ App = {
       currency: this.currency,
       url: Config.PRICING_ROOT_PATH + ("" + ds + ".json")
     });
+    this.currenyPricingMaps = [];
     return this.pricingMaps.on("sync", (function(_this) {
       return function() {
         return _this.onPricingMapsSynced();

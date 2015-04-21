@@ -14,17 +14,20 @@ PricingMapsCollection = Backbone.Collection.extend
     @currencyId = options.currency
     @app = options.app
     @url = options.url
-    $.ajax
-      url: Config.CURRENCY_URL
-      type: "GET"
-      success: (data) =>
-        @currency = data[Config.DEFAULT_CURRENCY.id][options.currency]
-        @app.currency = window.currency = @currency
-        return @fetch()
-      error: (error) =>
-        @currency = Config.DEFAULT_CURRENCY
-        @app.currency = window.currency = @currency
-        return @fetch()
+    @currency = options.currency
+    # @app.currency = window.currency = @currency
+    @fetch()
+    # $.ajax
+    #   url: Config.CURRENCY_URL
+    #   type: "GET"
+    #   success: (data) =>
+    #     @currency = data[Config.DEFAULT_CURRENCY.id][options.currency]
+    #     @app.currency = window.currency = @currency
+    #     return @fetch()
+    #   error: (error) =>
+    #     @currency = Config.DEFAULT_CURRENCY
+    #     @app.currency = window.currency = @currency
+    #     return @fetch()
 
 
   parse: (data) ->

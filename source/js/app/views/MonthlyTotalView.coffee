@@ -28,16 +28,27 @@ MonthlyTotalView = Backbone.View.extend
           .attr('data-pricing-map', pricingSheetHref)
         $(".datacenter", @$el).append($option)
 
-    $.getJSON Config.CURRENCY_URL, (currencies) =>
-      $.each currencies["USD"], (index, currency) =>
-        label = currency.id
-        rate = currency.rate
-        symbol = currency.symbol
-        selected = if options.currency is label then "selected" else ""
-        $option = $("<option value='#{label}' #{selected}>#{label}</option>")
-            .attr('data-currency-symbol', symbol)
-            .attr('data-currency-rate', rate)
-        $(".currency", @$el).append($option)
+    $.each @app.currencyData['USD'], (index, currency) =>
+      label = currency.id
+      rate = currency.rate
+      symbol = currency.symbol
+      selected = if options.currency.id is label then "selected" else ""
+      $option = $("<option value='#{label}' #{selected}>#{label}</option>")
+          .attr('data-currency-symbol', symbol)
+          .attr('data-currency-rate', rate)
+      $(".currency", @$el).append($option)
+
+
+    # $.getJSON Config.CURRENCY_URL, (currencies) =>
+    #   $.each currencies["USD"], (index, currency) =>
+    #     label = currency.id
+    #     rate = currency.rate
+    #     symbol = currency.symbol
+    #     selected = if options.currency is label then "selected" else ""
+    #     $option = $("<option value='#{label}' #{selected}>#{label}</option>")
+    #         .attr('data-currency-symbol', symbol)
+    #         .attr('data-currency-rate', rate)
+    #     $(".currency", @$el).append($option)
 
     mediaQueryList = window.matchMedia('print')
     mediaQueryList.addListener (mql) =>
