@@ -51,7 +51,7 @@ SupportView = Backbone.View.extend
     return 0 if @currentPlan is "developer"
 
     amount = @options.app.totalPrice - @options.app.oSSubtotal || 0
-
+    amount -= @options.app.managedTotal
     ranges = @supportPricing.ranges
     percentages = @supportPricing.percentages
 

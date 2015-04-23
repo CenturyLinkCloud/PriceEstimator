@@ -16,6 +16,11 @@ ServersCollection = Backbone.Collection.extend
       memo + server.totalOSPricePerMonth()
     , 0
 
+  managedTotal: ->
+    _.reduce @models, (memo, server) ->
+      memo + server.managedAppsPricePerMonth() + server.managedBasePricePerMonth()
+    , 0
+
   initPricing: (pricingMaps) ->
     @each (server) =>
       pricingMap = pricingMaps.forKey("server")

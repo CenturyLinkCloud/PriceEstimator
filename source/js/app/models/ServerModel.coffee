@@ -55,6 +55,9 @@ ServerModel = Backbone.Model.extend
     else
       return 0
 
+  managedBasePricePerMonth: ->
+    return @priceForMonth(@managedBasePricePerHour())
+
   utilityPricePerHourPerInstance: ->
     @totalCpuPerHour() + @totalMemoryPerHour() + @totalOSPerHour() + @managedBasePricePerHour()
 
