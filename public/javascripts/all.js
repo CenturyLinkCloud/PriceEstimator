@@ -23,6 +23,7 @@ Config = {
         _this.SUPPORT_PRICING_URL = config.supportPricingUrl;
         _this.DEFAULT_CURRENCY = config.defaultCurrency;
         return $.getJSON(_this.CURRENCY_URL, function(currencyData) {
+          console.log('currencyData', currencyData);
           app.currencyData = currencyData;
           return app.init();
         });
@@ -97,7 +98,7 @@ PricingMapsCollection = Backbone.Collection.extend({
         if (section.name === "Software") {
           _.each(section.products, function(product) {
             var item, software_price;
-            software_price = product.hourly * _this.currency.rate;
+            software_price = product.hourly;
             item = {
               name: product.name,
               price: software_price
@@ -113,24 +114,21 @@ PricingMapsCollection = Backbone.Collection.extend({
               if (ids[0] === 'server') {
                 if (ids[1] === 'os') {
                   price = product.hourly || 0;
-                  return server.options[ids[1]][ids[2]] = price * _this.currency.rate;
+                  return server.options[ids[1]][ids[2]] = price;
                 } else if (ids[1] === 'storage') {
                   price = product.hourly * HOURS_IN_MONTH;
-                  return server.options[ids[1]][ids[2]] = price * _this.currency.rate;
+                  return server.options[ids[1]][ids[2]] = price;
                 } else {
                   price = product.hourly || product.monthly;
-                  return server.options[ids[1]] = price * _this.currency.rate;
+                  return server.options[ids[1]] = price;
                 }
               } else if (ids[0] === 'networking-services') {
                 if (ids[1] === 'shared-load-balancer') {
                   price = product.hourly * HOURS_IN_MONTH;
-                  price *= _this.currency.rate;
                 } else if (ids[1] === 'dedicated-load-balancer-200' || ids[1] === 'dedicated-load-balancer-1000') {
                   price = product.monthly;
-                  price *= _this.currency.rate;
                 } else {
                   price = product.monthly;
-                  price *= _this.currency.rate;
                 }
                 service = {
                   type: ids[1],
@@ -140,10 +138,10 @@ PricingMapsCollection = Backbone.Collection.extend({
                 return additional_services.push(service);
               } else if (ids[0] === 'managed-apps') {
                 price = product.hourly;
-                return server.options[ids[1]] = price * _this.currency.rate;
+                return server.options[ids[1]] = price;
               } else if (ids[0] === 'networking') {
                 if (ids[1] === 'bandwidth') {
-                  price = product.monthly * _this.currency.rate;
+                  price = product.monthly;
                   service = {
                     type: 'bandwidth',
                     price: price,
@@ -151,7 +149,7 @@ PricingMapsCollection = Backbone.Collection.extend({
                   };
                   return additional_services.push(service);
                 } else if (ids[1] === 'object-storage') {
-                  price = product.monthly * _this.currency.rate;
+                  price = product.monthly;
                   enabled = (ids[2] != null) && ids[2] === 'enabled';
                   service = {
                     type: 'object-storage',
@@ -617,7 +615,7 @@ if (this.model.get("type") === "hyperscale") {
 
 $o.push("</td>\n<td class='price-cell table-cell'>\n  <span class='price'>");
 
-$o.push("    " + $e($c(accounting.formatMoney(this.model.totalPricePerMonth(), {
+$o.push("    " + $e($c(accounting.formatMoney(this.model.totalPricePerMonth() * this.app.currency.rate, {
   "symbol": this.app.currency.symbol
 }))));
 
@@ -670,7 +668,7 @@ if (this.model.get("input") === "slider") {
   $o.push("      </span>\n      GB\n    </div>\n    <input class='range-slider' type='range' name='quantity' min='" + ($e($c(0))) + "' max='" + ($e($c(10000))) + "' value='" + ($e($c(this.model.get("quantity")))) + "'>");
 } else {
   $o.push("    <span class='select'></span>\n    QTY\n      <select name='quantity'>\n        <option>0</option>\n        <option>1</option>\n        <option>2</option>\n        <option>3</option>\n        <option>4</option>\n        <option>5</option>\n      </select>\n      x\n      <span class='cost'>");
-  $o.push("        " + $e($c(accounting.formatMoney(this.model.get("pricing"), {
+  $o.push("        " + $e($c(accounting.formatMoney(this.model.get("pricing") * this.app.currency.rate, {
     "symbol": this.app.currency.symbol
   }))));
   if (this.model.get("hasSetupFee")) {
@@ -681,7 +679,7 @@ if (this.model.get("input") === "slider") {
 
 $o.push("    <span class='price'>");
 
-$o.push("      " + $e($c(accounting.formatMoney(this.model.totalPricePerMonth, {
+$o.push("      " + $e($c(accounting.formatMoney(this.model.totalPricePerMonth() * this.app.currency.rate, {
   "symbol": this.app.currency.symbol
 }))));
 
@@ -807,14 +805,15 @@ ManagedAppView = Backbone.View.extend({
     return this.model.set("managedApps", apps);
   },
   updateQuantityAndPrice: function() {
-    var instances, price, quantity;
+    var instances, newPrice, price, quantity;
     quantity = this.model.get("quantity");
     price = this.model.managedAppPricePerMonth(this.options.app.key, this.options.app.instances, this.options.app.softwareId);
     instances = this.options.app.instances || 1;
     $(".managed-app-quantity", this.$el).html(quantity);
-    $(".price", this.$el).html(accounting.formatMoney(price), {
+    newPrice = accounting.formatMoney(price * this.options.mainApp.currency.rate, {
       symbol: this.options.mainApp.currency.symbol
     });
+    $(".price", this.$el).html(newPrice);
     return $("input[name=usage]", this.$el).val(instances);
   },
   onFormChanged: function() {
@@ -922,8 +921,9 @@ MonthlyTotalView = Backbone.View.extend({
     })(this));
   },
   updateTotal: function() {
-    var newTotal;
-    newTotal = accounting.formatMoney(this.app.totalPriceWithSupport, {
+    var newTotal, total;
+    total = this.app.totalPriceWithSupport * this.app.currency.rate;
+    newTotal = accounting.formatMoney(total, {
       symbol: this.app.currency.symbol
     });
     return $(".price", this.$el).html(newTotal);
@@ -948,17 +948,12 @@ MonthlyTotalView = Backbone.View.extend({
     return window.top.location.href = href;
   },
   changeCurrency: function(e) {
-    var $datacenters, $selected_datacenter, $target, currency, datacenter, datasource, href;
-    $datacenters = $(".datacenter", this.$el);
-    datacenter = $datacenters.val();
-    $selected_datacenter = $datacenters.find('option:selected');
-    datasource = $selected_datacenter.attr('data-pricing-map') || 'default';
+    var $target, currency_id;
     $target = $(e.currentTarget);
-    currency = $target.val() || Config.DEFAULT_CURRENCY.id;
-    href = window.top.location.href;
-    href = href.replace(/\?datacenter=.*/, "");
-    href = "" + href + "?datacenter=" + datacenter + "&datasource=" + datasource + "&currency=" + currency;
-    return window.top.location.href = href;
+    currency_id = $target.val() || Config.DEFAULT_CURRENCY.id;
+    this.app.currency = this.app.currencyData['USD'][currency_id];
+    this.app.trigger("currencyChange");
+    return false;
   }
 });
 
@@ -1000,9 +995,14 @@ ServerView = Backbone.View.extend({
         return _this.onManagedChanged(model);
       };
     })(this));
-    return this.listenTo(this.model, 'change:os', (function(_this) {
+    this.listenTo(this.model, 'change:os', (function(_this) {
       return function(model) {
         return model.set('managedApps', []);
+      };
+    })(this));
+    return this.app.on("currencyChange", (function(_this) {
+      return function() {
+        return _this.onModelChange(_this.model);
       };
     })(this));
   },
@@ -1114,8 +1114,9 @@ ServerView = Backbone.View.extend({
     })(this));
   },
   onModelChange: function(model) {
-    var newTotal;
-    newTotal = accounting.formatMoney(model.totalPricePerMonth(), {
+    var newTotal, total;
+    total = model.totalPricePerMonth() * this.app.currency.rate;
+    newTotal = accounting.formatMoney(total, {
       symbol: this.app.currency.symbol
     });
     $(".price", this.$el).html(newTotal);
@@ -1177,6 +1178,11 @@ ServersView = Backbone.View.extend({
         return _this.updateSubtotal();
       };
     })(this));
+    this.app.on("currencyChange", (function(_this) {
+      return function() {
+        return _this.updateSubtotal();
+      };
+    })(this));
     this.updateSubtotal();
     this.serverViews = [];
     if (this.options.hyperscale) {
@@ -1213,8 +1219,9 @@ ServersView = Backbone.View.extend({
     return this.updateSubtotal();
   },
   updateSubtotal: function() {
-    var newSubtotal;
-    newSubtotal = accounting.formatMoney(this.collection.subtotal(), {
+    var newSubtotal, subTotal;
+    subTotal = this.collection.subtotal() * this.app.currency.rate;
+    newSubtotal = accounting.formatMoney(subTotal, {
       symbol: this.app.currency.symbol
     });
     return $(".subtotal", this.$el).html(newSubtotal);
@@ -1237,9 +1244,14 @@ ServiceView = Backbone.View.extend({
   initialize: function(options) {
     this.options = options || {};
     this.app = this.options.app;
-    return this.model.on("change", (function(_this) {
+    this.model.on("change", (function(_this) {
       return function(model) {
         return _this.onModelChange(model);
+      };
+    })(this));
+    return this.app.on("currencyChange", (function(_this) {
+      return function() {
+        return _this.onModelChange(_this.model);
       };
     })(this));
   },
@@ -1273,10 +1285,10 @@ ServiceView = Backbone.View.extend({
   },
   onModelChange: function(model) {
     var cost, newCost, newPrice;
-    newCost = accounting.formatMoney(model.get("pricing"), {
+    newCost = accounting.formatMoney(model.get("pricing") * this.app.currency.rate, {
       symbol: this.app.currency.symbol
     });
-    newPrice = accounting.formatMoney(model.totalPricePerMonth(), {
+    newPrice = accounting.formatMoney(model.totalPricePerMonth() * this.app.currency.rate, {
       symbol: this.app.currency.symbol
     });
     cost = newCost;
@@ -1319,6 +1331,11 @@ ServicesView = Backbone.View.extend({
         return _this.updateSubtotal();
       };
     })(this));
+    this.app.on("currencyChange", (function(_this) {
+      return function() {
+        return _this.updateSubtotal();
+      };
+    })(this));
     this.addServices();
     return this.updateSubtotal();
   },
@@ -1337,8 +1354,9 @@ ServicesView = Backbone.View.extend({
     })(this));
   },
   updateSubtotal: function() {
-    var newSubtotal;
-    newSubtotal = accounting.formatMoney(this.collection.subtotal(), {
+    var newSubtotal, subTotal;
+    subTotal = this.collection.subtotal() * this.app.currency.rate;
+    newSubtotal = accounting.formatMoney(subTotal, {
       symbol: this.app.currency.symbol
     });
     return $(".subtotal", this.$el).html(newSubtotal);
@@ -1426,7 +1444,7 @@ SupportView = Backbone.View.extend({
   updateSubtotal: function() {
     var newSubtotal;
     this.supportPrice = this.calculateSupportBill();
-    newSubtotal = accounting.formatMoney(this.supportPrice, {
+    newSubtotal = accounting.formatMoney(this.supportPrice * this.options.app.currency.rate, {
       symbol: this.options.app.currency.symbol
     });
     $(".subtotal", this.$el).html(newSubtotal);
@@ -1488,9 +1506,14 @@ App = {
       url: Config.PRICING_ROOT_PATH + ("" + ds + ".json")
     });
     this.currenyPricingMaps = [];
-    return this.pricingMaps.on("sync", (function(_this) {
+    this.pricingMaps.on("sync", (function(_this) {
       return function() {
         return _this.onPricingMapsSynced();
+      };
+    })(this));
+    return this.on("currencyChange", (function(_this) {
+      return function() {
+        return _this.updateTotalPrice();
       };
     })(this));
   },
@@ -1547,11 +1570,6 @@ App = {
     this.additionalServices.on("change", (function(_this) {
       return function() {
         return _this.updateTotalPrice();
-      };
-    })(this));
-    this.on('currencyUpdated', (function(_this) {
-      return function() {
-        return _this.additionalServices.initPricing(_this.pricingMaps);
       };
     })(this));
     this.initialized = true;

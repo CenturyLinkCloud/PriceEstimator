@@ -56,11 +56,12 @@ App =
 
     @currenyPricingMaps = []
 
-
     @pricingMaps.on "sync", =>
       @onPricingMapsSynced()
 
-
+    @.on "currencyChange", =>
+      @updateTotalPrice()
+      
   onPricingMapsSynced: ->
     @initServers()
     @initHyperscaleServers()
@@ -108,9 +109,6 @@ App =
 
     @additionalServices.on "change", =>
       @updateTotalPrice()
-
-    @.on 'currencyUpdated', =>
-      @additionalServices.initPricing(@pricingMaps)
 
     @initialized = true
     @updateTotalPrice()

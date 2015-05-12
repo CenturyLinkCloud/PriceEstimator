@@ -20,6 +20,9 @@ ServersView = Backbone.View.extend
     @collection.on "change", =>
       @updateSubtotal()
 
+    @app.on "currencyChange", =>
+      @updateSubtotal()
+
     @updateSubtotal()
 
     @serverViews = []
@@ -46,7 +49,8 @@ ServersView = Backbone.View.extend
     @updateSubtotal()
 
   updateSubtotal: ->
-    newSubtotal = accounting.formatMoney(@collection.subtotal(),
+    subTotal = @collection.subtotal() * @app.currency.rate
+    newSubtotal = accounting.formatMoney(subTotal,
       symbol: @app.currency.symbol
     )
     $(".subtotal", @$el).html newSubtotal
