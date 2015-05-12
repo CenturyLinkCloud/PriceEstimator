@@ -15,6 +15,9 @@ ServiceView = Backbone.View.extend
     @model.on "change", (model) =>
       @onModelChange(model)
 
+    @app.on "currencyChange", =>
+      @onModelChange(@model)
+
   render: ->
     template = require("../templates/service.haml")
     @$el.html template(model: @model, app: @app)
@@ -35,10 +38,10 @@ ServiceView = Backbone.View.extend
     @model.set(data)
 
   onModelChange: (model) ->
-    newCost = accounting.formatMoney(model.get("pricing"),
+    newCost = accounting.formatMoney(model.get("pricing") * @app.currency.rate,
       symbol: @app.currency.symbol
     )
-    newPrice = accounting.formatMoney(model.totalPricePerMonth(),
+    newPrice = accounting.formatMoney(model.totalPricePerMonth() * @app.currency.rate,
       symbol: @app.currency.symbol
     )
     cost = newCost

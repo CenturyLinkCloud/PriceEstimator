@@ -78,7 +78,7 @@ SupportView = Backbone.View.extend
 
   updateSubtotal: ->
     @supportPrice = @calculateSupportBill()
-    newSubtotal = accounting.formatMoney(@supportPrice,
+    newSubtotal = accounting.formatMoney(@supportPrice * @options.app.currency.rate,
       symbol: @options.app.currency.symbol
     )
     $(".subtotal", @$el).html newSubtotal

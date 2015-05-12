@@ -14,17 +14,8 @@ PricingMapsCollection = Backbone.Collection.extend
     @currencyId = options.currency
     @app = options.app
     @url = options.url
-    $.ajax
-      url: Config.CURRENCY_URL
-      type: "GET"
-      success: (data) =>
-        @currency = data[Config.DEFAULT_CURRENCY.id][options.currency]
-        @app.currency = window.currency = @currency
-        return @fetch()
-      error: (error) =>
-        @currency = Config.DEFAULT_CURRENCY
-        @app.currency = window.currency = @currency
-        return @fetch()
+    @currency = options.currency
+    @fetch()
 
 
   parse: (data) ->
@@ -41,7 +32,7 @@ PricingMapsCollection = Backbone.Collection.extend
     _.each data, (section) =>
       if section.name is "Software"
         _.each section.products, (product) =>
-          software_price = product.hourly * @currency.rate
+          software_price = product.hourly #* @currency.rate
           item = 
             name: product.name
             price: software_price
@@ -53,23 +44,23 @@ PricingMapsCollection = Backbone.Collection.extend
             if ids[0] is 'server'
               if ids[1] is 'os'
                 price = product.hourly || 0
-                server.options[ids[1]][ids[2]] = price * @currency.rate
+                server.options[ids[1]][ids[2]] = price #* @currency.rate
               else if ids[1] is 'storage'
                 price = product.hourly * HOURS_IN_MONTH
-                server.options[ids[1]][ids[2]] = price * @currency.rate
+                server.options[ids[1]][ids[2]] = price #* @currency.rate
               else
                 price = product.hourly || product.monthly
-                server.options[ids[1]] = price * @currency.rate
+                server.options[ids[1]] = price #* @currency.rate
             else if ids[0] is 'networking-services'
               if ids[1] is 'shared-load-balancer'
                 price = product.hourly * HOURS_IN_MONTH
-                price *= @currency.rate
+                #price *= @currency.rate
               else if ids[1] is 'dedicated-load-balancer-200' or ids[1] is 'dedicated-load-balancer-1000'
                 price = product.monthly
-                price *= @currency.rate
+                #price *= @currency.rate
               else
                 price = product.monthly
-                price *= @currency.rate
+                #price *= @currency.rate
               service = 
                 type: ids[1]
                 price: price
@@ -77,17 +68,17 @@ PricingMapsCollection = Backbone.Collection.extend
               additional_services.push(service)
             else if ids[0] is 'managed-apps'
               price = product.hourly
-              server.options[ids[1]] = price * @currency.rate
+              server.options[ids[1]] = price #* @currency.rate
             else if ids[0] is 'networking'
               if ids[1] is 'bandwidth'
-                price = product.monthly * @currency.rate
+                price = product.monthly #* @currency.rate
                 service =
                   type: 'bandwidth'
                   price: price
                   hasSetupFee: product.setupFee? 
                 additional_services.push(service)
               else if ids[1] is 'object-storage'
-                price = product.monthly * @currency.rate
+                price = product.monthly #* @currency.rate
                 enabled = ids[2]? and ids[2] is 'enabled'
                 service =
                   type: 'object-storage'

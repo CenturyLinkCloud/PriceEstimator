@@ -33,6 +33,9 @@ ServerView = Backbone.View.extend
     @listenTo @model, 'change:os', (model) =>
       model.set('managedApps', [])
 
+    @app.on "currencyChange", =>
+      @onModelChange(@model)
+
   render: ->
     template = require("../templates/server.haml")
     managedDisabled = @model.get("pricingMap").get("options").os["redhat-managed"] is "disabled"
@@ -111,7 +114,8 @@ ServerView = Backbone.View.extend
       @onModelChange(model)
 
   onModelChange: (model) ->
-    newTotal = accounting.formatMoney(model.totalPricePerMonth(),
+    total = model.totalPricePerMonth() * @app.currency.rate
+    newTotal = accounting.formatMoney(total,
       symbol: @app.currency.symbol
     )
     $(".price", @$el).html newTotal

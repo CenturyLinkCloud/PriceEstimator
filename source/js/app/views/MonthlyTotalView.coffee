@@ -28,16 +28,15 @@ MonthlyTotalView = Backbone.View.extend
           .attr('data-pricing-map', pricingSheetHref)
         $(".datacenter", @$el).append($option)
 
-    $.getJSON Config.CURRENCY_URL, (currencies) =>
-      $.each currencies["USD"], (index, currency) =>
-        label = currency.id
-        rate = currency.rate
-        symbol = currency.symbol
-        selected = if options.currency is label then "selected" else ""
-        $option = $("<option value='#{label}' #{selected}>#{label}</option>")
-            .attr('data-currency-symbol', symbol)
-            .attr('data-currency-rate', rate)
-        $(".currency", @$el).append($option)
+    $.each @app.currencyData['USD'], (index, currency) =>
+      label = currency.id
+      rate = currency.rate
+      symbol = currency.symbol
+      selected = if options.currency.id is label then "selected" else ""
+      $option = $("<option value='#{label}' #{selected}>#{label}</option>")
+          .attr('data-currency-symbol', symbol)
+          .attr('data-currency-rate', rate)
+      $(".currency", @$el).append($option)
 
     mediaQueryList = window.matchMedia('print')
     mediaQueryList.addListener (mql) =>
@@ -74,7 +73,8 @@ MonthlyTotalView = Backbone.View.extend
         return false
 
   updateTotal: ->
-    newTotal = accounting.formatMoney(@app.totalPriceWithSupport,
+    total = @app.totalPriceWithSupport * @app.currency.rate
+    newTotal = accounting.formatMoney(total,
       symbol: @app.currency.symbol
     )
     $(".price", @$el).html newTotal
@@ -98,16 +98,11 @@ MonthlyTotalView = Backbone.View.extend
     return window.top.location.href = href
 
   changeCurrency: (e) ->
-    $datacenters = $(".datacenter", @$el)
-    datacenter = $datacenters.val()
-    $selected_datacenter = $datacenters.find('option:selected')
-    datasource = $selected_datacenter.attr('data-pricing-map') || 'default'
     $target = $(e.currentTarget)
-    currency = $target.val() || Config.DEFAULT_CURRENCY.id
-    href = window.top.location.href
-    href = href.replace(/\?datacenter=.*/, "")
-    href = "#{href}?datacenter=#{datacenter}&datasource=#{datasource}&currency=#{currency}"
-    return window.top.location.href = href
+    currency_id = $target.val() || Config.DEFAULT_CURRENCY.id
+    @app.currency = @app.currencyData['USD'][currency_id]
+    @app.trigger "currencyChange"
+    return false
 
 
 module.exports = MonthlyTotalView

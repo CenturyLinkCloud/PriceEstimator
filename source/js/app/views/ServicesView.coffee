@@ -15,6 +15,9 @@ ServicesView = Backbone.View.extend
     @collection.on "change", =>
       @updateSubtotal()
 
+    @app.on "currencyChange", =>
+      @updateSubtotal()
+
     @addServices()
     @updateSubtotal()
 
@@ -25,7 +28,8 @@ ServicesView = Backbone.View.extend
       $(".services", @$el).append serviceView.render().el  
   
   updateSubtotal: ->
-    newSubtotal = accounting.formatMoney(@collection.subtotal(),
+    subTotal = @collection.subtotal() * @app.currency.rate
+    newSubtotal = accounting.formatMoney(subTotal,
       symbol: @app.currency.symbol
     )
     $(".subtotal", @$el).html newSubtotal

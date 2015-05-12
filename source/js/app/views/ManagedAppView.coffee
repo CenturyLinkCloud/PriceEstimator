@@ -35,9 +35,12 @@ ManagedAppView = Backbone.View.extend
     price = @model.managedAppPricePerMonth(@options.app.key, @options.app.instances, @options.app.softwareId)
     instances = @options.app.instances || 1
     $(".managed-app-quantity", @$el).html(quantity)
-    $(".price", @$el).html(accounting.formatMoney(price),
+
+    newPrice = accounting.formatMoney(price * @options.mainApp.currency.rate,
       symbol: @options.mainApp.currency.symbol
     )
+    $(".price", @$el).html(newPrice)
+
     $("input[name=usage]", @$el).val instances
 
   onFormChanged: ->
