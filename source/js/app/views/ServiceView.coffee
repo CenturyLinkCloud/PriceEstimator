@@ -48,10 +48,21 @@ ServiceView = Backbone.View.extend
     cost += "&nbsp;<span><sup>*</sup></span>" if model.get("hasSetupFee")
     $(".cost", @$el).html(cost)
     $(".price", @$el).html(newPrice)
+
+    if model.get("key") is "object-storage"
+      if model.get("disabled") is true
+        @$el.addClass("disabled")
+        $(".range-slider", @$el).val(0).change()
+      else
+        @$el.removeClass("disabled")
+
     $(".quantity", @$el).html(model.get("quantity"))
+
     if model.get("quantity") > 0
       @$el.addClass("active")
     else
       @$el.removeClass("active")
+
+
 
 module.exports = ServiceView

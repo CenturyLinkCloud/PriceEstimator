@@ -34,10 +34,13 @@ ServerModel = Backbone.Model.extend
     @.set("pricing", pricing)
 
   updatePricing: (pricingMap) ->
-    @.set("pricing", pricingMap.attributes.options)
+    @.set("pricingMap", pricingMap)
+    pricing = @.get("pricingMap").attributes.options
+    @.set("pricing", pricing)
 
   totalCpuPerHour: ->
-    @.get("cpu") * @.get("pricing").cpu
+    price = @.get("cpu") * @.get("pricing").cpu
+    return price
 
   totalMemoryPerHour: ->
     @.get("memory") * @.get("pricing").memory

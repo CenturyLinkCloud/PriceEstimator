@@ -128,7 +128,16 @@ ServerView = Backbone.View.extend
     $(".cpu-text-input", @$el).val(model.get("cpu"))
     $(".memory-text-input", @$el).val(model.get("memory"))
 
-    if model.get("os") == "linux"
+    managedDisabled = @model.get("pricingMap").get("options").os["redhat-managed"] is "disabled"
+    if managedDisabled
+      $(".managed-cell", @$el).addClass('disabled')
+    else
+      $(".managed-cell", @$el).removeClass('disabled')
+
+    @$el.attr("id", @model.cid)
+    console.log 'managedDisabled', managedDisabled
+
+    if model.get("os") == "linux" or managedDisabled is true
       model.set("managed", false)
       $(".managed-check", @$el).attr("disabled", true)
       $(".managed-check", @$el).attr("checked", false)

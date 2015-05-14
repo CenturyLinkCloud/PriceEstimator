@@ -9,8 +9,6 @@ PricingMapsCollection = Backbone.Collection.extend
   model: PricingModel
 
   initialize: (models, options) ->
-    window.currentDatacenter = options.datacenter
-    window.currentDatasource = options.datasource
     @currencyId = options.currency
     @app = options.app
     @url = options.url
@@ -28,7 +26,19 @@ PricingMapsCollection = Backbone.Collection.extend
     output = []
     additional_services = []
     software_licenses = []
-    server = _.clone(DEFAULT_SERVER_DATA)
+    server = 
+      type: "server"
+      options:
+        os:
+          linux: 0
+          redhat: 0.04
+          windows: 0.04
+          "redhat-managed": "disabled"
+          "windows-managed": "disabled"
+        storage:
+          standard: 0.15
+          premium: 0.5
+          "hyperscale": "disabled"
     _.each data, (section) =>
       if section.name is "Software"
         _.each section.products, (product) =>

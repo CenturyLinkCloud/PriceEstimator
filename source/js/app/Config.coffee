@@ -8,7 +8,7 @@ Config =
     rate: 1.0
     symbol: "$"
 
-  init: (app) ->
+  init: (app, cb) ->
     $.getJSON('./json/data-config.json', (data) =>
       config = data
       @NAME = config.name
@@ -17,11 +17,13 @@ Config =
       @CURRENCY_URL = config.currencyUrl
       @SUPPORT_PRICING_URL = config.supportPricingUrl
       @DEFAULT_CURRENCY = config.defaultCurrency
-      $.getJSON @CURRENCY_URL, (currencyData) ->
-        console.log 'currencyData', currencyData
-        app.currencyData = currencyData
-        return app.init()
+      $.getJSON @DATACENTERS_URL, (datacentersData) =>
+        app.datacentersData = datacentersData
+        $.getJSON @CURRENCY_URL, (currencyData) =>
+          app.currencyData = currencyData
+          cb.resolve()
     )
+    return cb.promise
   
 
 module.exports = Config

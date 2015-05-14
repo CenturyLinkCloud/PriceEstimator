@@ -18,6 +18,7 @@ ServersCollection = require './app/collections/ServersCollection.coffee'
 ServicesCollection = require './app/collections/ServicesCollection.coffee'
 ServiceModel = require './app/models/ServiceModel.coffee'
 Utils = require('./app/Utils.coffee')
+Q = require 'q'
 
 #--------------------------------------------------------
 # Init
@@ -29,14 +30,15 @@ App =
   init: ->
     _.extend(@, Backbone.Events)
 
-    datacenter = Utils.getUrlParameter("datacenter")
-    datasource = Utils.getUrlParameter("datasource")
-    currencyId = Utils.getUrlParameter("currency") || Config.DEFAULT_CURRENCY.id
+    datacenter = Utils.getUrlParameterFromHash("datacenter")
+    datasource = Utils.getUrlParameterFromHash("datasource")
+    currencyId = Utils.getUrlParameterFromHash("currency") || Config.DEFAULT_CURRENCY.id
 
     dc = datacenter || "NY1"
     ds = datasource || "ny1"
 
     @currency = @currencyData['USD'][currencyId]
+    @currentDatacenter = dc
 
     @monthlyTotalView = new MonthlyTotalView
       app: @
@@ -54,13 +56,12 @@ App =
       currency: @currency
       url: Config.PRICING_ROOT_PATH + "#{ds}.json"
 
-    @currenyPricingMaps = []
-
     @pricingMaps.on "sync", =>
       @onPricingMapsSynced()
 
     @.on "currencyChange", =>
       @updateTotalPrice()
+
       
   onPricingMapsSynced: ->
     @initServers()
@@ -173,13 +174,18 @@ App =
     @trigger("totalPriceUpdated")
 
 
-  setPricingMap: (datacenter) ->
-
+  setPricingMap: (dc,ds) ->
     # Create new pricing map based on new database pricing info
-    @pricingMaps = new PricingMapsCollection([], { datacenter: datacenter })
+    @pricingMaps = new PricingMapsCollection [],
+      app: @
+      datacenter: dc
+      datasource: ds
+      currency: @currency
+      url: Config.PRICING_ROOT_PATH + "#{ds}.json"
+
     @pricingMaps.on "sync", =>
 
-      # Update pricing map stored on the views (impacts new models)
+    # Update pricing map stored on the views (impacts new models)
       @hyperscaleServersView.options.pricingMap = @pricingMaps.forKey("server")
       @serversView.options.pricingMap = @pricingMaps.forKey("server")
 
@@ -195,8 +201,10 @@ App =
 #--------------------------------------------------------
 # DOM Ready
 #--------------------------------------------------------
+cb = Q.defer()
 
 $ ->
-  Config.init(App)
+  Config.init(App, cb).then ->
+    App.init()
 
   

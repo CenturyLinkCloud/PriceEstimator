@@ -33,7 +33,7 @@ MonthlyTotalView = Backbone.View.extend
       rate = currency.rate
       symbol = currency.symbol
       selected = if options.currency.id is label then "selected" else ""
-      $option = $("<option value='#{label}' #{selected}>#{label}</option>")
+      $option = $("<option value='#{label}' #{selected}>#{label}(#{symbol})</option>")
           .attr('data-currency-symbol', symbol)
           .attr('data-currency-rate', rate)
       $(".currency", @$el).append($option)
@@ -81,27 +81,30 @@ MonthlyTotalView = Backbone.View.extend
 
   positionHeader: ->
     if $(window).scrollTop() > 289
-      @$el.css("position", "fixed")
+      @$el.css("position", "fixed") 
     else
       @$el.css("position", "absolute")
 
   changeDatacenter: (e) ->
-    # @app.setPricingMap $(e.target).val()
     $target = $(e.target)
     $currencies = $(".currency", @$el)
     currency = $currencies.val() || Config.DEFAULT_CURRENCY.id
-    href = window.top.location.href
-    href = href.replace(/\?datacenter=.*/, "")
+    @app.trigger "datacenterChange"
     $selected = $target.find('option:selected')
     datasource = $selected.attr('data-pricing-map') || 'default'
-    href = "#{href}?datacenter=#{$target.val()}&datasource=#{datasource}&currency=#{currency}"
-    return window.top.location.href = href
+    window.location.hash = "datacenter=#{$target.val()}&datasource=#{datasource}&currency=#{currency}"
+
+    return @app.setPricingMap $target.val(), datasource
 
   changeCurrency: (e) ->
     $target = $(e.currentTarget)
     currency_id = $target.val() || Config.DEFAULT_CURRENCY.id
     @app.currency = @app.currencyData['USD'][currency_id]
     @app.trigger "currencyChange"
+    $selected = $(".datacenter", @$el).find('option:selected')
+    datacenter = $selected.val()
+    datasource = $selected.attr('data-pricing-map') || 'default'
+    window.location.hash = "datacenter=#{datacenter}&datasource=#{datasource}&currency=#{currency_id}"
     return false
 
 
