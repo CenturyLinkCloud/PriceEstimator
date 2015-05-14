@@ -22,7 +22,8 @@ ServersView = Backbone.View.extend
 
     @app.on "currencyChange", =>
       @updateSubtotal()
-    @app.on "datacenterChange", =>
+
+    @collection.on "datacenterUpdate", =>
       @updateSubtotal()
 
     @updateSubtotal()
@@ -56,10 +57,15 @@ ServersView = Backbone.View.extend
       symbol: @app.currency.symbol
     )
     $(".subtotal", @$el).html newSubtotal
-    # if @options.hyperscale
-    #   if @options.pricingMap.get("options").storage.hyperscale is "disabled"
-    #     @$el.addClass("disabled")
-    #   else
-    #     @$el.removeClass("disabled")
+
+    if @options.hyperscale
+      if @options.pricingMap.get("options").storage.hyperscale is "disabled"
+        @$el.addClass("disabled")
+        @collection.removeAll()
+      else
+        @$el.removeClass("disabled")
+
+        
+
 
 module.exports = ServersView

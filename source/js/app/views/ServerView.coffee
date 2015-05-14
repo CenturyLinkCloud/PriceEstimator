@@ -54,6 +54,7 @@ ServerView = Backbone.View.extend
   close: ->
     @remove()
     @unbind()
+    @$el.remove()
     @addManagedAppView.remove() if @addManagedAppView
     @removeAllManagedApps()
 
@@ -135,7 +136,6 @@ ServerView = Backbone.View.extend
       $(".managed-cell", @$el).removeClass('disabled')
 
     @$el.attr("id", @model.cid)
-    console.log 'managedDisabled', managedDisabled
 
     if model.get("os") == "linux" or managedDisabled is true
       model.set("managed", false)

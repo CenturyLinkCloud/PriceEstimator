@@ -16,7 +16,6 @@ Utils =
     while i < sURLVariables.length
       sParameterName = sURLVariables[i].split('=')
       if sParameterName[0] == sParam
-        console.log sParameterName[1]
         return sParameterName[1]
       i++
     return

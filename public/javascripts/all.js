@@ -2176,7 +2176,6 @@ Utils = {
     while (i < sURLVariables.length) {
       sParameterName = sURLVariables[i].split('=');
       if (sParameterName[0] === sParam) {
-        console.log(sParameterName[1]);
         return sParameterName[1];
       }
       i++;
@@ -2346,14 +2345,22 @@ ServersCollection = Backbone.Collection.extend({
       return memo + server.managedAppsPricePerMonth() + server.managedBasePricePerMonth();
     }, 0);
   },
-  initPricing: function(pricingMaps) {
+  removeAll: function() {
     return this.each((function(_this) {
+      return function(server) {
+        return server.destroy();
+      };
+    })(this));
+  },
+  initPricing: function(pricingMaps) {
+    this.each((function(_this) {
       return function(server) {
         var pricingMap;
         pricingMap = pricingMaps.forKey("server");
         return server.updatePricing(pricingMap);
       };
     })(this));
+    return this.trigger('datacenterUpdate');
   }
 });
 
@@ -3185,6 +3192,7 @@ ServerView = Backbone.View.extend({
   close: function() {
     this.remove();
     this.unbind();
+    this.$el.remove();
     if (this.addManagedAppView) {
       this.addManagedAppView.remove();
     }
@@ -3285,7 +3293,6 @@ ServerView = Backbone.View.extend({
       $(".managed-cell", this.$el).removeClass('disabled');
     }
     this.$el.attr("id", this.model.cid);
-    console.log('managedDisabled', managedDisabled);
     if (model.get("os") === "linux" || managedDisabled === true) {
       model.set("managed", false);
       $(".managed-check", this.$el).attr("disabled", true);
@@ -3343,7 +3350,7 @@ ServersView = Backbone.View.extend({
         return _this.updateSubtotal();
       };
     })(this));
-    this.app.on("datacenterChange", (function(_this) {
+    this.collection.on("datacenterUpdate", (function(_this) {
       return function() {
         return _this.updateSubtotal();
       };
@@ -3391,9 +3398,12 @@ ServersView = Backbone.View.extend({
     });
     $(".subtotal", this.$el).html(newSubtotal);
     if (this.options.hyperscale) {
-      return this.$el.addClass("disabled");
-    } else {
-      return this.$el.removeClass("disabled");
+      if (this.options.pricingMap.get("options").storage.hyperscale === "disabled") {
+        this.$el.addClass("disabled");
+        return this.collection.removeAll();
+      } else {
+        return this.$el.removeClass("disabled");
+      }
     }
   }
 });

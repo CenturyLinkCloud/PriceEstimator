@@ -21,9 +21,14 @@ ServersCollection = Backbone.Collection.extend
       memo + server.managedAppsPricePerMonth() + server.managedBasePricePerMonth()
     , 0
 
+  removeAll: ->
+    @each (server) =>
+      server.destroy()
+
   initPricing: (pricingMaps) ->
     @each (server) =>
       pricingMap = pricingMaps.forKey("server")
       server.updatePricing pricingMap
+    @trigger 'datacenterUpdate'
 
 module.exports = ServersCollection
