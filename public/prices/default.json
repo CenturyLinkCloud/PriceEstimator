@@ -24,13 +24,13 @@
                 "name": "Block Storage w/ Standard Backup",
                 "descriptionHtml" : "Persistent storage (single data center, 5 days of snapshot backup). Price per GB.",
                 "type" : "hourly (allocated)",
-                "hourly" : 0.0002,
+                "hourly" : 0.00021,
                 "href": "/block-storage"
             },
             {
                 "key": "server:storage:premium",
                 "name": "Block Storage w/ Premium Backup",
-                "descriptionHtml" : "Persistent storage (single data center, 5 days of snapshot backup). Price per GB.",
+                "descriptionHtml" : "Persistent storage (single data center, 14 days of snapshot backup). Price per GB.",
                 "type" : "hourly (allocated)",
                 "hourly" : 0.0007,
                 "href": "/block-storage"
@@ -143,116 +143,32 @@
     },
     {
         "name" : "Software",
-        "description" : "Operating System software licensing. Microsoft Windows prices apply to Windows Server, 2008, 2008 CORE R2, 2008 R2, 2008 Data Center, 2012, and 2012 Data Center. Red Hat Enterprise prices apply to 5, 6, 7.",
+        "description" : "",
         "products" : [
-            {
-                "name": "Microsoft Exchange Basic SAL",
-                "descriptionHtml" : "per license per hour",
-                "type" : "hourly (used)",
-                "hourly" : 0.0009
-            },
-            {
-                "name": "Microsoft Exchange Enterprise Plus SAL",
-                "descriptionHtml" : "per license per hour",
-                "type" : "hourly (used)",
-                "hourly" : 0.01
-            },
-            {
-                "name": "Microsoft Exchange Enterprise SAL",
-                "descriptionHtml" : "per license per hour",
-                "type" : "hourly (used)",
-                "hourly" : 0.0076
-            },
-            {
-                "name": "Microsoft Exchange Standard Plus SAL",
-                "descriptionHtml" : "per license per hour",
-                "type" : "hourly (used)",
-                "hourly" : 0.0053
-            },
-            {
-                "name": "Microsoft Exchange Standard SAL",
-                "descriptionHtml" : "per license per hour",
-                "type" : "hourly (used)",
-                "hourly" : 0.0031
-            },
-            {
-                "name": "Microsoft Lync Server Enterprise SAL",
-                "descriptionHtml" : "per license per hour",
-                "type" : "hourly (used)",
-                "hourly" : 0.0069
-            },
-            {
-                "name": "Microsoft Lync Server",
-                "descriptionHtml" : "per license per hour",
-                "type" : "hourly (used)",
-                "hourly" : 0.0062
-            },
-            {
-                "name": "Microsoft Lync Server Enterprise Plus SAL",
-                "descriptionHtml" : "per license per hour",
-                "type" : "hourly (used)",
-                "hourly" : 0.0123
-            },
-            {
-                "name": "Microsoft Lync Server Plus SAL",
-                "descriptionHtml" : "per license per hour",
-                "type" : "hourly (used)",
-                "hourly" : 0.0063
-            },
-            {
-                "name": "Microsoft Lync Server Standard SAL",
-                "descriptionHtml" : "per license per hour",
-                "type" : "hourly (used)",
-                "hourly" : 0.0016
-            },
-            {
-                "name": "Microsoft Sharepoint Server Enterprise SAL",
-                "descriptionHtml" : "per license per hour",
-                "type" : "hourly (used)",
-                "hourly" : 0.0049
-            },
-            {
-                "name": "Microsoft Sharepoint Server Standard SAL",
-                "descriptionHtml" : "per license per hour",
-                "type" : "hourly (used)",
-                "hourly" : 0.0047
-            },
-            {
-                "name": "Microsoft SQL Server Business Intelligence",
-                "descriptionHtml" : "per vCPU license per hour",
-                "type" : "hourly (used)",
-                "hourly" : 0.0329
-            },
-            {
-                "name": "Microsoft SQL Server Enterprise Edition",
-                "descriptionHtml" : "per vCPU license per hour",
-                "type" : "hourly (used)",
-                "hourly" : 0.4097
-            },
-            {
-                "name": "Microsoft SQL Server Standard Edition",
-                "descriptionHtml" : "per vCPU license per hour",
-                "type" : "hourly (used)",
-                "hourly" : 0.1068
-            },
-            {
-                "name": "Microsoft SQL Server Web Edition",
-                "descriptionHtml" : "per vCPU license per hour",
-                "type" : "hourly (used)",
-                "hourly" : 0.0067
-            },
-            {
-                "name": "Microsoft System Center Data Protection Manager Server Enterprise",
-                "descriptionHtml" : "per vCPU license per hour",
-                "type" : "hourly (used)",
-                "hourly" : 0.0257
-            },
-            {
-                "name": "Microsoft Windows Remote Desktop Services SAL",
-                "descriptionHtml" : "per vCPU license per hour",
-                "type" : "hourly (used)",
-                "hourly" : 0.0062
-            }
+              {
+                  "name": "Microsoft SQL Server Enterprise Edition",
+                  "descriptionHtml" : "per vCPU license per hour",
+                  "type" : "hourly (used)",
+                  "hourly" : 0.4097
+              },
+              {
+                  "name": "Microsoft SQL Server Standard Edition",
+                  "descriptionHtml" : "per vCPU license per hour",
+                  "type" : "hourly (used)",
+                  "hourly" : 0.1068
+              },
+              {
+                  "name": "Microsoft SQL Server Web Edition",
+                  "descriptionHtml" : "per vCPU license per hour",
+                  "type" : "hourly (used)",
+                  "hourly" : 0.0067
+              },
+              {
+                  "name": "Microsoft Windows Remote Desktop Services SAL",
+                  "descriptionHtml" : "per license per hour",
+                  "type" : "hourly (used)",
+                  "hourly" : 0.0062
+              }
         ]
     },
     {
@@ -324,25 +240,25 @@
                 "name": "Quickstart Express",
                 "descriptionHtml" : "Deployment and training services",
                 "type" : "one-time (fixed) ",
-                "setupFee" : 600
+                "setupFee" : 600.00
             },
             {
                 "name": "Quickstart Advanced ",
                 "descriptionHtml" : "Deployment services & best practice consultation to maximize ROI",
                 "type" : "one-time (fixed) ",
-                "setupFee" : 2000
+                "setupFee" : 2000.00
             },
             {
                 "name": "Quickstart Enterprise",
                 "descriptionHtml" : "Tailored for strategic and/or enterprise orgs who require complex onboarding and/or applicable to customers who have extended onboarding requirements",
                 "type" : "one-time (fixed) ",
-                "setupFee" : 20000
+                "setupFee" : 20000.00
             },
             {
                 "name": "Quickstart SafeHaven Onboarding",
-                "descriptionHtml" : "ncludes 6 Recovery VM setup. Any Additional Recovery VM setup will be $325 per VM which is a onetime charge",
+                "descriptionHtml" : "Includes 6 Recovery VM setup. Any Additional Recovery VM setup will be $325 per VM which is a onetime charge",
                 "type" : "one-time (fixed) ",
-                "setupFee" : 1850
+                "setupFee" : 1850.00
             }
         ]
     },
@@ -373,7 +289,7 @@
                 "type" : "$195/hour, 2 hour minimum",
                 "hourly" : 195,
                 "monthly" : "&mdash;",
-                "setupFee" : 195
+                "setupFee" : 390
             },
             {
                 "name": "Deploy VMWare Virtual Appliance",
@@ -421,7 +337,7 @@
                 "type" : "$195/hour, 1 hour minimum",
                 "hourly" : 195,
                 "monthly" : "&mdash;",
-                "setupFee" : 192
+                "setupFee" : 195
             },
             {
                 "name": "Install, Prepare or Configure Microsoft Software",
@@ -440,12 +356,20 @@
                 "setupFee" : 1560
             },
             {
-                "name": "Cost Optimization Analysis",
-                "descriptionHtml" : "CLC resources will work with the customer to identify areas of cost savings or consolidation and issue a report of actionable items.",
-                "type" : "$195/hour, 4 hour minimum",
+                "name": "MSSQL Database Mirroring",
+                "descriptionHtml" : "Available on both the Standard (synchronous only) and Enterprise Edition of all supported versions of MSSQL, mirroring synchronizes data from a principal DB to a mirror DB on another MSSQL instance.  Each database retains its own unique connection string, even in the case of failover. Configurable on a per-database basis.",
+                "type" : "$195/hour, 1 hour minimum",
                 "hourly" : 195,
                 "monthly" : "&mdash;",
-                "setupFee" : 780
+                "setupFee" : 195
+            },
+            {
+                "name": "Add / Install Remote Desktop Services",
+                "descriptionHtml" : "Customers who want to run Microsoft Remote Desktop Services can purchase this work item where we install the role on your virtual machine.",
+                "type" : "$195/hour, 1 hour minimum",
+                "hourly" : 195,
+                "monthly" : "&mdash;",
+                "setupFee" : 195
             },
             {
                 "name": "Conference Calls and Guided Troubleshooting",

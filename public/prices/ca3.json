@@ -268,25 +268,25 @@
                 "name": "Quickstart Express",
                 "descriptionHtml" : "Deployment and training services",
                 "type" : "one-time (fixed) ",
-                "setupFee" : 600
+                "setupFee" : 600.00
             },
             {
                 "name": "Quickstart Advanced ",
                 "descriptionHtml" : "Deployment services & best practice consultation to maximize ROI",
                 "type" : "one-time (fixed) ",
-                "setupFee" : 2000
+                "setupFee" : 2000.00
             },
             {
                 "name": "Quickstart Enterprise",
                 "descriptionHtml" : "Tailored for strategic and/or enterprise orgs who require complex onboarding and/or applicable to customers who have extended onboarding requirements",
                 "type" : "one-time (fixed) ",
-                "setupFee" : 20000
+                "setupFee" : 20000.00
             },
             {
                 "name": "Quickstart SafeHaven Onboarding",
-                "descriptionHtml" : "ncludes 6 Recovery VM setup. Any Additional Recovery VM setup will be $325 per VM which is a onetime charge",
+                "descriptionHtml" : "Includes 6 Recovery VM setup. Any Additional Recovery VM setup will be $325 per VM which is a onetime charge",
                 "type" : "one-time (fixed) ",
-                "setupFee" : 1850
+                "setupFee" : 1850.00
             }
         ]
     },
@@ -382,6 +382,14 @@
                 "hourly" : 195,
                 "monthly" : "&mdash;",
                 "setupFee" : 1560
+            },
+            {
+                "name": "MSSQL Database Mirroring",
+                "descriptionHtml" : "Available on both the Standard (synchronous only) and Enterprise Edition of all supported versions of MSSQL, mirroring synchronizes data from a principal DB to a mirror DB on another MSSQL instance.  Each database retains its own unique connection string, even in the case of failover. Configurable on a per-database basis.",
+                "type" : "$195/hour, 1 hour minimum",
+                "hourly" : 195,
+                "monthly" : "&mdash;",
+                "setupFee" : 195
             },
             {
                 "name": "Add / Install Remote Desktop Services",

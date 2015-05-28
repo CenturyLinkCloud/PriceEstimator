@@ -1,5 +1,6 @@
 {
   "name": "tier3",
+  "repository": "https://github.com/CenturyLinkCloud/PriceEstimator",
   "version": "0.0.1",
   "devDependencies": {
     "browserify": "^3.33.0",
