@@ -200,6 +200,146 @@
         ]
     },
     {
+        "name" : "Managed Operating Systems",
+        "description" : "Prices are for operating system management only. Software licensing is separate.",
+        "products" : [
+            {
+                "key": "server:os:windows-managed",
+                "name": "Managed Microsoft Windows Server",
+                "descriptionHtml" : "per server",
+                "type" : "hourly (used)",
+                "hourly" : 0.21
+            },
+            {
+                "key": "server:os:redhat-managed",
+                "name": "Managed Red Hat Enterprise Linux",
+                "descriptionHtml" : "per server",
+                "type" : "hourly (used)",
+                "hourly" : 0.21
+            }
+        ]
+    },
+    {
+        "name" : "Managed Applications",
+        "description" : "Prices are for application management only. Software licensing is separate.",
+        "products" : [
+            {
+                "key": "managed-apps:iis",
+                "name": "Managed Microsoft IIS",
+                "href" : "/managed-services/iis",
+                "descriptionHtml" : "per server",
+                "type" : "hourly (used)",
+                "hourly" : 0.21
+            },
+            {
+                "key": "managed-apps:active-directory",
+                "name": "Managed Microsoft Active Directory",
+                "href": "/managed-services/active-directory",
+                "descriptionHtml" : "per server",
+                "type" : "hourly (used)",
+                "hourly" : 0.28
+            },
+            {
+                "key": "managed-apps:ms-sql",
+                "name": "Managed Microsoft SQL",
+                "descriptionHtml" : "per application instance",
+                "href" : "/managed-services/ms-sql",
+                "type" : "hourly (used)",
+                "hourly" : 0.48
+            },
+            {
+                "key": "managed-apps:apache",
+                "name": "Managed Apache",
+                "descriptionHtml" : "per server",
+                "href" : "/managed-services/apache-server",
+                "type" : "hourly (used)",
+                "hourly" : 0.21
+            },
+            {
+                "key": "managed-apps:tomcat",
+                "name": "Managed Tomcat",
+                "descriptionHtml" : "per server",
+                "href" : "/managed-services/tomcat",
+                "type" : "hourly (used)",
+                "hourly" : 0.83
+            },
+            {
+                "key": "managed-apps:cloudera-cdh5-basic",
+                "name": "Managed Cloudera ",
+                "version": "CDH5 Basic",
+                "descriptionHtml" : "per server",
+                "href" : "/managed-services/cloudera",
+                "type" : "hourly (used)",
+                "hourly" : 0.54
+            },
+            {
+                "key": "managed-apps:cloudera-cdh5-basic-hbase",
+                "name": "Managed Cloudera ",
+                "version": "CDH5 Basic + HBase",
+                "descriptionHtml" : "per server",
+                "href" : "/managed-services/cloudera",
+                "type" : "hourly (used)",
+                "hourly" : 0.88
+            },
+            {
+                "key": "managed-apps:cloudera-enterprise-data-hub",
+                "name": "Managed Cloudera",
+                "version": "Enterprise Data Hub",
+                "descriptionHtml" : "per server",
+                "href" : "/managed-services/cloudera",
+                "type" : "hourly (used)",
+                "hourly" : 1.15
+            },
+            {
+                "key": "managed-apps:mysql",
+                "name": "Managed MySQL",
+                "descriptionHtml" : "per application instance",
+                "href" : "/managed-services/mysql",
+                "type" : "hourly (used)",
+                "hourly" : 0.763
+            },
+            {
+                "key": "managed-apps:mysql-replication-master-master",
+                "name": "Managed MySQL Replication (Master/Master)",
+                "descriptionHtml" : "per application instance per hour",
+                "type" : "hourly (used)",
+                "hourly" : 0.5556
+            },
+            {
+                "key": "managed-apps:mysql-replication-master-slave",
+                "name": "Managed MySQL Replication (Master/Slave)",
+                "descriptionHtml" : "per application instance per hour",
+                "type" : "hourly (used)",
+                "hourly" : 0.3472
+            },
+            {
+                "name": "Managed GeoTrust Quick SSL Certificate",
+                "descriptionHtml" : "per certificate",
+                "type" : "hourly (used)"
+            },
+            {
+                "name": "Managed Backup",
+                "descriptionHtml" : "Price per GB depends on usage. Lower pricing available via contract agreement",
+                "type" : "monthly per GB",
+                "monthly" : 1.10
+            },
+            {
+                "key": "managed-apps:kerberos",
+                "name": "Managed Kerberos",
+                "descriptionHtml" : "per server",
+                "type" : "hourly (used)",
+                "hourly" : 0.10
+            },
+            {
+                "key": "managed-apps:unlicensed-hadoop",
+                "name": "Managed Unlicensed Hadoop",
+                "descriptionHtml" : "per server",
+                "type" : "hourly (used)",
+                "hourly" : 0.30
+            }
+        ]
+    },
+    {
         "name" : "Disaster Recovery",
         "href" : "/disaster-recovery",
         "products": [

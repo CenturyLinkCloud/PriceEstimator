@@ -312,7 +312,6 @@
                 "type" : "hourly (used)"
             },
             {
-                "key": "managed-apps:backup",
                 "name": "Managed Backup",
                 "descriptionHtml" : "Price per GB depends on usage. Lower pricing available via contract agreement",
                 "type" : "monthly per GB",
