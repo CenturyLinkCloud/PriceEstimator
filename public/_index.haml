@@ -100,12 +100,34 @@
 
       %a.add-button.no-print{href: "#"} <span class="plus"></span> Add Hyperscale Instance
 
+
+    #baremetal-servers.calculator-section
+      %h3 Bare Metal Servers
+      %p
+        Bare Metal is great because .... <a href="/bare-metal" target="_blank" class="no-print">More info</a>.
+      .subtotal-wrapper
+        %span.print-only--inline Bare Metal Servers&nbsp;|&nbsp;
+        Sub-total
+        .subtotal
+          $0.00
+      %table.table
+        %tr.table-headers
+          %th.table-header QTY
+          %th.table-header
+            .tooltip-wrapper
+              %a.has-tooltip{href:"#", data: {toggle: "tooltip", title: "Bare Metal servers are billed hourly once allocated."}}
+            CONFIGURATION
+          %th.table-header OS
+          %th.table-header MONTHLY COST
+
+      %a.add-button.no-print{href: "#"} <span class="plus"></span> Add Bare Metal Server
+
     #appfog-services.calculator-section
       %h3 AppFog
       %p
         AppFog supports the most popular runtimes and frameworks, automatic load balancing, easy-to-use scaling, and <a href="/appfog" target="_blank" class="no-print">more</a>.
       .subtotal-wrapper
-        %span.print-only--inline AppFog Deployments&nbsp;|&nbsp;
+        %span.print-only--inline AppFog&nbsp;|&nbsp;
         Sub-total
         .subtotal
           $0.00

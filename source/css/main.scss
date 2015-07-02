@@ -62,7 +62,7 @@ input[type=text], input[type=number] {
 
 .container {
   width: 1170px;
-  
+
   @media print {
     width: 100%;
   }
@@ -239,13 +239,17 @@ input[type=text], input[type=number] {
     position: relative;
     top: 6px;
     width: 90px;
-    
+
     &.software {
       width: 230px;
-      
+
       &.hidden {
         display: none;
       }
+    }
+
+    &.baremetal-select {
+      width: 230px;
     }
   }
 
@@ -392,7 +396,7 @@ input[type=text], input[type=number] {
 
 .managed-cell {
   width: 65px;
-  
+
   &.disabled {
     opacity: 0.2;
     pointer-events: none
@@ -495,8 +499,8 @@ input[type=text], input[type=number] {
   margin-top: 20px;
   margin-bottom: 50px;
   page-break-inside: avoid;
-  
-  
+
+
 
   h3 {
     margin-bottom: 0;
@@ -573,7 +577,7 @@ input[type=text], input[type=number] {
     margin-left: 1em;
     position: relative;
     top: -7px;
-    
+
     select.currency {
       margin-bottom: 0;
     }
@@ -582,16 +586,16 @@ input[type=text], input[type=number] {
   .datacenter-select {
     clear: both;
     span {
-      color:white;    
+      color:white;
       font-size: 14px;
       position: relative;
       top: 2px;
       margin-right: 4px;
-    } 
+    }
 
     .datacenter {
       clear: both;
-      display: inline-block;  
+      display: inline-block;
       margin: 5px 0 0;
       text-transform: capitalize;
     }
@@ -645,7 +649,7 @@ input[type=text], input[type=number] {
 
   &.clone {
     padding: 0;
-    
+
     .total-box {
       padding: 0;
       float: left;
@@ -700,7 +704,7 @@ input[type=text], input[type=number] {
   &.disabled {
     opacity: 0.3;
     pointer-events: none;
-  } 
+  }
 
   .service__info {
     padding: 10px;
@@ -956,7 +960,7 @@ input[type=text], input[type=number] {
   .add-managed-app-row {
     display: none !important;
   }
-  
+
   .rangeslider {
     display: none !important;
   }
@@ -976,7 +980,7 @@ input[type=text], input[type=number] {
 
 .print-only {
   display: none;
-  
+
   &--block {
     display: none;
     @media print {
@@ -1022,4 +1026,3 @@ input[type=text], input[type=number] {
     left: -0.25em;
   }
 }
-

@@ -39,6 +39,12 @@ PricingMapsCollection = Backbone.Collection.extend
           standard: 0.15
           premium: 0.5
           "hyperscale": "disabled"
+    baremetal =
+      type: 'baremetal'
+      options:
+        config: {}
+        os: {}
+
     _.each data, (section) =>
       if section.name is "Software"
         _.each section.products, (product) =>
@@ -102,9 +108,13 @@ PricingMapsCollection = Backbone.Collection.extend
                 type: 'appfog'
                 price: price
               additional_services.push(service)
+            else if ids[0] is 'baremetal'
+              # baremetal['config']['1'] = product
+              baremetal.options[ids[1]][ids[2]] = product
 
     server.options["software"] = software_licenses
     output.push(server)
+    output.push(baremetal)
     _.each additional_services, (ser) -> output.push(ser)
     return output
 

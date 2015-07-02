@@ -1,0 +1,18 @@
+%td.table-cell.quantity-cell
+  %input.number{name: "quantity", value: @model.get("quantity"), type: "text"}
+
+%td.table-cell
+  %select.baremetal-select{name: "config"}
+    %option{value: 1,  selected: @model.get('config') == 1 } #{@model.get('pricing').config['1'].name}
+    %option{value: 2,  selected: @model.get('config') == 2 } #{@model.get('pricing').config['2'].name}
+    %option{value: 3,  selected: @model.get('config') == 3 } #{@model.get('pricing').config['3'].name}
+
+%td.table-cell
+  %select.baremetal-select{name: "os"}
+    %option{value: 1,  selected: @model.get('os') == 1 } #{@model.get('pricing').os['1'].name}
+    %option{value: 2,  selected: @model.get('os') == 2 } #{@model.get('pricing').os['2'].name}
+
+%td.table-cell.price-cell
+  %span.price
+    = accounting.formatMoney(@model.totalPricePerMonth() * @app.currency.rate, {"symbol": @app.currency.symbol })
+  %a.remove-button{href: "#"} X
