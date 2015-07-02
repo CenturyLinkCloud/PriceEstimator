@@ -73,6 +73,34 @@
         ]
     },
     {
+        "name": "AppFog Application Deployments",
+        "description": "",
+        "products": [
+            {
+                "name": "AppFog Application Deployment",
+                "descriptionHtml": "Per GB Memory per instance.",
+                "key": "appfog",
+                "type": "hourly (allocated)",
+                "hourly": 0.04,
+                "href": "/appfog"
+            }
+        ]
+    },
+    {
+        "name": "AppFog Deployments",
+        "description": "",
+        "products": [
+            {
+                "name": "AppFog Deployment",
+                "descriptionHtml": "Per GB Memory per instance.",
+                "key": "appfog",
+                "type": "hourly (allocated)",
+                "hourly": 0.04,
+                "href": "/appfog"
+            }
+        ]
+    },
+    {
         "name" : "Networking",
         "description" : "",
         "products" : [

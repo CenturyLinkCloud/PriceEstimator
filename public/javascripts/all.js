@@ -46,8 +46,11 @@ process.argv = [];
 function noop() {}
 
 process.on = noop;
+process.addListener = noop;
 process.once = noop;
 process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
 process.emit = noop;
 
 process.binding = function (name) {
@@ -2111,8 +2114,8 @@ return Q;
 
 });
 
-}).call(this,require("/Users/nathanyoung/Sites/PriceEstimator/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js"))
-},{"/Users/nathanyoung/Sites/PriceEstimator/node_modules/browserify/node_modules/insert-module-globals/node_modules/process/browser.js":1}],3:[function(require,module,exports){
+}).call(this,require("FWaASH"))
+},{"FWaASH":1}],3:[function(require,module,exports){
 var Config;
 
 Config = {
@@ -2188,6 +2191,41 @@ module.exports = Utils;
 
 
 },{}],5:[function(require,module,exports){
+var AppfogCollection, AppfogModel;
+
+AppfogModel = require('../models/AppfogModel.coffee');
+
+AppfogCollection = Backbone.Collection.extend({
+  model: AppfogModel,
+  parse: function(data) {
+    return data;
+  },
+  initPricing: function(pricingMap) {
+    this.each((function(_this) {
+      return function(appfog) {
+        return appfog.updatePricing(pricingMap);
+      };
+    })(this));
+    return this.trigger('datacenterUpdate');
+  },
+  subtotal: function() {
+    return _.reduce(this.models, function(memo, appfog) {
+      return memo + appfog.totalPricePerMonth();
+    }, 0);
+  },
+  removeAll: function() {
+    return this.each((function(_this) {
+      return function(appfog) {
+        return appfog.destroy();
+      };
+    })(this));
+  }
+});
+
+module.exports = AppfogCollection;
+
+
+},{"../models/AppfogModel.coffee":10}],6:[function(require,module,exports){
 var Config, DEFAULT_SERVER_DATA, HOURS_IN_MONTH, PricingMapsCollection, PricingModel;
 
 PricingModel = require('../models/PricingMapModel.coffee');
@@ -2303,6 +2341,13 @@ PricingMapsCollection = Backbone.Collection.extend({
                   };
                   return additional_services.push(service);
                 }
+              } else if (ids[0] === 'appfog') {
+                price = product.hourly;
+                service = {
+                  type: 'appfog',
+                  price: price
+                };
+                return additional_services.push(service);
               }
             }
           });
@@ -2321,7 +2366,7 @@ PricingMapsCollection = Backbone.Collection.extend({
 module.exports = PricingMapsCollection;
 
 
-},{"../Config.coffee":3,"../data/server.coffee":8,"../models/PricingMapModel.coffee":9}],6:[function(require,module,exports){
+},{"../Config.coffee":3,"../data/server.coffee":9,"../models/PricingMapModel.coffee":11}],7:[function(require,module,exports){
 var ServerModel, ServersCollection;
 
 ServerModel = require('../models/ServerModel.coffee');
@@ -2368,7 +2413,7 @@ ServersCollection = Backbone.Collection.extend({
 module.exports = ServersCollection;
 
 
-},{"../models/ServerModel.coffee":10}],7:[function(require,module,exports){
+},{"../models/ServerModel.coffee":12}],8:[function(require,module,exports){
 var ServiceModel, ServicesCollection;
 
 ServiceModel = require('../models/ServiceModel.coffee');
@@ -2401,7 +2446,7 @@ ServicesCollection = Backbone.Collection.extend({
 module.exports = ServicesCollection;
 
 
-},{"../models/ServiceModel.coffee":11}],8:[function(require,module,exports){
+},{"../models/ServiceModel.coffee":13}],9:[function(require,module,exports){
 module.exports = {
   type: "server",
   options: {
@@ -2421,7 +2466,70 @@ module.exports = {
 };
 
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
+var AppfogModel;
+
+AppfogModel = Backbone.Model.extend({
+  HOURS_PER_DAY: "hours_per_day",
+  HOURS_PER_WEEK: "hours_per_week",
+  HOURS_PER_MONTH: "hours_per_month",
+  PERCENTAGE_OF_MONTH: "percentage_of_month",
+  HOURS_IN_MONTH: 730,
+  DAYS_IN_MONTH: 30.41666667,
+  WEEKS_IN_MONTH: 4.345238095,
+  defaults: {
+    quantity: 1,
+    memory: 1024,
+    usage: 100,
+    usagePeriod: 'percentage_of_month'
+  },
+  initialize: function() {
+    return this.initPricing();
+  },
+  parse: function(data) {
+    return data;
+  },
+  initPricing: function() {
+    var pricing, pricingMap;
+    pricingMap = this.get("pricingMap");
+    if (pricingMap) {
+      pricing = pricingMap.attributes.price;
+    }
+    return this.set("pricing", pricing || 0);
+  },
+  updatePricing: function(pricingMap) {
+    var pricing;
+    this.set("pricingMap", pricingMap);
+    if (pricingMap) {
+      pricing = pricingMap.attributes.price;
+    }
+    return this.set("pricing", pricing || 0);
+  },
+  totalPricePerMonth: function() {
+    var memory, price, quantity;
+    price = this.get("pricing");
+    quantity = this.get("quantity");
+    memory = this.get("memory");
+    return this.priceForMonth(price * quantity * (memory / 1024));
+  },
+  priceForMonth: function(hourlyPrice) {
+    switch (this.get("usagePeriod")) {
+      case this.HOURS_PER_DAY:
+        return hourlyPrice * this.get("usage") * this.DAYS_IN_MONTH;
+      case this.HOURS_PER_WEEK:
+        return hourlyPrice * this.get("usage") * this.WEEKS_IN_MONTH;
+      case this.HOURS_PER_MONTH:
+        return hourlyPrice * this.get("usage");
+      case this.PERCENTAGE_OF_MONTH:
+        return this.get("usage") / 100 * this.HOURS_IN_MONTH * hourlyPrice;
+    }
+  }
+});
+
+module.exports = AppfogModel;
+
+
+},{}],11:[function(require,module,exports){
 var PricingMapModel;
 
 PricingMapModel = Backbone.Model.extend({
@@ -2434,7 +2542,7 @@ PricingMapModel = Backbone.Model.extend({
 module.exports = PricingMapModel;
 
 
-},{}],10:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 var ServerModel;
 
 ServerModel = Backbone.Model.extend({
@@ -2608,7 +2716,7 @@ ServerModel = Backbone.Model.extend({
 module.exports = ServerModel;
 
 
-},{}],11:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 var ServiceModel;
 
 ServiceModel = Backbone.Model.extend({
@@ -2638,7 +2746,7 @@ ServiceModel = Backbone.Model.extend({
 module.exports = ServiceModel;
 
 
-},{}],12:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 module.exports = function(options) {
 return (function() {
 var $c, $e, $o;
@@ -2674,7 +2782,43 @@ return $o.join("\n").replace(/\s(\w+)='true'/mg, ' $1').replace(/\s(\w+)='fa
 
 }).call(options)
 };
-},{}],13:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
+module.exports = function(options) {
+return (function() {
+var $c, $e, $o;
+
+$e = function(text, escape) {
+  return ("" + text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/'/g, '&#39;').replace(/\//g, '&#47;').replace(/"/g, '&quot;');
+};
+
+$c = function(text) {
+  switch (text) {
+    case null:
+    case void 0:
+      return '';
+    case true:
+    case false:
+      return '' + text;
+    default:
+      return text;
+  }
+};
+
+$o = [];
+
+$o.push("<td class='table-cell'>\n  Application" + this.model.collection.length + "\n</td>\n<td class='table-cell usage-cell'>\n  <input class='number' name='usage' value='" + ($e($c(this.model.get("usage")))) + "' type='text'>\n  <select name='usagePeriod'>\n    <option value='hours_per_month' selected='" + ($e($c(this.model.get('usagePeriod') === 'hours_per_month'))) + "'>hrs / month</option>\n    <option value='percentage_of_month' selected='" + ($e($c(this.model.get('usagePeriod') === 'percentage_of_month'))) + "'>% / month</option>\n    <option value='hours_per_week' selected='" + ($e($c(this.model.get('usagePeriod') === 'hours_per_week'))) + "'>hrs / week</option>\n    <option value='hours_per_day' selected='" + ($e($c(this.model.get('usagePeriod') === 'hours_per_day'))) + "'>hrs / day</option>\n  </select>\n</td>\n<td class='range-cell table-cell'>\n  <input class='number quantity-text-input' data-name='quantity'>\n  <input class='range-slider' type='range' name='quantity' min='" + ($e($c(1))) + "' max='" + ($e($c(100))) + "' value='" + ($e($c(this.model.get("quantity")))) + "'>\n</td>\n<td class='range-cell table-cell'>\n  <input class='memory-text-input number' data-name='memory'>\n  <input class='range-slider' type='range' name='memory' min='" + ($e($c(0))) + "' max='" + ($e($c(10240))) + "' value='" + ($e($c(this.model.get("memory")))) + "'>\n</td>\n<td class='price-cell table-cell'>\n  <span class='price'>");
+
+$o.push("    " + $e($c(accounting.formatMoney(this.model.totalPricePerMonth() * this.app.currency.rate, {
+  "symbol": this.app.currency.symbol
+}))));
+
+$o.push("  </span>\n  <a class='remove-button' href='#'>X</a>\n</td>");
+
+return $o.join("\n").replace(/\s(\w+)='true'/mg, ' $1').replace(/\s(\w+)='false'/mg, '').replace(/\s(?:id|class)=(['"])(\1)/mg, "");
+
+}).call(options)
+};
+},{}],16:[function(require,module,exports){
 module.exports = function(options) {
 return (function() {
 var $c, $e, $o, soft, _i, _len, _ref;
@@ -2730,7 +2874,7 @@ return $o.join("\n").replace(/\s(\w+)='true'/mg, ' $1').replace(/\s(\w+)='fa
 
 }).call(options)
 };
-},{}],14:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 module.exports = function(options) {
 return (function() {
 var $c, $e, $o;
@@ -2782,7 +2926,7 @@ return $o.join("\n").replace(/\s(\w+)='true'/mg, ' $1').replace(/\s(\w+)='fa
 
 }).call(options)
 };
-},{}],15:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 module.exports = function(options) {
 return (function() {
 var $c, $e, $o;
@@ -2846,7 +2990,7 @@ return $o.join("\n").replace(/\s(\w+)='true'/mg, ' $1').replace(/\s(\w+)='fa
 
 }).call(options)
 };
-},{}],16:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 var AddManagedAppView;
 
 AddManagedAppView = Backbone.View.extend({
@@ -2918,7 +3062,203 @@ AddManagedAppView = Backbone.View.extend({
 module.exports = AddManagedAppView;
 
 
-},{"../templates/addManagedApp.haml":12}],17:[function(require,module,exports){
+},{"../templates/addManagedApp.haml":14}],20:[function(require,module,exports){
+var AppfogView;
+
+AppfogView = Backbone.View.extend({
+  tagName: "tr",
+  className: "table-row",
+  events: {
+    "click .remove-button": "removeDeployment",
+    "change select": "onFormChanged",
+    "keypress .number": "ensureNumber",
+    "change select[name]": "onFormChanged",
+    "change input[name]": "onFormChanged",
+    "input input[name]": "onFormChanged",
+    "keyup input[name]": "onFormChanged",
+    "keypress input:not([name])": "ensureNumber",
+    "input input:not([name])": "onSliderTextChanged"
+  },
+  initialize: function(options) {
+    this.options = options || {};
+    this.app = this.options.app;
+    this.model.on("change", (function(_this) {
+      return function(model) {
+        return _this.onModelChange(model);
+      };
+    })(this));
+    return this.app.on("currencyChange", (function(_this) {
+      return function() {
+        return _this.onModelChange(_this.model);
+      };
+    })(this));
+  },
+  render: function() {
+    var template;
+    template = require("../templates/appfog.haml");
+    this.$el.html(template({
+      model: this.model,
+      app: this.app
+    }));
+    this.$el.attr("id", this.model.cid);
+    _.defer((function(_this) {
+      return function() {
+        $('.range-slider', _this.$el).rangeslider({
+          polyfill: false
+        });
+        return $('.range-slider', _this.$el).css("opacity", 1);
+      };
+    })(this));
+    return this;
+  },
+  close: function() {
+    this.remove();
+    this.unbind();
+    return this.$el.remove();
+  },
+  removeDeployment: function(e) {
+    e.preventDefault();
+    return this.model.destroy();
+  },
+  onFormChanged: function(e) {
+    var data;
+    e.preventDefault();
+    data = Backbone.Syphon.serialize(this);
+    return this.model.set(data);
+  },
+  onModelChange: function(model) {
+    var newPrice;
+    this.$el.removeClass("disabled");
+    newPrice = accounting.formatMoney(model.totalPricePerMonth() * this.app.currency.rate, {
+      symbol: this.app.currency.symbol
+    });
+    $(".price", this.$el).html(newPrice);
+    $(".quantity", this.$el).html(model.get("quantity"));
+    $(".memory", this.$el).html(model.get("memory"));
+    $(".quantity-text-input", this.$el).val(model.get("quantity"));
+    $(".memory-text-input", this.$el).val(model.get("memory"));
+    if (model.get("memory") > 0) {
+      return this.$el.addClass("active");
+    } else {
+      return this.$el.removeClass("active");
+    }
+  },
+  ensureNumber: function(e) {
+    var charCode;
+    charCode = (e.which ? e.which : e.keyCode);
+    return !(charCode > 31 && (charCode < 48 || charCode > 57));
+  },
+  onSliderTextChanged: function(e) {
+    var $this, data, name, value;
+    $this = $(e.currentTarget);
+    name = $this.data("name");
+    value = $this.val();
+    if (value === "") {
+      return;
+    }
+    data = Backbone.Syphon.serialize(this);
+    data[name] = value;
+    this.model.set(data);
+    return $("[name=" + name + "]", this.$el).val(value).change();
+  }
+});
+
+module.exports = AppfogView;
+
+
+},{"../templates/appfog.haml":15}],21:[function(require,module,exports){
+var AppfogModel, AppfogView, AppfogsView;
+
+AppfogView = require('./AppfogView.coffee');
+
+AppfogModel = require('../models/AppfogModel.coffee');
+
+AppfogsView = Backbone.View.extend({
+  events: {
+    "click .add-button": "addDeployment"
+  },
+  initialize: function(options) {
+    this.options = options || {};
+    this.app = this.options.app;
+    this.collection.on("add", (function(_this) {
+      return function(model, collection, options) {
+        return _this.onDeploymentAdded(model);
+      };
+    })(this));
+    this.collection.on("remove", (function(_this) {
+      return function(model, collection, options) {
+        return _this.onDeploymentRemoved(model);
+      };
+    })(this));
+    this.collection.on("change", (function(_this) {
+      return function() {
+        return _this.updateSubtotal();
+      };
+    })(this));
+    this.app.on("currencyChange", (function(_this) {
+      return function() {
+        return _this.updateSubtotal();
+      };
+    })(this));
+    this.collection.on("datacenterUpdate", (function(_this) {
+      return function() {
+        _this.checkPricingMap();
+        return _this.updateSubtotal();
+      };
+    })(this));
+    this.checkPricingMap();
+    this.appfogViews = [];
+    return $('.has-tooltip', this.$el).tooltip();
+  },
+  checkPricingMap: function() {
+    if (!this.options.pricingMap) {
+      this.$el.addClass("disabled");
+      this.collection.removeAll();
+      return false;
+    } else {
+      this.$el.removeClass("disabled");
+      return true;
+    }
+  },
+  addDeployment: function(e) {
+    if (e) {
+      e.preventDefault();
+    }
+    return this.collection.add({
+      pricingMap: this.options.pricingMap
+    });
+  },
+  onDeploymentAdded: function(model) {
+    var appfogView;
+    appfogView = new AppfogView({
+      model: model,
+      app: this.app,
+      parentView: this
+    });
+    this.appfogViews[model.cid] = appfogView;
+    $(".table", this.$el).append(appfogView.render().el);
+    return this.updateSubtotal();
+  },
+  onDeploymentRemoved: function(model) {
+    if (this.appfogViews[model.cid]) {
+      this.appfogViews[model.cid].close();
+    }
+    return this.updateSubtotal();
+  },
+  updateSubtotal: function() {
+    var newSubtotal, subTotal;
+    subTotal = this.collection.subtotal() * this.app.currency.rate;
+    newSubtotal = accounting.formatMoney(subTotal, {
+      symbol: this.app.currency.symbol
+    });
+    return $(".subtotal", this.$el).html(newSubtotal);
+  }
+});
+
+module.exports = AppfogsView;
+
+
+},{"../models/AppfogModel.coffee":10,"./AppfogView.coffee":20}],22:[function(require,module,exports){
 var ManagedAppView;
 
 ManagedAppView = Backbone.View.extend({
@@ -2989,7 +3329,7 @@ ManagedAppView = Backbone.View.extend({
 module.exports = ManagedAppView;
 
 
-},{"../templates/managedApp.haml":13}],18:[function(require,module,exports){
+},{"../templates/managedApp.haml":16}],23:[function(require,module,exports){
 var Config, MonthlyTotalView;
 
 Config = require('../Config.coffee');
@@ -3120,7 +3460,7 @@ MonthlyTotalView = Backbone.View.extend({
 module.exports = MonthlyTotalView;
 
 
-},{"../Config.coffee":3}],19:[function(require,module,exports){
+},{"../Config.coffee":3}],24:[function(require,module,exports){
 var AddManagedAppView, ManagedAppView, ServerView;
 
 AddManagedAppView = require('./AddManagedAppView.coffee');
@@ -3317,7 +3657,7 @@ ServerView = Backbone.View.extend({
 module.exports = ServerView;
 
 
-},{"../templates/server.haml":14,"./AddManagedAppView.coffee":16,"./ManagedAppView.coffee":17}],20:[function(require,module,exports){
+},{"../templates/server.haml":17,"./AddManagedAppView.coffee":19,"./ManagedAppView.coffee":22}],25:[function(require,module,exports){
 var ServerModel, ServerView, ServersView;
 
 ServerView = require('./ServerView.coffee');
@@ -3412,7 +3752,7 @@ ServersView = Backbone.View.extend({
 module.exports = ServersView;
 
 
-},{"../models/ServerModel.coffee":10,"./ServerView.coffee":19}],21:[function(require,module,exports){
+},{"../models/ServerModel.coffee":12,"./ServerView.coffee":24}],26:[function(require,module,exports){
 var ServiceView;
 
 ServiceView = Backbone.View.extend({
@@ -3498,7 +3838,7 @@ ServiceView = Backbone.View.extend({
 module.exports = ServiceView;
 
 
-},{"../templates/service.haml":15}],22:[function(require,module,exports){
+},{"../templates/service.haml":18}],27:[function(require,module,exports){
 var ServiceModel, ServiceView, ServicesView;
 
 ServiceView = require('./ServiceView.coffee');
@@ -3555,7 +3895,7 @@ ServicesView = Backbone.View.extend({
 module.exports = ServicesView;
 
 
-},{"../models/ServiceModel.coffee":11,"./ServiceView.coffee":21}],23:[function(require,module,exports){
+},{"../models/ServiceModel.coffee":13,"./ServiceView.coffee":26}],28:[function(require,module,exports){
 var Config, SupportView;
 
 Config = require('../Config.coffee');
@@ -3644,8 +3984,8 @@ SupportView = Backbone.View.extend({
 module.exports = SupportView;
 
 
-},{"../Config.coffee":3}],24:[function(require,module,exports){
-var App, Config, MonthlyTotalView, PricingMapsCollection, Q, ServersCollection, ServersView, ServiceModel, ServicesCollection, ServicesView, SupportView, Utils, cb;
+},{"../Config.coffee":3}],29:[function(require,module,exports){
+var App, AppfogCollection, AppfogsView, Config, MonthlyTotalView, PricingMapsCollection, Q, ServersCollection, ServersView, ServicesCollection, ServicesView, SupportView, Utils, cb;
 
 Config = require('./app/Config.coffee');
 
@@ -3655,6 +3995,8 @@ SupportView = require('./app/views/SupportView.coffee');
 
 ServicesView = require('./app/views/ServicesView.coffee');
 
+AppfogsView = require('./app/views/AppfogsView.coffee');
+
 MonthlyTotalView = require('./app/views/MonthlyTotalView.coffee');
 
 PricingMapsCollection = require('./app/collections/PricingMapsCollection.coffee');
@@ -3663,7 +4005,7 @@ ServersCollection = require('./app/collections/ServersCollection.coffee');
 
 ServicesCollection = require('./app/collections/ServicesCollection.coffee');
 
-ServiceModel = require('./app/models/ServiceModel.coffee');
+AppfogCollection = require('./app/collections/AppfogCollection.coffee');
 
 Utils = require('./app/Utils.coffee');
 
@@ -3711,6 +4053,7 @@ App = {
   onPricingMapsSynced: function() {
     this.initServers();
     this.initHyperscaleServers();
+    this.initAppfogServices();
     this.networkingServices = new ServicesCollection({
       collectionUrl: "json/networking-services.json"
     });
@@ -3812,11 +4155,25 @@ App = {
       hyperscale: true
     });
   },
+  initAppfogServices: function() {
+    this.appfogServicesCollection = new AppfogCollection;
+    this.appfogServicesCollection.on("change remove add", (function(_this) {
+      return function() {
+        return _this.updateTotalPrice();
+      };
+    })(this));
+    return this.appfogsView = new AppfogsView({
+      app: this,
+      collection: this.appfogServicesCollection,
+      el: "#appfog-services",
+      pricingMap: this.pricingMaps.forKey("appfog")
+    });
+  },
   updateTotalPrice: function() {
     if (!this.initialized) {
       return;
     }
-    this.totalPrice = this.serversCollection.subtotal() + this.hyperscaleServersCollection.subtotal() + this.networkingServices.subtotal() + this.additionalServices.subtotal() + this.bandwidthServices.subtotal();
+    this.totalPrice = this.serversCollection.subtotal() + this.hyperscaleServersCollection.subtotal() + this.appfogServicesCollection.subtotal() + this.networkingServices.subtotal() + this.additionalServices.subtotal() + this.bandwidthServices.subtotal();
     this.oSSubtotal = this.serversCollection.oSSubtotal() + this.hyperscaleServersCollection.oSSubtotal();
     this.managedTotal = this.serversCollection.managedTotal();
     this.totalPriceWithSupport = this.totalPrice + this.supportView.updateSubtotal();
@@ -3833,9 +4190,11 @@ App = {
     return this.pricingMaps.on("sync", (function(_this) {
       return function() {
         _this.hyperscaleServersView.options.pricingMap = _this.pricingMaps.forKey("server");
+        _this.appfogsView.options.pricingMap = _this.pricingMaps.forKey("appfog");
         _this.serversView.options.pricingMap = _this.pricingMaps.forKey("server");
         _this.serversCollection.initPricing(_this.pricingMaps);
         _this.hyperscaleServersCollection.initPricing(_this.pricingMaps);
+        _this.appfogServicesCollection.initPricing(_this.pricingMaps.forKey("appfog"));
         _this.networkingServices.initPricing(_this.pricingMaps);
         _this.additionalServices.initPricing(_this.pricingMaps);
         return _this.bandwidthServices.initPricing(_this.pricingMaps);
@@ -3853,4 +4212,4 @@ $(function() {
 });
 
 
-},{"./app/Config.coffee":3,"./app/Utils.coffee":4,"./app/collections/PricingMapsCollection.coffee":5,"./app/collections/ServersCollection.coffee":6,"./app/collections/ServicesCollection.coffee":7,"./app/models/ServiceModel.coffee":11,"./app/views/MonthlyTotalView.coffee":18,"./app/views/ServersView.coffee":20,"./app/views/ServicesView.coffee":22,"./app/views/SupportView.coffee":23,"q":2}]},{},[24])
+},{"./app/Config.coffee":3,"./app/Utils.coffee":4,"./app/collections/AppfogCollection.coffee":5,"./app/collections/PricingMapsCollection.coffee":6,"./app/collections/ServersCollection.coffee":7,"./app/collections/ServicesCollection.coffee":8,"./app/views/AppfogsView.coffee":21,"./app/views/MonthlyTotalView.coffee":23,"./app/views/ServersView.coffee":25,"./app/views/ServicesView.coffee":27,"./app/views/SupportView.coffee":28,"q":2}]},{},[29])

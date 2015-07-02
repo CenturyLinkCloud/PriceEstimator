@@ -100,6 +100,28 @@
 
       %a.add-button.no-print{href: "#"} <span class="plus"></span> Add Hyperscale Instance
 
+    #appfog-services.calculator-section
+      %h3 AppFog
+      %p
+        AppFog supports the most popular runtimes and frameworks, automatic load balancing, easy-to-use scaling, and <a href="/appfog" target="_blank" class="no-print">more</a>.
+      .subtotal-wrapper
+        %span.print-only--inline AppFog Deployments&nbsp;|&nbsp;
+        Sub-total
+        .subtotal
+          $0.00
+      %table.table
+        %tr.table-headers
+          %th.table-header DEPLOYED APPLICATIONS
+          %th.table-header
+            .tooltip-wrapper
+              %a.has-tooltip{href:"#", data: {toggle: "tooltip", title: "Memory is billed hourly per instance when deployments are running."}}
+            USAGE
+          %th.table-header NUMBER OF INSTANCES
+          %th.table-header MEMORY (MB) per INSTANCE
+          %th.table-header MONTHLY COST
+
+      %a.add-button.no-print{href: "#"} <span class="plus"></span> Add AppFog Deployment
+
     #networking-services.calculator-section.services-section
       %h3 Networking Services
       %p Add additional networking services to your environment.
@@ -259,4 +281,3 @@
     %div.row.copyright
       %div.span6
         &copy; 2015 CenturyLink, Inc. All rights reserved. All other trademarks cited here are the properties of their respective owners.
-
