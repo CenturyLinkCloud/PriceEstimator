@@ -89,7 +89,7 @@
             },
             {
                 "key": "baremetal:config:3",
-                "name": "20 core, 128 GB RAM, 6x 1TB Raw HDD",
+                "name": "20 core, 128 GB RAM, 6x 2TB Raw HDD",
                 "descriptionHtml": "20 cores (2x10), Intel Xeon E5-2650 v3 @ 2.30 GHz, 128 GB RAM, 6x 2TB HDD Raw @ 7200 rpm, 9.09 TB RAID 5 usable",
                 "type": "hourly (allocated)",
                 "hourly": 2.52,
@@ -98,18 +98,26 @@
             },
             {
                 "key": "baremetal:os:1",
-                "name": "Windows Server 2012R2 - Standard Licensing",
-                "descriptionHtml": "Per Socket",
+                "name": "Windows",
+                "descriptionHtml": "Windows Server 2012R2 - Standard Licensing",
                 "type": "hourly (allocated)",
                 "hourly": 0.04,
                 "href": "/bare-metal"
             },
             {
                 "key": "baremetal:os:2",
-                "name": "Red Hat Enterprise Linux 6",
-                "descriptionHtml": "Per Socket",
+                "name": "Red Hat",
+                "descriptionHtml": "Red Hat Enterprise Linux 6",
                 "type": "hourly (allocated)",
                 "hourly": 0.075,
+                "href": "/bare-metal"
+            },
+            {
+                "key": "baremetal:os:3",
+                "name": "CentOS",
+                "descriptionHtml": "CentOS 6",
+                "type": "hourly (allocated)",
+                "hourly": 0.0,
                 "href": "/bare-metal"
             }
         ]

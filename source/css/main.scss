@@ -249,7 +249,8 @@ input[type=text], input[type=number] {
     }
 
     &.baremetal-select {
-      width: 230px;
+      width: auto;
+      max-width: 300px;
     }
   }
 
