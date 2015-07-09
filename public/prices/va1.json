@@ -205,8 +205,8 @@
             {
                 "key": "baremetal:os:1",
                 "shortName": "Windows",
-                "name": "MicroSoft Windows Server for Bare Metal",
-                "descriptionHtml": "per socket for Bare Metal",
+                "name": "Microsoft Windows Server for Bare Metal",
+                "descriptionHtml": "per socket",
                 "type": "hourly (allocated)",
                 "hourly": 0.04,
                 "href": "/bare-metal#Features"
