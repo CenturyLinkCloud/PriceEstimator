@@ -51,7 +51,7 @@
                 "name": "AppFog Application Deployment",
                 "descriptionHtml": "Per GB Memory per instance.",
                 "key": "appfog",
-                "type": "hourly (allocated)",
+                "type": "hourly (used)",
                 "hourly": 0.04,
                 "href": "/appfog"
             }

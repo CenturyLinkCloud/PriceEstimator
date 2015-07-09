@@ -62,13 +62,7 @@
                 "descriptionHtml" : "Per GB Stored for Archived Virtual Machines)",
                 "type" : "hourly (used)",
                 "hourly" : 0.0001
-            }
-        ]
-    },
-    {
-        "name": "Bare Metal",
-        "description": "",
-        "products": [
+            },
             {
                 "key": "baremetal:config:1",
                 "name": "4 core, 16 GB RAM, 2x 1TB Raw HDD",
@@ -76,7 +70,7 @@
                 "type": "hourly (allocated)",
                 "hourly": 0.56,
                 "sockets": 1,
-                "href": "/bare-metal"
+                "href": "/bare-metal#Pricing"
             },
             {
                 "key": "baremetal:config:2",
@@ -85,7 +79,7 @@
                 "type": "hourly (allocated)",
                 "hourly": 1.65,
                 "sockets": 2,
-                "href": "/bare-metal"
+                "href": "/bare-metal#Pricing"
             },
             {
                 "key": "baremetal:config:3",
@@ -94,31 +88,7 @@
                 "type": "hourly (allocated)",
                 "hourly": 2.52,
                 "sockets": 2,
-                "href": "/bare-metal"
-            },
-            {
-                "key": "baremetal:os:1",
-                "name": "Windows",
-                "descriptionHtml": "Windows Server 2012R2 - Standard Licensing",
-                "type": "hourly (allocated)",
-                "hourly": 0.04,
-                "href": "/bare-metal"
-            },
-            {
-                "key": "baremetal:os:2",
-                "name": "Red Hat",
-                "descriptionHtml": "Red Hat Enterprise Linux 6",
-                "type": "hourly (allocated)",
-                "hourly": 0.075,
-                "href": "/bare-metal"
-            },
-            {
-                "key": "baremetal:os:3",
-                "name": "CentOS",
-                "descriptionHtml": "CentOS 6",
-                "type": "hourly (allocated)",
-                "hourly": 0.0,
-                "href": "/bare-metal"
+                "href": "/bare-metal#Pricing"
             }
         ]
     },
@@ -130,7 +100,7 @@
                 "name": "AppFog Application Deployment",
                 "descriptionHtml": "Per GB Memory per instance.",
                 "key": "appfog",
-                "type": "hourly (allocated)",
+                "type": "hourly (used)",
                 "hourly": 0.04,
                 "href": "/appfog"
             }
@@ -231,6 +201,33 @@
             {
                 "name": "Ubuntu",
                 "type" : "no charge"
+            },
+            {
+                "key": "baremetal:os:1",
+                "shortName": "Windows",
+                "name": "MicroSoft Windows Server for Bare Metal",
+                "descriptionHtml": "per socket for Bare Metal",
+                "type": "hourly (allocated)",
+                "hourly": 0.04,
+                "href": "/bare-metal#Features"
+            },
+            {
+                "key": "baremetal:os:2",
+                "shortName": "Red Hat",
+                "name": "Red Hat Enterprise Linux for Bare Metal",
+                "descriptionHtml": "per socket",
+                "type": "hourly (allocated)",
+                "hourly": 0.075,
+                "href": "/bare-metal#Features"
+            },
+            {
+                "key": "baremetal:os:3",
+                "shortName": "CentOS",
+                "name": "CentOS for Bare Metal",
+                "descriptionHtml": "",
+                "type": "no charge",
+                "hourly": 0.0,
+                "href": "/bare-metal#Features"
             }
         ]
     },
