@@ -62,35 +62,41 @@
                 "descriptionHtml" : "Per GB Stored for Archived Virtual Machines)",
                 "type" : "hourly (used)",
                 "hourly" : 0.0001
-            },
-            {
-                "key": "baremetal:config:1",
-                "name": "4 core, 16 GB RAM, 2x 1TB Raw HDD",
-                "descriptionHtml": "4 cores (1x4), Intel Xeon E3-1271 v3 @ 3.60 GHz, 16 GB RAM, 2x 1TB HDD Raw @ 7200 rpm, 0.91 TB RAID 1 usable",
-                "type": "hourly (allocated)",
-                "hourly": 0.56,
-                "sockets": 1,
-                "href": "/bare-metal#Pricing"
-            },
-            {
-                "key": "baremetal:config:2",
-                "name": "12 core, 64 GB RAM, 4x 2TB Raw HDD",
-                "descriptionHtml": "12 cores (2x6), Intel Xeon E5-2620 v3 @ 2.40 GHz, 64 GB RAM, 4x 2TB HDD Raw @ 7200 rpm, 5.46 TB RAID 5 usable",
-                "type": "hourly (allocated)",
-                "hourly": 1.65,
-                "sockets": 2,
-                "href": "/bare-metal#Pricing"
-            },
-            {
-                "key": "baremetal:config:3",
-                "name": "20 core, 128 GB RAM, 6x 2TB Raw HDD",
-                "descriptionHtml": "20 cores (2x10), Intel Xeon E5-2650 v3 @ 2.30 GHz, 128 GB RAM, 6x 2TB HDD Raw @ 7200 rpm, 9.09 TB RAID 5 usable",
-                "type": "hourly (allocated)",
-                "hourly": 2.52,
-                "sockets": 2,
-                "href": "/bare-metal#Pricing"
             }
         ]
+    },
+    {
+      "name": "Bare Metal",
+      "description": "",
+      "products": [
+        {
+            "key": "baremetal:config:1",
+            "name": "4 core, 16 GB RAM, 2x 1TB Raw HDD",
+            "descriptionHtml": "4 cores (1x4), Intel Xeon E3-1271 v3 @ 3.60 GHz, 16 GB RAM, 2x 1TB HDD Raw @ 7200 rpm, 0.91 TB RAID 1 usable",
+            "type": "hourly (allocated)",
+            "hourly": 0.56,
+            "sockets": 1,
+            "href": "/bare-metal#Pricing"
+        },
+        {
+            "key": "baremetal:config:2",
+            "name": "12 core, 64 GB RAM, 4x 2TB Raw HDD",
+            "descriptionHtml": "12 cores (2x6), Intel Xeon E5-2620 v3 @ 2.40 GHz, 64 GB RAM, 4x 2TB HDD Raw @ 7200 rpm, 5.46 TB RAID 5 usable",
+            "type": "hourly (allocated)",
+            "hourly": 1.65,
+            "sockets": 2,
+            "href": "/bare-metal#Pricing"
+        },
+        {
+            "key": "baremetal:config:3",
+            "name": "20 core, 128 GB RAM, 6x 2TB Raw HDD",
+            "descriptionHtml": "20 cores (2x10), Intel Xeon E5-2650 v3 @ 2.30 GHz, 128 GB RAM, 6x 2TB HDD Raw @ 7200 rpm, 9.09 TB RAID 5 usable",
+            "type": "hourly (allocated)",
+            "hourly": 2.52,
+            "sockets": 2,
+            "href": "/bare-metal#Pricing"
+        }
+      ]
     },
     {
         "name": "AppFog Application Deployments",
