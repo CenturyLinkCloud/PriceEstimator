@@ -100,6 +100,50 @@
 
       %a.add-button.no-print{href: "#"} <span class="plus"></span> Add Hyperscale Instance
 
+
+    #baremetal-servers.calculator-section
+      %h3 Bare Metal Servers
+      %p
+        Dedicated physical servers on-demand that are ideal for compute-intensive workloads. <a href="/bare-metal" target="_blank" class="no-print">More info</a>.
+      .subtotal-wrapper
+        %span.print-only--inline Bare Metal Servers&nbsp;|&nbsp;
+        Sub-total
+        .subtotal
+          $0.00
+      %table.table
+        %tr.table-headers
+          %th.table-header QTY
+          %th.table-header
+            .tooltip-wrapper
+              %a.has-tooltip{href:"#", data: {toggle: "tooltip", title: "Bare Metal servers are billed hourly once allocated."}}
+            CONFIGURATION
+          %th.table-header OS
+          %th.table-header MONTHLY COST
+
+      %a.add-button.no-print{href: "#"} <span class="plus"></span> Add Bare Metal Server
+
+    #appfog-services.calculator-section
+      %h3 AppFog
+      %p
+        AppFog supports the most popular runtimes and frameworks, automatic load balancing, easy-to-use scaling, and <a href="/appfog" target="_blank" class="no-print">more</a>.
+      .subtotal-wrapper
+        %span.print-only--inline AppFog&nbsp;|&nbsp;
+        Sub-total
+        .subtotal
+          $0.00
+      %table.table
+        %tr.table-headers
+          %th.table-header DEPLOYED APPLICATIONS
+          %th.table-header
+            .tooltip-wrapper
+              %a.has-tooltip{href:"#", data: {toggle: "tooltip", title: "Memory is billed hourly per instance when deployments are running."}}
+            USAGE
+          %th.table-header INSTANCES
+          %th.table-header MEMORY / INSTANCE (MB)
+          %th.table-header MONTHLY COST
+
+      %a.add-button.no-print{href: "#"} <span class="plus"></span> Add AppFog Deployment
+
     #networking-services.calculator-section.services-section
       %h3 Networking Services
       %p Add additional networking services to your environment.
@@ -259,4 +303,3 @@
     %div.row.copyright
       %div.span6
         &copy; 2015 CenturyLink, Inc. All rights reserved. All other trademarks cited here are the properties of their respective owners.
-

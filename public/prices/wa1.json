@@ -6,7 +6,7 @@
             {
                 "key": "server:cpu",
                 "name": "Virtual CPU",
-                "descriptionHtml" : "2 Ghz+ Processor (up to 16 cpu)",
+                "descriptionHtml" : "Standard Servers. 2 Ghz+ Processor (up to 16 cpu)",
                 "type" : "hourly (allocated)",
                 "hourly" : 0.0100,
                 "href": "/servers"
@@ -14,7 +14,7 @@
             {
                 "key": "server:memory",
                 "name": "Virtual RAM",
-                "descriptionHtml" : "1 GB (up to 128GB)",
+                "descriptionHtml" : "Standard Servers. 1 GB (up to 128GB)",
                 "type" : "hourly (allocated)",
                 "hourly" : 0.015,
                 "href": "/servers"
@@ -36,67 +36,12 @@
                 "href": "/block-storage"
             },
             {
-                "name": "Virtual CPU for Hyperscale",
-                "descriptionHtml" : "2 Ghz+ Processor (up to 16 cpu)",
-                "type" : "hourly (allocated)",
-                "hourly" : 0.0100,
-                "href": "/hyperscale"
-            },
-            {
-                "name": "Virtual RAM for Hyperscale",
-                "descriptionHtml" : "1 GB (up to 128GB)",
-                "type" : "hourly (allocated)",
-                "hourly" : 0.015,
-                "href": "/hyperscale"
-            },
-            {
-                "key": "server:storage:hyperscale",
-                "name": "Block Storage for Hyperscale",
-                "descriptionHtml" : "Persistent high performance storage: SSD based storage with sustained rates of 15k IOPS. Price per GB.",
-                "type" : "hourly (allocated)",
-                "hourly" : 0.0005,
-                "href": "/hyperscale"
-            },
-            {
                 "name": "Archive Storage",
                 "descriptionHtml" : "Per GB Stored for Archived Virtual Machines)",
                 "type" : "hourly (used)",
                 "hourly" : 0.0001
             }
         ]
-    },
-    {
-      "name": "Bare Metal",
-      "description": "",
-      "products": [
-        {
-            "key": "baremetal:config:1",
-            "name": "4 core, 16 GB RAM, 2x 1TB Raw HDD",
-            "descriptionHtml": "4 cores (1x4), Intel Xeon E3-1271 v3 @ 3.60 GHz, 16 GB RAM, 2x 1TB HDD Raw @ 7200 rpm, 0.91 TB RAID 1 usable",
-            "type": "hourly (allocated)",
-            "hourly": 0.56,
-            "sockets": 1,
-            "href": "/bare-metal#Pricing"
-        },
-        {
-            "key": "baremetal:config:2",
-            "name": "12 core, 64 GB RAM, 4x 2TB Raw HDD",
-            "descriptionHtml": "12 cores (2x6), Intel Xeon E5-2620 v3 @ 2.40 GHz, 64 GB RAM, 4x 2TB HDD Raw @ 7200 rpm, 5.46 TB RAID 5 usable",
-            "type": "hourly (allocated)",
-            "hourly": 1.65,
-            "sockets": 2,
-            "href": "/bare-metal#Pricing"
-        },
-        {
-            "key": "baremetal:config:3",
-            "name": "20 core, 128 GB RAM, 6x 2TB Raw HDD",
-            "descriptionHtml": "20 cores (2x10), Intel Xeon E5-2650 v3 @ 2.30 GHz, 128 GB RAM, 6x 2TB HDD Raw @ 7200 rpm, 9.09 TB RAID 5 usable",
-            "type": "hourly (allocated)",
-            "hourly": 2.52,
-            "sockets": 2,
-            "href": "/bare-metal#Pricing"
-        }
-      ]
     },
     {
         "name": "AppFog Application Deployments",
@@ -207,33 +152,6 @@
             {
                 "name": "Ubuntu",
                 "type" : "no charge"
-            },
-            {
-                "key": "baremetal:os:1",
-                "shortName": "Windows",
-                "name": "Microsoft Windows Server for Bare Metal",
-                "descriptionHtml": "per socket",
-                "type": "hourly (allocated)",
-                "hourly": 0.04,
-                "href": "/bare-metal#Features"
-            },
-            {
-                "key": "baremetal:os:2",
-                "shortName": "Red Hat",
-                "name": "Red Hat Enterprise Linux for Bare Metal",
-                "descriptionHtml": "per socket",
-                "type": "hourly (allocated)",
-                "hourly": 0.075,
-                "href": "/bare-metal#Features"
-            },
-            {
-                "key": "baremetal:os:3",
-                "shortName": "CentOS",
-                "name": "CentOS for Bare Metal",
-                "descriptionHtml": "",
-                "type": "no charge",
-                "hourly": 0.0,
-                "href": "/bare-metal#Features"
             }
         ]
     },
@@ -241,170 +159,30 @@
         "name" : "Software",
         "description" : "",
         "products" : [
-            {
-                "name": "Microsoft SQL Server Enterprise Edition",
-                "descriptionHtml" : "per vCPU license per hour",
-                "type" : "hourly (used)",
-                "hourly" : 0.4097
-            },
-            {
-                "name": "Microsoft SQL Server Standard Edition",
-                "descriptionHtml" : "per vCPU license per hour",
-                "type" : "hourly (used)",
-                "hourly" : 0.1068
-            },
-            {
-                "name": "Microsoft SQL Server Web Edition",
-                "descriptionHtml" : "per vCPU license per hour",
-                "type" : "hourly (used)",
-                "hourly" : 0.0067
-            },
-            {
-                "name": "Microsoft Windows Remote Desktop Services SAL",
-                "descriptionHtml" : "per license per hour",
-                "type" : "hourly (used)",
-                "hourly" : 0.0062
-            }
-        ]
-    },
-    {
-        "name" : "Managed Operating Systems",
-        "description" : "Prices are for operating system management only. Software licensing is separate.",
-        "products" : [
-            {
-                "key": "server:os:windows-managed",
-                "name": "Managed Microsoft Windows Server",
-                "descriptionHtml" : "per server",
-                "type" : "hourly (used)",
-                "hourly" : 0.21
-            },
-            {
-                "key": "server:os:redhat-managed",
-                "name": "Managed Red Hat Enterprise Linux",
-                "descriptionHtml" : "per server",
-                "type" : "hourly (used)",
-                "hourly" : 0.21
-            }
-        ]
-    },
-    {
-        "name" : "Managed Applications",
-        "description" : "Prices are for application management only. Software licensing is separate.",
-        "products" : [
-            {
-                "key": "managed-apps:iis",
-                "name": "Managed Microsoft IIS",
-                "href" : "/managed-services/iis",
-                "descriptionHtml" : "per server",
-                "type" : "hourly (used)",
-                "hourly" : 0.21
-            },
-            {
-                "key": "managed-apps:active-directory",
-                "name": "Managed Microsoft Active Directory",
-                "href": "/managed-services/active-directory",
-                "descriptionHtml" : "per server",
-                "type" : "hourly (used)",
-                "hourly" : 0.28
-            },
-            {
-                "key": "managed-apps:ms-sql",
-                "name": "Managed Microsoft SQL",
-                "descriptionHtml" : "per application instance",
-                "href" : "/managed-services/ms-sql",
-                "type" : "hourly (used)",
-                "hourly" : 0.48
-            },
-            {
-                "key": "managed-apps:apache",
-                "name": "Managed Apache",
-                "descriptionHtml" : "per server",
-                "href" : "/managed-services/apache-server",
-                "type" : "hourly (used)",
-                "hourly" : 0.21
-            },
-            {
-                "key": "managed-apps:tomcat",
-                "name": "Managed Tomcat",
-                "descriptionHtml" : "per server",
-                "href" : "/managed-services/tomcat",
-                "type" : "hourly (used)",
-                "hourly" : 0.83
-            },
-            {
-                "key": "managed-apps:cloudera-cdh5-basic",
-                "name": "Managed Cloudera ",
-                "version": "CDH5 Basic",
-                "descriptionHtml" : "per server",
-                "href" : "/managed-services/cloudera",
-                "type" : "hourly (used)",
-                "hourly" : 0.54
-            },
-            {
-                "key": "managed-apps:cloudera-cdh5-basic-hbase",
-                "name": "Managed Cloudera ",
-                "version": "CDH5 Basic + HBase",
-                "descriptionHtml" : "per server",
-                "href" : "/managed-services/cloudera",
-                "type" : "hourly (used)",
-                "hourly" : 0.88
-            },
-            {
-                "key": "managed-apps:cloudera-enterprise-data-hub",
-                "name": "Managed Cloudera",
-                "version": "Enterprise Data Hub",
-                "descriptionHtml" : "per server",
-                "href" : "/managed-services/cloudera",
-                "type" : "hourly (used)",
-                "hourly" : 1.15
-            },
-            {
-                "key": "managed-apps:mysql",
-                "name": "Managed MySQL",
-                "descriptionHtml" : "per application instance",
-                "href" : "/managed-services/mysql",
-                "type" : "hourly (used)",
-                "hourly" : 0.763
-            },
-            {
-                "key": "managed-apps:mysql-replication-master-master",
-                "name": "Managed MySQL Replication (Master/Master)",
-                "descriptionHtml" : "per application instance per hour",
-                "type" : "hourly (used)",
-                "hourly" : 0.5556
-            },
-            {
-                "key": "managed-apps:mysql-replication-master-slave",
-                "name": "Managed MySQL Replication (Master/Slave)",
-                "descriptionHtml" : "per application instance per hour",
-                "type" : "hourly (used)",
-                "hourly" : 0.3472
-            },
-            {
-                "name": "Managed GeoTrust Quick SSL Certificate",
-                "descriptionHtml" : "per certificate",
-                "type" : "hourly (used)"
-            },
-            {
-                "name": "Managed Backup",
-                "descriptionHtml" : "Price per GB depends on usage. Lower pricing available via contract agreement",
-                "type" : "monthly per GB",
-                "monthly" : 1.10
-            },
-            {
-                "key": "managed-apps:kerberos",
-                "name": "Managed Kerberos",
-                "descriptionHtml" : "per server",
-                "type" : "hourly (used)",
-                "hourly" : 0.10
-            },
-            {
-                "key": "managed-apps:unlicensed-hadoop",
-                "name": "Managed Unlicensed Hadoop",
-                "descriptionHtml" : "per server",
-                "type" : "hourly (used)",
-                "hourly" : 0.30
-            }
+              {
+                  "name": "Microsoft SQL Server Enterprise Edition",
+                  "descriptionHtml" : "per vCPU license per hour",
+                  "type" : "hourly (used)",
+                  "hourly" : 0.4097
+              },
+              {
+                  "name": "Microsoft SQL Server Standard Edition",
+                  "descriptionHtml" : "per vCPU license per hour",
+                  "type" : "hourly (used)",
+                  "hourly" : 0.1068
+              },
+              {
+                  "name": "Microsoft SQL Server Web Edition",
+                  "descriptionHtml" : "per vCPU license per hour",
+                  "type" : "hourly (used)",
+                  "hourly" : 0.0067
+              },
+              {
+                  "name": "Microsoft Windows Remote Desktop Services SAL",
+                  "descriptionHtml" : "per license per hour",
+                  "type" : "hourly (used)",
+                  "hourly" : 0.0062
+              }
         ]
     },
     {

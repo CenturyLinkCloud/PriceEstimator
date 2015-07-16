@@ -55,7 +55,7 @@
         "links": [
             {
                 "rel": "pricing",
-                "href": "/prices/default.json"
+                "href": "/prices/wa1.json"
             }
         ]
     },

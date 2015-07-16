@@ -12,11 +12,14 @@ Config = require './app/Config.coffee'
 ServersView = require './app/views/ServersView.coffee'
 SupportView = require './app/views/SupportView.coffee'
 ServicesView = require './app/views/ServicesView.coffee'
+AppfogsView = require './app/views/AppfogsView.coffee'
+BaremetalConfigsView = require './app/views/BaremetalConfigsView.coffee'
 MonthlyTotalView = require './app/views/MonthlyTotalView.coffee'
 PricingMapsCollection = require './app/collections/PricingMapsCollection.coffee'
 ServersCollection = require './app/collections/ServersCollection.coffee'
 ServicesCollection = require './app/collections/ServicesCollection.coffee'
-ServiceModel = require './app/models/ServiceModel.coffee'
+AppfogCollection = require './app/collections/AppfogCollection.coffee'
+BaremetalCollection = require './app/collections/BaremetalCollection.coffee'
 Utils = require('./app/Utils.coffee')
 Q = require 'q'
 
@@ -62,10 +65,12 @@ App =
     @.on "currencyChange", =>
       @updateTotalPrice()
 
-      
+
   onPricingMapsSynced: ->
     @initServers()
     @initHyperscaleServers()
+    @initAppfogServices()
+    @initBaremetalConfigs()
 
     @networkingServices = new ServicesCollection
       collectionUrl: "json/networking-services.json"
@@ -155,12 +160,35 @@ App =
       pricingMap: @pricingMaps.forKey("server")
       hyperscale: true
 
+  initAppfogServices: ->
+    @appfogServicesCollection = new AppfogCollection
+    @appfogServicesCollection.on "change remove add", =>
+      @updateTotalPrice()
+
+    @appfogsView = new AppfogsView
+      app: @
+      collection: @appfogServicesCollection
+      el: "#appfog-services"
+      pricingMap: @pricingMaps.forKey("appfog")
+
+  initBaremetalConfigs: ->
+    @baremetalCollection = new BaremetalCollection
+    @baremetalCollection.on "change remove add", =>
+      @updateTotalPrice()
+
+    @BaremetalConfigsView = new BaremetalConfigsView
+      app: @
+      collection: @baremetalCollection
+      el: "#baremetal-servers"
+      pricingMap: @pricingMaps.forKey("baremetal")
 
   updateTotalPrice: ->
     return unless @initialized
 
     @totalPrice = @serversCollection.subtotal() +
                   @hyperscaleServersCollection.subtotal() +
+                  @appfogServicesCollection.subtotal() +
+                  @baremetalCollection.subtotal() +
                   @networkingServices.subtotal() +
                   @additionalServices.subtotal() +
                   @bandwidthServices.subtotal()
@@ -187,11 +215,15 @@ App =
 
     # Update pricing map stored on the views (impacts new models)
       @hyperscaleServersView.options.pricingMap = @pricingMaps.forKey("server")
+      @appfogsView.options.pricingMap = @pricingMaps.forKey("appfog")
+      @BaremetalConfigsView.options.pricingMap = @pricingMaps.forKey("baremetal")
       @serversView.options.pricingMap = @pricingMaps.forKey("server")
 
       # Update pricing map stored on collections (impacts existing models)
       @serversCollection.initPricing(@pricingMaps)
       @hyperscaleServersCollection.initPricing(@pricingMaps)
+      @appfogServicesCollection.initPricing(@pricingMaps.forKey("appfog"))
+      @baremetalCollection.initPricing(@pricingMaps.forKey("baremetal"))
       @networkingServices.initPricing(@pricingMaps)
       @additionalServices.initPricing(@pricingMaps)
       @bandwidthServices.initPricing(@pricingMaps)
@@ -206,5 +238,3 @@ cb = Q.defer()
 $ ->
   Config.init(App, cb).then ->
     App.init()
-
-  
