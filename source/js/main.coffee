@@ -37,8 +37,8 @@ App =
     datasource = Utils.getUrlParameterFromHash("datasource")
     currencyId = Utils.getUrlParameterFromHash("currency") || Config.DEFAULT_CURRENCY.id
 
-    dc = datacenter || "NY1"
-    ds = datasource || "ny1"
+    dc = datacenter || "VA1"
+    ds = datasource || "va1"
 
     @currency = @currencyData['USD'][currencyId]
     @currentDatacenter = dc
