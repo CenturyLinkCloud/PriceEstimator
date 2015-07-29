@@ -66,6 +66,39 @@
         ]
     },
     {
+      "name": "Bare Metal",
+      "description": "",
+      "products": [
+        {
+            "key": "baremetal:config:1",
+            "name": "4 core, 16 GB RAM, 2x 1TB Raw HDD",
+            "descriptionHtml": "4 cores (1x4), Intel Xeon E3-1271 v3 @ 3.60 GHz, 16 GB RAM, 2x 1TB HDD Raw @ 7200 rpm, 0.91 TB RAID 1 usable",
+            "type": "hourly (allocated)",
+            "hourly": 0.62,
+            "sockets": 1,
+            "href": "/bare-metal#Pricing"
+        },
+        {
+            "key": "baremetal:config:2",
+            "name": "12 core, 64 GB RAM, 4x 2TB Raw HDD",
+            "descriptionHtml": "12 cores (2x6), Intel Xeon E5-2620 v3 @ 2.40 GHz, 64 GB RAM, 4x 2TB HDD Raw @ 7200 rpm, 5.46 TB RAID 5 usable",
+            "type": "hourly (allocated)",
+            "hourly": 1.82,
+            "sockets": 2,
+            "href": "/bare-metal#Pricing"
+        },
+        {
+            "key": "baremetal:config:3",
+            "name": "20 core, 128 GB RAM, 6x 2TB Raw HDD",
+            "descriptionHtml": "20 cores (2x10), Intel Xeon E5-2650 v3 @ 2.30 GHz, 128 GB RAM, 6x 2TB HDD Raw @ 7200 rpm, 9.09 TB RAID 5 usable",
+            "type": "hourly (allocated)",
+            "hourly": 2.77,
+            "sockets": 2,
+            "href": "/bare-metal#Pricing"
+        }
+      ]
+    },
+    {
         "name" : "Networking",
         "description" : "",
         "products" : [
@@ -160,6 +193,33 @@
             {
                 "name": "Ubuntu",
                 "type" : "no charge"
+            },
+            {
+                "key": "baremetal:os:1",
+                "shortName": "Windows",
+                "name": "Microsoft Windows Server for Bare Metal",
+                "descriptionHtml": "per socket",
+                "type": "hourly (allocated)",
+                "hourly": 0.04,
+                "href": "/bare-metal#Features"
+            },
+            {
+                "key": "baremetal:os:2",
+                "shortName": "Red Hat",
+                "name": "Red Hat Enterprise Linux for Bare Metal",
+                "descriptionHtml": "per socket",
+                "type": "hourly (allocated)",
+                "hourly": 0.075,
+                "href": "/bare-metal#Features"
+            },
+            {
+                "key": "baremetal:os:3",
+                "shortName": "CentOS",
+                "name": "CentOS for Bare Metal",
+                "descriptionHtml": "",
+                "type": "no charge",
+                "hourly": 0.0,
+                "href": "/bare-metal#Features"
             }
         ]
     },
