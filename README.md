@@ -37,7 +37,7 @@ To update Managed Services, edit: https://github.com/CenturyLinkCloud/PriceEstim
 
 ## Assumptions for Calculations
 
-- 730 hours in a month
+- 720 hours in a month
 - 30.42 days in a month
 - 4.35 weeks in a month
 

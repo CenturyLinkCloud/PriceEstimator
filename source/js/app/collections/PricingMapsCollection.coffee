@@ -3,7 +3,7 @@ Config = require '../Config.coffee'
 
 DEFAULT_SERVER_DATA = require '../data/server.coffee'
 
-HOURS_IN_MONTH = 730
+HOURS_IN_MONTH = 720
 
 PricingMapsCollection = Backbone.Collection.extend
   model: PricingModel
