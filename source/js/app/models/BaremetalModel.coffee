@@ -1,5 +1,5 @@
 BaremetalModel = Backbone.Model.extend
-  HOURS_IN_MONTH: 730
+  HOURS_IN_MONTH: 720
 
   defaults:
     quantity: 1
