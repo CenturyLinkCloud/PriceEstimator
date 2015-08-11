@@ -4326,6 +4326,7 @@ App = {
   init: function() {
     var currencyId, datacenter, datasource, dc, ds;
     _.extend(this, Backbone.Events);
+    window.estimatorApp = this;
     datacenter = Utils.getUrlParameterFromHash("datacenter");
     datasource = Utils.getUrlParameterFromHash("datasource");
     currencyId = Utils.getUrlParameterFromHash("currency") || Config.DEFAULT_CURRENCY.id;
