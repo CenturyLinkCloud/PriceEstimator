@@ -33,6 +33,9 @@ App =
   init: ->
     _.extend(@, Backbone.Events)
 
+    # expose app for digital apps to update programmatically
+    window.estimatorApp = @
+
     datacenter = Utils.getUrlParameterFromHash("datacenter")
     datasource = Utils.getUrlParameterFromHash("datasource")
     currencyId = Utils.getUrlParameterFromHash("currency") || Config.DEFAULT_CURRENCY.id
