@@ -69,13 +69,6 @@
                 "monthly" : 0.05
             },
             {
-                "key": "networking:object-storage",
-                "name": "Object Storage Data Transfer",
-                "descriptionHtml" : "Inbound and outbound traffic. Price per GB transferred",
-                "type" : "usage (GB)",
-                "monthly" : 0.05
-            },
-            {
                 "key": "networking-services:vpn",
                 "name": "VPN Connection",
                 "descriptionHtml" : "Site to Site VPN Connection (Does not include bandwidth)",

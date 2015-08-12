@@ -2830,9 +2830,15 @@ ServiceModel = Backbone.Model.extend({
     disabled: false
   },
   initPricing: function(pricingMap) {
-    this.set("pricing", pricingMap.get('price'));
-    this.set("disabled", pricingMap.get('disabled'));
-    return this.set("hasSetupFee", pricingMap.get('hasSetupFee'));
+    if (pricingMap != null) {
+      this.set("pricing", pricingMap.get('price'));
+      this.set("disabled", pricingMap.get('disabled'));
+      return this.set("hasSetupFee", pricingMap.get('hasSetupFee'));
+    } else {
+      this.set("pricing", 0);
+      this.set("disabled", true);
+      return this.set("hasSetupFee", false);
+    }
   },
   parse: function(data) {
     return data;
