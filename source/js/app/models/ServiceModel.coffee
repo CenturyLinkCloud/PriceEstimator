@@ -8,9 +8,14 @@ ServiceModel = Backbone.Model.extend
     disabled: false
 
   initPricing: (pricingMap) ->
-    @.set "pricing", pricingMap.get('price')
-    @.set "disabled", pricingMap.get('disabled')
-    @.set "hasSetupFee", pricingMap.get('hasSetupFee')
+    if pricingMap?
+      @.set "pricing", pricingMap.get('price')
+      @.set "disabled", pricingMap.get('disabled')
+      @.set "hasSetupFee", pricingMap.get('hasSetupFee')
+    else
+      @.set "pricing", 0
+      @.set "disabled", true
+      @.set "hasSetupFee", false
 
   parse: (data) ->
     return data

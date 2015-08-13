@@ -3,21 +3,21 @@
     "key": "vpn",
     "title": "VPN - Site to Site",
     "description": "Secure access to the CenturyLink Cloud through client VPN or IPsec point-to-point VPN tunnel. Fully self-service.",
-    "link": " http://www.centurylinkcloud.com/products/network/vpn",
+    "link": " https://www.ctl.io/products/network/vpn",
     "input": "select"
   },
   {
     "key": "firewall",
     "title": "Additional VLAN/Firewall",
     "description": "Administer custom firewall policies within a single data center and across multiple data centers; create and manage VLANs.  First VLAN free.",
-    "link": "http://www.centurylinkcloud.com/products/network/firewall",
+    "link": "https://www.ctl.io/products/network/firewall",
     "input": "select"
   },
   {
     "key": "shared-load-balancer",
     "title": "Shared Load Balancer",
     "description": "Self-service product to help cloud applications perform as traffic rapidly changes.",
-    "link": "http://www.centurylinkcloud.com/products/network/load-balancing",
+    "link": "https://www.ctl.io/products/network/load-balancing",
     "input": "select"
   },
   {
@@ -25,14 +25,14 @@
     "title": "Dedicated Load Balancer (200Mbps traffic)",
     "description": "NetScaler Standard Edition; Enterprise Edition also available. Includes the monthly cost of a VM that powers the Load Balancer.",
 
-    "link": "http://www.centurylinkcloud.com/products/network/load-balancing",
+    "link": "https://www.ctl.io/products/network/load-balancing",
     "input": "select"
   },
   {
     "key": "dedicated-load-balancer-1000",
     "title": "Dedicated Load Balancer (1000Mbps traffic)",
     "description": "NetScaler Standard Edition; Enterprise Edition also available. Includes the monthly cost of a VM that powers the Load Balancer.",
-    "link": "http://www.centurylinkcloud.com/products/network/load-balancing",
+    "link": "https://www.ctl.io/products/network/load-balancing",
     "input": "select"
   },
   {

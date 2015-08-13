@@ -5,7 +5,7 @@ ServerModel = Backbone.Model.extend
   HOURS_PER_MONTH: "hours_per_month"
   PERCENTAGE_OF_MONTH: "percentage_of_month"
 
-  HOURS_IN_MONTH: 730
+  HOURS_IN_MONTH: 720
   DAYS_IN_MONTH: 30.41666667
   WEEKS_IN_MONTH: 4.345238095
 

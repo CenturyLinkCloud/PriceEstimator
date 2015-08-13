@@ -77,13 +77,6 @@
                 "monthly" : 0.0575
             },
             {
-                "key": "networking:object-storage",
-                "name": "Object Storage Data Transfer",
-                "descriptionHtml" : "Inbound and outbound traffic. Price per GB transferred",
-                "type" : "usage (GB)",
-                "monthly" : 0.05
-            },
-            {
                 "key": "networking-services:vpn",
                 "name": "VPN Connection",
                 "descriptionHtml" : "Site to Site VPN Connection (Does not include bandwidth)",
@@ -171,13 +164,13 @@
               "name": "Microsoft SQL Server Enterprise Edition",
               "descriptionHtml" : "per vCPU license per hour",
               "type" : "hourly (used)",
-              "hourly" : 0.4097
+              "hourly" : 0.4153
           },
           {
               "name": "Microsoft SQL Server Standard Edition",
               "descriptionHtml" : "per vCPU license per hour",
               "type" : "hourly (used)",
-              "hourly" : 0.1068
+              "hourly" : 0.1083
           },
           {
               "name": "Microsoft SQL Server Web Edition",
@@ -222,7 +215,7 @@
                 "name": "Managed Microsoft IIS",
                 "href" : "/managed-services/iis",
                 "descriptionHtml" : "per server",
-                "type" : "hourly (used)",
+                "type" : "hourly (allocated)",
                 "hourly" : 0.21
             },
             {
@@ -230,7 +223,7 @@
                 "name": "Managed Microsoft Active Directory",
                 "href": "/managed-services/active-directory",
                 "descriptionHtml" : "per server",
-                "type" : "hourly (used)",
+                "type" : "hourly (allocated)",
                 "hourly" : 0.28
             },
             {
@@ -238,7 +231,7 @@
                 "name": "Managed Microsoft SQL",
                 "descriptionHtml" : "per application instance",
                 "href" : "/managed-services/ms-sql",
-                "type" : "hourly (used)",
+                "type" : "hourly (allocated)",
                 "hourly" : 0.48
             },
             {
@@ -246,7 +239,7 @@
                 "name": "Managed Apache",
                 "descriptionHtml" : "per server",
                 "href" : "/managed-services/apache-server",
-                "type" : "hourly (used)",
+                "type" : "hourly (allocated)",
                 "hourly" : 0.21
             },
             {
@@ -254,7 +247,7 @@
                 "name": "Managed Tomcat",
                 "descriptionHtml" : "per server",
                 "href" : "/managed-services/tomcat",
-                "type" : "hourly (used)",
+                "type" : "hourly (allocated)",
                 "hourly" : 0.83
             },
             {
@@ -263,7 +256,7 @@
                 "version": "CDH5 Basic",
                 "descriptionHtml" : "per server",
                 "href" : "/managed-services/cloudera",
-                "type" : "hourly (used)",
+                "type" : "hourly (allocated)",
                 "hourly" : 0.54
             },
             {
@@ -272,7 +265,7 @@
                 "version": "CDH5 Basic + HBase",
                 "descriptionHtml" : "per server",
                 "href" : "/managed-services/cloudera",
-                "type" : "hourly (used)",
+                "type" : "hourly (allocated)",
                 "hourly" : 0.88
             },
             {
@@ -281,7 +274,7 @@
                 "version": "Enterprise Data Hub",
                 "descriptionHtml" : "per server",
                 "href" : "/managed-services/cloudera",
-                "type" : "hourly (used)",
+                "type" : "hourly (allocated)",
                 "hourly" : 1.15
             },
             {
@@ -289,27 +282,27 @@
                 "name": "Managed MySQL",
                 "descriptionHtml" : "per application instance",
                 "href" : "/managed-services/mysql",
-                "type" : "hourly (used)",
+                "type" : "hourly (allocated)",
                 "hourly" : 0.763
             },
             {
                 "key": "managed-apps:mysql-replication-master-master",
                 "name": "Managed MySQL Replication (Master/Master)",
                 "descriptionHtml" : "per application instance per hour",
-                "type" : "hourly (used)",
+                "type" : "hourly (allocated)",
                 "hourly" : 0.5556
             },
             {
                 "key": "managed-apps:mysql-replication-master-slave",
                 "name": "Managed MySQL Replication (Master/Slave)",
                 "descriptionHtml" : "per application instance per hour",
-                "type" : "hourly (used)",
+                "type" : "hourly (allocated)",
                 "hourly" : 0.3472
             },
             {
                 "name": "Managed GeoTrust Quick SSL Certificate",
                 "descriptionHtml" : "per certificate",
-                "type" : "hourly (used)"
+                "type" : "hourly (allocated)"
             },
             {
                 "name": "Managed Backup",
@@ -321,14 +314,14 @@
                 "key": "managed-apps:kerberos",
                 "name": "Managed Kerberos",
                 "descriptionHtml" : "per server",
-                "type" : "hourly (used)",
+                "type" : "hourly (allocated)",
                 "hourly" : 0.10
             },
             {
                 "key": "managed-apps:unlicensed-hadoop",
                 "name": "Managed Unlicensed Hadoop",
                 "descriptionHtml" : "per server",
-                "type" : "hourly (used)",
+                "type" : "hourly (allocated)",
                 "hourly" : 0.30
             }
         ]
@@ -527,7 +520,7 @@
             },
             {
                 "name": "Add / Install Remote Desktop Services",
-                "descriptionHtml" : "Customers who want to run Microsoft Remote Desktop Services can purchase this work item where we install the role on your virtual machine.",
+                "descriptionHtml" : "Customers who want to run Microsoft Remote Desktop Services can purchase this work item where we will provision RDS licenses for use on CenturyLink Cloud.",
                 "type" : "$195/hour, 1 hour minimum",
                 "hourly" : 195,
                 "monthly" : "&mdash;",

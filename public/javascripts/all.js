@@ -2269,7 +2269,7 @@ Config = require('../Config.coffee');
 
 DEFAULT_SERVER_DATA = require('../data/server.coffee');
 
-HOURS_IN_MONTH = 730;
+HOURS_IN_MONTH = 720;
 
 PricingMapsCollection = Backbone.Collection.extend({
   model: PricingModel,
@@ -2519,7 +2519,7 @@ AppfogModel = Backbone.Model.extend({
   HOURS_PER_WEEK: "hours_per_week",
   HOURS_PER_MONTH: "hours_per_month",
   PERCENTAGE_OF_MONTH: "percentage_of_month",
-  HOURS_IN_MONTH: 730,
+  HOURS_IN_MONTH: 720,
   DAYS_IN_MONTH: 30.41666667,
   WEEKS_IN_MONTH: 4.345238095,
   defaults: {
@@ -2578,7 +2578,7 @@ module.exports = AppfogModel;
 var BaremetalModel;
 
 BaremetalModel = Backbone.Model.extend({
-  HOURS_IN_MONTH: 730,
+  HOURS_IN_MONTH: 720,
   defaults: {
     quantity: 1,
     config: 1,
@@ -2652,7 +2652,7 @@ ServerModel = Backbone.Model.extend({
   HOURS_PER_WEEK: "hours_per_week",
   HOURS_PER_MONTH: "hours_per_month",
   PERCENTAGE_OF_MONTH: "percentage_of_month",
-  HOURS_IN_MONTH: 730,
+  HOURS_IN_MONTH: 720,
   DAYS_IN_MONTH: 30.41666667,
   WEEKS_IN_MONTH: 4.345238095,
   defaults: {
@@ -2830,9 +2830,15 @@ ServiceModel = Backbone.Model.extend({
     disabled: false
   },
   initPricing: function(pricingMap) {
-    this.set("pricing", pricingMap.get('price'));
-    this.set("disabled", pricingMap.get('disabled'));
-    return this.set("hasSetupFee", pricingMap.get('hasSetupFee'));
+    if (pricingMap != null) {
+      this.set("pricing", pricingMap.get('price'));
+      this.set("disabled", pricingMap.get('disabled'));
+      return this.set("hasSetupFee", pricingMap.get('hasSetupFee'));
+    } else {
+      this.set("pricing", 0);
+      this.set("disabled", true);
+      return this.set("hasSetupFee", false);
+    }
   },
   parse: function(data) {
     return data;

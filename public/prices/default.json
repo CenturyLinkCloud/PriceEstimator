@@ -53,14 +53,6 @@
                 "descriptionHtml" : "Outbound only, inbound is free. Price per GB transferred",
                 "type" : "usage (GB)",
                 "monthly" : 0.05
-            },
-            {
-                "key": "networking:object-storage",
-                "name": "Object Storage Data Transfer",
-                "descriptionHtml" : "Inbound and outbound traffic. Price per GB transferred",
-                "type" : "usage (GB)",
-                "monthly" : 0.05
-            },
             {
                 "key": "networking-services:vpn",
                 "name": "VPN Connection",
@@ -149,13 +141,13 @@
                   "name": "Microsoft SQL Server Enterprise Edition",
                   "descriptionHtml" : "per vCPU license per hour",
                   "type" : "hourly (used)",
-                  "hourly" : 0.4097
+                  "hourly" : 0.4153
               },
               {
                   "name": "Microsoft SQL Server Standard Edition",
                   "descriptionHtml" : "per vCPU license per hour",
                   "type" : "hourly (used)",
-                  "hourly" : 0.1068
+                  "hourly" : 0.1083
               },
               {
                   "name": "Microsoft SQL Server Web Edition",
@@ -365,7 +357,7 @@
             },
             {
                 "name": "Add / Install Remote Desktop Services",
-                "descriptionHtml" : "Customers who want to run Microsoft Remote Desktop Services can purchase this work item where we install the role on your virtual machine.",
+                "descriptionHtml" : "Customers who want to run Microsoft Remote Desktop Services can purchase this work item where we will provision RDS licenses for use on CenturyLink Cloud.",
                 "type" : "$195/hour, 1 hour minimum",
                 "hourly" : 195,
                 "monthly" : "&mdash;",
