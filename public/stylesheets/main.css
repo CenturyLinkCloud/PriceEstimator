@@ -1,49 +1,49 @@
 /* Base HTML
 ----------------------------------------------------- */
-/* line 4, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 4, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 html {
   -webkit-text-size-adjust: 100%; }
 
-/* line 10, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 10, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 * {
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
 
-/* line 16, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 16, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 body {
   background: white; }
 
-/* line 20, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 20, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 p, .price {
   color: #807f83; }
 
-/* line 24, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 24, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 a {
   color: #11853F; }
 
-/* line 28, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 28, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 h3 {
   font-size: 24px;
   color: black; }
 
-/* line 33, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 33, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 h4 {
   font-size: 18px;
   color: black; }
 
-/* line 38, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 38, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 input, select {
   font-size: 13px;
   height: 30px;
   width: auto;
   vertical-align: middle; }
 
-/* line 45, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 45, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 input[type=checkbox] {
   position: relative;
   top: -3px; }
 
-/* line 50, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 50, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 input[type=text], input[type=number] {
   border-radius: 0px;
   padding: 0px 4px;
@@ -54,17 +54,17 @@ input[type=text], input[type=number] {
 
 /* Major layout
 ----------------------------------------------------- */
-/* line 63, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 63, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 .container {
   width: 1170px; }
   @media print {
     .container {
       width: 100%; } }
 
-/* line 71, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 71, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 .main-container {
   opacity: 0; }
-  /* line 74, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 74, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .main-container.visible {
     opacity: 1;
     transition: opacity 300ms; }
@@ -72,18 +72,18 @@ input[type=text], input[type=number] {
     .main-container {
       width: 100%; } }
 
-/* line 83, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 83, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 .page-form {
   position: relative;
   margin-top: 0;
   padding-top: 140px; }
 
-/* line 89, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 89, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 .page-footer {
   margin-top: 0;
   margin-bottom: 50px; }
 
-/* line 94, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 94, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 .spinner {
   position: absolute;
   left: 50%;
@@ -92,7 +92,7 @@ input[type=text], input[type=number] {
 
 /* Buttons
 ----------------------------------------------------- */
-/* line 104, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 104, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 .remove-button {
   display: block;
   width: 20px;
@@ -103,11 +103,11 @@ input[type=text], input[type=number] {
   right: 10px;
   top: 34%;
   overflow: hidden; }
-  /* line 116, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 116, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .remove-button:hover {
     background-position: 0 -21px; }
 
-/* line 121, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 121, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 .add-button, .add-managed-button {
   border-radius: 3px;
   background: #00853f;
@@ -118,7 +118,7 @@ input[type=text], input[type=number] {
   font-size: 14px;
   line-height: 1.3;
   letter-spacing: 1px; }
-  /* line 132, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 132, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .add-button .plus, .add-managed-button .plus {
     overflow: hidden;
     display: inline-block;
@@ -126,14 +126,14 @@ input[type=text], input[type=number] {
     width: 11px;
     height: 11px;
     margin-right: 3px; }
-  /* line 141, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 141, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .add-button:hover, .add-managed-button:hover {
     transition: background 200ms;
     text-decoration: none;
     background: #274D36;
     color: white; }
 
-/* line 149, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 149, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 .add-managed-button {
   background: #959595;
   text-transform: none;
@@ -142,7 +142,7 @@ input[type=text], input[type=number] {
   margin-left: 5px;
   position: relative;
   cursor: pointer; }
-  /* line 159, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 159, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .add-managed-button .plus {
     overflow: hidden;
     display: inline-block;
@@ -154,7 +154,7 @@ input[type=text], input[type=number] {
     position: relative;
     top: -2px;
     left: -2px; }
-  /* line 172, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 172, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .add-managed-button .down-arrow {
     overflow: hidden;
     display: inline-block;
@@ -167,14 +167,14 @@ input[type=text], input[type=number] {
     position: relative;
     top: -2px;
     left: -2px; }
-  /* line 186, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 186, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .add-managed-button:hover {
     background: #686868; }
-    /* line 188, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+    /* line 188, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
     .add-managed-button:hover .managed-app-options {
       display: inline-block; }
 
-/* line 194, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 194, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 .managed-app-options {
   z-index: 100;
   position: absolute;
@@ -188,53 +188,53 @@ input[type=text], input[type=number] {
   padding: 0;
   padding-top: 2px;
   font-size: 12px; }
-  /* line 207, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 207, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .managed-app-options a {
     color: white;
     display: block;
     padding: 4px 8px;
     background: #959595;
     transition: background 200ms; }
-    /* line 214, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+    /* line 214, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
     .managed-app-options a:first-child {
       border-radius: 3px 3px 0 0; }
-    /* line 218, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+    /* line 218, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
     .managed-app-options a:last-child {
       border-radius: 0 0 3px 3px; }
-    /* line 222, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+    /* line 222, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
     .managed-app-options a:hover {
       text-decoration: none;
       background: #686868; }
 
 /* Tables
 ----------------------------------------------------- */
-/* line 232, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 232, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 .table {
   display: table;
   table-layout: fixed;
   width: 100%;
   margin-bottom: 15px;
   page-break-inside: avoid; }
-  /* line 238, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 238, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .table select {
     position: relative;
     top: 6px;
     width: 90px; }
-    /* line 243, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+    /* line 243, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
     .table select.software {
       width: 230px; }
-      /* line 246, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+      /* line 246, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
       .table select.software.hidden {
         display: none; }
-    /* line 251, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+    /* line 251, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
     .table select.baremetal-select {
       width: auto;
       max-width: 300px; }
-  /* line 257, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 257, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .table input[type=range] {
     width: 100px; }
 
-/* line 263, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 263, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 .support-table td {
   text-align: center;
   color: black;
@@ -242,34 +242,34 @@ input[type=text], input[type=number] {
   padding: 10px 5px;
   transition: border 200ms;
   width: 240px; }
-  /* line 271, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 271, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .support-table td p {
     color: black; }
-  /* line 275, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 275, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .support-table td:first-child {
     width: 270px;
     color: #807f83;
     text-align: right;
     text-transform: uppercase;
     letter-spacing: 1px; }
-/* line 285, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 285, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 .support-table tr:last-child td {
   border-bottom: none; }
 
-/* line 291, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 291, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 .table-row, .table-headers {
   display: table-row;
   width: 100%;
   background: #f0f0ee;
   font-size: 14px; }
-  /* line 297, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 297, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .table-row .table-header, .table-headers .table-header {
     vertical-align: bottom;
     background: #E5E5E5; }
-  /* line 302, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 302, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .table-row .table-cell, .table-headers .table-cell {
     vertical-align: middle; }
-  /* line 306, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 306, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .table-row .table-cell, .table-row .table-header, .table-headers .table-cell, .table-headers .table-header {
     position: relative;
     display: table-cell;
@@ -279,12 +279,12 @@ input[type=text], input[type=number] {
     line-height: 1.3;
     border-top: none;
     border-bottom: solid 1px #D3D3D0; }
-    /* line 316, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+    /* line 316, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
     .table-row .table-cell .tooltip-wrapper, .table-row .table-header .tooltip-wrapper, .table-headers .table-cell .tooltip-wrapper, .table-headers .table-header .tooltip-wrapper {
       position: relative;
       width: 100%;
       display: block; }
-    /* line 322, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+    /* line 322, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
     .table-row .table-cell .has-tooltip, .table-row .table-header .has-tooltip, .table-headers .table-cell .has-tooltip, .table-headers .table-header .has-tooltip {
       position: absolute;
       top: -6px;
@@ -293,131 +293,131 @@ input[type=text], input[type=number] {
       width: 100%;
       display: block;
       z-index: 10; }
-    /* line 332, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+    /* line 332, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
     .table-row .table-cell.managed-app-cell, .table-row .table-header.managed-app-cell, .table-headers .table-cell.managed-app-cell, .table-headers .table-header.managed-app-cell {
       text-align: center;
       position: relative;
       left: -96px;
       font-size: 16px; }
-    /* line 339, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+    /* line 339, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
     .table-row .table-cell.managed-app-quantity-cell, .table-row .table-header.managed-app-quantity-cell, .table-headers .table-cell.managed-app-quantity-cell, .table-headers .table-header.managed-app-quantity-cell {
       text-align: center; }
-    /* line 343, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+    /* line 343, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
     .table-row .table-cell.managed-app-usage-cell, .table-row .table-header.managed-app-usage-cell, .table-headers .table-cell.managed-app-usage-cell, .table-headers .table-header.managed-app-usage-cell {
       position: relative;
       left: -11px; }
-  /* line 349, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 349, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .table-row.is-managed, .table-headers.is-managed {
     background: #f0f0ee url(../images/dash.gif) repeat-x bottom left; }
-    /* line 352, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+    /* line 352, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
     .table-row.is-managed .table-cell, .table-headers.is-managed .table-cell {
       border-bottom: none; }
 
-/* line 358, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 358, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 .table-row {
   height: 57px; }
 
-/* line 362, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 362, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 .table-headers {
   background: #E5E5E5;
   color: #807f83; }
 
-/* line 368, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 368, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 .table-header {
   vertical-align: bottom; }
 
-/* line 372, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 372, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 .tooltip {
   width: 200px;
   z-index: 19; }
 
-/* line 377, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 377, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 .rangeslider {
   display: inline-block;
   width: 60px; }
 
-/* line 382, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 382, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 .quantity-cell {
   width: 31px; }
-  /* line 385, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 385, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .quantity-cell input {
     width: 30px; }
 
-/* line 390, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 390, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 .type-cell {
   width: 94px; }
 
-/* line 394, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 394, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 .os-cell {
   width: 81px; }
 
-/* line 398, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 398, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 .managed-cell {
   width: 65px; }
-  /* line 401, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 401, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .managed-cell.disabled {
     opacity: 0.2;
     pointer-events: none; }
 
-/* line 407, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 407, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 .usage-cell {
   width: 116px; }
-  /* line 410, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 410, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .usage-cell input {
     width: 35px; }
-  /* line 414, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 414, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .usage-cell select {
     width: 95px; }
 
-/* line 419, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 419, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 .range-cell {
   width: 90px; }
-  /* line 422, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 422, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .range-cell span {
     display: inline-block;
     width: 14px;
     text-align: left;
     margin-right: 3px; }
-  /* line 429, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 429, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .range-cell input[type=range] {
     position: relative;
     top: -2px;
     opacity: 0; }
 
-/* line 437, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 437, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 .memory-cell span {
   width: 20px; }
-/* line 441, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 441, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 .memory-cell .memory-text-input {
   width: 35px;
   padding-left: 3px;
   margin-right: 2px;
   font-size: 12px; }
 
-/* line 451, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 451, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 .cpu-cell span {
   width: 20px; }
-/* line 455, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 455, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 .cpu-cell .cpu-text-input {
   width: 35px;
   padding-left: 3px;
   margin-right: 2px;
   font-size: 12px; }
 
-/* line 465, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 465, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 .storage-cell span {
   width: 35px; }
-/* line 469, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 469, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 .storage-cell .storage-text-input {
   width: 35px;
   padding-left: 3px;
   margin-right: 2px;
   font-size: 11px; }
 
-/* line 477, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 477, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 .price-cell {
   width: 88px; }
-  /* line 479, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 479, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .price-cell .price {
     width: 78px;
     min-width: 20px;
@@ -425,35 +425,35 @@ input[type=text], input[type=number] {
     word-wrap: break-word;
     display: inline-block; }
 
-/* line 488, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 488, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 .add-managed-app-cell {
   width: 120px; }
 
 /* Calculator Sections
 ----------------------------------------------------- */
-/* line 497, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 497, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 .calculator-section {
   position: relative;
   line-height: 1.4;
   margin-top: 20px;
   margin-bottom: 50px;
   page-break-inside: avoid; }
-  /* line 506, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 506, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .calculator-section h3 {
     margin-bottom: 0;
     line-height: 1.4; }
-  /* line 511, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 511, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .calculator-section p {
     margin-top: 0;
     margin-bottom: 20px; }
-  /* line 516, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 516, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .calculator-section ul {
     color: #807f83;
     font-size: 15px; }
-    /* line 520, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+    /* line 520, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
     .calculator-section ul li {
       margin-bottom: 0; }
-  /* line 525, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 525, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .calculator-section .subtotal-wrapper {
     position: absolute;
     right: 0;
@@ -464,7 +464,7 @@ input[type=text], input[type=number] {
     width: 300px;
     text-align: right;
     overflow: hidden; }
-    /* line 536, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+    /* line 536, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
     .calculator-section .subtotal-wrapper .subtotal {
       margin-left: 7px;
       display: inline-block;
@@ -472,14 +472,14 @@ input[type=text], input[type=number] {
       color: #00853f;
       word-wrap: break-word; }
 
-/* line 547, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 547, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 .calculator-section.disabled {
   opacity: 0.3;
   pointer-events: none; }
 
 /* Total Section
 ----------------------------------------------------- */
-/* line 556, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 556, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 .green-section {
   position: absolute;
   top: 0;
@@ -489,7 +489,7 @@ input[type=text], input[type=number] {
   padding: 20px;
   overflow: hidden;
   z-index: 100; }
-  /* line 566, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 566, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .green-section h3 {
     color: white;
     float: left;
@@ -497,36 +497,36 @@ input[type=text], input[type=number] {
     line-height: 20px;
     position: relative;
     top: 6px; }
-  /* line 575, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 575, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .green-section .currency-select {
     margin-bottom: 0;
     display: inline-block;
     margin-left: 1em;
     position: relative;
     top: -7px; }
-    /* line 582, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+    /* line 582, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
     .green-section .currency-select select.currency {
       margin-bottom: 0; }
-  /* line 587, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 587, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .green-section .datacenter-select {
     clear: both; }
-    /* line 589, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+    /* line 589, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
     .green-section .datacenter-select span {
       color: white;
       font-size: 14px;
       position: relative;
       top: 2px;
       margin-right: 4px; }
-    /* line 597, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+    /* line 597, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
     .green-section .datacenter-select .datacenter {
       clear: both;
       display: inline-block;
       margin: 5px 0 0;
       text-transform: capitalize; }
-  /* line 605, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 605, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .green-section .lpChatTextLinkText {
     color: white; }
-  /* line 610, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 610, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .green-section .buttons .btn-discuss {
     background: #284e36;
     border: 2px solid #108442;
@@ -536,10 +536,10 @@ input[type=text], input[type=number] {
     position: relative;
     top: 4px;
     text-align: center; }
-    /* line 620, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+    /* line 620, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
     .green-section .buttons .btn-discuss:hover {
       background: #108442; }
-  /* line 626, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 626, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .green-section .total-box {
     float: right;
     width: 55%;
@@ -547,38 +547,38 @@ input[type=text], input[type=number] {
     padding: 15px;
     background: #284e36;
     max-height: 72px; }
-    /* line 634, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+    /* line 634, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
     .green-section .total-box .price {
       line-height: 1;
       color: white;
       font-size: 42px;
       margin-bottom: 20px;
       word-wrap: break-word; }
-    /* line 642, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+    /* line 642, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
     .green-section .total-box .estimated {
       color: #addd6c;
       width: 60px;
       margin-left: 10px;
       display: inline-block;
       line-height: 1.2; }
-  /* line 651, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 651, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .green-section.clone {
     padding: 0; }
-    /* line 654, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+    /* line 654, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
     .green-section.clone .total-box {
       padding: 0;
       float: left; }
-    /* line 658, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+    /* line 658, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
     .green-section.clone .pull-left {
       display: none; }
 
 /* Services
 ----------------------------------------------------- */
-/* line 668, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 668, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 .services {
   margin-top: -10px; }
 
-/* line 672, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 672, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 .service {
   text-align: center;
   border: solid 5px #d3d3d0;
@@ -586,10 +586,10 @@ input[type=text], input[type=number] {
   margin: 10px 30px 20px 0;
   display: inline-block;
   transition: border 200ms; }
-  /* line 680, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 680, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .service:nth-child(3), .service:nth-child(6) {
     margin-right: 0; }
-  /* line 684, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 684, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .service select {
     width: 50px;
     position: relative;
@@ -597,21 +597,21 @@ input[type=text], input[type=number] {
     margin-left: 4px;
     margin-right: 4px;
     display: inline-block; }
-  /* line 693, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 693, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .service h4 {
     font-size: 18px;
     display: table-cell;
     vertical-align: middle;
     padding: 0 20px;
     width: 100%; }
-  /* line 701, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 701, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .service form {
     margin: 0; }
-  /* line 705, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 705, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .service.disabled {
     opacity: 0.3;
     pointer-events: none; }
-  /* line 710, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 710, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .service .service__info {
     padding: 10px;
     background: #f0f0ee;
@@ -619,7 +619,7 @@ input[type=text], input[type=number] {
     height: 110px;
     width: 100%;
     display: table; }
-  /* line 719, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 719, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .service .service__description {
     background: #f0f0ee;
     position: absolute;
@@ -631,61 +631,61 @@ input[type=text], input[type=number] {
     font-size: 14px;
     opacity: 0;
     transition: opacity 200ms; }
-  /* line 732, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 732, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .service .service__inputs {
     padding: 10px;
     text-align: left;
     padding-left: 20px;
     position: relative;
     width: 100%; }
-    /* line 739, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+    /* line 739, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
     .service .service__inputs .price {
       text-align: right;
       position: absolute;
       right: 20px;
       top: 20px; }
-    /* line 746, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+    /* line 746, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
     .service .service__inputs .quantity-wrapper {
       display: inline-block;
       width: 65px; }
-    /* line 751, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+    /* line 751, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
     .service .service__inputs input[type=range] {
       position: relative;
       z-index: 10;
       margin-left: 6px;
       margin-right: 5px;
       top: -1px; }
-    /* line 760, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+    /* line 760, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
     .service .service__inputs.slider .price {
       top: 14px; }
-  /* line 767, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 767, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .service.object-storage input[type=range], .service.object-storage .rangeslider {
     width: 114px; }
-  /* line 772, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 772, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .service.bandwidth {
     width: 658px; }
-    /* line 775, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+    /* line 775, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
     .service.bandwidth .service__info {
       height: 60px; }
-    /* line 779, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+    /* line 779, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
     .service.bandwidth input[type=range], .service.bandwidth .rangeslider {
       width: 440px; }
-    /* line 783, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+    /* line 783, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
     .service.bandwidth .service__info {
       min-height: 0; }
-  /* line 788, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 788, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .service.active {
     border-color: #a5d867; }
-  /* line 793, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 793, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .service:hover .service__description {
     opacity: 1; }
 
 /* Included Section
 ----------------------------------------------------- */
-/* line 804, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 804, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 #included {
   overflow: hidden; }
-  /* line 806, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 806, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   #included ul {
     list-style: none;
     margin: 0;
@@ -694,7 +694,7 @@ input[type=text], input[type=number] {
     margin-bottom: 40px;
     width: 33%;
     float: left; }
-  /* line 816, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 816, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   #included li {
     list-style: none;
     width: 100%;
@@ -703,27 +703,27 @@ input[type=text], input[type=number] {
     margin-left: 0;
     margin: 10px 0;
     padding-right: 40px; }
-  /* line 826, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 826, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   #included p {
     font-size: 14px;
     clear: both;
     text-align: left;
     width: 800px; }
 
-/* line 835, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 835, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 #bandwidth > p {
   width: 630px; }
 
 /* Support
 ----------------------------------------------------- */
-/* line 846, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 846, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 #support > p {
   width: 220px; }
-/* line 850, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 850, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 #support .support-table {
   margin-top: -50px; }
 
-/* line 855, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 855, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 .support-select {
   background: #f0f0ee;
   border: solid 5px #d3d3d0;
@@ -733,16 +733,16 @@ input[type=text], input[type=number] {
   height: 204px;
   text-align: center;
   cursor: pointer; }
-  /* line 865, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 865, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .support-select h4 {
     line-height: 60px; }
-  /* line 869, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 869, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .support-select .status-label-wrapper {
     background: white;
     padding: 24px 0;
     padding-bottom: 10px;
     height: 134px; }
-  /* line 876, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 876, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .support-select .status-label {
     display: inline-block;
     background: #D3D3D0;
@@ -753,101 +753,101 @@ input[type=text], input[type=number] {
     line-height: 1;
     font-size: 13px;
     letter-spacing: 1px; }
-  /* line 888, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 888, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .support-select p {
     margin-top: 20px;
     margin-bottom: 0;
     font-size: 12px;
     padding: 0 10px; }
-  /* line 895, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 895, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .support-select:hover {
     text-decoration: none; }
-  /* line 899, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 899, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .support-select.selected {
     border-color: #a5d867; }
-    /* line 902, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+    /* line 902, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
     .support-select.selected .status-label {
       background: #a5d867; }
 
 @media print {
-  /* line 909, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 909, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   h3 {
     font-size: 24px; }
-  /* line 913, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 913, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .page-form {
     padding-top: 0;
     padding-left: 2em;
     padding-right: 2em;
     min-width: 1012px; }
-  /* line 919, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 919, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   #networking-services {
     page-break-before: always; }
-  /* line 922, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 922, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   #monthly-total {
     position: relative !important;
     display: block !important;
     padding: 20px 0 20px 0;
     margin-bottom: 20px;
     border-bottom: 1px solid #ddd; }
-    /* line 928, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+    /* line 928, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
     #monthly-total h3 {
       font-size: 26px; }
-  /* line 932, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 932, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .total-box {
     width: auto !important; }
-  /* line 936, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 936, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .total-box .buttons {
     display: none; }
-  /* line 939, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 939, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   #support {
     page-break-before: always; }
-  /* line 942, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 942, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .service {
     width: 30%; }
-  /* line 946, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 946, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   #included {
     page-break-before: always; }
-  /* line 950, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 950, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .tooltip, .service__description {
     display: none !important; }
-  /* line 954, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 954, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .calculator-section .subtotal-wrapper {
     top: 100%;
     width: 100%; }
-  /* line 958, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 958, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .page-footer {
     padding-left: 40px; }
-  /* line 961, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 961, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .add-managed-app-row {
     display: none !important; }
-  /* line 965, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 965, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .rangeslider {
     display: none !important; }
-  /* line 970, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 970, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   table {
     min-width: 100%; } }
 
 @media print {
-  /* line 977, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 977, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .no-print {
     display: none !important; } }
 
-/* line 982, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 982, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 .print-only {
   display: none; }
-  /* line 985, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 985, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .print-only--block {
     display: none; }
     @media print {
       .print-only--block {
         display: block; } }
-  /* line 991, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 991, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .print-only--inline {
     display: none; }
     @media print {
       .print-only--inline {
         display: inline; } }
-  /* line 997, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+  /* line 997, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
   .print-only--inline-block {
     display: none; }
     @media print {
@@ -861,11 +861,11 @@ input[type=text], input[type=number] {
   .print .break-after-always {
     page-after-before: always; } }
 
-/* line 1019, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 1019, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 .header.print-only--block .container {
   width: 100%; }
 
-/* line 1025, /Users/jim-phillips/Documents/dev/PriceEstimator/source/css/main.scss */
+/* line 1025, /Users/bryanfriedman/Documents/Repos/PriceEstimator/source/css/main.scss */
 .cost sup {
   top: -0.25em;
   left: -0.25em; }
