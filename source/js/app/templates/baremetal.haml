@@ -1,13 +1,21 @@
 %td.table-cell.quantity-cell
   %input.number{name: "quantity", value: @model.get("quantity"), type: "text"}
 
-%td.table-cell
+%td.table-cell.usage-cell
+  %input.number{name: "usage", value: @model.get("usage"), type: "text"}
+  %select{name: "usagePeriod"}
+    %option{value: "hours_per_month",  selected: @model.get('usagePeriod') == 'hours_per_month' } hrs / month
+    %option{value: "percentage_of_month", selected: @model.get('usagePeriod') == 'percentage_of_month' } % / month
+    %option{value: "hours_per_week", selected: @model.get('usagePeriod') == 'hours_per_week'} hrs / week
+    %option{value: "hours_per_day", selected: @model.get('usagePeriod') == 'hours_per_day'} hrs / day
+
+%td.table-cell.config-cell
   %select.baremetal-select{name: "config"}
     %option{value: 1,  selected: @model.get('config') == 1 } #{@model.get('pricing').config['1'].name}
     %option{value: 2,  selected: @model.get('config') == 2 } #{@model.get('pricing').config['2'].name}
     %option{value: 3,  selected: @model.get('config') == 3 } #{@model.get('pricing').config['3'].name}
 
-%td.table-cell
+%td.table-cell.os-cell
   %select{name: "os"}
     %option{value: 1,  selected: @model.get('os') == 1, title: @model.get('pricing').os['1'].descriptionHtml } #{@model.get('pricing').os['1'].shortName}
     %option{value: 2,  selected: @model.get('os') == 2, title: @model.get('pricing').os['2'].descriptionHtml } #{@model.get('pricing').os['2'].shortName}
