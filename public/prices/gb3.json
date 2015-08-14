@@ -213,6 +213,15 @@
                 "type": "no charge",
                 "hourly": 0.0,
                 "href": "/bare-metal#Features"
+            },
+            {
+                "key": "baremetal:os:4",
+                "shortName": "Ubuntu",
+                "name": "Ubuntu for Bare Metal",
+                "descriptionHtml": "",
+                "type": "no charge",
+                "hourly": 0.0,
+                "href": "/bare-metal#Features"
             }
         ]
     },

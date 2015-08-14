@@ -20,7 +20,7 @@ module.exports = (grunt) ->
 
     pkg: grunt.file.readJSON("package.json")
 
-    
+
     # --------------------------------------------------------
     # Concatenate vendor JS
     # --------------------------------------------------------
@@ -38,7 +38,7 @@ module.exports = (grunt) ->
           ]
           dest: "#{output}/javascripts/vendor.js"
 
-    
+
     # --------------------------------------------------------
     # Compile CSS
     # --------------------------------------------------------
@@ -48,7 +48,8 @@ module.exports = (grunt) ->
         src: "#{source}/css/main.scss"
         dest: "#{output}/stylesheets/main.css"
         options:
-          sourceComments: "map"
+          sourceComments: false
+          sourcemap: "none"
 
 
     # --------------------------------------------------------
@@ -56,7 +57,7 @@ module.exports = (grunt) ->
     # --------------------------------------------------------
 
     autoprefixer:
-      dist: 
+      dist:
         expand: true,
         flatten: true,
         src: "#{output}/stylesheets/*.css"
@@ -119,15 +120,15 @@ module.exports = (grunt) ->
           ignoreLeaks: true
         src: ["#{test}/html/index.html"]
 
-    
+
     # --------------------------------------------------------
     # Run Middleman concurrently with Grunt Watch
     # --------------------------------------------------------
 
-    concurrent: 
-      options: 
+    concurrent:
+      options:
         logConcurrentOutput: true
-      server: 
+      server:
         tasks: ['exec:middleman', 'watch']
 
 
@@ -141,19 +142,19 @@ module.exports = (grunt) ->
       test:
         files: [ 'test/**/*.*', 'source/coffeescript/**/*.*' ]
         tasks: [ 'test' ]
-      config: 
+      config:
         files: ["Gruntfile.coffee"]
         options:
           reload: true
       scripts:
         files: ["#{source}/js/**/*.{js,coffee,haml}"]
         tasks: ["browserify"]
-        options: 
+        options:
           spawn: true
       sass:
         files: ["#{source}/css/*.scss"]
         tasks: ["sass", "autoprefixer"]
-        options: 
+        options:
           spawn: true
       livereload:
         files: ["#{output}/stylesheets/*.css", "#{output}/javascripts/*.js", "#{output}/*.{erb,haml,html}"]
@@ -164,7 +165,7 @@ module.exports = (grunt) ->
 
   # --------------------------------------------------------
   # Load and register Grunt Tasks
-  # --------------------------------------------------------  
+  # --------------------------------------------------------
 
   grunt.loadNpmTasks "grunt-contrib-clean"
   grunt.loadNpmTasks "grunt-contrib-concat"
