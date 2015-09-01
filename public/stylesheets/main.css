@@ -339,6 +339,11 @@ input[type=text], input[type=number] {
   margin-right: 2px;
   font-size: 11px; }
 
+.config-cell {
+  width: 330px; }
+  .config-cell select {
+    width: auto; }
+
 .price-cell {
   width: 88px; }
   .price-cell .price {

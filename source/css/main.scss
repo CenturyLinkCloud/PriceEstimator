@@ -474,6 +474,13 @@ input[type=text], input[type=number] {
   }
 }
 
+.config-cell {
+  width: 330px;
+  select {
+    width: auto;
+  }
+}
+
 .price-cell {
   width: 88px;
   .price {

@@ -112,13 +112,14 @@
           $0.00
       %table.table
         %tr.table-headers
-          %th.table-header QTY
-          %th.table-header
+          %th.table-header.quantity-cell QTY
+          %th.table-header.usage-cell USAGE
+          %th.table-header.config-cell
             .tooltip-wrapper
               %a.has-tooltip{href:"#", data: {toggle: "tooltip", title: "Bare Metal servers are billed hourly once allocated."}}
             CONFIGURATION
-          %th.table-header OS
-          %th.table-header MONTHLY COST
+          %th.table-header.os-cell OS
+          %th.table-header.price-cell MONTHLY COST
 
       %a.add-button.no-print{href: "#"} <span class="plus"></span> Add Bare Metal Server
 
