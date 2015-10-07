@@ -203,11 +203,11 @@
             },
             {
                 "key": "baremetal:os:1",
-                "shortName": "Windows",
-                "name": "Microsoft Windows Server for Bare Metal",
-                "descriptionHtml": "per socket",
-                "type": "hourly (allocated)",
-                "hourly": 0.04,
+                "shortName": "CentOS",
+                "name": "CentOS for Bare Metal",
+                "descriptionHtml": "",
+                "type": "no charge",
+                "hourly": 0.0,
                 "href": "/bare-metal#Features"
             },
             {
@@ -221,15 +221,24 @@
             },
             {
                 "key": "baremetal:os:3",
-                "shortName": "CentOS",
-                "name": "CentOS for Bare Metal",
-                "descriptionHtml": "",
-                "type": "no charge",
-                "hourly": 0.0,
+                "shortName": "Win Std",
+                "name": "Microsoft Windows Server Standard for Bare Metal",
+                "descriptionHtml": "per socket",
+                "type": "hourly (allocated)",
+                "hourly": 0.04,
                 "href": "/bare-metal#Features"
             },
             {
                 "key": "baremetal:os:4",
+                "shortName": "Win DC",
+                "name": "Microsoft Windows Server Datacenter for Bare Metal",
+                "descriptionHtml": "per socket",
+                "type": "hourly (allocated)",
+                "hourly": 0.279,
+                "href": "/bare-metal#Features"
+            },
+            {
+                "key": "baremetal:os:5",
                 "shortName": "Ubuntu",
                 "name": "Ubuntu for Bare Metal",
                 "descriptionHtml": "",
