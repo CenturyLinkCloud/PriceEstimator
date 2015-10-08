@@ -6,7 +6,7 @@
             {
                 "key": "server:cpu",
                 "name": "Virtual CPU",
-                "descriptionHtml" : "Standard Servers. 2 Ghz+ Processor (up to 16 cpu)",
+                "descriptionHtml" : "Standard Servers. 2 Ghz+ Processor (up to 16 CPU)",
                 "type" : "hourly (used)",
                 "hourly" : 0.0100,
                 "href": "/servers"
@@ -50,27 +50,27 @@
             {
                 "key": "networking:bandwidth",
                 "name": "Internet Bandwidth Data Transfer",
-                "descriptionHtml" : "Outbound only, inbound is free. Price per GB transferred",
+                "descriptionHtml" : "Outbound only, inbound is free. Price per GB transferred.",
                 "type" : "usage (GB)",
                 "monthly" : 0.05
             {
                 "key": "networking-services:vpn",
                 "name": "VPN Connection",
-                "descriptionHtml" : "Site to Site VPN Connection (Does not include bandwidth)",
+                "descriptionHtml" : "Site to Site VPN Connection (Does not include bandwidth.)",
                 "type" : "monthly (fixed)",
                 "monthly" : 45.00
             },
             {
                 "key": "networking-services:firewall",
                 "name": "Private VLAN (Additional)",
-                "descriptionHtml" : "1 VLAN is automatically included with each acccount",
+                "descriptionHtml" : "1 VLAN is automatically included with each account.",
                 "type" : "monthly (fixed)",
                 "monthly" : 45.00
             },
             {
                 "key": "networking-services:external-ip-address",
                 "name": "Public IP Address",
-                "descriptionHtml" : "IP Address accessible by public internet",
+                "descriptionHtml" : "IP Address accessible by public internet.",
                 "type" : "monthly (fixed)",
                 "monthly" : 2.00
             },
@@ -95,7 +95,7 @@
             },
             {
                 "name": "CDN SSL Delivery with Private Cert",
-                "descriptionHtml" : "per domain (does not include HTTPS delivery)",
+                "descriptionHtml" : "Per domain (Does not include HTTPS delivery.)",
                 "type" : "monthly (fixed)",
                 "monthly" : "260.00"
             }
@@ -139,25 +139,25 @@
         "products" : [
               {
                   "name": "Microsoft SQL Server Enterprise Edition",
-                  "descriptionHtml" : "per vCPU license per hour",
+                  "descriptionHtml" : "Per vCPU license per hour",
                   "type" : "hourly (used)",
                   "hourly" : 0.4153
               },
               {
                   "name": "Microsoft SQL Server Standard Edition",
-                  "descriptionHtml" : "per vCPU license per hour",
+                  "descriptionHtml" : "Per vCPU license per hour",
                   "type" : "hourly (used)",
                   "hourly" : 0.1083
               },
               {
                   "name": "Microsoft SQL Server Web Edition",
-                  "descriptionHtml" : "per vCPU license per hour",
+                  "descriptionHtml" : "Per vCPU license per hour",
                   "type" : "hourly (used)",
                   "hourly" : 0.0067
               },
               {
                   "name": "Microsoft Windows Remote Desktop Services SAL",
-                  "descriptionHtml" : "per license per hour",
+                  "descriptionHtml" : "Per license per hour",
                   "type" : "hourly (used)",
                   "hourly" : 0.0062
               }
@@ -169,7 +169,7 @@
         "products": [
             {
                 "name": "SafeHaven License",
-                "descriptionHtml" : "per server",
+                "descriptionHtml" : "Per server",
                 "type" : "hourly (allocated)",
                 "hourly" : 0.0548
             }
@@ -252,19 +252,19 @@
             },
             {
                 "name": "Quickstart Advanced ",
-                "descriptionHtml" : "Deployment services & best practice consultation to maximize ROI",
+                "descriptionHtml" : "Deployment services and best practice consultation to maximize ROI",
                 "type" : "one-time (fixed) ",
                 "setupFee" : 2000.00
             },
             {
                 "name": "Quickstart Enterprise",
-                "descriptionHtml" : "Tailored for strategic and/or enterprise orgs who require complex onboarding and/or applicable to customers who have extended onboarding requirements",
+                "descriptionHtml" : "Tailored for strategic and/or enterprise orgs who require complex onboarding and/or applicable to customers who have extended onboarding requirements.",
                 "type" : "one-time (fixed) ",
                 "setupFee" : 20000.00
             },
             {
                 "name": "Quickstart SafeHaven Onboarding",
-                "descriptionHtml" : "Includes 6 Recovery VM setup. Any Additional Recovery VM setup will be $325 per VM which is a onetime charge",
+                "descriptionHtml" : "Includes 6 Recovery VM setup. Any Additional Recovery VM setup is $325 per VM which is a onetime charge.",
                 "type" : "one-time (fixed) ",
                 "setupFee" : 1850.00
             }
@@ -293,7 +293,7 @@
             },
             {
                 "name": "Deploy Site-to-Site VPN Tunnels or Direct Connect",
-                "descriptionHtml" : "Provision specialized site to site tunnels for customers or connect CenturyLink Cloud to hardware in the same data center via Direct Connect.",
+                "descriptionHtml" : "Provision specialized site-to-site tunnels for customers or connect CenturyLink Cloud to hardware in the same data center via Direct Connect.",
                 "type" : "$195/hour, 2 hour minimum",
                 "hourly" : 195,
                 "monthly" : "&mdash;",
@@ -365,7 +365,7 @@
             },
             {
                 "name": "MSSQL Database Mirroring",
-                "descriptionHtml" : "Available on both the Standard (synchronous only) and Enterprise Edition of all supported versions of MSSQL, mirroring synchronizes data from a principal DB to a mirror DB on another MSSQL instance.  Each database retains its own unique connection string, even in the case of failover. Configurable on a per-database basis.",
+                "descriptionHtml" : "Available on both the Standard (synchronous only) and Enterprise Edition of all supported versions of MSSQL. Mirroring synchronizes data from a principal DB to a mirror DB on another MSSQL instance.  Each database retains its own unique connection string, even in the case of failover. Configurable on a per-database basis.",
                 "type" : "$195/hour, 1 hour minimum",
                 "hourly" : 195,
                 "monthly" : "&mdash;",
@@ -397,7 +397,7 @@
             },
             {
                 "name": "Direct Connect Setup",
-                "descriptionHtml" : "Provides the planning and work necessary to establish a direct connect between environments via cross connect or MPLS",
+                "descriptionHtml" : "Provides the planning and work necessary to establish a direct connect between environments via cross connect or MPLS.",
                 "type" : "$195/hour, 4 hour minimum",
                 "hourly" : 195,
                 "monthly" : "&mdash;",
