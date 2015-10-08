@@ -7,7 +7,7 @@
                 "key": "server:cpu",
                 "name": "Virtual CPU",
                 "descriptionHtml" : "2 Ghz+ Processor (up to 16 cpu)",
-                "type" : "hourly (allocated)",
+                "type" : "hourly (used)",
                 "hourly" : 0.0115,
                 "href": "/servers"
             },
@@ -15,7 +15,7 @@
                 "key": "server:memory",
                 "name": "Virtual RAM",
                 "descriptionHtml" : "1 GB (up to 128GB)",
-                "type" : "hourly (allocated)",
+                "type" : "hourly (used)",
                 "hourly" : 0.0173,
                 "href": "/servers"
             },
@@ -38,14 +38,14 @@
             {
                 "name": "Virtual CPU for Hyperscale",
                 "descriptionHtml" : "2 Ghz+ Processor (up to 16 cpu)",
-                "type" : "hourly (allocated)",
+                "type" : "hourly (used)",
                 "hourly" : 0.0115,
                 "href": "/hyperscale"
             },
             {
                 "name": "Virtual RAM for Hyperscale",
                 "descriptionHtml" : "1 GB (up to 128GB)",
-                "type" : "hourly (allocated)",
+                "type" : "hourly (used)",
                 "hourly" : 0.0173,
                 "href": "/hyperscale"
             },
@@ -343,47 +343,63 @@
         "href" : "/load-balancing",
         "description" : "Self-service shared or dedicated load balancer options.",
         "products": [
-            {
-                "key": "networking-services:shared-load-balancer",
-                "name": "Shared Load Balancer",
-                "descriptionHtml" : "Fully self-service shared load balancer",
-                "type" : "hourly (allocated)",
-                "hourly" : 0.04
-            },
-            {
-                "key": "networking-services:dedicated-load-balancer-200",
-                "name": "Citrix NetScaler VPX",
-                "version" : "200Mbps Standard",
-                "descriptionHtml" : "Dedicated Load Balancer (Virtual Appliance)",
-                "type" : "monthly (fixed)",
-                "monthly" : 260.00,
-                "setupFee": 390.00
-            },
-            {
-                "name": "Citrix NetScaler VPX",
-                "version" : "200Mbps Enterprise",
-                "descriptionHtml" : "Dedicated Load Balancer (Virtual Appliance)",
-                "type" : "monthly (fixed)",
-                "monthly" : 520.00,
-                "setupFee": 390.00
-            },
-            {
-                "key": "networking-services:dedicated-load-balancer-1000",
-                "name": "Citrix NetScaler VPX",
-                "version" : "1000Mbps Standard",
-                "descriptionHtml" : "Dedicated Load Balancer (Virtual Appliance)",
-                "type" : "monthly (fixed)",
-                "monthly" : 780.00,
-                "setupFee": 390.00
-            },
-            {
-                "name": "Citrix NetScaler VPX",
-                "version" : "1000Mbps Enterprise",
-                "descriptionHtml" : "Dedicated Load Balancer (Virtual Appliance)",
-                "type" : "monthly (fixed)",
-                "monthly" : 1170.00,
-                "setupFee": 390.00
-            }
+          {
+              "key": "networking-services:shared-load-balancer",
+              "name": "Shared Load Balancer",
+              "descriptionHtml" : "Fully self-service shared load balancer",
+              "type" : "hourly (allocated)",
+              "hourly" : 0.04
+          },
+          {
+              "key": "networking-services:dedicated-load-balancer-200",
+              "name": "Citrix NetScaler VPX",
+              "version" : "200Mbps Standard",
+              "descriptionHtml" : "Dedicated Load Balancer (Virtual Appliance)",
+              "type" : "monthly (fixed)",
+              "monthly" : 260.00,
+              "setupFee": 390.00
+          },
+          {
+              "name": "Citrix NetScaler VPX",
+              "version" : "200Mbps Enterprise",
+              "descriptionHtml" : "Dedicated Load Balancer (Virtual Appliance)",
+              "type" : "monthly (fixed)",
+              "monthly" : 520.00,
+              "setupFee": 390.00
+          },
+          {
+              "name": "Citrix NetScaler VPX",
+              "version" : "200Mbps Platinum",
+              "descriptionHtml" : "Dedicated Load Balancer (Virtual Appliance)",
+              "type" : "monthly (fixed)",
+              "monthly" : 780.00,
+              "setupFee": 390.00
+          },
+          {
+              "key": "networking-services:dedicated-load-balancer-1000",
+              "name": "Citrix NetScaler VPX",
+              "version" : "1000Mbps Standard",
+              "descriptionHtml" : "Dedicated Load Balancer (Virtual Appliance)",
+              "type" : "monthly (fixed)",
+              "monthly" : 780.00,
+              "setupFee": 390.00
+          },
+          {
+              "name": "Citrix NetScaler VPX",
+              "version" : "1000Mbps Enterprise",
+              "descriptionHtml" : "Dedicated Load Balancer (Virtual Appliance)",
+              "type" : "monthly (fixed)",
+              "monthly" : 1170.00,
+              "setupFee": 390.00
+          },
+          {
+              "name": "Citrix NetScaler VPX",
+              "version" : "1000Mbps Platinum",
+              "descriptionHtml" : "Dedicated Load Balancer (Virtual Appliance)",
+              "type" : "monthly (fixed)",
+              "monthly" : 1560.00,
+              "setupFee": 390.00
+          }
         ]
     },
     {
