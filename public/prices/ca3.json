@@ -68,7 +68,7 @@
                 "name": "Object Storage",
                 "descriptionHtml" : "Flexible, scalable storage that's S3 compatible. Highly available large file storage accessible via HTTP, with automatic multi-site replication.",
                 "type" : "usage (per GB per month)",
-                "monthly" : 0.15
+                "monthly" : 0.04
             }
         ]
     },
