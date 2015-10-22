@@ -6,16 +6,16 @@
             {
                 "key": "server:cpu",
                 "name": "Virtual CPU",
-                "descriptionHtml" : "Standard Servers. 2 Ghz+ Processor (up to 16 cpu)",
-                "type" : "hourly (allocated)",
+                "descriptionHtml" : "Standard Servers. 2 Ghz+ Processor (up to 16 CPU)",
+                "type" : "hourly (used)",
                 "hourly" : 0.0100,
                 "href": "/servers"
             },
             {
                 "key": "server:memory",
                 "name": "Virtual RAM",
-                "descriptionHtml" : "Standard Servers. 1 GB (up to 128GB)",
-                "type" : "hourly (allocated)",
+                "descriptionHtml" : "Standard Servers. 1 GB (up to 128 GB)",
+                "type" : "hourly (used)",
                 "hourly" : 0.015,
                 "href": "/servers"
             },
@@ -49,7 +49,7 @@
         "products": [
             {
                 "name": "AppFog Application Deployment",
-                "descriptionHtml": "Per GB Memory per instance.",
+                "descriptionHtml": "Per GB Memory per instance",
                 "key": "appfog",
                 "type": "hourly (used)",
                 "hourly": 0.04,
@@ -64,34 +64,34 @@
             {
                 "key": "networking:bandwidth",
                 "name": "Internet Bandwidth Data Transfer",
-                "descriptionHtml" : "Outbound only, inbound is free. Price per GB transferred",
+                "descriptionHtml" : "Outbound only, inbound is free. Price per GB transferred.",
                 "type" : "usage (GB)",
                 "monthly" : 0.05
             },
             {
                 "key": "networking-services:vpn",
                 "name": "VPN Connection",
-                "descriptionHtml" : "Site to Site VPN Connection (Does not include bandwidth)",
+                "descriptionHtml" : "Site-to-Site VPN Connection (Does not include bandwidth.)",
                 "type" : "monthly (fixed)",
                 "monthly" : 45.00
             },
             {
                 "key": "networking-services:firewall",
                 "name": "Private VLAN (Additional)",
-                "descriptionHtml" : "1 VLAN is automatically included with each acccount",
+                "descriptionHtml" : "1 VLAN is automatically included with each account.",
                 "type" : "monthly (fixed)",
                 "monthly" : 45.00
             },
             {
                 "key": "networking-services:external-ip-address",
                 "name": "Public IP Address",
-                "descriptionHtml" : "IP Address accessible by public internet",
+                "descriptionHtml" : "IP Address accessible by public internet.",
                 "type" : "monthly (fixed)",
                 "monthly" : 2.00
             },
             {
                 "name": "Managed DNS",
-                "descriptionHtml" : "Per Zone",
+                "descriptionHtml" : "Per zone",
                 "type" : "monthly (fixed)",
                 "monthly" : 5.00
             },
@@ -110,7 +110,7 @@
             },
             {
                 "name": "CDN SSL Delivery with Private Cert",
-                "descriptionHtml" : "per domain (does not include HTTPS delivery)",
+                "descriptionHtml" : "Per domain (Does not include HTTPS delivery.)",
                 "type" : "monthly (fixed)",
                 "monthly" : "260.00"
             }
@@ -131,14 +131,14 @@
             {
                 "key":"server:os:windows",
                 "name": "Microsoft Windows Server",
-                "descriptionHtml" : "per vCPU",
+                "descriptionHtml" : "Per vCPU",
                 "type" : "hourly (allocated)",
                 "hourly" : 0.04
             },
             {
                 "key":"server:os:redhat",
                 "name": "Red Hat Enterprise Linux",
-                "descriptionHtml" : "per vCPU",
+                "descriptionHtml" : "Per vCPU",
                 "type" : "hourly (allocated)",
                 "hourly" : 0.04
             },
@@ -154,25 +154,25 @@
         "products" : [
               {
                   "name": "Microsoft SQL Server Enterprise Edition",
-                  "descriptionHtml" : "per vCPU license per hour",
+                  "descriptionHtml" : "Per vCPU license per hour",
                   "type" : "hourly (used)",
                   "hourly" : 0.4097
               },
               {
                   "name": "Microsoft SQL Server Standard Edition",
-                  "descriptionHtml" : "per vCPU license per hour",
+                  "descriptionHtml" : "Per vCPU license per hour",
                   "type" : "hourly (used)",
                   "hourly" : 0.1068
               },
               {
                   "name": "Microsoft SQL Server Web Edition",
-                  "descriptionHtml" : "per vCPU license per hour",
+                  "descriptionHtml" : "Per vCPU license per hour",
                   "type" : "hourly (used)",
                   "hourly" : 0.0067
               },
               {
                   "name": "Microsoft Windows Remote Desktop Services SAL",
-                  "descriptionHtml" : "per license per hour",
+                  "descriptionHtml" : "Per license per hour",
                   "type" : "hourly (used)",
                   "hourly" : 0.0062
               }
@@ -184,7 +184,7 @@
         "products": [
             {
                 "name": "SafeHaven License",
-                "descriptionHtml" : "per server",
+                "descriptionHtml" : "Per server",
                 "type" : "hourly (allocated)",
                 "hourly" : 0.0548
             }
@@ -193,49 +193,65 @@
     {
         "name" : "Load Balancing",
         "href" : "/load-balancing",
-        "description" : "Self-service shared or dedicated load balancer options.",
+        "description" : "Self-service shared or dedicated load balancer options",
         "products": [
-            {
-                "key": "networking-services:shared-load-balancer",
-                "name": "Shared Load Balancer",
-                "descriptionHtml" : "Fully self-service shared load balancer",
-                "type" : "hourly (allocated)",
-                "hourly" : 0.04
-            },
-            {
-                "key": "networking-services:dedicated-load-balancer-200",
-                "name": "Citrix NetScaler VPX",
-                "version" : "200Mbps Standard",
-                "descriptionHtml" : "Dedicated Load Balancer (Virtual Appliance)",
-                "type" : "monthly (fixed)",
-                "monthly" : 260.00,
-                "setupFee": 390.00
-            },
-            {
-                "name": "Citrix NetScaler VPX",
-                "version" : "200Mbps Enterprise",
-                "descriptionHtml" : "Dedicated Load Balancer (Virtual Appliance)",
-                "type" : "monthly (fixed)",
-                "monthly" : 520.00,
-                "setupFee": 390.00
-            },
-            {
-                "key": "networking-services:dedicated-load-balancer-1000",
-                "name": "Citrix NetScaler VPX",
-                "version" : "1000Mbps Standard",
-                "descriptionHtml" : "Dedicated Load Balancer (Virtual Appliance)",
-                "type" : "monthly (fixed)",
-                "monthly" : 780.00,
-                "setupFee": 390.00
-            },
-            {
-                "name": "Citrix NetScaler VPX",
-                "version" : "1000Mbps Enterprise",
-                "descriptionHtml" : "Dedicated Load Balancer (Virtual Appliance)",
-                "type" : "monthly (fixed)",
-                "monthly" : 1170.00,
-                "setupFee": 390.00
-            }
+          {
+              "key": "networking-services:shared-load-balancer",
+              "name": "Shared Load Balancer",
+              "descriptionHtml" : "Fully self-service shared load balancer",
+              "type" : "hourly (allocated)",
+              "hourly" : 0.04
+          },
+          {
+              "key": "networking-services:dedicated-load-balancer-200",
+              "name": "Citrix NetScaler VPX",
+              "version" : "200Mbps Standard",
+              "descriptionHtml" : "Dedicated Load Balancer (Virtual Appliance)",
+              "type" : "monthly (fixed)",
+              "monthly" : 260.00,
+              "setupFee": 390.00
+          },
+          {
+              "name": "Citrix NetScaler VPX",
+              "version" : "200Mbps Enterprise",
+              "descriptionHtml" : "Dedicated Load Balancer (Virtual Appliance)",
+              "type" : "monthly (fixed)",
+              "monthly" : 520.00,
+              "setupFee": 390.00
+          },
+          {
+              "name": "Citrix NetScaler VPX",
+              "version" : "200Mbps Platinum",
+              "descriptionHtml" : "Dedicated Load Balancer (Virtual Appliance)",
+              "type" : "monthly (fixed)",
+              "monthly" : 780.00,
+              "setupFee": 390.00
+          },
+          {
+              "key": "networking-services:dedicated-load-balancer-1000",
+              "name": "Citrix NetScaler VPX",
+              "version" : "1000Mbps Standard",
+              "descriptionHtml" : "Dedicated Load Balancer (Virtual Appliance)",
+              "type" : "monthly (fixed)",
+              "monthly" : 780.00,
+              "setupFee": 390.00
+          },
+          {
+              "name": "Citrix NetScaler VPX",
+              "version" : "1000Mbps Enterprise",
+              "descriptionHtml" : "Dedicated Load Balancer (Virtual Appliance)",
+              "type" : "monthly (fixed)",
+              "monthly" : 1170.00,
+              "setupFee": 390.00
+          },
+          {
+              "name": "Citrix NetScaler VPX",
+              "version" : "1000Mbps Platinum",
+              "descriptionHtml" : "Dedicated Load Balancer (Virtual Appliance)",
+              "type" : "monthly (fixed)",
+              "monthly" : 1560.00,
+              "setupFee": 390.00
+          }
         ]
     },
     {
@@ -251,19 +267,19 @@
             },
             {
                 "name": "Quickstart Advanced ",
-                "descriptionHtml" : "Deployment services & best practice consultation to maximize ROI",
+                "descriptionHtml" : "Deployment services and best practice consultation to maximize ROI.",
                 "type" : "one-time (fixed) ",
                 "setupFee" : 2000.00
             },
             {
                 "name": "Quickstart Enterprise",
-                "descriptionHtml" : "Tailored for strategic and/or enterprise orgs who require complex onboarding and/or applicable to customers who have extended onboarding requirements",
+                "descriptionHtml" : "Tailored for strategic and/or enterprise orgs who require complex onboarding and/or applicable to customers who have extended onboarding requirements.",
                 "type" : "one-time (fixed) ",
                 "setupFee" : 20000.00
             },
             {
                 "name": "Quickstart SafeHaven Onboarding",
-                "descriptionHtml" : "Includes 6 Recovery VM setup. Any Additional Recovery VM setup will be $325 per VM which is a onetime charge",
+                "descriptionHtml" : "Includes 6 Recovery VM setup. Any Additional Recovery VM setup is $325 per VM, which is a one-time charge.",
                 "type" : "one-time (fixed) ",
                 "setupFee" : 1850.00
             }
@@ -292,7 +308,7 @@
             },
             {
                 "name": "Deploy Site-to-Site VPN Tunnels or Direct Connect",
-                "descriptionHtml" : "Provision specialized site to site tunnels for customers or connect CenturyLink Cloud to hardware in the same data center via Direct Connect.",
+                "descriptionHtml" : "Provision specialized site-to-site tunnels for customers or connect CenturyLink Cloud to hardware in the same data center via Direct Connect.",
                 "type" : "$195/hour, 2 hour minimum",
                 "hourly" : 195,
                 "monthly" : "&mdash;",
@@ -300,7 +316,7 @@
             },
             {
                 "name": "Deploy VMWare Virtual Appliance",
-                "descriptionHtml" : "Add virtual appliances to an account",
+                "descriptionHtml" : "Add virtual appliances to an account.",
                 "type" : "$195/hour, 2 hour minimum",
                 "hourly" : 195,
                 "monthly" : "&mdash;",
@@ -396,7 +412,7 @@
             },
             {
                 "name": "Direct Connect Setup",
-                "descriptionHtml" : "Provides the planning and work necessary to establish a direct connect between environments via cross connect or MPLS",
+                "descriptionHtml" : "Provides the planning and work necessary to establish a direct connect between environments via cross connect or MPLS.",
                 "type" : "$195/hour, 4 hour minimum",
                 "hourly" : 195,
                 "monthly" : "&mdash;",

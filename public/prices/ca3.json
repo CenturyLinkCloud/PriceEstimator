@@ -6,8 +6,8 @@
             {
                 "key": "server:cpu",
                 "name": "Virtual CPU",
-                "descriptionHtml" : "2 Ghz+ Processor (up to 16 cpu)",
-                "type" : "hourly (allocated)",
+                "descriptionHtml" : "2 Ghz+ Processor (up to 16 CPU)",
+                "type" : "hourly (used)",
                 "hourly" : 0.0100,
                 "href": "/servers"
             },
@@ -15,7 +15,7 @@
                 "key": "server:memory",
                 "name": "Virtual RAM",
                 "descriptionHtml" : "1 GB (up to 128GB)",
-                "type" : "hourly (allocated)",
+                "type" : "hourly (used)",
                 "hourly" : 0.015,
                 "href": "/servers"
             },
@@ -37,15 +37,15 @@
             },
             {
                 "name": "Virtual CPU for Hyperscale",
-                "descriptionHtml" : "2 Ghz+ Processor (up to 16 cpu)",
-                "type" : "hourly (allocated)",
+                "descriptionHtml" : "2 Ghz+ Processor (up to 16 CPU)",
+                "type" : "hourly (used)",
                 "hourly" : 0.0100,
                 "href": "/hyperscale"
             },
             {
                 "name": "Virtual RAM for Hyperscale",
                 "descriptionHtml" : "1 GB (up to 128GB)",
-                "type" : "hourly (allocated)",
+                "type" : "hourly (used)",
                 "hourly" : 0.015,
                 "href": "/hyperscale"
             },
@@ -99,7 +99,7 @@
             {
                 "key": "networking-services:firewall",
                 "name": "Private VLAN (Additional)",
-                "descriptionHtml" : "1 VLAN is automatically included with each acccount",
+                "descriptionHtml" : "1 VLAN is automatically included with each account",
                 "type" : "monthly (fixed)",
                 "monthly" : 45.00
             },
@@ -131,7 +131,7 @@
             },
             {
                 "name": "CDN SSL Delivery with Private Cert",
-                "descriptionHtml" : "per domain (does not include HTTPS delivery)",
+                "descriptionHtml" : "Per domain (does not include HTTPS delivery)",
                 "type" : "monthly (fixed)",
                 "monthly" : "260.00"
             }
@@ -152,14 +152,14 @@
             {
                 "key":"server:os:windows",
                 "name": "Microsoft Windows Server",
-                "descriptionHtml" : "per vCPU",
+                "descriptionHtml" : "Per vCPU",
                 "type" : "hourly (allocated)",
                 "hourly" : 0.04
             },
             {
                 "key":"server:os:redhat",
                 "name": "Red Hat Enterprise Linux",
-                "descriptionHtml" : "per vCPU",
+                "descriptionHtml" : "Per vCPU",
                 "type" : "hourly (allocated)",
                 "hourly" : 0.04
             },
@@ -175,25 +175,25 @@
         "products" : [
           {
               "name": "Microsoft SQL Server Enterprise Edition",
-              "descriptionHtml" : "per vCPU license per hour",
+              "descriptionHtml" : "Per vCPU license per hour",
               "type" : "hourly (used)",
               "hourly" : 0.4153
           },
           {
               "name": "Microsoft SQL Server Standard Edition",
-              "descriptionHtml" : "per vCPU license per hour",
+              "descriptionHtml" : "Per vCPU license per hour",
               "type" : "hourly (used)",
               "hourly" : 0.1083
           },
           {
               "name": "Microsoft SQL Server Web Edition",
-              "descriptionHtml" : "per vCPU license per hour",
+              "descriptionHtml" : "Per vCPU license per hour",
               "type" : "hourly (used)",
               "hourly" : 0.0067
           },
           {
               "name": "Microsoft Windows Remote Desktop Services SAL",
-              "descriptionHtml" : "per license per hour",
+              "descriptionHtml" : "Per license per hour",
               "type" : "hourly (used)",
               "hourly" : 0.0062
           }
@@ -206,14 +206,14 @@
             {
                 "key": "server:os:windows-managed",
                 "name": "Managed Microsoft Windows Server",
-                "descriptionHtml" : "per server",
+                "descriptionHtml" : "Per server",
                 "type" : "hourly (used)",
                 "hourly" : 0.21
             },
             {
                 "key": "server:os:redhat-managed",
                 "name": "Managed Red Hat Enterprise Linux",
-                "descriptionHtml" : "per server",
+                "descriptionHtml" : "Per server",
                 "type" : "hourly (used)",
                 "hourly" : 0.21
             }
@@ -227,7 +227,7 @@
                 "key": "managed-apps:iis",
                 "name": "Managed Microsoft IIS",
                 "href" : "/managed-services/iis",
-                "descriptionHtml" : "per server",
+                "descriptionHtml" : "Per server",
                 "type" : "hourly (allocated)",
                 "hourly" : 0.21
             },
@@ -235,14 +235,14 @@
                 "key": "managed-apps:active-directory",
                 "name": "Managed Microsoft Active Directory",
                 "href": "/managed-services/active-directory",
-                "descriptionHtml" : "per server",
+                "descriptionHtml" : "Per server",
                 "type" : "hourly (allocated)",
                 "hourly" : 0.28
             },
             {
                 "key": "managed-apps:ms-sql",
                 "name": "Managed Microsoft SQL",
-                "descriptionHtml" : "per application instance, plus additional charge for software license – see Software section for pricing",
+                "descriptionHtml" : "Per application instance, plus additional charge for software license – see Software section for pricing.",
                 "href" : "/managed-services/ms-sql",
                 "type" : "hourly (allocated)",
                 "hourly" : 0.48
@@ -250,7 +250,7 @@
             {
                 "key": "managed-apps:apache",
                 "name": "Managed Apache",
-                "descriptionHtml" : "per server",
+                "descriptionHtml" : "Per server",
                 "href" : "/managed-services/apache-server",
                 "type" : "hourly (allocated)",
                 "hourly" : 0.21
@@ -258,25 +258,25 @@
             {
                 "key": "managed-apps:tomcat",
                 "name": "Managed Tomcat",
-                "descriptionHtml" : "per server",
+                "descriptionHtml" : "Per server",
                 "href" : "/managed-services/tomcat",
                 "type" : "hourly (allocated)",
                 "hourly" : 0.83
             },
             {
                 "key": "managed-apps:cloudera-cdh5-basic",
-                "name": "Managed Cloudera ",
+                "name": "Managed Cloudera",
                 "version": "CDH5 Basic",
-                "descriptionHtml" : "per server",
+                "descriptionHtml" : "Per server",
                 "href" : "/managed-services/cloudera",
                 "type" : "hourly (allocated)",
                 "hourly" : 0.54
             },
             {
                 "key": "managed-apps:cloudera-cdh5-basic-hbase",
-                "name": "Managed Cloudera ",
+                "name": "Managed Cloudera",
                 "version": "CDH5 Basic + HBase",
-                "descriptionHtml" : "per server",
+                "descriptionHtml" : "Per server",
                 "href" : "/managed-services/cloudera",
                 "type" : "hourly (allocated)",
                 "hourly" : 0.88
@@ -285,7 +285,7 @@
                 "key": "managed-apps:cloudera-enterprise-data-hub",
                 "name": "Managed Cloudera",
                 "version": "Enterprise Data Hub",
-                "descriptionHtml" : "per server",
+                "descriptionHtml" : "Per server",
                 "href" : "/managed-services/cloudera",
                 "type" : "hourly (allocated)",
                 "hourly" : 1.15
@@ -293,7 +293,7 @@
             {
                 "key": "managed-apps:mysql",
                 "name": "Managed MySQL",
-                "descriptionHtml" : "per application instance",
+                "descriptionHtml" : "Per application instance",
                 "href" : "/managed-services/mysql",
                 "type" : "hourly (allocated)",
                 "hourly" : 0.763
@@ -301,39 +301,39 @@
             {
                 "key": "managed-apps:mysql-replication-master-master",
                 "name": "Managed MySQL Replication (Master/Master)",
-                "descriptionHtml" : "per application instance per hour",
+                "descriptionHtml" : "Per application instance per hour",
                 "type" : "hourly (allocated)",
                 "hourly" : 0.5556
             },
             {
                 "key": "managed-apps:mysql-replication-master-slave",
                 "name": "Managed MySQL Replication (Master/Slave)",
-                "descriptionHtml" : "per application instance per hour",
+                "descriptionHtml" : "Per application instance per hour",
                 "type" : "hourly (allocated)",
                 "hourly" : 0.3472
             },
             {
                 "name": "Managed GeoTrust Quick SSL Certificate",
-                "descriptionHtml" : "per certificate",
+                "descriptionHtml" : "Per certificate",
                 "type" : "hourly (allocated)"
             },
             {
                 "name": "Managed Backup",
-                "descriptionHtml" : "Price per GB depends on usage. Lower pricing available via contract agreement",
+                "descriptionHtml" : "Price per GB depends on usage. Lower pricing available via contract agreement.",
                 "type" : "monthly per GB",
                 "monthly" : 1.10
             },
             {
                 "key": "managed-apps:kerberos",
                 "name": "Managed Kerberos",
-                "descriptionHtml" : "per server",
+                "descriptionHtml" : "Per server",
                 "type" : "hourly (allocated)",
                 "hourly" : 0.10
             },
             {
                 "key": "managed-apps:unlicensed-hadoop",
                 "name": "Managed Unlicensed Hadoop",
-                "descriptionHtml" : "per server",
+                "descriptionHtml" : "Per server",
                 "type" : "hourly (allocated)",
                 "hourly" : 0.30
             }
@@ -345,7 +345,7 @@
         "products": [
             {
                 "name": "SafeHaven License",
-                "descriptionHtml" : "per server",
+                "descriptionHtml" : "Per server",
                 "type" : "hourly (allocated)",
                 "hourly" : 0.0548
             }
@@ -381,6 +381,14 @@
                 "setupFee": 390.00
             },
             {
+                "name": "Citrix NetScaler VPX",
+                "version" : "200Mbps Platinum",
+                "descriptionHtml" : "Dedicated Load Balancer (Virtual Appliance)",
+                "type" : "monthly (fixed)",
+                "monthly" : 780.00,
+                "setupFee": 390.00
+            },
+            {
                 "key": "networking-services:dedicated-load-balancer-1000",
                 "name": "Citrix NetScaler VPX",
                 "version" : "1000Mbps Standard",
@@ -395,6 +403,14 @@
                 "descriptionHtml" : "Dedicated Load Balancer (Virtual Appliance)",
                 "type" : "monthly (fixed)",
                 "monthly" : 1170.00,
+                "setupFee": 390.00
+            },
+            {
+                "name": "Citrix NetScaler VPX",
+                "version" : "1000Mbps Platinum",
+                "descriptionHtml" : "Dedicated Load Balancer (Virtual Appliance)",
+                "type" : "monthly (fixed)",
+                "monthly" : 1560.00,
                 "setupFee": 390.00
             }
         ]
@@ -411,20 +427,20 @@
                 "setupFee" : 600.00
             },
             {
-                "name": "Quickstart Advanced ",
+                "name": "Quickstart Advanced",
                 "descriptionHtml" : "Deployment services & best practice consultation to maximize ROI",
                 "type" : "one-time (fixed) ",
                 "setupFee" : 2000.00
             },
             {
                 "name": "Quickstart Enterprise",
-                "descriptionHtml" : "Tailored for strategic and/or enterprise orgs who require complex onboarding and/or applicable to customers who have extended onboarding requirements",
+                "descriptionHtml" : "Tailored for strategic and/or enterprise orgs who require complex onboarding and/or applicable to customers who have extended onboarding requirements.",
                 "type" : "one-time (fixed) ",
                 "setupFee" : 20000.00
             },
             {
                 "name": "Quickstart SafeHaven Onboarding",
-                "descriptionHtml" : "Includes 6 Recovery VM setup. Any Additional Recovery VM setup will be $325 per VM which is a onetime charge",
+                "descriptionHtml" : "Includes 6 Recovery VM setup. Any Additional Recovery VM setup will be $325 per VM which is a one-time charge.",
                 "type" : "one-time (fixed) ",
                 "setupFee" : 1850.00
             }
@@ -525,7 +541,7 @@
             },
             {
                 "name": "MSSQL Database Mirroring",
-                "descriptionHtml" : "Available on both the Standard (synchronous only) and Enterprise Edition of all supported versions of MSSQL, mirroring synchronizes data from a principal DB to a mirror DB on another MSSQL instance.  Each database retains its own unique connection string, even in the case of failover. Configurable on a per-database basis.",
+                "descriptionHtml" : "Available on both the Standard (synchronous only) and Enterprise Edition of all supported versions of MSSQL. Mirroring synchronizes data from a principal DB to a mirror DB on another MSSQL instance.  Each database retains its own unique connection string, even in the case of failover. Configurable on a per-database basis.",
                 "type" : "$195/hour, 1 hour minimum",
                 "hourly" : 195,
                 "monthly" : "&mdash;",
