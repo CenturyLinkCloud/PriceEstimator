@@ -85,7 +85,7 @@
             },
             {
                 "name": "Object Storage Data Transfer",
-                "descriptionHtml" : "Inbound and outbound traffic. Price per GB transferred",
+                "descriptionHtml" : "Outbound only, inbound is free. Price per GB transferred",
                 "type" : "usage (GB)",
                 "monthly" : 0.05
             },
