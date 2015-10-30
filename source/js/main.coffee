@@ -12,12 +12,14 @@ Config = require './app/Config.coffee'
 ServersView = require './app/views/ServersView.coffee'
 SupportView = require './app/views/SupportView.coffee'
 ServicesView = require './app/views/ServicesView.coffee'
+IpServicesView = require './app/views/IpServicesView.coffee'
 AppfogsView = require './app/views/AppfogsView.coffee'
 BaremetalConfigsView = require './app/views/BaremetalConfigsView.coffee'
 MonthlyTotalView = require './app/views/MonthlyTotalView.coffee'
 PricingMapsCollection = require './app/collections/PricingMapsCollection.coffee'
 ServersCollection = require './app/collections/ServersCollection.coffee'
 ServicesCollection = require './app/collections/ServicesCollection.coffee'
+IpsCollection = require './app/collections/IpsCollection.coffee'
 AppfogCollection = require './app/collections/AppfogCollection.coffee'
 BaremetalCollection = require './app/collections/BaremetalCollection.coffee'
 Utils = require('./app/Utils.coffee')
@@ -69,6 +71,7 @@ App =
   onPricingMapsSynced: ->
     @initServers()
     @initHyperscaleServers()
+    @initIpsServices()
     @initAppfogServices()
     @initBaremetalConfigs()
 
@@ -160,6 +163,17 @@ App =
       pricingMap: @pricingMaps.forKey("server")
       hyperscale: true
 
+  initIpsServices: ->
+    @ipsCollection = new IpsCollection
+    @ipsCollection.on "change remove add", =>
+      @updateTotalPrice()
+
+    @ipServicesView = new IpServicesView
+      app: @
+      collection: @ipsCollection
+      el: "#intrusion-prevention-service"
+      pricingMap: @pricingMaps.forKey("ips")
+
   initAppfogServices: ->
     @appfogServicesCollection = new AppfogCollection
     @appfogServicesCollection.on "change remove add", =>
@@ -187,6 +201,7 @@ App =
 
     @totalPrice = @serversCollection.subtotal() +
                   @hyperscaleServersCollection.subtotal() +
+                  @ipsCollection.subtotal() +
                   @appfogServicesCollection.subtotal() +
                   @baremetalCollection.subtotal() +
                   @networkingServices.subtotal() +
@@ -215,6 +230,7 @@ App =
 
     # Update pricing map stored on the views (impacts new models)
       @hyperscaleServersView.options.pricingMap = @pricingMaps.forKey("server")
+      @ipServicessView.options.pricingMap = @pricingMaps.forKey("ips")
       @appfogsView.options.pricingMap = @pricingMaps.forKey("appfog")
       @BaremetalConfigsView.options.pricingMap = @pricingMaps.forKey("baremetal")
       @serversView.options.pricingMap = @pricingMaps.forKey("server")
@@ -222,6 +238,7 @@ App =
       # Update pricing map stored on collections (impacts existing models)
       @serversCollection.initPricing(@pricingMaps)
       @hyperscaleServersCollection.initPricing(@pricingMaps)
+      @ipsCollection.initPricing(@pricingMaps.forKey("ips"))
       @appfogServicesCollection.initPricing(@pricingMaps.forKey("appfog"))
       @baremetalCollection.initPricing(@pricingMaps.forKey("baremetal"))
       @networkingServices.initPricing(@pricingMaps)

@@ -102,6 +102,12 @@ PricingMapsCollection = Backbone.Collection.extend
                   disabled: !enabled
                   hasSetupFee: product.setupFee?
                 additional_services.push(service)
+            else if ids[0] is 'ips'
+              price = product.hourly #* @currency.rate
+              service =
+                type: 'ips'
+                price: price
+              additional_services.push(service)
             else if ids[0] is 'appfog'
               price = product.hourly #* @currency.rate
               service =

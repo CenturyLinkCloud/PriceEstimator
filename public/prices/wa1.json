@@ -44,6 +44,20 @@
         ]
     },
     {
+        "name": "Intrusion Prevention Service (IPS)",
+        "description": "",
+        "products": [
+            {
+                "name": "Intrusion Prevention Service (IPS)",
+                "descriptionHtml": "Per hour per instance.",
+                "key": "ips",
+                "type": "allocated",
+                "hourly": 0.25,
+                "href": "/intrusion-prevention-service"
+            }
+        ]
+    },
+    {
         "name": "AppFog Application Deployments",
         "description": "",
         "products": [
