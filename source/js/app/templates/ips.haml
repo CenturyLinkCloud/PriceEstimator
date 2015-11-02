@@ -1,0 +1,19 @@
+%td.table-cell
+  IPS#{@model.collection.length}
+
+%td.table-cell.usage-cell
+  %input.number{name: "usage", value: @model.get("usage"), type: "text"}
+  %select{name: "usagePeriod"}
+    %option{value: "hours_per_month",  selected: @model.get('usagePeriod') == 'hours_per_month' } hrs / month
+    %option{value: "percentage_of_month", selected: @model.get('usagePeriod') == 'percentage_of_month' } % / month
+    %option{value: "hours_per_week", selected: @model.get('usagePeriod') == 'hours_per_week'} hrs / week
+    %option{value: "hours_per_day", selected: @model.get('usagePeriod') == 'hours_per_day'} hrs / day
+
+%td.table-cell.range-cell
+  %input.quantity-text-input.number{data: {name: "quantity"}}
+  %input.range-slider{type: "range", name: "quantity", min: 1, max: 1000, value: @model.get("quantity")}
+
+%td.table-cell.price-cell
+  %span.price
+    = accounting.formatMoney(@model.totalPricePerMonth() * @app.currency.rate, {"symbol": @app.currency.symbol })
+  %a.remove-button{href: "#"} X
