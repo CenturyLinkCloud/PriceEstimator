@@ -68,15 +68,6 @@
                 "descriptionHtml": "Per GB Stored (for archived virtual machines)",
                 "type": "hourly (used)",
                 "hourly": 0.0001
-            },
-            {
-                "key": "networking:object-storage:enabled",
-                "name": "Object Storage",
-                "descriptionHtml": "Flexible, scalable storage that's S3 compatible. Highly available large file storage accessible via HTTP, with automatic multi-site replication.",
-                "type": "usage (per GB per month)",
-                "monthly": 0.04,
-                "unit": "GB",
-                "href": "/object-storage"
             }
         ]
     },
@@ -162,16 +153,6 @@
                 "usage": 0.05,
                 "unit": "GB",
                 "href": "/bandwidth"
-            },
-            {
-                "key": "networking:bandwidth:object-storage",
-                "name": "Object Storage Data Transfer",
-                "descriptionHtml": "Outbound only, inbound is free. Price per GB transferred.",
-                "type": "usage (GB)",
-                "monthly": 0.05,
-                "usage": 0.05,
-                "unit": "GB",
-                "href": "/object-storage"
             },
             {
                 "key": "networking-services:vpn",
