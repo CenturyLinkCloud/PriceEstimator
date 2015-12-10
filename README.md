@@ -23,9 +23,13 @@ This project uses:
 - Run `grunt dev` to watch the front-end source files and recompile as necessary.
 
 To update prices (each data center the service is offered), edit:
-https://github.com/CenturyLinkCloud/PriceEstimator/tree/master/public/json/pricing
+https://github.com/CenturyLinkCloud/PriceEstimator/tree/master/public/json/pricing and https://github.com/CenturyLinkCloud/PublicPlatform/tree/master/public/json/pricing
 
-There are multiple pricing sheets: a default, and then ones for each data center should their prices differ. The file [data-center-prices.json](https://github.com/CenturyLinkCloud/PriceEstimator/blob/master/public/prices/data-center-prices.json) feeds the select dropdown for the data centers as well as specifies which pricing JSON file to use.
+There are multiple pricing JSON files: `baseline.json`, one for each data center (e.g., `gb3.json`, and `default.json`. The `default.json` file is used if there is not a file for a particular data center.
+
+Pricing changes must be made to all of these files in bothe repositories.
+
+The file [data-center-prices.json](https://github.com/CenturyLinkCloud/PriceEstimator/blob/master/public/prices/data-center-prices.json) feeds the select dropdown for the data centers as well as specifies which pricing JSON file to use.
 
 To update Managed Services, edit: https://github.com/CenturyLinkCloud/PriceEstimator/blob/master/source/js/app/templates/addManagedApp.haml
 
