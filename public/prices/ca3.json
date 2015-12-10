@@ -81,7 +81,7 @@
                 "descriptionHtml": "Per hour per instance.",
                 "key": "ips",
                 "type": "allocated",
-                "hourly": 0.25,
+                "hourly": 0.18,
                 "href": "/intrusion-prevention-service"
             }
         ]
