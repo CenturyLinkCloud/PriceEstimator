@@ -166,7 +166,7 @@
                 "name": "Intrusion Prevention Service (IPS)",
                 "descriptionHtml": "Per hour per instance.",
                 "type": "hourly (allocated)",
-                "hourly": 0.25,
+                "hourly": 0.18,
                 "unit": "hour",
                 "monthly": "&mdash;",
                 "href": "/intrusion-prevention-service"
@@ -543,14 +543,6 @@
                 "unit": "GB"
             },
             {
-                "key": "managed-apps:kerberos",
-                "name": "Kerberos Authentication for Cloudera",
-                "descriptionHtml": "Per server",
-                "href": "/managed-services/cloudera",
-                "type": "hourly (allocated)",
-                "hourly": 0.10
-            },
-            {
                 "key": "managed-apps:pivotal-cloud-foundry",
                 "name": "Managed Pivotal Cloud Foundry",
                 "descriptionHtml": "Key administrative functions performed by our team of experts.",
@@ -691,7 +683,7 @@
                 "key": "service-tasks:vm-import",
                 "name": "VM Import",
                 "descriptionHtml": "Take a customer virtual machine and convert to either (a) a running virtual machine or (b) a reusable template. Servers converted. The customer will be asked for details about which account, group, VLAN, and storage type to apply to the imported server.",
-                "details": "Best option for virtual appliances or other OVF files that do not meet self-service import requirements <a href=\"https://t3n.zendesk.com/entries/60156724-Self-Service-VM-Import-OVF-Requirements\">listed here</a>. Take a customer virtual machine and convert to either (a) a running virtual machine or (b) a reusable template. Servers converted. The customer will be asked for details about which account, group, VLAN, and storage type to apply to the imported server.",
+                "details": "Best option for virtual appliances or other OVF files that do not meet self-service import requirements <a href=\"/knowledge-base/servers/self-service-vm-import-ovf-requirements/\">listed here</a>. Take a customer virtual machine and convert to either (a) a running virtual machine or (b) a reusable template. Servers converted. The customer will be asked for details about which account, group, VLAN, and storage type to apply to the imported server.",
                 "type": "$195/hour, 2 hour minimum",
                 "hourly": 195,
                 "monthly": "&mdash;",
