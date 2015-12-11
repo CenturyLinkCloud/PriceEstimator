@@ -9,7 +9,7 @@
                 "name": "Virtual CPU",
                 "descriptionHtml": "2 Ghz+ Processor (up to 16 CPU)",
                 "type": "hourly (used)",
-                "hourly": 0.0115,
+                "hourly": 0.0100,
                 "href": "/servers"
             },
             {
@@ -17,7 +17,7 @@
                 "name": "Virtual RAM",
                 "descriptionHtml": "1 GB (up to 128 GB)",
                 "type": "hourly (used)",
-                "hourly": 0.0173,
+                "hourly": 0.015,
                 "href": "/servers"
             },
             {
@@ -25,7 +25,7 @@
                 "name": "Block Storage w/ Standard Backup",
                 "descriptionHtml": "Persistent storage (single data center, 5 days of snapshot backup). Price per GB.",
                 "type": "hourly (allocated)",
-                "hourly": 0.00024,
+                "hourly": 0.00021,
                 "unit": "GB",
                 "href": "/block-storage"
             },
@@ -34,7 +34,7 @@
                 "name": "Block Storage w/ Premium Backup",
                 "descriptionHtml": "Persistent storage (single data center, 14 days of snapshot backup). Price per GB.",
                 "type": "hourly (allocated)",
-                "hourly": 0.00081,
+                "hourly": 0.0007,
                 "unit": "GB",
                 "href": "/block-storage"
             },
@@ -43,7 +43,7 @@
                 "name": "Virtual CPU for Hyperscale",
                 "descriptionHtml": "2 Ghz+ Processor (up to 16 CPU)",
                 "type": "hourly (used)",
-                "hourly": 0.0115,
+                "hourly": 0.0100,
                 "href": "/hyperscale"
             },
             {
@@ -51,7 +51,7 @@
                 "name": "Virtual RAM for Hyperscale",
                 "descriptionHtml": "1 GB (up to 128 GB)",
                 "type": "hourly (used)",
-                "hourly": 0.0173,
+                "hourly": 0.015,
                 "href": "/hyperscale"
             },
             {
@@ -59,7 +59,7 @@
                 "name": "Block Storage for Hyperscale",
                 "descriptionHtml": "Persistent high performance storage. SSD based storage with sustained rates of 15k IOPS. Price per GB.",
                 "type": "hourly (allocated)",
-                "hourly": 0.00064,
+                "hourly": 0.0005,
                 "href": "/hyperscale"
             },
             {
@@ -67,7 +67,7 @@
                 "name": "Archive Storage",
                 "descriptionHtml": "Per GB Stored (for archived virtual machines)",
                 "type": "hourly (used)",
-                "hourly": 0.00016
+                "hourly": 0.0001
             },
             {
                 "key": "networking:object-storage:enabled",
@@ -77,6 +77,82 @@
                 "monthly": 0.04,
                 "unit": "GB",
                 "href": "/object-storage"
+            }
+        ]
+    },
+    {
+        "key": "bare-metal",
+        "name": "Bare Metal",
+        "description": "",
+        "products": [
+            {
+                "key": "baremetal:config:1",
+                "name": "4 core, 16 GB RAM, 2x 1TB Raw HDD",
+                "descriptionHtml": "4 cores (1x4)<br>Intel Xeon E3-1271 v3 @ 3.60 GHz<br>16 GB RAM<br>2x 1TB HDD Raw @ 7200 rpm<br>0.91 TB RAID 1 usable",
+                "type": "hourly (allocated)",
+                "hourly": 0.56,
+                "sockets": 1,
+                "href": "/bare-metal#Pricing"
+            },
+            {
+                "key": "baremetal:config:2",
+                "name": "12 core, 64 GB RAM, 4x 2TB Raw HDD",
+                "descriptionHtml": "12 cores (2x6)<br>Intel Xeon E5-2620 v3 @ 2.40 GHz<br>64 GB RAM<br>4x 2TB HDD Raw @ 7200 rpm<br>5.46 TB RAID 5 usable",
+                "type": "hourly (allocated)",
+                "hourly": 1.65,
+                "sockets": 2,
+                "href": "/bare-metal#Pricing"
+            },
+            {
+                "key": "baremetal:config:3",
+                "name": "20 core, 128 GB RAM, 6x 2TB Raw HDD",
+                "descriptionHtml": "20 cores (2x10)<br>Intel Xeon E5-2650 v3 @ 2.30 GHz<br>128 GB RAM<br>6x 2TB HDD Raw @ 7200 rpm<br>9.09 TB RAID 5 usable",
+                "type": "hourly (allocated)",
+                "hourly": 2.52,
+                "sockets": 2,
+                "href": "/bare-metal#Pricing"
+            }
+        ],
+        "disclaimer": "Resources charged hourly, even when bare metal servers are powered off. Monthly estimates based on 720 hours, represent global average price based on available locations. Does not include operating system/software licensing cost."
+    },
+    {
+        "key": "appfog-application-deployments",
+        "name": "AppFog Application Deployments",
+        "description": "",
+        "products": [
+            {
+                "key": "appfog",
+                "name": "AppFog Application Deployment",
+                "descriptionHtml": "Per GB Memory per instance.",
+                "type": "hourly (used)",
+                "hourly": 0.04,
+                "unit": "GB",
+                "href": "/appfog"
+            }
+        ]
+    },
+    {
+        "key": "cdn",
+        "name": "CDN",
+        "description": "",
+        "products": [
+            {
+                "key": "cdn:http:delivery",
+                "name": "HTTP/S Delivery",
+                "descriptionHtml": "HTTP and HTTPS CDN delivery",
+                "type": "usage (GB)",
+                "usage": 0.15,
+                "unit": "GB",
+                "href": "/cdn"
+            },
+            {
+                "key": "cdn:streaming:delivery",
+                "name": "Streaming Media Delivery",
+                "descriptionHtml": "On-Demand Content Streaming via supported media server platforms",
+                "type": "usage (GB)",
+                "usage": 0.15,
+                "unit": "GB",
+                "href": "/cdn"
             }
         ]
     },
@@ -91,8 +167,8 @@
                 "descriptionHtml": "Per hour per instance.",
                 "type": "hourly (allocated)",
                 "hourly": 0.18,
-                "monthly": "&mdash;",
                 "unit": "hour",
+                "monthly": "&mdash;",
                 "href": "/intrusion-prevention-service"
             }
         ]
@@ -107,7 +183,7 @@
                 "name": "Internet Bandwidth Data Transfer",
                 "descriptionHtml": "Outbound only, inbound is free. Price per GB transferred.",
                 "type": "usage (GB)",
-                "monthly": 0.0575,
+                "monthly": 0.05,
                 "usage": 0.05,
                 "unit": "GB",
                 "href": "/bandwidth"
@@ -219,6 +295,51 @@
                 "key": "server:os:ubuntu",
                 "name": "Ubuntu",
                 "type": "no charge"
+            },
+            {
+                "key": "baremetal:os:1",
+                "shortName": "CentOS",
+                "name": "CentOS for Bare Metal",
+                "descriptionHtml": "",
+                "type": "no charge",
+                "hourly": 0.0,
+                "href": "/bare-metal#Features"
+            },
+            {
+                "key": "baremetal:os:2",
+                "shortName": "Red Hat",
+                "name": "Red Hat Enterprise Linux for Bare Metal",
+                "descriptionHtml": "Per socket",
+                "type": "hourly (allocated)",
+                "hourly": 0.075,
+                "href": "/bare-metal#Features"
+            },
+            {
+                "key": "baremetal:os:3",
+                "shortName": "Ubuntu",
+                "name": "Ubuntu for Bare Metal",
+                "descriptionHtml": "",
+                "type": "no charge",
+                "hourly": 0.0,
+                "href": "/bare-metal#Features"
+            },
+            {
+                "key": "baremetal:os:4",
+                "shortName": "Win Std",
+                "name": "Microsoft Windows Server Standard for Bare Metal",
+                "descriptionHtml": "Per socket",
+                "type": "hourly (allocated)",
+                "hourly": 0.04,
+                "href": "/bare-metal#Features"
+            },
+            {
+                "key": "baremetal:os:5",
+                "shortName": "Win DC",
+                "name": "Microsoft Windows Server Datacenter for Bare Metal",
+                "descriptionHtml": "Per socket",
+                "type": "hourly (allocated)",
+                "hourly": 0.279,
+                "href": "/bare-metal#Features"
             }
         ]
     },
@@ -232,14 +353,14 @@
                 "name": "Microsoft SQL Server Enterprise Edition",
                 "descriptionHtml": "Per vCPU license per hour",
                 "type": "hourly (used)",
-                "hourly": 0.4153
+                "hourly": 0.4097
             },
             {
                 "key": "software:microsoft-sql-server-standard-edition",
                 "name": "Microsoft SQL Server Standard Edition",
                 "descriptionHtml": "Per vCPU license per hour",
                 "type": "hourly (used)",
-                "hourly": 0.1083
+                "hourly": 0.1068
             },
             {
                 "key": "software:microsoft-sql-server-web-edition",
@@ -289,7 +410,7 @@
     {
         "key": "managed-applications",
         "name": "Managed Applications",
-        "description": "Prices are for application management only. Software licensing is separate.",
+        "description": "Prices are for both application management and software licensing, unless indicated.",
         "href": "/managed-services",
         "products": [
             {
@@ -318,7 +439,7 @@
             {
                 "key": "managed-apps:ms-sql",
                 "name": "Managed Microsoft SQL",
-                "descriptionHtml": "Per application instance",
+                "descriptionHtml": "Per application instance, plus additional charge for software license. Refer to the Software section for pricing.",
                 "href": "/managed-services/ms-sql",
                 "type": "hourly (allocated)",
                 "hourly": 0.48
@@ -420,6 +541,15 @@
                 "type": "monthly per GB",
                 "monthly": 1.10,
                 "unit": "GB"
+            },
+            {
+                "key": "managed-apps:pivotal-cloud-foundry",
+                "name": "Managed Pivotal Cloud Foundry",
+                "descriptionHtml": "Key administrative functions performed by our team of experts.",
+                "href": "/managed-services/pivotal-cloud-foundry",
+                "type": "hourly (allocated)",
+                "hourly": 8.50,
+                "unit": "cluster"
             }
         ]
     },
@@ -572,6 +702,17 @@
                 "prerequisite": "For load balancers that require licensing, the customer must provide licensing information or approve CenturyLink Cloud to purchase on their behalf."
             },
             {
+                "key": "service-tasks:openvpn-servers-deployment",
+                "name": "Deploy Custom OpenVPN Servers or Configurations",
+                "descriptionHtml": "CenturyLink's OpenVPN solution supports up to approximately 19 active sessions. Customers who need more than 19 sessions, a custom port, or a configuration in a secondary data center can request this work item.",
+                "details": "CenturyLink's OpenVPN solution supports up to approximately 19 active sessions. Customers who need more than 19 sessions, a custom port, or a configuration in a secondary data center can request this work item.",
+                "type": "$195/hour, 1 hour minimum",
+                "hourly": 195,
+                "monthly": "&mdash;",
+                "setupFee": 195,
+                "prerequisite": "None"
+            },
+            {
                 "key": "service-tasks:vpn-tunnels-deployment",
                 "name": "Deploy Site-to-Site VPN Tunnels or Direct Connect",
                 "descriptionHtml": "Provision specialized site-to-site tunnels for customers or connect CenturyLink Cloud to hardware in the same data center via Direct Connect.",
@@ -684,6 +825,17 @@
                 "prerequisite": "Available to Managed Microsoft SQL service customers"
             },
             {
+                "key": "service-tasks:mssql-alwayson-configuration",
+                "name": "MSSQL AlwaysOn Availability Groups",
+                "descriptionHtml": "This is a high-availability and DR solution that offers additional capabilities over mirroring. Available with the Enterprise Edition of MSSQL 2012 or later, one or more databases can be added to an Availability Group for which a singular network name (listener) exists for client connectivity. Replication and failover configurations are applied to the Availability Group, which can span 2 or more nodes&mdash;one primary (writable) replica and one or more secondary (optionally readable) replicas. Although asynchronous replication is available, synchronous replication allows for automatic failover.",
+                "details": "This is a high-availability and DR solution that offers additional capabilities over mirroring. Available with the Enterprise Edition of MSSQL 2012 or later, one or more databases can be added to an Availability Group for which a singular network name (listener) exists for client connectivity. Replication and failover configurations are applied to the Availability Group, which can span 2 or more nodes&mdash;one primary (writable) replica and one or more secondary (optionally readable) replicas. Although asynchronous replication is available, synchronous replication allows for automatic failover.",
+                "type": "$195/hour, 1 hour minimum",
+                "hourly": 195,
+                "monthly": "&mdash;",
+                "setupFee": 195,
+                "prerequisite": "Available to Managed Microsoft SQL service customers"
+            },
+            {
                 "key": "service-tasks:remote-desktop",
                 "name": "Add / Install Remote Desktop Services",
                 "descriptionHtml": "Customers who want to run Microsoft Remote Desktop Services can purchase the work item. Then we provision the RDS licenses for use on CenturyLink Cloud.",
@@ -744,6 +896,138 @@
                 "type": "Priced per project, hourly rates of $195",
                 "hourly": 195,
                 "monthly": "&mdash;"
+            }
+        ]
+    },
+    {
+        "key": "account-management",
+        "name": "Account Management",
+        "description": "Support for enterprise scenarios, including sub-account hierarchies, billing reports, and private-labeling.",
+        "href": "/account-management",
+        "products": [
+            {
+                "key": "account-management",
+                "name": "Account Management",
+                "descriptionHtml": "Comprehensive back-office features to support advanced cloud deployments",
+                "type": "Included"
+            },
+            {
+                "key": "account-management:group-quotas",
+                "name": "Group Quotas",
+                "descriptionHtml": "Set resource and usage limits on groups of virtual servers to prevent unwanted costs",
+                "type": "Included"
+            },
+            {
+                "key": "account-management:private-labeling",
+                "name": "Private Labeling",
+                "descriptionHtml": "Customize UI and support resources to match custom brand requirements",
+                "type": "Included"
+            },
+            {
+                "key": "account-management:billing",
+                "name": "Billing",
+                "descriptionHtml": "Line-item detail of costs incurred",
+                "type": "Included"
+            },
+            {
+                "key": "account-management:activity-logging",
+                "name": "Activity Logging",
+                "descriptionHtml": "Audit trail of activities performed by users and the API",
+                "type": "Included"
+            },
+            {
+                "key": "account-management:groups",
+                "name": "Groups",
+                "descriptionHtml": "Bulk administration of servers",
+                "type": "Included"
+            },
+            {
+                "key": "account-management:cloud-monitoring",
+                "name": "Standard Cloud Monitoring—Compute, Network, and Storage",
+                "descriptionHtml": "Alerts and thresholds that notify users when cloud resources exceed specified limits.",
+                "type": "Included"
+            },
+            {
+                "key": "account-management:scheduling",
+                "name": "Scheduling",
+                "descriptionHtml": "Schedule key infrastructure management tasks to automatically execute",
+                "type": "Included for all customers"
+            }
+        ]
+    },
+    {
+        "key": "api",
+        "name": "API",
+        "description": "Comprehensive REST based web services to enable amazing ideas",
+        "href": "/api",
+        "products": [
+            {
+                "key": "api",
+                "name": "API",
+                "type": "Included for all customers"
+            }
+        ]
+    },
+    {
+        "key": "blueprints",
+        "name": "Blueprints",
+        "description": "Comprehensive REST based web services to enable amazing ideas",
+        "href": "/blueprints",
+        "products": [
+            {
+                "key": "blueprints",
+                "name": "Blueprints",
+                "descriptionHtml": "\"Templates\" for cloud environments, cloud orchestration, and automation.",
+                "type": "Included"
+            },
+            {
+                "key": "blueprints:spark",
+                "name": "Self-Managed Apache Spark",
+                "descriptionHtml": "free add-on for existing VMs",
+                "type": "Included"
+            }
+        ]
+    },
+    {
+        "key": "private-cloud",
+        "name": "Private Cloud",
+        "description": "Build a cloud that's tailored for your business. CenturyLink Cloud's private cloud solution balances performance, efficiency, security and integration your organization needs.",
+        "href": "/private-cloud",
+        "products": [
+            {
+                "key": "private-cloud",
+                "name": "CenturyLink Private Cloud",
+                "descriptionHtml": "Isolated compute, storage, and network, hosted in a CenturyLink facility. Priced by the pod, multi-year commitment required.",
+                "type": "<a href=\"/contact\">Call for a quote</a>"
+            }
+        ]
+    },
+    {
+        "key": "support",
+        "name": "Support",
+        "description": "CenturyLink Cloud has best of breed support there when you need it for Cloud Servers, Storage, Backup, Disaster Recovery and more.",
+        "href": "/support",
+        "hidden": true,
+        "products": [
+            {
+                "key": "support:0-10k",
+                "name": "$0–$10K",
+                "type": "10% of monthly CenturyLink Cloud usage"
+            },
+            {
+                "key": "support:10k-80k",
+                "name": "$10K–$80K",
+                "type": "7% of monthly CenturyLink Cloud usage"
+            },
+            {
+                "key": "support:80k-250k",
+                "name": "$80K–$250K",
+                "type": "5% of monthly CenturyLink Cloud usage"
+            },
+            {
+                "key": "support:250k",
+                "name": "$250K+",
+                "type": "3% of monthly CenturyLink Cloud usage"
             }
         ]
     }
