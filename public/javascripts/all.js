@@ -3269,14 +3269,20 @@ if (this.model.get("input") === "slider") {
   $o.push("        " + $e($c(this.model.get("quantity"))));
   $o.push("      </span>\n      GB\n    </div>\n    <input class='range-slider' type='range' name='quantity' min='" + ($e($c(0))) + "' max='" + ($e($c(10000))) + "' value='" + ($e($c(this.model.get("quantity")))) + "'>");
 } else {
-  $o.push("    <span class='select'></span>\n    QTY\n      <select name='quantity'>\n        <option>0</option>\n        <option>1</option>\n        <option>2</option>\n        <option>3</option>\n        <option>4</option>\n        <option>5</option>\n      </select>\n      x\n      <span class='cost'>");
-  $o.push("        " + $e($c(accounting.formatMoney(this.model.get("pricing") * this.app.currency.rate, {
-    "symbol": this.app.currency.symbol
-  }))));
-  if (this.model.get("hasSetupFee")) {
-    $o.push("        <span>\n          <sup>\n            *\n          </sup>\n        </span>");
+  if (this.model.get("input") === "number") {
+    $o.push("    <div class='quantity-wrapper'>\n      <span class='quantity'>");
+    $o.push("        " + $e($c(this.model.get("quantity"))));
+    $o.push("      </span>\n      GB\n    </div>\n    <input class='number' name='quantity' value='" + ($e($c(this.model.get("quantity")))) + "' type='number'>");
+  } else {
+    $o.push("    <span class='select'></span>\n    QTY\n      <select name='quantity'>\n        <option>0</option>\n        <option>1</option>\n        <option>2</option>\n        <option>3</option>\n        <option>4</option>\n        <option>5</option>\n      </select>\n      x\n      <span class='cost'>");
+    $o.push("        " + $e($c(accounting.formatMoney(this.model.get("pricing") * this.app.currency.rate, {
+      "symbol": this.app.currency.symbol
+    }))));
+    if (this.model.get("hasSetupFee")) {
+      $o.push("        <span>\n          <sup>\n            *\n          </sup>\n        </span>");
+    }
+    $o.push("      </span>");
   }
-  $o.push("      </span>");
 }
 
 $o.push("    <span class='price'>");

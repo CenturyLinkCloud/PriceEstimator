@@ -771,13 +771,14 @@ input[type=text], input[type=number] {
   }
 
   &.object-storage {
-    input[type=range], .rangeslider {
+    input[type=range], input[type=number], .rangeslider {
       width: 114px;
     }
+
   }
 
   &.bandwidth {
-    width: 658px;
+    width: 458px;
 
     .service__info {
       height: 60px;
@@ -785,6 +786,10 @@ input[type=text], input[type=number] {
 
     input[type=range], .rangeslider {
       width: 440px;
+    }
+
+    input[type=number], {
+      width: 114px;
     }
 
     .service__info {
