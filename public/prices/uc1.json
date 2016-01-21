@@ -1,576 +1,720 @@
 [
     {
-        "name" : "Infrastructure Resources",
-        "description" : "Pay for infrastructure resources by the hour with no long-term commitments. This frees you from the costs and complexities of planning, purchasing, and maintaining hardware and transforms what are commonly large fixed costs into much smaller variable costs.",
-        "products" : [
+        "key": "infrastructure-resources",
+        "name": "Infrastructure Resources",
+        "description": "Pay for infrastructure resources by the hour with no long-term commitments. This frees you from the costs and complexities of planning, purchasing, and maintaining hardware. Transform large fixed costs into much smaller variable costs.",
+        "products": [
             {
                 "key": "server:cpu",
                 "name": "Virtual CPU",
-                "descriptionHtml" : "2 Ghz+ Processor (up to 16 cpu)",
-                "type" : "hourly (allocated)",
-                "hourly" : 0.0100,
+                "descriptionHtml": "2 Ghz+ Processor (up to 16 CPU)",
+                "type": "hourly (used)",
+                "hourly": 0.0100,
                 "href": "/servers"
             },
             {
                 "key": "server:memory",
                 "name": "Virtual RAM",
-                "descriptionHtml" : "1 GB (up to 128GB)",
-                "type" : "hourly (allocated)",
-                "hourly" : 0.015,
+                "descriptionHtml": "1 GB (up to 128 GB)",
+                "type": "hourly (used)",
+                "hourly": 0.015,
                 "href": "/servers"
             },
             {
                 "key": "server:storage:standard",
                 "name": "Block Storage w/ Standard Backup",
-                "descriptionHtml" : "Persistent storage (single data center, 5 days of snapshot backup). Price per GB.",
-                "type" : "hourly (allocated)",
-                "hourly" : 0.00021,
+                "descriptionHtml": "Persistent storage (single data center, 5 days of snapshot backup). Price per GB.",
+                "type": "hourly (allocated)",
+                "hourly": 0.00021,
+                "unit": "GB",
                 "href": "/block-storage"
             },
             {
                 "key": "server:storage:premium",
                 "name": "Block Storage w/ Premium Backup",
-                "descriptionHtml" : "Persistent storage (single data center, 14 days of snapshot backup). Price per GB.",
-                "type" : "hourly (allocated)",
-                "hourly" : 0.0007,
+                "descriptionHtml": "Persistent storage (single data center, 14 days of snapshot backup). Price per GB.",
+                "type": "hourly (allocated)",
+                "hourly": 0.0007,
+                "unit": "GB",
                 "href": "/block-storage"
             },
             {
+                "key": "server:cpu:hyperscale",
                 "name": "Virtual CPU for Hyperscale",
-                "descriptionHtml" : "2 Ghz+ Processor (up to 16 cpu)",
-                "type" : "hourly (allocated)",
-                "hourly" : 0.0100,
+                "descriptionHtml": "2 Ghz+ Processor (up to 16 CPU)",
+                "type": "hourly (used)",
+                "hourly": 0.0100,
                 "href": "/hyperscale"
             },
             {
+                "key": "server:memory:hyperscale",
                 "name": "Virtual RAM for Hyperscale",
-                "descriptionHtml" : "1 GB (up to 128GB)",
-                "type" : "hourly (allocated)",
-                "hourly" : 0.015,
+                "descriptionHtml": "1 GB (up to 128 GB)",
+                "type": "hourly (used)",
+                "hourly": 0.015,
                 "href": "/hyperscale"
             },
             {
                 "key": "server:storage:hyperscale",
                 "name": "Block Storage for Hyperscale",
-                "descriptionHtml" : "Persistent high performance storage: SSD based storage with sustained rates of 15k IOPS. Price per GB.",
-                "type" : "hourly (allocated)",
-                "hourly" : 0.0005,
+                "descriptionHtml": "Persistent high performance storage. SSD based storage with sustained rates of 15k IOPS. Price per GB.",
+                "type": "hourly (allocated)",
+                "hourly": 0.0005,
                 "href": "/hyperscale"
             },
             {
+                "key": "server:storage:archive",
                 "name": "Archive Storage",
-                "descriptionHtml" : "Per GB Stored for Archived Virtual Machines)",
-                "type" : "hourly (used)",
-                "hourly" : 0.0001
+                "descriptionHtml": "Per GB Stored (for archived virtual machines)",
+                "type": "hourly (used)",
+                "hourly": 0.0001
+            },
+            {
+                "key": "networking:object-storage:enabled",
+                "name": "Object Storage",
+                "descriptionHtml": "Flexible, scalable storage that's S3 compatible. Highly available large file storage accessible via HTTP, with automatic multi-site replication.",
+                "type": "usage (per GB per month)",
+                "monthly": 0.04,
+                "unit": "GB",
+                "href": "/object-storage"
             }
         ]
     },
     {
+        "key": "ips",
+        "name": "Intrusion Prevention Service (IPS)",
+        "description": "",
+        "products": [
+            {
+                "key": "ips",
+                "name": "Intrusion Prevention Service (IPS)",
+                "descriptionHtml": "Per hour per instance.",
+                "type": "hourly (allocated)",
+                "hourly": 0.18,
+                "monthly": "&mdash;",
+                "unit": "hour",
+                "href": "/intrusion-prevention-service"
+            }
+        ]
+    },
+    {
+        "key": "appfog-application-deployments",
         "name": "AppFog Application Deployments",
         "description": "",
         "products": [
             {
+                "key": "appfog",
                 "name": "AppFog Application Deployment",
                 "descriptionHtml": "Per GB Memory per instance.",
-                "key": "appfog",
                 "type": "hourly (used)",
                 "hourly": 0.04,
+                "unit": "GB",
                 "href": "/appfog"
             }
         ]
     },
     {
-        "name" : "Networking",
-        "description" : "",
-        "products" : [
+        "key": "networking",
+        "name": "Networking",
+        "description": "",
+        "products": [
             {
                 "key": "networking:bandwidth",
                 "name": "Internet Bandwidth Data Transfer",
-                "descriptionHtml" : "Outbound only, inbound is free. Price per GB transferred",
-                "type" : "usage (GB)",
-                "monthly" : 0.05
+                "descriptionHtml": "Outbound only, inbound is free. Price per GB transferred.",
+                "type": "usage (GB)",
+                "monthly": 0.05,
+                "usage": 0.05,
+                "unit": "GB",
+                "href": "/bandwidth"
+            },
+            {
+                "key": "networking:bandwidth:object-storage",
+                "name": "Object Storage Data Transfer",
+                "descriptionHtml": "Outbound only, inbound is free. Price per GB transferred.",
+                "type": "usage (GB)",
+                "monthly": 0.05,
+                "usage": 0.05,
+                "unit": "GB",
+                "href": "/object-storage"
             },
             {
                 "key": "networking-services:vpn",
                 "name": "VPN Connection",
-                "descriptionHtml" : "Site to Site VPN Connection (Does not include bandwidth)",
-                "type" : "monthly (fixed)",
-                "monthly" : 45.00
+                "descriptionHtml": "Site-to-Site VPN Connection (Does not include bandwidth.)",
+                "type": "monthly (fixed)",
+                "monthly": 45.00
+            },
+            {
+                "key": "networking-services:first-firewall",
+                "name": "Private VLAN (Primary)",
+                "descriptionHtml": "",
+                "type": "Included",
+                "href": "/cloud-firewall"
             },
             {
                 "key": "networking-services:firewall",
-                "name": "Private VLAN (Additional)",
-                "descriptionHtml" : "1 VLAN is automatically included with each acccount",
-                "type" : "monthly (fixed)",
-                "monthly" : 45.00
+                "name": "Private VLAN (additional)",
+                "descriptionHtml": "1 VLAN is automatically included with each account.",
+                "type": "monthly (fixed)",
+                "monthly": 45.00,
+                "href": "/cloud-firewall"
             },
             {
                 "key": "networking-services:external-ip-address",
                 "name": "Public IP Address",
-                "descriptionHtml" : "IP Address accessible by public internet",
-                "type" : "monthly (fixed)",
-                "monthly" : 2.00
+                "descriptionHtml": "IP Address accessible by public internet.",
+                "type": "monthly (fixed)",
+                "monthly": 2.00
             },
             {
+                "key": "networking-services:dns",
                 "name": "Managed DNS",
-                "descriptionHtml" : "Per Zone",
-                "type" : "monthly (fixed)",
-                "monthly" : 5.00
+                "descriptionHtml": "Per zone",
+                "type": "monthly (fixed)",
+                "monthly": 5.00,
+                "unit": "zone"
             },
             {
+                "key": "smtp-relay",
                 "name": "SMTP Relay Service",
-                "descriptionHtml" : "Price per 1000 emails sent",
-                "type" : "usage (per 1000 emails)",
-                "monthly" : 0.10
+                "descriptionHtml": "Price per 1000 emails sent",
+                "type": "usage (per 1000 emails)",
+                "monthly": 0.10,
+                "usage": 0.10,
+                "unit": "1000 emails"
             },
             {
+                "key": "data-center:cross-connect",
                 "name": "Data Center Cross Connect",
-                "descriptionHtml" : "1 gbps port connection",
-                "type" : "monthly (fixed)",
-                "monthly" : "custom",
+                "descriptionHtml": "1 Gbps port connection",
+                "type": "Custom price. Contact <a href=\"mailto:noc@ctl.io\">noc@ctl.io</a> for details.",
+                "monthly": "custom",
                 "setupFee": "custom"
             },
             {
+                "key": "networking-services:ssl-private-certificate",
                 "name": "CDN SSL Delivery with Private Cert",
-                "descriptionHtml" : "per domain (does not include HTTPS delivery)",
-                "type" : "monthly (fixed)",
-                "monthly" : "260.00"
+                "descriptionHtml": "Per domain (Does not include HTTPS delivery.)",
+                "type": "monthly (fixed)",
+                "monthly": 260.00,
+                "href": "/cdn"
             }
         ]
     },
     {
-        "name" : "Operating Systems",
-        "description" : "Operating System software licensing. Microsoft Windows prices apply to Windows Server, 2008, 2008 CORE R2, 2008 R2, 2008 Data Center, 2012, and 2012 Data Center. Red Hat Enterprise prices apply to 5, 6, 7.",
-        "products" : [
+        "key": "operating-systems",
+        "name": "Operating Systems",
+        "description": "Operating System software licensing. Microsoft Windows prices apply to Windows Server, 2008, 2008 CORE R2, 2008 R2, 2008 Data Center, 2012, and 2012 Data Center. Red Hat Enterprise prices apply to 5, 6, 7.",
+        "products": [
             {
+                "key": "server:os:centos",
                 "name": "CentOS",
-                "type" : "no charge"
+                "type": "no charge"
             },
             {
+                "key": "server:os:debian",
                 "name": "Debian",
-                "type" : "no charge"
+                "type": "no charge"
             },
             {
-                "key":"server:os:windows",
+                "key": "server:os:windows",
                 "name": "Microsoft Windows Server",
-                "descriptionHtml" : "per vCPU",
-                "type" : "hourly (allocated)",
-                "hourly" : 0.04
+                "descriptionHtml": "Per vCPU",
+                "type": "hourly (allocated)",
+                "hourly": 0.04
             },
             {
-                "key":"server:os:redhat",
+                "key": "server:os:redhat",
                 "name": "Red Hat Enterprise Linux",
-                "descriptionHtml" : "per vCPU",
-                "type" : "hourly (allocated)",
-                "hourly" : 0.04
+                "descriptionHtml": "Per vCPU",
+                "type": "hourly (allocated)",
+                "hourly": 0.04
             },
             {
+                "key": "server:os:ubuntu",
                 "name": "Ubuntu",
-                "type" : "no charge"
+                "type": "no charge"
             }
         ]
     },
     {
-        "name" : "Software",
-        "description" : "",
-        "products" : [
-          {
-              "name": "Microsoft SQL Server Enterprise Edition",
-              "descriptionHtml" : "per vCPU license per hour",
-              "type" : "hourly (used)",
-              "hourly" : 0.4153
-          },
-          {
-              "name": "Microsoft SQL Server Standard Edition",
-              "descriptionHtml" : "per vCPU license per hour",
-              "type" : "hourly (used)",
-              "hourly" : 0.1083
-          },
-          {
-              "name": "Microsoft SQL Server Web Edition",
-              "descriptionHtml" : "per vCPU license per hour",
-              "type" : "hourly (used)",
-              "hourly" : 0.0067
-          },
-          {
-              "name": "Microsoft Windows Remote Desktop Services SAL",
-              "descriptionHtml" : "per license per hour",
-              "type" : "hourly (used)",
-              "hourly" : 0.0062
-          }
+        "key": "software",
+        "name": "Software",
+        "description": "",
+        "products": [
+            {
+                "key": "software:microsoft-sql-server-enterprise-edition",
+                "name": "Microsoft SQL Server Enterprise Edition",
+                "descriptionHtml": "Per vCPU license per hour",
+                "type": "hourly (used)",
+                "hourly": 0.4153
+            },
+            {
+                "key": "software:microsoft-sql-server-standard-edition",
+                "name": "Microsoft SQL Server Standard Edition",
+                "descriptionHtml": "Per vCPU license per hour",
+                "type": "hourly (used)",
+                "hourly": 0.1083
+            },
+            {
+                "key": "software:microsoft-sql-server-web-edition",
+                "name": "Microsoft SQL Server Web Edition",
+                "descriptionHtml": "Per vCPU license per hour",
+                "type": "hourly (used)",
+                "hourly": 0.0067
+            },
+            {
+                "key": "software:microsoft-windows-remote-desktop-services-sal",
+                "name": "Microsoft Windows Remote Desktop Services SAL",
+                "descriptionHtml": "Per license per hour",
+                "type": "hourly (used)",
+                "hourly": 0.0062
+            }
         ]
     },
     {
-        "name" : "Managed Operating Systems",
-        "description" : "Prices are for operating system management only. Software licensing is separate.",
-        "products" : [
+        "key": "managed-operating-systems",
+        "name": "Managed Operating Systems",
+        "description": "Prices are for operating system management only. Software licensing is separate.",
+        "products": [
             {
                 "key": "server:os:windows-managed",
                 "name": "Managed Microsoft Windows Server",
-                "descriptionHtml" : "per server",
-                "type" : "hourly (used)",
-                "hourly" : 0.21
+                "descriptionHtml": "Per server",
+                "type": "hourly (used)",
+                "hourly": 0.21
             },
             {
                 "key": "server:os:redhat-managed",
                 "name": "Managed Red Hat Enterprise Linux",
-                "descriptionHtml" : "per server",
-                "type" : "hourly (used)",
-                "hourly" : 0.21
+                "descriptionHtml": "Per server",
+                "type": "hourly (used)",
+                "hourly": 0.21
+            },
+            {
+                "key": "server:os:managed",
+                "name": "Managed Operating Systems",
+                "descriptionHtml": "Key administrative functions performed by our team of experts.",
+                "type": "hourly (used)",
+                "hourly": 0.21,
+                "unit": "VM"
             }
         ]
     },
     {
-        "name" : "Managed Applications",
-        "description" : "Prices are for both application management and software licensing, unless indicated.",
-        "products" : [
+        "key": "managed-applications",
+        "name": "Managed Applications",
+        "description": "Prices are for both application management and software licensing, unless indicated.",
+        "href": "/managed-services",
+        "products": [
+            {
+                "key": "managed-apps",
+                "name": "Managed Services",
+                "descriptionHtml": "Installation, configuration, and maintenance of operating systems and applications, performed by experts.",
+                "type": "Billed hourly, rates vary"
+            },
             {
                 "key": "managed-apps:iis",
                 "name": "Managed Microsoft IIS",
-                "href" : "/managed-services/iis",
-                "descriptionHtml" : "per server",
-                "type" : "hourly (allocated)",
-                "hourly" : 0.21
+                "href": "/managed-services/iis",
+                "descriptionHtml": "Per server",
+                "type": "hourly (allocated)",
+                "hourly": 0.21
             },
             {
                 "key": "managed-apps:active-directory",
                 "name": "Managed Microsoft Active Directory",
                 "href": "/managed-services/active-directory",
-                "descriptionHtml" : "per server",
-                "type" : "hourly (allocated)",
-                "hourly" : 0.28
+                "descriptionHtml": "Per server",
+                "type": "hourly (allocated)",
+                "hourly": 0.28,
+                "unit": "VM"
             },
             {
                 "key": "managed-apps:ms-sql",
                 "name": "Managed Microsoft SQL",
-                "descriptionHtml" : "per application instance, plus additional charge for software license – see Software section for pricing",
-                "href" : "/managed-services/ms-sql",
-                "type" : "hourly (allocated)",
-                "hourly" : 0.48
+                "descriptionHtml": "Per application instance, plus additional charge for software license. Refer to the Software section for pricing.",
+                "href": "/managed-services/ms-sql",
+                "type": "hourly (allocated)",
+                "hourly": 0.48
             },
             {
                 "key": "managed-apps:apache",
                 "name": "Managed Apache",
-                "descriptionHtml" : "per server",
-                "href" : "/managed-services/apache-server",
-                "type" : "hourly (allocated)",
-                "hourly" : 0.21
+                "descriptionHtml": "Per server",
+                "href": "/managed-services/apache-server",
+                "type": "hourly (allocated)",
+                "hourly": 0.21,
+                "unit": "VM"
             },
             {
                 "key": "managed-apps:tomcat",
                 "name": "Managed Tomcat",
-                "descriptionHtml" : "per server",
-                "href" : "/managed-services/tomcat",
-                "type" : "hourly (allocated)",
-                "hourly" : 0.83
-            },
-            {
-                "key": "managed-apps:cloudera-cdh5-basic",
-                "name": "Managed Cloudera ",
-                "version": "CDH5 Basic",
-                "descriptionHtml" : "per server",
-                "href" : "/managed-services/cloudera",
-                "type" : "hourly (allocated)",
-                "hourly" : 0.54
-            },
-            {
-                "key": "managed-apps:cloudera-cdh5-basic-hbase",
-                "name": "Managed Cloudera ",
-                "version": "CDH5 Basic + HBase",
-                "descriptionHtml" : "per server",
-                "href" : "/managed-services/cloudera",
-                "type" : "hourly (allocated)",
-                "hourly" : 0.88
-            },
-            {
-                "key": "managed-apps:cloudera-enterprise-data-hub",
-                "name": "Managed Cloudera",
-                "version": "Enterprise Data Hub",
-                "descriptionHtml" : "per server",
-                "href" : "/managed-services/cloudera",
-                "type" : "hourly (allocated)",
-                "hourly" : 1.15
+                "descriptionHtml": "Per server",
+                "href": "/managed-services/tomcat",
+                "type": "hourly (allocated)",
+                "hourly": 0.83
             },
             {
                 "key": "managed-apps:mysql",
                 "name": "Managed MySQL",
-                "descriptionHtml" : "per application instance",
-                "href" : "/managed-services/mysql",
-                "type" : "hourly (allocated)",
-                "hourly" : 0.763
+                "descriptionHtml": "Per application instance",
+                "href": "/managed-services/mysql",
+                "type": "hourly (allocated)",
+                "hourly": 0.763
             },
             {
                 "key": "managed-apps:mysql-replication-master-master",
                 "name": "Managed MySQL Replication (Master/Master)",
-                "descriptionHtml" : "per application instance per hour",
-                "type" : "hourly (allocated)",
-                "hourly" : 0.5556
+                "descriptionHtml": "Per application instance per hour",
+                "type": "hourly (allocated)",
+                "hourly": 0.5556
             },
             {
                 "key": "managed-apps:mysql-replication-master-slave",
                 "name": "Managed MySQL Replication (Master/Slave)",
-                "descriptionHtml" : "per application instance per hour",
-                "type" : "hourly (allocated)",
-                "hourly" : 0.3472
+                "descriptionHtml": "Per application instance per hour",
+                "type": "hourly (allocated)",
+                "hourly": 0.3472
             },
             {
+                "key": "managed-apps:managed-geotrust-quick-ssl-certificate",
                 "name": "Managed GeoTrust Quick SSL Certificate",
-                "descriptionHtml" : "per certificate",
-                "type" : "hourly (allocated)"
+                "descriptionHtml": "Per certificate",
+                "type": "hourly (allocated)"
             },
             {
+                "key": "managed-apps:backup",
                 "name": "Managed Backup",
-                "descriptionHtml" : "Price per GB depends on usage. Lower pricing available via contract agreement",
-                "type" : "monthly per GB",
-                "monthly" : 1.10
-            },
-            {
-                "key": "managed-apps:kerberos",
-                "name": "Managed Kerberos",
-                "descriptionHtml" : "per server",
-                "type" : "hourly (allocated)",
-                "hourly" : 0.10
-            },
-            {
-                "key": "managed-apps:unlicensed-hadoop",
-                "name": "Managed Unlicensed Hadoop",
-                "descriptionHtml" : "per server",
-                "type" : "hourly (allocated)",
-                "hourly" : 0.30
+                "descriptionHtml": "Price per GB depends on usage. Lower pricing available via contract agreement.",
+                "type": "monthly per GB",
+                "monthly": 1.10,
+                "unit": "GB"
             }
         ]
     },
     {
-        "name" : "Disaster Recovery",
-        "href" : "/disaster-recovery",
+        "key": "disaster-recovery",
+        "name": "Disaster Recovery",
+        "href": "/disaster-recovery",
         "products": [
             {
+                "key": "disaster-recovery:safehaven",
                 "name": "SafeHaven License",
-                "descriptionHtml" : "per server",
-                "type" : "hourly (allocated)",
-                "hourly" : 0.0548
+                "descriptionHtml": "Per server",
+                "type": "hourly (allocated)",
+                "hourly": 0.0548,
+                "unit": "VM"
             }
         ]
     },
     {
-        "name" : "Load Balancing",
-        "href" : "/load-balancing",
-        "description" : "Self-service shared or dedicated load balancer options.",
+        "key": "load-balancing",
+        "name": "Load Balancing",
+        "href": "/load-balancing",
+        "description": "Self-service shared or dedicated load balancer options.",
         "products": [
             {
                 "key": "networking-services:shared-load-balancer",
                 "name": "Shared Load Balancer",
-                "descriptionHtml" : "Fully self-service shared load balancer",
-                "type" : "hourly (allocated)",
-                "hourly" : 0.04
+                "descriptionHtml": "Fully self-service shared load balancer",
+                "type": "hourly (allocated)",
+                "hourly": 0.04
             },
             {
                 "key": "networking-services:dedicated-load-balancer-200",
                 "name": "Citrix NetScaler VPX",
-                "version" : "200Mbps Standard",
-                "descriptionHtml" : "Dedicated Load Balancer (Virtual Appliance)",
-                "type" : "monthly (fixed)",
-                "monthly" : 260.00,
+                "version": "200Mbps Standard",
+                "descriptionHtml": "Dedicated Load Balancer (virtual appliance)",
+                "type": "monthly (fixed)",
+                "monthly": 260.00,
                 "setupFee": 390.00
             },
             {
+                "key": "networking-services:dedicated-load-balancer-200-enterprise",
                 "name": "Citrix NetScaler VPX",
-                "version" : "200Mbps Enterprise",
-                "descriptionHtml" : "Dedicated Load Balancer (Virtual Appliance)",
-                "type" : "monthly (fixed)",
-                "monthly" : 520.00,
+                "version": "200Mbps Enterprise",
+                "descriptionHtml": "Dedicated Load Balancer (virtual appliance)",
+                "type": "monthly (fixed)",
+                "monthly": 520.00,
+                "setupFee": 390.00
+            },
+            {
+                "key": "networking-services:dedicated-load-balancer-200-platinum",
+                "name": "Citrix NetScaler VPX",
+                "version": "200Mbps Platinum",
+                "descriptionHtml": "Dedicated Load Balancer (virtual appliance)",
+                "type": "monthly (fixed)",
+                "monthly": 780.00,
                 "setupFee": 390.00
             },
             {
                 "key": "networking-services:dedicated-load-balancer-1000",
                 "name": "Citrix NetScaler VPX",
-                "version" : "1000Mbps Standard",
-                "descriptionHtml" : "Dedicated Load Balancer (Virtual Appliance)",
-                "type" : "monthly (fixed)",
-                "monthly" : 780.00,
+                "version": "1000Mbps Standard",
+                "descriptionHtml": "Dedicated Load Balancer (virtual appliance)",
+                "type": "monthly (fixed)",
+                "monthly": 780.00,
                 "setupFee": 390.00
             },
             {
+                "key": "networking-services:dedicated-load-balancer-1000-enterprise",
                 "name": "Citrix NetScaler VPX",
-                "version" : "1000Mbps Enterprise",
-                "descriptionHtml" : "Dedicated Load Balancer (Virtual Appliance)",
-                "type" : "monthly (fixed)",
-                "monthly" : 1170.00,
+                "version": "1000Mbps Enterprise",
+                "descriptionHtml": "Dedicated Load Balancer (virtual appliance)",
+                "type": "monthly (fixed)",
+                "monthly": 1170.00,
+                "setupFee": 390.00
+            },
+            {
+                "key": "networking-services:dedicated-load-balancer-1000-platinum",
+                "name": "Citrix NetScaler VPX",
+                "version": "1000Mbps Platinum",
+                "descriptionHtml": "Dedicated Load Balancer (virtual appliance)",
+                "type": "monthly (fixed)",
+                "monthly": 1560.00,
                 "setupFee": 390.00
             }
         ]
     },
     {
-        "name" : "Quickstart Services",
-        "description" : "Get help with your transition, or simply help speed up the process of adopting our enterprise cloud platform.",
-        "href" : "/onboarding",
+        "key": "quickstart-services",
+        "name": "Quickstart Services",
+        "description": "Get help with your transition, or simply help speed up the process of adopting our enterprise cloud platform.",
+        "href": "/onboarding",
         "products": [
             {
+                "key": "quickstart:express",
                 "name": "Quickstart Express",
-                "descriptionHtml" : "Deployment and training services",
-                "type" : "one-time (fixed) ",
-                "setupFee" : 600.00
+                "descriptionHtml": "Deployment and training services",
+                "type": "one-time (fixed)",
+                "setupFee": 600.00
             },
             {
-                "name": "Quickstart Advanced ",
-                "descriptionHtml" : "Deployment services & best practice consultation to maximize ROI",
-                "type" : "one-time (fixed) ",
-                "setupFee" : 2000.00
+                "key": "quickstart:advanced",
+                "name": "Quickstart Advanced",
+                "descriptionHtml": "Deployment services and best practice consultation to maximize ROI.",
+                "type": "one-time (fixed)",
+                "setupFee": 2000.00
             },
             {
+                "key": "quickstart:enterprise",
                 "name": "Quickstart Enterprise",
-                "descriptionHtml" : "Tailored for strategic and/or enterprise orgs who require complex onboarding and/or applicable to customers who have extended onboarding requirements",
-                "type" : "one-time (fixed) ",
-                "setupFee" : 20000.00
+                "descriptionHtml": "Tailored for strategic and/or enterprise orgs who require complex onboarding and/or applicable to customers who have extended onboarding requirements.",
+                "type": "one-time (fixed)",
+                "setupFee": 20000.00
             },
             {
+                "key": "quickstart:safehaven-onboarding",
                 "name": "Quickstart SafeHaven Onboarding",
-                "descriptionHtml" : "Includes 6 Recovery VM setup. Any Additional Recovery VM setup will be $325 per VM which is a onetime charge",
-                "type" : "one-time (fixed) ",
-                "setupFee" : 1850.00
+                "descriptionHtml": "Includes 6 Recovery VM setup. Any additional Recovery VM setup is $325 per VM, a one-time charge.",
+                "type": "one-time (fixed)",
+                "setupFee": 1850.00
             }
         ]
     },
     {
-        "name" : "Service Tasks",
-        "description" : "Our team of network engineers have deep operational expertise to quickly and efficiently perform common platform activities. Just give us the details on your request, and within one business day, we'll reply with an estimate, along with a projected completion date for the task. Service task estimation and duties are performed during business hours, 9am-5pm Pacific Time.",
-        "href" : "/service-tasks",
+        "key": "service-tasks",
+        "name": "Service Tasks",
+        "description": "Our team of network engineers have deep operational expertise to quickly and efficiently perform common platform activities. Just give us the details on your request, and within one business day, we'll reply with an estimate, along with a projected completion date for the task. Service task estimation and duties are performed during business hours, 9 a.m.&ndash;5 p.m. Pacific Time.",
+        "href": "/service-tasks",
         "products": [
             {
+                "key": "service-tasks:vm-import",
                 "name": "VM Import",
-                "descriptionHtml" : "Take a customer virtual machine and convert to either (a) a running virtual machine or (b) a reusable template. Servers converted. The customer will be asked for details about which account, group, VLAN, and storage type to apply to the imported server.",
-                "type" : "$195/hour, 2 hour minimum",
-                "hourly" : 195,
-                "monthly" : "&mdash;",
-                "setupFee" : 390
+                "descriptionHtml": "Take a customer virtual machine and convert to either (a) a running virtual machine or (b) a reusable template. Servers converted. The customer will be asked for details about which account, group, VLAN, and storage type to apply to the imported server.",
+                "details": "Best option for virtual appliances or other OVF files that do not meet self-service import requirements <a href=\"/knowledge-base/servers/self-service-vm-import-ovf-requirements/\">listed here</a>. Take a customer virtual machine and convert to either (a) a running virtual machine or (b) a reusable template. Servers converted. The customer will be asked for details about which account, group, VLAN, and storage type to apply to the imported server.",
+                "type": "$195/hour, 2 hour minimum",
+                "hourly": 195,
+                "monthly": "&mdash;",
+                "setupFee": 390,
+                "prerequisite": "Export virtual machine in OVF format. Must be an Operating System currently supported on the CenturyLink Cloud. For full list of requirements for custom imports, see <a href=\"/knowledge-base/service-tasks/requirements-for-custom-imagevm-imports/\">this KB article</a>."
             },
             {
+                "key": "service-tasks:load-balancer-deployment",
                 "name": "Deploy Dedicated Load Balancer",
-                "descriptionHtml" : "Customer can request dedicated Netscaler, HAProxy, and F5 devices for their accounts. These are best suited to customers who want control over routing management for public or private traffic.     ",
-                "type" : "$195/hour, 2 hour minimum",
-                "hourly" : 195,
-                "monthly" : "&mdash;",
-                "setupFee" : 390
+                "descriptionHtml": "Customer can request dedicated Netscaler, HAProxy, and F5 devices for their accounts. These are best suited to customers who want control over routing management for public or private traffic.",
+                "details": "CenturyLink Cloud offers self-service shared load balancers. For customers who desire control over routing management for public or private traffic, however, they can request dedicated Netscaler, HAProxy, and F5 devices for their accounts.",
+                "type": "$195/hour, 2 hour minimum",
+                "hourly": 195,
+                "monthly": "&mdash;",
+                "setupFee": 390,
+                "prerequisite": "For load balancers that require licensing, the customer must provide licensing information or approve CenturyLink Cloud to purchase on their behalf."
             },
             {
+                "key": "service-tasks:vpn-tunnels-deployment",
                 "name": "Deploy Site-to-Site VPN Tunnels or Direct Connect",
-                "descriptionHtml" : "Provision specialized site to site tunnels for customers or connect CenturyLink Cloud to hardware in the same data center via Direct Connect.",
-                "type" : "$195/hour, 2 hour minimum",
-                "hourly" : 195,
-                "monthly" : "&mdash;",
-                "setupFee" : 390
+                "descriptionHtml": "Provision specialized site-to-site tunnels for customers or connect CenturyLink Cloud to hardware in the same data center via Direct Connect.",
+                "details": "Our team will provision specialized site-to-site tunnels for customers.",
+                "type": "$195/hour, 1 hour minimum",
+                "hourly": 195,
+                "monthly": "&mdash;",
+                "setupFee": 195,
+                "prerequisite": "None"
             },
             {
+                "key": "service-tasks:vmware-deployment",
                 "name": "Deploy VMWare Virtual Appliance",
-                "descriptionHtml" : "Add virtual appliances to an account",
-                "type" : "$195/hour, 2 hour minimum",
-                "hourly" : 195,
-                "monthly" : "&mdash;",
-                "setupFee" : 390
+                "descriptionHtml": "Add virtual appliances to an account.",
+                "details": "Add pre-packaged applications to your CenturyLink Cloud deployment&mdash;including AlertLogic, Twinstrata Gateway, and Riverbed WAN accelerator.",
+                "type": "$195/hour, 2 hour minimum",
+                "hourly": 195,
+                "monthly": "&mdash;",
+                "setupFee": 390,
+                "prerequisite": "Customer must already have purchased licenses for appliances, or approve of CenturyLink Cloud purchasing licenses on their behalf."
             },
             {
+                "key": "service-tasks:data-import-export",
                 "name": "Data Import/Export",
-                "descriptionHtml" : "For customers with large data sets to add to (or extract from) the cloud, this content can be distributed via removable media or FTP. This may include data files, virtual machine hard drives (export), or unstructured content. For export where no removable media provided by customer, cost of media added to invoice.",
-                "type" : "$195/hour, 2 hour minimum",
-                "hourly" : 195,
-                "monthly" : "&mdash;",
-                "setupFee" : 390
+                "descriptionHtml": "For customers with large data sets to add to (or extract from) the cloud, this content can be distributed via removable media or FTP. This may include data files, virtual machine hard drives (export), or unstructured content. For export where no removable media provided by customer, cost of media added to invoice.",
+                "details": "Transferring large amounts of data into&mdash;and out of&mdash;CenturyLink Cloud is a common request. For customers with large data sets to add to (or extract from) the cloud, this content can be distributed via removable media or FTP. This may include data files, virtual machine hard drives (export), or unstructured content.",
+                "type": "$195/hour, 2 hour minimum",
+                "hourly": 195,
+                "monthly": "&mdash;",
+                "setupFee": 390,
+                "note": "For export where no removable media provided by customer, cost of media added to invoice.",
+                "prerequisite": "For import, customer provides removable media with any required encryption."
             },
             {
+                "key": "service-tasks:vm-transfer",
                 "name": "Move Cloud Servers To Different Data Center",
-                "descriptionHtml" : "Customers can request that we move a running, stopped, or archived VM to another CLC data center. Part of this migration includes moving the VM hard drives, setting up the VM in the requested DC, putting it into the specified Group, and joining it to a new network.",
-                "type" : "$195/hour, 3 hour minimum",
-                "hourly" : 195,
-                "monthly" : "&mdash;",
-                "setupFee" : 585
+                "descriptionHtml": "Customers can request that we move a running, stopped, or archived VM to another CenturyLink Cloud data center. Part of this migration includes moving the VM hard drives, setting up the VM in the requested DC, putting it into the specified Group, and joining it to a new network.",
+                "details": "Customers can request that a running, stopped, or archived VM be moved from one account&mdash;or data center location&mdash;to another. Covered in this work item includes moving VM hard drives, setting up the VM in the requested account or data center, putting it into the specified Group, and joining it to a new network.",
+                "type": "$195/hour, 3 hour minimum",
+                "hourly": 195,
+                "monthly": "&mdash;",
+                "setupFee": 585,
+                "prerequisite": "None"
             },
             {
+                "key": "service-tasks:usage-reporting",
                 "name": "Usage Reporting",
-                "descriptionHtml" : "This addresses any request for data that the customer cannot or does not want to retrieve themselves from the platform.",
-                "type" : "$195/hour, 2 hour minimum",
-                "hourly" : 195,
-                "monthly" : "&mdash;",
-                "setupFee" : 390
+                "descriptionHtml": "This addresses any request for data that the customer cannot or does not want to retrieve themselves from the platform.",
+                "details": "The Control Portal provides detailed resource utilization and user activity logs for services consumed. But for customized reporting, customers can request usage reports across the platform such as usage across account hierarchies, or historical billing information.",
+                "type": "$195/hour, 2 hour minimum",
+                "hourly": 195,
+                "monthly": "&mdash;",
+                "setupFee": 390,
+                "prerequisite": "Specific questions that the reports are meant to answer"
             },
             {
+                "key": "service-tasks:disaster-recovery-testing",
                 "name": "Disaster Recovery Testing",
-                "descriptionHtml" : "Restore premium storage servers in remote DC and verify replication is working properly. This does not include leading any customer-side business continuity execution and represents the CLC portion of the DR exercise only. Servers are started in remote DCs based on account/group/network information provided by the customer.",
-                "type" : "$195/hour, 8 hour minimum",
-                "hourly" : 195,
-                "monthly" : "&mdash;",
-                "setupFee" : 1560
+                "descriptionHtml": "Restore premium storage servers in remote DC and verify replication is working properly. This does not include leading any customer-side business continuity execution and represents the CenturyLink Cloud portion of the DR exercise only. Servers are started in remote DCs based on account, group, and network information from the customer.",
+                "details": "<a href=\"/block-storage\">CenturyLink Cloud’s premium storage</a> includes an off-site replication capability. With this work item, customers can conduct tests to verify that replication is working properly. Servers are started in remote DCs based on account, Group, and network information provided by the customer.</p><p><i>NOTE: This work item represents the CenturyLink Cloud portion of the DR exercise only&mdash;this does not include leading any customer-side business continuity execution.</i></p><p>Additionally, if the standard RTO of 8 hours and RPO of 24 hours do not suit a customer’s requirements, we can consult on alternative solutions to achieve more rigorous goals.",
+                "type": "$195/hour, 8 hour minimum",
+                "hourly": 195,
+                "monthly": "&mdash;",
+                "setupFee": 1560,
+                "prerequisite": "None"
             },
             {
+                "key": "service-tasks:cloud-server-creation",
                 "name": "Create Cloud Servers",
-                "descriptionHtml" : "Customers can pay CLC to build servers based on provided specifications.",
-                "type" : "$195/hour, 1 hour minimum",
-                "hourly" : 195,
-                "monthly" : "&mdash;",
-                "setupFee" : 195
+                "descriptionHtml": "Customers can pay CenturyLink Cloud to build servers based on the specifications provided.",
+                "details": "Give us your specifications, and we’ll build servers in our cloud for you.",
+                "type": "$195/hour, 2 hour minimum",
+                "hourly": 195,
+                "monthly": "&mdash;",
+                "setupFee": 390,
+                "prerequisite": "None"
             },
             {
+                "key": "service-tasks:microsoft-software-installation",
                 "name": "Install, Prepare or Configure Microsoft Software",
-                "descriptionHtml" : "Customers who want to run Microsoft software can purchase this work item where we mount ISOs, install software, and configure it.",
-                "type" : "$195/hour, 1 hour minimum",
-                "hourly" : 195,
-                "monthly" : "&mdash;",
-                "setupFee" : 195
+                "descriptionHtml": "Customers who want to run Microsoft software can purchase this work item where we mount ISOs, install software, and configure it.",
+                "details": "Our expertise in Microsoft software runs deep&mdash;put this to work for your business. Here, our team will mount ISOs, install software, and configure it to your specifications.",
+                "type": "$195/hour, 1 hour minimum",
+                "hourly": 195,
+                "monthly": "&mdash;",
+                "setupFee": 195,
+                "note": "Completed by: Service Engineers",
+                "prerequisite": "Software licenses and media (as needed)."
             },
             {
+                "key": "service-tasks:blueprints-development",
                 "name": "Develop Blueprints",
-                "descriptionHtml" : "If a customer wants a Blueprint developed, they can pay CLC resources to design and deploy the Blueprint for their account.",
-                "type" : "$195/hour, 8 hour minimum",
-                "hourly" : 195,
-                "monthly" : "&mdash;",
-                "setupFee" : 1560
+                "descriptionHtml": "If a customer wants a Blueprint developed, they can pay CenturyLink Cloud to design and deploy the Blueprint for their account.",
+                "details": "Our cloud orchestration engine, Blueprints, allows customers to create new, complex environments in a couple of clicks&mdash;ensuring that custom apps and pre-packaged software are always deployed with ideal settings. Blueprints also eliminate human error, while significantly reducing the time to deploy solutions.</p><p>To make the most of Blueprints, strong experience with scripting technologies (like Powershell for Windows and shell scripts for Linux) is usually required. In addition, in-depth knowledge of the application in question (i.e. SharePoint, MySQL, IIS, Apache, etc.) is useful too.</p><p>If this expertise is not immediately available in-house, our Service Engineering team can help customers create Blueprints for a variety of operating systems and apps. We’ll also recommend the latest industry best practices for optimal configuration.",
+                "type": "$195/hour, 8 hour minimum",
+                "hourly": 195,
+                "monthly": "&mdash;",
+                "setupFee": 1560,
+                "prerequisite": "None, unless the Blueprint requires software paid for, or developed by the customer."
             },
             {
+                "key": "service-tasks:mssql-database-mirroring",
                 "name": "MSSQL Database Mirroring",
-                "descriptionHtml" : "Available on both the Standard (synchronous only) and Enterprise Edition of all supported versions of MSSQL, mirroring synchronizes data from a principal DB to a mirror DB on another MSSQL instance.  Each database retains its own unique connection string, even in the case of failover. Configurable on a per-database basis.",
-                "type" : "$195/hour, 1 hour minimum",
-                "hourly" : 195,
-                "monthly" : "&mdash;",
-                "setupFee" : 195
+                "descriptionHtml": "Available on both the Standard (synchronous only) and Enterprise Edition of all supported versions of MSSQL. Mirroring synchronizes data from a principal DB to a mirror DB on another MSSQL instance.  Each database retains its own unique connection string, even in the case of failover. Configurable on a per-database basis.",
+                "details": "This MSSQL availability solution is configurable on a per-database basis.  Available on both the Standard Edition (synchronous only) and Enterprise Edition of all supported versions of MSSQL. Mirroring synchronizes data from a principal DB to a mirror DB on another MSSQL instance.  Each database retains its own unique connection string, even in the case of failover.",
+                "type": "$195/hour, 1 hour minimum",
+                "hourly": 195,
+                "monthly": "&mdash;",
+                "setupFee": 195,
+                "prerequisite": "Available to Managed Microsoft SQL service customers"
             },
             {
+                "key": "service-tasks:remote-desktop",
                 "name": "Add / Install Remote Desktop Services",
-                "descriptionHtml" : "Customers who want to run Microsoft Remote Desktop Services can purchase this work item where we will provision RDS licenses for use on CenturyLink Cloud.",
-                "type" : "$195/hour, 1 hour minimum",
-                "hourly" : 195,
-                "monthly" : "&mdash;",
-                "setupFee" : 195
+                "descriptionHtml": "Customers who want to run Microsoft Remote Desktop Services can purchase the work item. Then we provision the RDS licenses for use on CenturyLink Cloud.",
+                "details": "Our expertise in Microsoft software runs deep&mdash;put this to work for your business. Our team will provision Remote Desktop Services licenses for use on CenturyLink Cloud.</p><p><i>NOTE: while the Service Task incurs a one-time charge, the Microsoft Windows Remote Desktop Services license will be billed monthly. <a href=https://www.centurylinkcloud.com/pricing/#/ny1>See the Pricing Catalog</a> for the hourly cost of this software.</i>",
+                "type": "$195/hour, 1 hour minimum",
+                "hourly": 195,
+                "monthly": "&mdash;",
+                "setupFee": 195,
+                "prerequisite": "None"
             },
             {
+                "key": "service-tasks:troubleshooting",
                 "name": "Conference Calls and Guided Troubleshooting",
-                "descriptionHtml" : "Participation on customer conference calls and guided troubleshooting sessions.",
-                "type" : "$195/hour, 1 hour minimum",
-                "hourly" : 195,
-                "monthly" : "&mdash;",
-                "setupFee" : 195
+                "descriptionHtml": "Participation on customer conference calls and guided troubleshooting sessions.",
+                "details": "Participation on customer conference calls and guided troubleshooting sessions.",
+                "type": "$195/hour, 1 hour minimum",
+                "hourly": 195,
+                "monthly": "&mdash;",
+                "setupFee": 195,
+                "prerequisite": "List of expectations"
             },
             {
+                "key": "service-tasks:nessus-scanning",
                 "name": "NESSUS Security Vulnerability Scanning",
-                "descriptionHtml" : "Runs security scans against one or more virtual machines to look for over 65,000 <a href='http://www.tenable.com/plugins/index.php?view=all'>specific vulnerabilities and security gaps</a>. Findings are then shared with the customer.",
-                "type" : "$195/hour, 1 hour minimum",
-                "hourly" : 195,
-                "monthly" : "&mdash;",
-                "setupFee" : 195
+                "descriptionHtml": "Runs security scans against one or more virtual machines to look for over 65,000 <a href='http://www.tenable.com/plugins/index.php?view=all'>specific vulnerabilities and security gaps</a>. Findings are then shared with the customer.",
+                "type": "$195/hour, 1 hour minimum",
+                "hourly": 195,
+                "monthly": "&mdash;",
+                "setupFee": 195,
+                "prerequisite": "Customer provides the account alias, IP address(es), and VLAN to scan."
             },
             {
+                "key": "service-tasks:direct-connect-setup",
                 "name": "Direct Connect Setup",
-                "descriptionHtml" : "Provides the planning and work necessary to establish a direct connect between environments via cross connect or MPLS",
-                "type" : "$195/hour, 4 hour minimum",
-                "hourly" : 195,
-                "monthly" : "&mdash;",
-                "setupFee" : 780
+                "descriptionHtml": "Provides the planning and work necessary to establish a direct connect between environments via cross connect or MPLS.",
+                "details": "Labor required to plan, configure, and establish a direct connect (via cross connect or MPLS) between environments. NOTE: This fee just covers labor for the initial setup. Ongoing monthly usage fees are not included. These fees will vary based on the provider.",
+                "type": "$195/hour, 4 hour minimum",
+                "hourly": 195,
+                "monthly": "&mdash;",
+                "setupFee": 780,
+                "prerequisite": "Details on the specifications of the cross-connect. For additional information, please <a href=\"/knowledge-base/network/network-access-options-for-connecting-to-centurylink-clouds-platform/\">refer to this KB article</a>."
             },
             {
+                "key": "service-tasks:safehaven",
                 "name": "SafeHaven Disaster Recovery as a Service Consulting",
-                "descriptionHtml" : "SafeHaven design and technical engineering.",
-                "type" : "$195/hour, 4 hour minimum",
-                "hourly" : 195,
-                "monthly" : "&mdash;",
-                "setupFee" : 780
+                "descriptionHtml": "SafeHaven design and technical engineering.",
+                "details": "",
+                "type": "$195/hour, 4 hour minimum",
+                "hourly": 195,
+                "monthly": "&mdash;",
+                "setupFee": 780,
+                "prerequisite": "None"
+            },
+            {
+                "key": "service-tasks",
+                "name": "Service Tasks",
+                "descriptionHtml": "Custom business and technical services performed by our team of cloud experts",
+                "type": "Priced per project, hourly rates of $195",
+                "hourly": 195,
+                "monthly": "&mdash;"
             }
         ]
     }

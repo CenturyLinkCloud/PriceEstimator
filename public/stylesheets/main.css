@@ -547,14 +547,16 @@ input[type=text], input[type=number] {
       top: -1px; }
     .service .service__inputs.slider .price {
       top: 14px; }
-  .service.object-storage input[type=range], .service.object-storage .rangeslider {
+  .service.object-storage input[type=range], .service.object-storage input[type=number], .service.object-storage .rangeslider {
     width: 114px; }
   .service.bandwidth {
-    width: 658px; }
+    width: 458px; }
     .service.bandwidth .service__info {
       height: 60px; }
     .service.bandwidth input[type=range], .service.bandwidth .rangeslider {
       width: 440px; }
+    .service.bandwidth input[type=number] {
+      width: 114px; }
     .service.bandwidth .service__info {
       min-height: 0; }
   .service.active {

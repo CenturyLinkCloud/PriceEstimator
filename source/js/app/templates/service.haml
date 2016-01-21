@@ -17,23 +17,30 @@
         GB
       %input.range-slider{type: "range", name: "quantity", min: 0, max: 10000, value: @model.get("quantity")}
     - else
-      %span.select
-      QTY
-        %select{name: "quantity"}
-          %option 0
-          %option 1
-          %option 2
-          %option 3
-          %option 4
-          %option 5
+      - if @model.get("input") is "number"
+        .quantity-wrapper
+          %span.quantity
+            = @model.get("quantity")
+          GB
+        %input.number{name: "quantity", value: @model.get("quantity"), type: "number"}
+      - else
+        %span.select
+        QTY
+          %select{name: "quantity"}
+            %option 0
+            %option 1
+            %option 2
+            %option 3
+            %option 4
+            %option 5
 
-        x
-        %span.cost
-          = accounting.formatMoney(@model.get("pricing") * @app.currency.rate, {"symbol": @app.currency.symbol } )
-          - if @model.get("hasSetupFee")
-            %span 
-              %sup
-                *
+          x
+          %span.cost
+            = accounting.formatMoney(@model.get("pricing") * @app.currency.rate, {"symbol": @app.currency.symbol } )
+            - if @model.get("hasSetupFee")
+              %span
+                %sup
+                  *
 
     %span.price
       = accounting.formatMoney(@model.totalPricePerMonth() * @app.currency.rate, { "symbol": @app.currency.symbol } )

@@ -2,6 +2,6 @@
   {
     "key": "bandwidth",
     "title": "Estimated Outbound Monthly Bandwidth",
-    "input": "slider"
+    "input": "number"
   }
 ]
