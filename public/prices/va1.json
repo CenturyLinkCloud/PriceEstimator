@@ -841,7 +841,7 @@
         "key": "rdbs",
         "name": "Relational DB Service",
         "description": "",
-        "href": "/dbaas",
+        "href": "/relational-database",
         "products": [
             {
                 "key": "rdbs:single:cpu",
