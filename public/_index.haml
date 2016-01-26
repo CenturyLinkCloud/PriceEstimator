@@ -123,6 +123,40 @@
 
       %a.add-button.no-print{href: "#"} <span class="plus"></span> Add Bare Metal Server
 
+    #rdbss.server-table.calculator-section
+      %h3 Relational DB Services
+      %ul
+        %li
+          High Performance, Enterprise-Grade MySQL-compatible Database on Hyperscale all-flash cloud servers.
+          <a href="/relational-databases" target="_blank" class="no-print">More info</a>.
+      .subtotal-wrapper
+        %span.print-only--inline Relational DB Services&nbsp;|&nbsp;
+        Sub-total
+        .subtotal
+          $0.00
+      %table.table
+        %tr.table-headers
+          %th.table-header.quantity-cell
+            QTY
+          %th.table-header.usage-cell
+            .tooltip-wrapper
+              %a.has-tooltip{href:"#", data: {toggle: "tooltip", title: "VCPU and Memory are billed hourly when VMs are running; Storage is charged hourly based on what’s allocated."}}
+            USAGE
+          %th.table-header.type-cell
+            .tooltip-wrapper
+              %a.has-tooltip{href:"#", data: {toggle: "tooltip", title: "Single or Replicated"}}
+            TYPE
+          %th.table-header.cpu-cell.range-cell
+            vCPU
+          %th.table-header.memory-cell.range-cell MEMORY (GB)
+          %th.table-header.storage-cell.range-cell
+            .tooltip-wrapper
+              %a.has-tooltip{href:"#", data: {toggle: "tooltip", title: "Persistent block storage in addition to base storage of the OS template."}}
+            STORAGE (GB)
+          %th.table-header.price-cell MONTHLY COST
+
+      %a.add-button.no-print{href: "#"} <span class="plus"></span> Add Relational DB Service
+
     #intrusion-prevention-service.calculator-section
       %h3 Intrusion Prevention Service (IPS)
       %p

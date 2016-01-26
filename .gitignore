@@ -21,3 +21,4 @@
 .DS_Store
 
 test/html/spec/spec-runner.js
+*~
