@@ -9,6 +9,7 @@ RdbssView = Backbone.View.extend
   initialize: (options) ->
     @options = options || {}
 
+    console.log('initialize RdbssView', @options)
     @app = @options.app
 
     @collection.on "add", (model, collection, options) =>
@@ -29,10 +30,6 @@ RdbssView = Backbone.View.extend
     @updateSubtotal()
 
     @rdbsViews = []
-
-    if @options.hyperscale
-      if @options.pricingMap.get("options").storage.hyperscale is "disabled"
-        @$el.addClass("disabled")
 
     $('.has-tooltip', @$el).tooltip()
 
@@ -57,15 +54,6 @@ RdbssView = Backbone.View.extend
       symbol: @app.currency.symbol
     )
     $(".subtotal", @$el).html newSubtotal
-
-    if @options.hyperscale
-      if @options.pricingMap.get("options").storage.hyperscale is "disabled"
-        @$el.addClass("disabled")
-        @collection.removeAll()
-      else
-        @$el.removeClass("disabled")
-
-        
 
 
 module.exports = RdbssView

@@ -2352,6 +2352,7 @@ PricingMapsCollection = Backbone.Collection.extend({
         os: {}
       }
     };
+    console.log('data', data);
     _.each(data, (function(_this) {
       return function(section) {
         if (section.name === "Software") {
@@ -2371,6 +2372,17 @@ PricingMapsCollection = Backbone.Collection.extend({
             if (_.has(product, 'key')) {
               ids = product.key.split(":");
               if (ids[0] === 'server') {
+                if (ids[1] === 'os') {
+                  price = product.hourly || 0;
+                  return server.options[ids[1]][ids[2]] = price;
+                } else if (ids[1] === 'storage') {
+                  price = product.hourly * HOURS_IN_MONTH;
+                  return server.options[ids[1]][ids[2]] = price;
+                } else {
+                  price = product.hourly || product.monthly;
+                  return server.options[ids[1]] = price;
+                }
+              } else if (ids[0] === 'rdbs') {
                 if (ids[1] === 'os') {
                   price = product.hourly || 0;
                   return server.options[ids[1]][ids[2]] = price;
@@ -4445,17 +4457,11 @@ RdbsView = Backbone.View.extend({
     })(this));
   },
   render: function() {
-    var disabledClass, managedDisabled, template;
+    var template;
     template = require("../templates/rdbs.haml");
-    managedDisabled = this.model.get("pricingMap").get("options").os["redhat-managed"] === "disabled";
-    disabledClass = "";
-    if (managedDisabled) {
-      disabledClass = "disabled";
-    }
     this.$el.html(template({
       model: this.model,
-      app: this.app,
-      disabledClass: disabledClass
+      app: this.app
     }));
     this.$el.attr("id", this.model.cid);
     _.defer((function(_this) {
@@ -4553,7 +4559,7 @@ RdbsView = Backbone.View.extend({
     })(this));
   },
   onModelChange: function(model) {
-    var managedDisabled, newTotal, total;
+    var newTotal, total;
     total = model.totalPricePerMonth() * this.app.currency.rate;
     newTotal = accounting.formatMoney(total, {
       symbol: this.app.currency.symbol
@@ -4565,12 +4571,6 @@ RdbsView = Backbone.View.extend({
     $(".storage-text-input", this.$el).val(model.get("storage"));
     $(".cpu-text-input", this.$el).val(model.get("cpu"));
     $(".memory-text-input", this.$el).val(model.get("memory"));
-    managedDisabled = this.model.get("pricingMap").get("options").os["redhat-managed"] === "disabled";
-    if (managedDisabled) {
-      $(".managed-cell", this.$el).addClass('disabled');
-    } else {
-      $(".managed-cell", this.$el).removeClass('disabled');
-    }
     this.$el.attr("id", this.model.cid);
     if (model.get("os") === "linux" || managedDisabled === true) {
       model.set("managed", false);
@@ -4608,6 +4608,7 @@ RdbssView = Backbone.View.extend({
   },
   initialize: function(options) {
     this.options = options || {};
+    console.log('initialize RdbssView', this.options);
     this.app = this.options.app;
     this.collection.on("add", (function(_this) {
       return function(model, collection, options) {
@@ -4636,11 +4637,6 @@ RdbssView = Backbone.View.extend({
     })(this));
     this.updateSubtotal();
     this.rdbsViews = [];
-    if (this.options.hyperscale) {
-      if (this.options.pricingMap.get("options").storage.hyperscale === "disabled") {
-        this.$el.addClass("disabled");
-      }
-    }
     return $('.has-tooltip', this.$el).tooltip();
   },
   addRdbs: function(e) {
@@ -4673,15 +4669,7 @@ RdbssView = Backbone.View.extend({
     newSubtotal = accounting.formatMoney(subTotal, {
       symbol: this.app.currency.symbol
     });
-    $(".subtotal", this.$el).html(newSubtotal);
-    if (this.options.hyperscale) {
-      if (this.options.pricingMap.get("options").storage.hyperscale === "disabled") {
-        this.$el.addClass("disabled");
-        return this.collection.removeAll();
-      } else {
-        return this.$el.removeClass("disabled");
-      }
-    }
+    return $(".subtotal", this.$el).html(newSubtotal);
   }
 });
 
@@ -4898,6 +4886,7 @@ ServersView = Backbone.View.extend({
   },
   initialize: function(options) {
     this.options = options || {};
+    console.log('initialize ServersView', this.options);
     this.app = this.options.app;
     this.collection.on("add", (function(_this) {
       return function(model, collection, options) {
@@ -4939,7 +4928,7 @@ ServersView = Backbone.View.extend({
       e.preventDefault();
     }
     type = this.options.hyperscale === true ? "hyperscale" : "standard";
-    console.log('ServersView addServer');
+    console.log('ServersView addServer', this.options.pricingMap);
     return this.collection.add({
       pricingMap: this.options.pricingMap,
       type: type
@@ -5394,6 +5383,7 @@ App = {
         return _this.updateTotalPrice();
       };
     })(this));
+    console.log('initRdbss', this.pricingMaps);
     return this.rdbssView = new RdbssView({
       app: this,
       collection: this.rdbssCollection,
@@ -5484,6 +5474,7 @@ App = {
         _this.ipServicessView.options.pricingMap = _this.pricingMaps.forKey("ips");
         _this.appfogsView.options.pricingMap = _this.pricingMaps.forKey("appfog");
         _this.BaremetalConfigsView.options.pricingMap = _this.pricingMaps.forKey("baremetal");
+        console.log('pricingMaps.on sync serversView.options.pricingMap');
         _this.serversView.options.pricingMap = _this.pricingMaps.forKey("server");
         _this.rdbssView.options.pricingMap = _this.pricingMaps.forKey("rdbs");
         console.log('rdbssView.options.pricingMap', _this.rdbssView.options.pricingMap);

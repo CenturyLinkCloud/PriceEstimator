@@ -163,6 +163,7 @@ App =
     @rdbssCollection.on "change remove add", =>
       @updateTotalPrice()
 
+    console.log('initRdbss', @pricingMaps)
     @rdbssView = new RdbssView
       app: @
       collection: @rdbssCollection
@@ -254,6 +255,7 @@ App =
       @ipServicessView.options.pricingMap = @pricingMaps.forKey("ips")
       @appfogsView.options.pricingMap = @pricingMaps.forKey("appfog")
       @BaremetalConfigsView.options.pricingMap = @pricingMaps.forKey("baremetal")
+      console.log('pricingMaps.on sync serversView.options.pricingMap')
       @serversView.options.pricingMap = @pricingMaps.forKey("server")
       @rdbssView.options.pricingMap = @pricingMaps.forKey("rdbs")
       console.log('rdbssView.options.pricingMap', @rdbssView.options.pricingMap)

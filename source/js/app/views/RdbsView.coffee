@@ -38,10 +38,7 @@ RdbsView = Backbone.View.extend
 
   render: ->
     template = require("../templates/rdbs.haml")
-    managedDisabled = @model.get("pricingMap").get("options").os["redhat-managed"] is "disabled"
-    disabledClass = ""
-    disabledClass = "disabled" if managedDisabled
-    @$el.html template(model: @model, app: @app, disabledClass: disabledClass)
+    @$el.html template(model: @model, app: @app)
     @$el.attr("id", @model.cid)
 
     _.defer =>
@@ -128,12 +125,6 @@ RdbsView = Backbone.View.extend
     $(".storage-text-input", @$el).val(model.get("storage"))
     $(".cpu-text-input", @$el).val(model.get("cpu"))
     $(".memory-text-input", @$el).val(model.get("memory"))
-
-    managedDisabled = @model.get("pricingMap").get("options").os["redhat-managed"] is "disabled"
-    if managedDisabled
-      $(".managed-cell", @$el).addClass('disabled')
-    else
-      $(".managed-cell", @$el).removeClass('disabled')
 
     @$el.attr("id", @model.cid)
 

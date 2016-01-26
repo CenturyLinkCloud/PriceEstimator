@@ -44,6 +44,7 @@ PricingMapsCollection = Backbone.Collection.extend
       options:
         config: {}
         os: {}
+    console.log('data', data)
 
     _.each data, (section) =>
       if section.name is "Software"
@@ -58,6 +59,16 @@ PricingMapsCollection = Backbone.Collection.extend
           if _.has(product,'key')
             ids = product.key.split(":")
             if ids[0] is 'server'
+              if ids[1] is 'os'
+                price = product.hourly || 0
+                server.options[ids[1]][ids[2]] = price #* @currency.rate
+              else if ids[1] is 'storage'
+                price = product.hourly * HOURS_IN_MONTH
+                server.options[ids[1]][ids[2]] = price #* @currency.rate
+              else
+                price = product.hourly || product.monthly
+                server.options[ids[1]] = price #* @currency.rate
+            else if ids[0] is 'rdbs'
               if ids[1] is 'os'
                 price = product.hourly || 0
                 server.options[ids[1]][ids[2]] = price #* @currency.rate
