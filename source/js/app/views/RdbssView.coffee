@@ -37,10 +37,10 @@ RdbssView = Backbone.View.extend
     $('.has-tooltip', @$el).tooltip()
 
   addRdbs: (e) ->
+    console.log('RdbssView.addRdbs', @options.pricingMap)
     e.preventDefault() if e
-    type = if @options.hyperscale is true then "hyperscale" else "standard"
-    @collection.add(pricingMap: @options.pricingMap, type: type)
-  
+    @collection.add(pricingMap: @options.pricingMap)
+
   onRdbsAdded: (model) ->
     rdbsView = new RdbsView(model: model, app: @app, parentView: @)
     @rdbsViews[model.cid] = rdbsView

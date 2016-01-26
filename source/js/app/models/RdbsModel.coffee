@@ -33,6 +33,7 @@ RdbsModel = Backbone.Model.extend
     @.set("pricing", pricing)
 
   updatePricing: (pricingMap) ->
+    console.log('updatePricing', pricingMap);
     @.set("pricingMap", pricingMap)
     pricing = @.get("pricingMap").attributes.options
     @.set("pricing", pricing)

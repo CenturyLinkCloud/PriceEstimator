@@ -26,6 +26,7 @@ RdbssCollection = Backbone.Collection.extend
       rdbs.destroy()
 
   initPricing: (pricingMaps) ->
+    console.log('RdbssCollection initPricing', pricingMaps);
     @each (rdbs) =>
       pricingMap = pricingMaps.forKey("rdbs")
       rdbs.updatePricing pricingMap

@@ -26,6 +26,7 @@ ServersCollection = Backbone.Collection.extend
       server.destroy()
 
   initPricing: (pricingMaps) ->
+    console.log('ServersCollection.initPricing')
     @each (server) =>
       pricingMap = pricingMaps.forKey("server")
       server.updatePricing pricingMap

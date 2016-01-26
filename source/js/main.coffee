@@ -71,7 +71,9 @@ App =
 
 
   onPricingMapsSynced: ->
+    console.log('onPricingMapsSynced');
     @initServers()
+    console.log('call initRdbss');
     @initRdbss()
     @initHyperscaleServers()
     @initIpsServices()
@@ -155,6 +157,7 @@ App =
       pricingMap: @pricingMaps.forKey("server")
 
   initRdbss: ->
+    console.log('initRdbss');
     @rdbssCollection = new RdbssCollection
 
     @rdbssCollection.on "change remove add", =>
@@ -234,6 +237,7 @@ App =
 
 
   setPricingMap: (dc,ds) ->
+    console.log('setPricingMap')
     # Create new pricing map based on new database pricing info
     @pricingMaps = new PricingMapsCollection [],
       app: @
@@ -245,15 +249,18 @@ App =
     @pricingMaps.on "sync", =>
 
     # Update pricing map stored on the views (impacts new models)
+      console.log('pricingMaps.on sync')
       @hyperscaleServersView.options.pricingMap = @pricingMaps.forKey("server")
       @ipServicessView.options.pricingMap = @pricingMaps.forKey("ips")
       @appfogsView.options.pricingMap = @pricingMaps.forKey("appfog")
       @BaremetalConfigsView.options.pricingMap = @pricingMaps.forKey("baremetal")
       @serversView.options.pricingMap = @pricingMaps.forKey("server")
       @rdbssView.options.pricingMap = @pricingMaps.forKey("rdbs")
+      console.log('rdbssView.options.pricingMap', @rdbssView.options.pricingMap)
 
       # Update pricing map stored on collections (impacts existing models)
       @serversCollection.initPricing(@pricingMaps)
+      console.log('call init pricing');
       @rdbssCollection.initPricing(@pricingMaps)
       @hyperscaleServersCollection.initPricing(@pricingMaps)
       @ipsCollection.initPricing(@pricingMaps.forKey("ips"))

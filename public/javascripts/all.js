@@ -2486,6 +2486,7 @@ RdbssCollection = Backbone.Collection.extend({
     })(this));
   },
   initPricing: function(pricingMaps) {
+    console.log('RdbssCollection initPricing', pricingMaps);
     this.each((function(_this) {
       return function(rdbs) {
         var pricingMap;
@@ -2533,6 +2534,7 @@ ServersCollection = Backbone.Collection.extend({
     })(this));
   },
   initPricing: function(pricingMaps) {
+    console.log('ServersCollection.initPricing');
     this.each((function(_this) {
       return function(server) {
         var pricingMap;
@@ -2848,6 +2850,7 @@ RdbsModel = Backbone.Model.extend({
   },
   updatePricing: function(pricingMap) {
     var pricing;
+    console.log('updatePricing', pricingMap);
     this.set("pricingMap", pricingMap);
     pricing = this.get("pricingMap").attributes.options;
     return this.set("pricing", pricing);
@@ -3017,11 +3020,13 @@ ServerModel = Backbone.Model.extend({
   },
   initPricing: function() {
     var pricing;
+    console.log('ServerModel.initPricing', this.get("pricingMap"));
     pricing = this.get("pricingMap").attributes.options;
     return this.set("pricing", pricing);
   },
   updatePricing: function(pricingMap) {
     var pricing;
+    console.log('ServerModel.updatePricing');
     this.set("pricingMap", pricingMap);
     pricing = this.get("pricingMap").attributes.options;
     return this.set("pricing", pricing);
@@ -4639,14 +4644,12 @@ RdbssView = Backbone.View.extend({
     return $('.has-tooltip', this.$el).tooltip();
   },
   addRdbs: function(e) {
-    var type;
+    console.log('RdbssView.addRdbs', this.options.pricingMap);
     if (e) {
       e.preventDefault();
     }
-    type = this.options.hyperscale === true ? "hyperscale" : "standard";
     return this.collection.add({
-      pricingMap: this.options.pricingMap,
-      type: type
+      pricingMap: this.options.pricingMap
     });
   },
   onRdbsAdded: function(model) {
@@ -4936,6 +4939,7 @@ ServersView = Backbone.View.extend({
       e.preventDefault();
     }
     type = this.options.hyperscale === true ? "hyperscale" : "standard";
+    console.log('ServersView addServer');
     return this.collection.add({
       pricingMap: this.options.pricingMap,
       type: type
@@ -5288,7 +5292,9 @@ App = {
     })(this));
   },
   onPricingMapsSynced: function() {
+    console.log('onPricingMapsSynced');
     this.initServers();
+    console.log('call initRdbss');
     this.initRdbss();
     this.initHyperscaleServers();
     this.initIpsServices();
@@ -5381,6 +5387,7 @@ App = {
     });
   },
   initRdbss: function() {
+    console.log('initRdbss');
     this.rdbssCollection = new RdbssCollection;
     this.rdbssCollection.on("change remove add", (function(_this) {
       return function() {
@@ -5462,6 +5469,7 @@ App = {
     return this.trigger("totalPriceUpdated");
   },
   setPricingMap: function(dc, ds) {
+    console.log('setPricingMap');
     this.pricingMaps = new PricingMapsCollection([], {
       app: this,
       datacenter: dc,
@@ -5471,13 +5479,16 @@ App = {
     });
     return this.pricingMaps.on("sync", (function(_this) {
       return function() {
+        console.log('pricingMaps.on sync');
         _this.hyperscaleServersView.options.pricingMap = _this.pricingMaps.forKey("server");
         _this.ipServicessView.options.pricingMap = _this.pricingMaps.forKey("ips");
         _this.appfogsView.options.pricingMap = _this.pricingMaps.forKey("appfog");
         _this.BaremetalConfigsView.options.pricingMap = _this.pricingMaps.forKey("baremetal");
         _this.serversView.options.pricingMap = _this.pricingMaps.forKey("server");
         _this.rdbssView.options.pricingMap = _this.pricingMaps.forKey("rdbs");
+        console.log('rdbssView.options.pricingMap', _this.rdbssView.options.pricingMap);
         _this.serversCollection.initPricing(_this.pricingMaps);
+        console.log('call init pricing');
         _this.rdbssCollection.initPricing(_this.pricingMaps);
         _this.hyperscaleServersCollection.initPricing(_this.pricingMaps);
         _this.ipsCollection.initPricing(_this.pricingMaps.forKey("ips"));
