@@ -2330,11 +2330,7 @@ PricingMapsCollection = Backbone.Collection.extend({
     software_licenses = [];
     rdbs = {
       type: "rdbs",
-      options: {
-        cpu: {},
-        memory: {},
-        storage: {}
-      }
+      options: {}
     };
     server = {
       type: "server",
@@ -2390,7 +2386,10 @@ PricingMapsCollection = Backbone.Collection.extend({
                   return server.options[ids[1]] = price;
                 }
               } else if (ids[0] === 'rdbs') {
-                if (ids[2] && rdbs.options[ids[2]]) {
+                if (ids[2]) {
+                  if (!rdbs.options[ids[2]]) {
+                    rdbs.options[ids[2]] = {};
+                  }
                   price = product.hourly;
                   if (ids[2] === 'storage') {
                     price = price * HOURS_IN_MONTH;
@@ -2457,7 +2456,9 @@ PricingMapsCollection = Backbone.Collection.extend({
       };
     })(this));
     server.options["software"] = software_licenses;
-    output.push(rdbs);
+    if (rdbs.options.cpu) {
+      output.push(rdbs);
+    }
     output.push(server);
     output.push(baremetal);
     _.each(additional_services, function(ser) {
@@ -2853,8 +2854,10 @@ RdbsModel = Backbone.Model.extend({
   updatePricing: function(pricingMap) {
     var pricing;
     this.set("pricingMap", pricingMap);
-    pricing = this.get("pricingMap").attributes.options;
-    return this.set("pricing", pricing);
+    if (this.get("pricingMap")) {
+      pricing = this.get("pricingMap").attributes.options;
+      return this.set("pricing", pricing);
+    }
   },
   totalCpuPerHour: function() {
     var type;
@@ -4445,12 +4448,24 @@ RdbssView = Backbone.View.extend({
     })(this));
     this.collection.on("datacenterUpdate", (function(_this) {
       return function() {
+        _this.checkPricingMap();
         return _this.updateSubtotal();
       };
     })(this));
+    this.checkPricingMap();
     this.updateSubtotal();
     this.rdbsViews = [];
     return $('.has-tooltip', this.$el).tooltip();
+  },
+  checkPricingMap: function() {
+    if (!this.options.pricingMap) {
+      this.$el.addClass("disabled");
+      this.collection.removeAll();
+      return false;
+    } else {
+      this.$el.removeClass("disabled");
+      return true;
+    }
   },
   addRdbs: function(e) {
     if (e) {
@@ -5275,7 +5290,7 @@ App = {
     return this.pricingMaps.on("sync", (function(_this) {
       return function() {
         _this.hyperscaleServersView.options.pricingMap = _this.pricingMaps.forKey("server");
-        _this.ipServicessView.options.pricingMap = _this.pricingMaps.forKey("ips");
+        _this.ipServicesView.options.pricingMap = _this.pricingMaps.forKey("ips");
         _this.appfogsView.options.pricingMap = _this.pricingMaps.forKey("appfog");
         _this.BaremetalConfigsView.options.pricingMap = _this.pricingMaps.forKey("baremetal");
         _this.serversView.options.pricingMap = _this.pricingMaps.forKey("server");
