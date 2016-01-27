@@ -2324,10 +2324,18 @@ PricingMapsCollection = Backbone.Collection.extend({
     }));
   },
   _parsePricingData: function(data) {
-    var additional_services, baremetal, output, server, software_licenses;
+    var additional_services, baremetal, output, rdbs, server, software_licenses;
     output = [];
     additional_services = [];
     software_licenses = [];
+    rdbs = {
+      type: "rdbs",
+      options: {
+        cpu: {},
+        memory: {},
+        storage: {}
+      }
+    };
     server = {
       type: "server",
       options: {
@@ -2352,7 +2360,6 @@ PricingMapsCollection = Backbone.Collection.extend({
         os: {}
       }
     };
-    console.log('data', data);
     _.each(data, (function(_this) {
       return function(section) {
         if (section.name === "Software") {
@@ -2383,15 +2390,12 @@ PricingMapsCollection = Backbone.Collection.extend({
                   return server.options[ids[1]] = price;
                 }
               } else if (ids[0] === 'rdbs') {
-                if (ids[1] === 'os') {
-                  price = product.hourly || 0;
-                  return server.options[ids[1]][ids[2]] = price;
-                } else if (ids[1] === 'storage') {
-                  price = product.hourly * HOURS_IN_MONTH;
-                  return server.options[ids[1]][ids[2]] = price;
-                } else {
-                  price = product.hourly || product.monthly;
-                  return server.options[ids[1]] = price;
+                if (ids[2] && rdbs.options[ids[2]]) {
+                  price = product.hourly;
+                  if (ids[2] === 'storage') {
+                    price = price * HOURS_IN_MONTH;
+                  }
+                  return rdbs.options[ids[2]][ids[1]] = price;
                 }
               } else if (ids[0] === 'networking-services') {
                 if (ids[1] === 'shared-load-balancer') {
@@ -2453,6 +2457,7 @@ PricingMapsCollection = Backbone.Collection.extend({
       };
     })(this));
     server.options["software"] = software_licenses;
+    output.push(rdbs);
     output.push(server);
     output.push(baremetal);
     _.each(additional_services, function(ser) {
@@ -2477,17 +2482,7 @@ RdbssCollection = Backbone.Collection.extend({
   },
   subtotal: function() {
     return _.reduce(this.models, function(memo, rdbs) {
-      return memo + rdbs.totalPricePerMonth() + rdbs.managedAppsPricePerMonth();
-    }, 0);
-  },
-  oSSubtotal: function() {
-    return _.reduce(this.models, function(memo, rdbs) {
-      return memo + rdbs.totalOSPricePerMonth();
-    }, 0);
-  },
-  managedTotal: function() {
-    return _.reduce(this.models, function(memo, rdbs) {
-      return memo + rdbs.managedAppsPricePerMonth() + rdbs.managedBasePricePerMonth();
+      return memo + rdbs.totalPricePerMonth();
     }, 0);
   },
   removeAll: function() {
@@ -2498,7 +2493,6 @@ RdbssCollection = Backbone.Collection.extend({
     })(this));
   },
   initPricing: function(pricingMaps) {
-    console.log('RdbssCollection initPricing', pricingMaps);
     this.each((function(_this) {
       return function(rdbs) {
         var pricingMap;
@@ -2546,7 +2540,6 @@ ServersCollection = Backbone.Collection.extend({
     })(this));
   },
   initPricing: function(pricingMaps) {
-    console.log('ServersCollection.initPricing');
     this.each((function(_this) {
       return function(server) {
         var pricingMap;
@@ -2844,13 +2837,10 @@ RdbsModel = Backbone.Model.extend({
     storage: 1,
     quantity: 1,
     usagePeriod: "percentage_of_month",
-    usage: 100,
-    managed: false,
-    managedApps: []
+    usage: 100
   },
   initialize: function() {
-    this.initPricing();
-    return this.set("managedApps", []);
+    return this.initPricing();
   },
   parse: function(data) {
     return data;
@@ -2862,39 +2852,22 @@ RdbsModel = Backbone.Model.extend({
   },
   updatePricing: function(pricingMap) {
     var pricing;
-    console.log('updatePricing', pricingMap);
     this.set("pricingMap", pricingMap);
     pricing = this.get("pricingMap").attributes.options;
     return this.set("pricing", pricing);
   },
   totalCpuPerHour: function() {
-    var price;
-    price = this.get("cpu") * this.get("pricing").cpu;
-    return price;
+    var type;
+    type = this.get("type");
+    return this.get("cpu") * this.get("pricing").cpu[type];
   },
   totalMemoryPerHour: function() {
-    return this.get("memory") * this.get("pricing").memory;
-  },
-  totalOSPerHour: function() {
-    var os;
-    os = this.get("os");
-    return this.get("pricing").os[os] * this.get("cpu");
-  },
-  managedBasePricePerHour: function() {
-    var os, osPrice;
-    if (this.get("managed")) {
-      os = this.get("os");
-      osPrice = this.get("pricing").os["" + os + "-managed"];
-      return osPrice;
-    } else {
-      return 0;
-    }
-  },
-  managedBasePricePerMonth: function() {
-    return this.priceForMonth(this.managedBasePricePerHour());
+    var type;
+    type = this.get("type");
+    return this.get("memory") * this.get("pricing").memory[type];
   },
   utilityPricePerHourPerInstance: function() {
-    return this.totalCpuPerHour() + this.totalMemoryPerHour() + this.totalOSPerHour() + this.managedBasePricePerHour();
+    return this.totalCpuPerHour() + this.totalMemoryPerHour();
   },
   utilityPricePerHourTotal: function() {
     return this.utilityPricePerHourPerInstance() * this.get("quantity");
@@ -2904,41 +2877,11 @@ RdbsModel = Backbone.Model.extend({
     type = this.get("type");
     return this.get("storage") * this.get("pricing").storage[type] * this.get("quantity");
   },
-  managedAppPricePerMonth: function(managedAppKey, instances, softwareId) {
-    var appPerHour, appSoftwareHourlyPrice, softwarePricing, software_selection;
-    softwarePricing = this.get('pricing').software;
-    software_selection = _.findWhere(softwarePricing, {
-      name: softwareId
-    });
-    appSoftwareHourlyPrice = software_selection != null ? software_selection.price : 0;
-    appSoftwareHourlyPrice *= this.get("cpu") || 1;
-    appPerHour = this.get("pricing")[managedAppKey];
-    return ((this.priceForMonth(appPerHour) + this.priceForMonth(appSoftwareHourlyPrice)) * this.get("quantity")) * instances;
-  },
-  managedAppsPricePerMonth: function() {
-    var apps, total;
-    apps = this.get("managedApps");
-    total = 0;
-    _.each(apps, (function(_this) {
-      return function(app) {
-        return total += _this.managedAppPricePerMonth(app.key, app.instances, app.softwareId);
-      };
-    })(this));
-    return total;
-  },
-  totalOSPricePerMonth: function() {
-    return this.priceForMonth(this.totalOSPerHour()) * this.get("quantity");
-  },
   totalPricePerMonth: function() {
     var total, utilityPerMonth;
     utilityPerMonth = 0;
     utilityPerMonth = this.priceForMonth(this.utilityPricePerHourTotal());
     total = utilityPerMonth + this.storagePricePerMonth();
-    return total;
-  },
-  totalPricePerMonthWithApps: function() {
-    var total;
-    total = this.totalPricePerMonth + this.managedAppsPricePerMonth();
     return total;
   },
   priceForMonth: function(hourlyPrice) {
@@ -2952,48 +2895,6 @@ RdbsModel = Backbone.Model.extend({
       case this.PERCENTAGE_OF_MONTH:
         return this.get("usage") / 100 * this.HOURS_IN_MONTH * hourlyPrice;
     }
-  },
-  addManagedApp: function(key, name) {
-    var apps, exists;
-    apps = this.get("managedApps");
-    exists = false;
-    _.each(apps, function(app) {
-      if (app.key === key) {
-        return exists = true;
-      }
-    });
-    if (exists === false) {
-      if (key === 'ms-sql') {
-        apps.push({
-          "key": key,
-          "name": name,
-          "instances": 1,
-          "softwareId": "Microsoft SQL Server Standard Edition"
-        });
-      } else {
-        apps.push({
-          "key": key,
-          "name": name,
-          "instances": 1,
-          "softwareId": ""
-        });
-      }
-      this.set("managedApps", apps);
-      this.trigger("change", this);
-      return this.trigger("change:managedApps", this);
-    }
-  },
-  updateManagedAppIntances: function(key, quantity, softwareId) {
-    var apps;
-    apps = this.get("managedApps");
-    _.each(apps, function(app) {
-      if (app.key === key) {
-        app.instances = quantity;
-        return app.softwareId = softwareId;
-      }
-    });
-    this.set("managedApps", apps);
-    return this.trigger("change:managedApps", this);
   }
 });
 
@@ -3032,13 +2933,11 @@ ServerModel = Backbone.Model.extend({
   },
   initPricing: function() {
     var pricing;
-    console.log('ServerModel.initPricing', this.get("pricingMap"));
     pricing = this.get("pricingMap").attributes.options;
     return this.set("pricing", pricing);
   },
   updatePricing: function(pricingMap) {
     var pricing;
-    console.log('ServerModel.updatePricing');
     this.set("pricingMap", pricingMap);
     pricing = this.get("pricingMap").attributes.options;
     return this.set("pricing", pricing);
@@ -3436,15 +3335,7 @@ $c = function(text) {
 
 $o = [];
 
-$o.push("<td class='quantity-cell table-cell'>\n  <input class='number' name='quantity' value='" + ($e($c(this.model.get("quantity")))) + "' type='text'>\n</td>\n<td class='table-cell usage-cell'>\n  <input class='number' name='usage' value='" + ($e($c(this.model.get("usage")))) + "' type='text'>\n  <select name='usagePeriod'>\n    <option value='hours_per_month' selected='" + ($e($c(this.model.get('usagePeriod') === 'hours_per_month'))) + "'>hrs / month</option>\n    <option value='percentage_of_month' selected='" + ($e($c(this.model.get('usagePeriod') === 'percentage_of_month'))) + "'>% / month</option>\n    <option value='hours_per_week' selected='" + ($e($c(this.model.get('usagePeriod') === 'hours_per_week'))) + "'>hrs / week</option>\n    <option value='hours_per_day' selected='" + ($e($c(this.model.get('usagePeriod') === 'hours_per_day'))) + "'>hrs / day</option>\n  </select>\n</td>\n<td class='table-cell type-cell'>\n  <select name='type'>\n    <option value='single' selected='" + ($e($c(this.model.get('type') === 'single'))) + "'>single</option>\n    <option value='replicated' selected='" + ($e($c(this.model.get('type') === 'replicated'))) + "'>replicated</option>\n  </select>\n</td>\n<td class='cpu-cell range-cell table-cell'>\n  <input class='cpu-text-input' data-name='cpu'>\n  <input class='range-slider' name='cpu' type='range' min='" + ($e($c(1))) + "' max='" + ($e($c(16))) + "' value='" + ($e($c(this.model.get("cpu")))) + "'>\n</td>\n<td class='memory-cell range-cell table-cell'>\n  <input class='memory-text-input' data-name='memory'>\n  <input class='range-slider' name='memory' type='range' min='" + ($e($c(1))) + "' max='" + ($e($c(128))) + "' value='" + ($e($c(this.model.get("memory")))) + "'>\n</td>\n<td class='range-cell storage-cell table-cell'>\n  <input class='storage-text-input' data-name='storage'>");
-
-if (this.model.get("type") === "hyperscale") {
-  $o.push("  <input class='range-slider' name='storage' type='range' min='" + ($e($c(1))) + "' max='" + ($e($c(1024))) + "' step='" + ($e($c(1))) + "' value='" + ($e($c(this.model.get("storage")))) + "'>");
-} else {
-  $o.push("  <input class='range-slider' name='storage' type='range' min='" + ($e($c(1))) + "' max='" + ($e($c(4000))) + "' step='" + ($e($c(1))) + "' value='" + ($e($c(this.model.get("storage")))) + "'>");
-}
-
-$o.push("</td>\n<td class='price-cell table-cell'>\n  <span class='price'>");
+$o.push("<td class='quantity-cell table-cell'>\n  <input class='number' name='quantity' value='" + ($e($c(this.model.get("quantity")))) + "' type='text'>\n</td>\n<td class='table-cell usage-cell'>\n  <input class='number' name='usage' value='" + ($e($c(this.model.get("usage")))) + "' type='text'>\n  <select name='usagePeriod'>\n    <option value='hours_per_month' selected='" + ($e($c(this.model.get('usagePeriod') === 'hours_per_month'))) + "'>hrs / month</option>\n    <option value='percentage_of_month' selected='" + ($e($c(this.model.get('usagePeriod') === 'percentage_of_month'))) + "'>% / month</option>\n    <option value='hours_per_week' selected='" + ($e($c(this.model.get('usagePeriod') === 'hours_per_week'))) + "'>hrs / week</option>\n    <option value='hours_per_day' selected='" + ($e($c(this.model.get('usagePeriod') === 'hours_per_day'))) + "'>hrs / day</option>\n  </select>\n</td>\n<td class='table-cell type-cell'>\n  <select name='type'>\n    <option value='single' selected='" + ($e($c(this.model.get('type') === 'single'))) + "'>single</option>\n    <option value='replicated' selected='" + ($e($c(this.model.get('type') === 'replicated'))) + "'>replicated</option>\n  </select>\n</td>\n<td class='cpu-cell range-cell table-cell'>\n  <input class='cpu-text-input' data-name='cpu'>\n  <input class='range-slider' name='cpu' type='range' min='" + ($e($c(1))) + "' max='" + ($e($c(16))) + "' value='" + ($e($c(this.model.get("cpu")))) + "'>\n</td>\n<td class='memory-cell range-cell table-cell'>\n  <input class='memory-text-input' data-name='memory'>\n  <input class='range-slider' name='memory' type='range' min='" + ($e($c(1))) + "' max='" + ($e($c(128))) + "' value='" + ($e($c(this.model.get("memory")))) + "'>\n</td>\n<td class='range-cell storage-cell table-cell'>\n  <input class='storage-text-input' data-name='storage'>\n  <input class='range-slider' name='storage' type='range' min='" + ($e($c(1))) + "' max='" + ($e($c(4000))) + "' step='" + ($e($c(1))) + "' value='" + ($e($c(this.model.get("storage")))) + "'>\n</td>\n<td class='price-cell table-cell'>\n  <span class='price'>");
 
 $o.push("    " + $e($c(accounting.formatMoney(this.model.totalPricePerMonth() * this.app.currency.rate, {
   "symbol": this.app.currency.symbol
@@ -4411,11 +4302,7 @@ module.exports = MonthlyTotalView;
 
 
 },{"../Config.coffee":3}],37:[function(require,module,exports){
-var AddManagedAppView, ManagedAppView, RdbsView;
-
-AddManagedAppView = require('./AddManagedAppView.coffee');
-
-ManagedAppView = require('./ManagedAppView.coffee');
+var RdbsView;
 
 RdbsView = Backbone.View.extend({
   tagName: "tr",
@@ -4423,7 +4310,6 @@ RdbsView = Backbone.View.extend({
   events: {
     "keypress .number": "ensureNumber",
     "click .remove-button": "removeRdbs",
-    "click .managed-check": "onManagedCheckboxChanged",
     "change select[name]": "onFormChanged",
     "change input[name]": "onFormChanged",
     "input input[name]": "onFormChanged",
@@ -4438,16 +4324,6 @@ RdbsView = Backbone.View.extend({
     this.listenTo(this.model, 'change', (function(_this) {
       return function(model) {
         return _this.onModelChange(model);
-      };
-    })(this));
-    this.listenTo(this.model, 'change:managedApps', (function(_this) {
-      return function(model) {
-        return _this.onManagedChanged(model);
-      };
-    })(this));
-    this.listenTo(this.model, 'change:os', (function(_this) {
-      return function(model) {
-        return model.set('managedApps', []);
       };
     })(this));
     return this.app.on("currencyChange", (function(_this) {
@@ -4477,11 +4353,7 @@ RdbsView = Backbone.View.extend({
   close: function() {
     this.remove();
     this.unbind();
-    this.$el.remove();
-    if (this.addManagedAppView) {
-      this.addManagedAppView.remove();
-    }
-    return this.removeAllManagedApps();
+    return this.$el.remove();
   },
   removeRdbs: function(e) {
     e.preventDefault();
@@ -4511,53 +4383,6 @@ RdbsView = Backbone.View.extend({
     data = Backbone.Syphon.serialize(this);
     return this.model.set(data);
   },
-  onManagedCheckboxChanged: function(e) {
-    var $check;
-    $check = $(e.currentTarget);
-    if ($check.is(":checked")) {
-      return this.addMangedApps();
-    } else {
-      return this.removeAllManagedAppsAndAddButton();
-    }
-  },
-  addMangedApps: function() {
-    this.addManagedAppView = new AddManagedAppView({
-      model: this.model
-    });
-    return this.$el.after(this.addManagedAppView.render().el);
-  },
-  removeAllManagedApps: function() {
-    _.each(this.appViews, function(appView) {
-      return appView.remove();
-    });
-    return this.appViews = [];
-  },
-  removeAllManagedAppsAndAddButton: function() {
-    this.$el.removeClass("is-managed");
-    this.model.set("managedApps", []);
-    if (this.addManagedAppView) {
-      this.addManagedAppView.remove();
-    }
-    return this.removeAllManagedApps();
-  },
-  onManagedChanged: function(model) {
-    var managedApps;
-    this.removeAllManagedApps();
-    managedApps = model.get("managedApps");
-    return _.each(managedApps, (function(_this) {
-      return function(app) {
-        var managedAppView;
-        managedAppView = new ManagedAppView({
-          model: model,
-          app: app,
-          mainApp: _this.app
-        });
-        _this.appViews.push(managedAppView);
-        _this.addManagedAppView.$el.before(managedAppView.render().el);
-        return _this.onModelChange(model);
-      };
-    })(this));
-  },
   onModelChange: function(model) {
     var newTotal, total;
     total = model.totalPricePerMonth() * this.app.currency.rate;
@@ -4572,22 +4397,11 @@ RdbsView = Backbone.View.extend({
     $(".cpu-text-input", this.$el).val(model.get("cpu"));
     $(".memory-text-input", this.$el).val(model.get("memory"));
     this.$el.attr("id", this.model.cid);
-    if (model.get("os") === "linux" || managedDisabled === true) {
-      model.set("managed", false);
-      $(".managed-check", this.$el).attr("disabled", true);
-      $(".managed-check", this.$el).attr("checked", false);
-      this.removeAllManagedAppsAndAddButton();
-    } else {
-      $(".managed-check", this.$el).attr("disabled", false);
-    }
     _.each(this.appViews, (function(_this) {
       return function(appView) {
         return appView.updateQuantityAndPrice();
       };
     })(this));
-    if (this.addManagedAppView) {
-      this.addManagedAppView.updateOptions();
-    }
     return this.options.parentView.collection.trigger('change');
   }
 });
@@ -4595,7 +4409,7 @@ RdbsView = Backbone.View.extend({
 module.exports = RdbsView;
 
 
-},{"../templates/rdbs.haml":25,"./AddManagedAppView.coffee":28,"./ManagedAppView.coffee":35}],38:[function(require,module,exports){
+},{"../templates/rdbs.haml":25}],38:[function(require,module,exports){
 var RdbsModel, RdbsView, RdbssView;
 
 RdbsView = require('./RdbsView.coffee');
@@ -4608,7 +4422,6 @@ RdbssView = Backbone.View.extend({
   },
   initialize: function(options) {
     this.options = options || {};
-    console.log('initialize RdbssView', this.options);
     this.app = this.options.app;
     this.collection.on("add", (function(_this) {
       return function(model, collection, options) {
@@ -4640,7 +4453,6 @@ RdbssView = Backbone.View.extend({
     return $('.has-tooltip', this.$el).tooltip();
   },
   addRdbs: function(e) {
-    console.log('RdbssView.addRdbs', this.options.pricingMap);
     if (e) {
       e.preventDefault();
     }
@@ -4886,7 +4698,6 @@ ServersView = Backbone.View.extend({
   },
   initialize: function(options) {
     this.options = options || {};
-    console.log('initialize ServersView', this.options);
     this.app = this.options.app;
     this.collection.on("add", (function(_this) {
       return function(model, collection, options) {
@@ -4928,7 +4739,6 @@ ServersView = Backbone.View.extend({
       e.preventDefault();
     }
     type = this.options.hyperscale === true ? "hyperscale" : "standard";
-    console.log('ServersView addServer', this.options.pricingMap);
     return this.collection.add({
       pricingMap: this.options.pricingMap,
       type: type
@@ -5281,9 +5091,7 @@ App = {
     })(this));
   },
   onPricingMapsSynced: function() {
-    console.log('onPricingMapsSynced');
     this.initServers();
-    console.log('call initRdbss');
     this.initRdbss();
     this.initHyperscaleServers();
     this.initIpsServices();
@@ -5376,14 +5184,12 @@ App = {
     });
   },
   initRdbss: function() {
-    console.log('initRdbss');
     this.rdbssCollection = new RdbssCollection;
     this.rdbssCollection.on("change remove add", (function(_this) {
       return function() {
         return _this.updateTotalPrice();
       };
     })(this));
-    console.log('initRdbss', this.pricingMaps);
     return this.rdbssView = new RdbssView({
       app: this,
       collection: this.rdbssCollection,
@@ -5459,7 +5265,6 @@ App = {
     return this.trigger("totalPriceUpdated");
   },
   setPricingMap: function(dc, ds) {
-    console.log('setPricingMap');
     this.pricingMaps = new PricingMapsCollection([], {
       app: this,
       datacenter: dc,
@@ -5469,17 +5274,13 @@ App = {
     });
     return this.pricingMaps.on("sync", (function(_this) {
       return function() {
-        console.log('pricingMaps.on sync');
         _this.hyperscaleServersView.options.pricingMap = _this.pricingMaps.forKey("server");
         _this.ipServicessView.options.pricingMap = _this.pricingMaps.forKey("ips");
         _this.appfogsView.options.pricingMap = _this.pricingMaps.forKey("appfog");
         _this.BaremetalConfigsView.options.pricingMap = _this.pricingMaps.forKey("baremetal");
-        console.log('pricingMaps.on sync serversView.options.pricingMap');
         _this.serversView.options.pricingMap = _this.pricingMaps.forKey("server");
         _this.rdbssView.options.pricingMap = _this.pricingMaps.forKey("rdbs");
-        console.log('rdbssView.options.pricingMap', _this.rdbssView.options.pricingMap);
         _this.serversCollection.initPricing(_this.pricingMaps);
-        console.log('call init pricing');
         _this.rdbssCollection.initPricing(_this.pricingMaps);
         _this.hyperscaleServersCollection.initPricing(_this.pricingMaps);
         _this.ipsCollection.initPricing(_this.pricingMaps.forKey("ips"));

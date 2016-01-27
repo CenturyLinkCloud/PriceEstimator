@@ -24,10 +24,7 @@
 
 %td.table-cell.storage-cell.range-cell
   %input.storage-text-input{data: {name: "storage"}}
-  - if @model.get("type") is "hyperscale"
-    %input.range-slider{name: "storage", type:"range", min: 1, max: 1024, step: 1, value: @model.get("storage")}
-  - else
-    %input.range-slider{name: "storage", type:"range", min: 1, max: 4000, step: 1, value: @model.get("storage")}
+  %input.range-slider{name: "storage", type:"range", min: 1, max: 4000, step: 1, value: @model.get("storage")}
 
 %td.table-cell.price-cell
   %span.price

@@ -9,7 +9,6 @@ ServersView = Backbone.View.extend
   initialize: (options) ->
     @options = options || {}
 
-    console.log('initialize ServersView', @options)
     @app = @options.app
 
     @collection.on "add", (model, collection, options) =>
@@ -40,7 +39,6 @@ ServersView = Backbone.View.extend
   addServer: (e) ->
     e.preventDefault() if e
     type = if @options.hyperscale is true then "hyperscale" else "standard"
-    console.log('ServersView addServer', @options.pricingMap)
     @collection.add(pricingMap: @options.pricingMap, type: type)
   
   onServerAdded: (model) ->

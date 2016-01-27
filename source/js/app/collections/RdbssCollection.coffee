@@ -8,17 +8,7 @@ RdbssCollection = Backbone.Collection.extend
 
   subtotal: ->
     _.reduce @models, (memo, rdbs) ->
-      memo + rdbs.totalPricePerMonth() + rdbs.managedAppsPricePerMonth()
-    , 0
-
-  oSSubtotal: ->
-    _.reduce @models, (memo, rdbs) ->
-      memo + rdbs.totalOSPricePerMonth()
-    , 0
-
-  managedTotal: ->
-    _.reduce @models, (memo, rdbs) ->
-      memo + rdbs.managedAppsPricePerMonth() + rdbs.managedBasePricePerMonth()
+      memo + rdbs.totalPricePerMonth()
     , 0
 
   removeAll: ->
@@ -26,7 +16,6 @@ RdbssCollection = Backbone.Collection.extend
       rdbs.destroy()
 
   initPricing: (pricingMaps) ->
-    console.log('RdbssCollection initPricing', pricingMaps);
     @each (rdbs) =>
       pricingMap = pricingMaps.forKey("rdbs")
       rdbs.updatePricing pricingMap

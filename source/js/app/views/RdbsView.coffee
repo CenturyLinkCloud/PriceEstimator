@@ -1,6 +1,3 @@
-AddManagedAppView = require './AddManagedAppView.coffee'
-ManagedAppView = require './ManagedAppView.coffee'
-
 RdbsView = Backbone.View.extend
 
   tagName: "tr"
@@ -9,7 +6,6 @@ RdbsView = Backbone.View.extend
   events:
     "keypress .number": "ensureNumber"
     "click .remove-button": "removeRdbs"
-    "click .managed-check": "onManagedCheckboxChanged"
     "change select[name]": "onFormChanged"
     "change input[name]": "onFormChanged"
     "input input[name]": "onFormChanged"
@@ -26,12 +22,6 @@ RdbsView = Backbone.View.extend
 
     @listenTo @model, 'change', (model) =>
       @onModelChange(model)
-
-    @listenTo @model, 'change:managedApps', (model) =>
-      @onManagedChanged(model)
-
-    @listenTo @model, 'change:os', (model) =>
-      model.set('managedApps', [])
 
     @app.on "currencyChange", =>
       @onModelChange(@model)
@@ -52,8 +42,6 @@ RdbsView = Backbone.View.extend
     @remove()
     @unbind()
     @$el.remove()
-    @addManagedAppView.remove() if @addManagedAppView
-    @removeAllManagedApps()
 
   removeRdbs: (e) ->
     e.preventDefault()
@@ -80,37 +68,6 @@ RdbsView = Backbone.View.extend
     data = Backbone.Syphon.serialize(@)
     @model.set(data)
 
-  onManagedCheckboxChanged: (e) ->
-    $check = $(e.currentTarget)
-    if $check.is(":checked")
-      @addMangedApps()
-    else
-      @removeAllManagedAppsAndAddButton()
-
-  addMangedApps: ->
-    @addManagedAppView = new AddManagedAppView(model: @model)
-    @$el.after(@addManagedAppView.render().el)
-
-  removeAllManagedApps: ->
-    _.each @appViews, (appView) ->
-      appView.remove()
-    @appViews = []
-
-  removeAllManagedAppsAndAddButton: ->
-    @$el.removeClass("is-managed")
-    @model.set("managedApps", [])
-    @addManagedAppView.remove() if @addManagedAppView
-    @removeAllManagedApps()
-
-  onManagedChanged: (model) ->
-    @removeAllManagedApps()
-    managedApps = model.get("managedApps")
-    _.each managedApps, (app) =>
-      managedAppView = new ManagedAppView(model: model, app: app, mainApp: @app)
-      @appViews.push managedAppView
-      @addManagedAppView.$el.before(managedAppView.render().el)
-      @onModelChange(model)
-
   onModelChange: (model) ->
     total = model.totalPricePerMonth() * @app.currency.rate
     newTotal = accounting.formatMoney(total,
@@ -128,18 +85,8 @@ RdbsView = Backbone.View.extend
 
     @$el.attr("id", @model.cid)
 
-    if model.get("os") == "linux" or managedDisabled is true
-      model.set("managed", false)
-      $(".managed-check", @$el).attr("disabled", true)
-      $(".managed-check", @$el).attr("checked", false)
-      @removeAllManagedAppsAndAddButton()
-    else
-      $(".managed-check", @$el).attr("disabled", false)
-
     _.each @appViews, (appView) =>
       appView.updateQuantityAndPrice()
-
-    @addManagedAppView.updateOptions() if @addManagedAppView
 
     @options.parentView.collection.trigger 'change'
 

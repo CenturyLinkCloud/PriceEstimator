@@ -9,7 +9,6 @@ RdbssView = Backbone.View.extend
   initialize: (options) ->
     @options = options || {}
 
-    console.log('initialize RdbssView', @options)
     @app = @options.app
 
     @collection.on "add", (model, collection, options) =>
@@ -34,7 +33,6 @@ RdbssView = Backbone.View.extend
     $('.has-tooltip', @$el).tooltip()
 
   addRdbs: (e) ->
-    console.log('RdbssView.addRdbs', @options.pricingMap)
     e.preventDefault() if e
     @collection.add(pricingMap: @options.pricingMap)
 

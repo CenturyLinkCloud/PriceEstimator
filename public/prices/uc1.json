@@ -733,7 +733,7 @@
                 "unit": "vCPU"
             },
             {
-                "key": "rdbs:single:ram",
+                "key": "rdbs:single:memory",
                 "name": "MySQL RDBS - Single instance - RAM",
                 "descriptionHtml": "Price per GB of RAM for a single MySQL RDBS instance",
                 "type": "hourly (allocated)",
@@ -757,7 +757,7 @@
                 "unit": "vCPU"
             },
             {
-                "key": "rdbs:replicated:ram",
+                "key": "rdbs:replicated:memory",
                 "name": "MySQL DBaaS with Replication - RAM",
                 "descriptionHtml": "Price per GB of RAM for a MySQL DBaaS instance with replication",
                 "type": "hourly (allocated)",

@@ -17,15 +17,11 @@ RdbsModel = Backbone.Model.extend
     quantity: 1
     usagePeriod: "percentage_of_month"
     usage: 100
-    managed: false
-    managedApps: []
 
   initialize: ->
     @initPricing()
-    @.set("managedApps", [])
 
   parse: (data) ->
-    # console.log 'RDBS Model', data
     return data
 
   initPricing: ->
@@ -33,36 +29,20 @@ RdbsModel = Backbone.Model.extend
     @.set("pricing", pricing)
 
   updatePricing: (pricingMap) ->
-    console.log('updatePricing', pricingMap);
     @.set("pricingMap", pricingMap)
     pricing = @.get("pricingMap").attributes.options
     @.set("pricing", pricing)
 
   totalCpuPerHour: ->
-    price = @.get("cpu") * @.get("pricing").cpu
-    return price
+    type = @.get("type")
+    @.get("cpu") * @.get("pricing").cpu[type]
 
   totalMemoryPerHour: ->
-    @.get("memory") * @.get("pricing").memory
-
-  totalOSPerHour: ->
-    os = @.get("os")
-    # os = "#{os}-managed" if @.get("managed")
-    @.get("pricing").os[os] * @.get("cpu")
-
-  managedBasePricePerHour: ->
-    if @.get("managed")
-      os = @.get("os")
-      osPrice = @.get("pricing").os["#{os}-managed"]
-      return osPrice
-    else
-      return 0
-
-  managedBasePricePerMonth: ->
-    return @priceForMonth(@managedBasePricePerHour())
+    type = @.get("type")
+    @.get("memory") * @.get("pricing").memory[type]
 
   utilityPricePerHourPerInstance: ->
-    @totalCpuPerHour() + @totalMemoryPerHour() + @totalOSPerHour() + @managedBasePricePerHour()
+    @totalCpuPerHour() + @totalMemoryPerHour()
 
   utilityPricePerHourTotal: ->
     @utilityPricePerHourPerInstance() * @.get("quantity")
@@ -71,32 +51,10 @@ RdbsModel = Backbone.Model.extend
     type = @.get("type")
     @.get("storage") * @.get("pricing").storage[type] * @.get("quantity")
 
-  managedAppPricePerMonth: (managedAppKey, instances, softwareId) ->
-    softwarePricing = @.get('pricing').software
-    software_selection = _.findWhere(softwarePricing, {name: softwareId})
-    appSoftwareHourlyPrice = if software_selection? then software_selection.price else 0
-    appSoftwareHourlyPrice *= @.get("cpu") || 1
-    appPerHour = @.get("pricing")[managedAppKey]
-    return ((@priceForMonth(appPerHour) + @priceForMonth(appSoftwareHourlyPrice)) * @.get("quantity")) * instances
-
-  managedAppsPricePerMonth: ->
-    apps = @.get("managedApps")
-    total = 0
-    _.each apps, (app) =>
-      total += @managedAppPricePerMonth(app.key, app.instances, app.softwareId)
-    return total
-
-  totalOSPricePerMonth: ->
-    @priceForMonth(@totalOSPerHour()) * @.get("quantity")
-
   totalPricePerMonth: ->
     utilityPerMonth = 0
     utilityPerMonth = @priceForMonth(@utilityPricePerHourTotal())
     total = utilityPerMonth + @storagePricePerMonth()
-    return total
-
-  totalPricePerMonthWithApps: ->
-    total = @totalPricePerMonth + @managedAppsPricePerMonth()
     return total
 
   priceForMonth: (hourlyPrice) ->
@@ -109,29 +67,5 @@ RdbsModel = Backbone.Model.extend
         return hourlyPrice * @.get("usage")
       when @PERCENTAGE_OF_MONTH
         return @.get("usage") / 100 * @HOURS_IN_MONTH * hourlyPrice
-
-  addManagedApp: (key, name) ->
-    apps = @.get("managedApps")
-    exists = false
-    _.each apps, (app) ->
-      if app.key is key
-        exists = true
-    if exists is false
-      if key is 'ms-sql'
-        apps.push {"key": key, "name": name, "instances": 1, "softwareId": "Microsoft SQL Server Standard Edition"}
-      else
-        apps.push {"key": key, "name": name, "instances": 1, "softwareId": ""}
-      @.set("managedApps", apps)
-      @.trigger "change", @
-      @.trigger "change:managedApps", @
-
-  updateManagedAppIntances: (key, quantity, softwareId) ->
-    apps = @.get("managedApps")
-    _.each apps, (app) ->
-      if app.key is key
-        app.instances = quantity
-        app.softwareId = softwareId
-    @.set("managedApps", apps)
-    @.trigger "change:managedApps", @
 
 module.exports = RdbsModel
