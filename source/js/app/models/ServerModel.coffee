@@ -26,7 +26,6 @@ ServerModel = Backbone.Model.extend
     @.set("managedApps", [])
 
   parse: (data) ->
-    # console.log 'Server Model', data
     return data
 
   initPricing: ->

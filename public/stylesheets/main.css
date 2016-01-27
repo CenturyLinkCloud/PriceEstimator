@@ -186,7 +186,7 @@ input[type=text], input[type=number] {
   .table select {
     position: relative;
     top: 6px;
-    width: 90px; }
+    width: 100px; }
     .table select.software {
       width: 230px; }
       .table select.software.hidden {

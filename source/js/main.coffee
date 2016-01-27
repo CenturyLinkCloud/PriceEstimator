@@ -10,6 +10,7 @@
 
 Config = require './app/Config.coffee'
 ServersView = require './app/views/ServersView.coffee'
+RdbssView = require './app/views/RdbssView.coffee'
 SupportView = require './app/views/SupportView.coffee'
 ServicesView = require './app/views/ServicesView.coffee'
 IpServicesView = require './app/views/IpServicesView.coffee'
@@ -18,6 +19,7 @@ BaremetalConfigsView = require './app/views/BaremetalConfigsView.coffee'
 MonthlyTotalView = require './app/views/MonthlyTotalView.coffee'
 PricingMapsCollection = require './app/collections/PricingMapsCollection.coffee'
 ServersCollection = require './app/collections/ServersCollection.coffee'
+RdbssCollection = require './app/collections/RdbssCollection.coffee'
 ServicesCollection = require './app/collections/ServicesCollection.coffee'
 IpsCollection = require './app/collections/IpsCollection.coffee'
 AppfogCollection = require './app/collections/AppfogCollection.coffee'
@@ -70,6 +72,7 @@ App =
 
   onPricingMapsSynced: ->
     @initServers()
+    @initRdbss()
     @initHyperscaleServers()
     @initIpsServices()
     @initAppfogServices()
@@ -151,6 +154,18 @@ App =
       el: "#servers"
       pricingMap: @pricingMaps.forKey("server")
 
+  initRdbss: ->
+    @rdbssCollection = new RdbssCollection
+
+    @rdbssCollection.on "change remove add", =>
+      @updateTotalPrice()
+
+    @rdbssView = new RdbssView
+      app: @
+      collection: @rdbssCollection
+      el: "#rdbss"
+      pricingMap: @pricingMaps.forKey("rdbs")
+
   initHyperscaleServers: ->
     @hyperscaleServersCollection = new ServersCollection
     @hyperscaleServersCollection.on "change remove add", =>
@@ -200,6 +215,7 @@ App =
     return unless @initialized
 
     @totalPrice = @serversCollection.subtotal() +
+                  @rdbssCollection.subtotal() +
                   @hyperscaleServersCollection.subtotal() +
                   @ipsCollection.subtotal() +
                   @appfogServicesCollection.subtotal() +
@@ -234,9 +250,11 @@ App =
       @appfogsView.options.pricingMap = @pricingMaps.forKey("appfog")
       @BaremetalConfigsView.options.pricingMap = @pricingMaps.forKey("baremetal")
       @serversView.options.pricingMap = @pricingMaps.forKey("server")
+      @rdbssView.options.pricingMap = @pricingMaps.forKey("rdbs")
 
       # Update pricing map stored on collections (impacts existing models)
       @serversCollection.initPricing(@pricingMaps)
+      @rdbssCollection.initPricing(@pricingMaps)
       @hyperscaleServersCollection.initPricing(@pricingMaps)
       @ipsCollection.initPricing(@pricingMaps.forKey("ips"))
       @appfogServicesCollection.initPricing(@pricingMaps.forKey("appfog"))
