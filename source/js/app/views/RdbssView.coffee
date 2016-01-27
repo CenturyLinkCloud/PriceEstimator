@@ -24,13 +24,24 @@ RdbssView = Backbone.View.extend
       @updateSubtotal()
 
     @collection.on "datacenterUpdate", =>
+      @checkPricingMap()
       @updateSubtotal()
 
+    @checkPricingMap()
     @updateSubtotal()
 
     @rdbsViews = []
 
     $('.has-tooltip', @$el).tooltip()
+
+  checkPricingMap: () ->
+    if !@options.pricingMap
+      @$el.addClass("disabled")
+      @collection.removeAll()
+      return false
+    else
+      @$el.removeClass("disabled")
+      return true
 
   addRdbs: (e) ->
     e.preventDefault() if e

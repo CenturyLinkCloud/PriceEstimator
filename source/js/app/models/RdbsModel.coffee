@@ -30,8 +30,9 @@ RdbsModel = Backbone.Model.extend
 
   updatePricing: (pricingMap) ->
     @.set("pricingMap", pricingMap)
-    pricing = @.get("pricingMap").attributes.options
-    @.set("pricing", pricing)
+    if @.get("pricingMap")
+      pricing = @.get("pricingMap").attributes.options
+      @.set("pricing", pricing)
 
   totalCpuPerHour: ->
     type = @.get("type")

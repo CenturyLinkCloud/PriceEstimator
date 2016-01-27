@@ -28,10 +28,7 @@ PricingMapsCollection = Backbone.Collection.extend
     software_licenses = []
     rdbs =
       type: "rdbs"
-      options:
-        cpu: {}
-        memory: {}
-        storage: {}
+      options: {}
     server =
       type: "server"
       options:
@@ -74,7 +71,9 @@ PricingMapsCollection = Backbone.Collection.extend
                 price = product.hourly || product.monthly
                 server.options[ids[1]] = price #* @currency.rate
             else if ids[0] is 'rdbs'
-              if ids[2] and rdbs.options[ids[2]]
+              if ids[2]
+                if !rdbs.options[ids[2]]
+                  rdbs.options[ids[2]] = {}
                 price = product.hourly
                 if ids[2] is 'storage'
                   price = price * HOURS_IN_MONTH
@@ -131,7 +130,8 @@ PricingMapsCollection = Backbone.Collection.extend
               baremetal.options[ids[1]][ids[2]] = product
 
     server.options["software"] = software_licenses
-    output.push(rdbs)
+    if rdbs.options.cpu
+      output.push(rdbs)
     output.push(server)
     output.push(baremetal)
     _.each additional_services, (ser) -> output.push(ser)

@@ -246,7 +246,7 @@ App =
 
     # Update pricing map stored on the views (impacts new models)
       @hyperscaleServersView.options.pricingMap = @pricingMaps.forKey("server")
-      @ipServicessView.options.pricingMap = @pricingMaps.forKey("ips")
+      @ipServicesView.options.pricingMap = @pricingMaps.forKey("ips")
       @appfogsView.options.pricingMap = @pricingMaps.forKey("appfog")
       @BaremetalConfigsView.options.pricingMap = @pricingMaps.forKey("baremetal")
       @serversView.options.pricingMap = @pricingMaps.forKey("server")
