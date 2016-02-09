@@ -30,6 +30,30 @@
                 "href": "/block-storage"
             },
             {
+                "key": "server:cpu:hyperscale",
+                "name": "Virtual CPU for Hyperscale",
+                "descriptionHtml": "2 Ghz+ Processor (up to 16 CPU)",
+                "type": "hourly (used)",
+                "hourly": 0.009,
+                "href": "/hyperscale"
+            },
+            {
+                "key": "server:memory:hyperscale",
+                "name": "Virtual RAM for Hyperscale",
+                "descriptionHtml": "1 GB (up to 128 GB)",
+                "type": "hourly (used)",
+                "hourly": 0.0135,
+                "href": "/hyperscale"
+            },
+            {
+                "key": "server:storage:hyperscale",
+                "name": "Block Storage for Hyperscale",
+                "descriptionHtml": "Persistent high performance storage. SSD based storage with sustained rates of 15k IOPS. Price per GB.",
+                "type": "hourly (allocated)",
+                "hourly": 0.0004,
+                "href": "/hyperscale"
+            },
+            {
                 "key": "server:storage:premium",
                 "name": "Block Storage w/ Premium Backup",
                 "descriptionHtml": "Persistent storage (single data center, 14 days of snapshot backup). Price per GB.",
@@ -478,7 +502,7 @@
                 "key": "service-tasks:remote-desktop",
                 "name": "Add / Install Remote Desktop Services",
                 "descriptionHtml": "Customers who want to run Microsoft Remote Desktop Services can purchase the work item. Then we provision the RDS licenses for use on CenturyLink Cloud.",
-                "details": "Our expertise in Microsoft software runs deep&mdash;put this to work for your business. Our team will provision Remote Desktop Services licenses for use on CenturyLink Cloud.</p><p><i>NOTE: while the Service Task incurs a one-time charge, the Microsoft Windows Remote Desktop Services license will be billed monthly. <a href=https://www.centurylinkcloud.com/pricing/#/ny1>See the Pricing Catalog</a> for the hourly cost of this software.</i>",
+                "details": "Our expertise in Microsoft software runs deep&mdash;put this to work for your business. Our team will provision Remote Desktop Services licenses for use on CenturyLink Cloud.</p><p><i>NOTE: while the Service Task incurs a one-time charge, the Microsoft Windows Remote Desktop Services license will be billed monthly. <a href=https://www.ctl.io/pricing/#/ny1>See the Pricing Catalog</a> for the hourly cost of this software.</i>",
                 "type": "$195/hour, 1 hour minimum",
                 "hourly": 195,
                 "monthly": "&mdash;",
@@ -535,6 +559,62 @@
                 "type": "Priced per project, hourly rates of $195",
                 "hourly": 195,
                 "monthly": "&mdash;"
+            }
+        ]
+    },
+    {
+        "key": "rdbs",
+        "name": "Relational DB Service",
+        "description": "",
+        "href": "/relational-database",
+        "products": [
+            {
+                "key": "rdbs:single:cpu",
+                "name": "MySQL RDBS - Single Instance - CPU",
+                "descriptionHtml": "Price per CPU for a single MySQL RDBS instance",
+                "type": "hourly (allocated)",
+                "hourly": 0.009,
+                "unit": "vCPU"
+            },
+            {
+                "key": "rdbs:single:memory",
+                "name": "MySQL RDBS - Single instance - RAM",
+                "descriptionHtml": "Price per GB of RAM for a single MySQL RDBS instance",
+                "type": "hourly (allocated)",
+                "hourly": 0.0135,
+                "unit": "GB"
+            },
+            {
+                "key": "rdbs:single:storage",
+                "name": "MySQL RDBS - Single Instance - Storage",
+                "descriptionHtml": "Price per GB of storage for a single MySQL RDBS instance",
+                "type": "hourly (allocated)",
+                "hourly": 0.0004,
+                "unit": "GB"
+            },
+            {
+                "key": "rdbs:replicated:cpu",
+                "name": "MySQL DBaaS with Replication - CPU",
+                "descriptionHtml": "Price per CPU for a MySQL DBaaS instance with replication",
+                "type": "hourly (allocated)",
+                "hourly": 0.018,
+                "unit": "vCPU"
+            },
+            {
+                "key": "rdbs:replicated:memory",
+                "name": "MySQL DBaaS with Replication - RAM",
+                "descriptionHtml": "Price per GB of RAM for a MySQL DBaaS instance with replication",
+                "type": "hourly (allocated)",
+                "hourly": 0.027,
+                "unit": "GB"
+            },
+            {
+                "key": "rdbs:replicated:storage",
+                "name": "MySQL DBaaS with Replication - Storage",
+                "descriptionHtml": "Price per GB of storage for a MySQL DBaaS instance with replication",
+                "type": "hourly (allocated)",
+                "hourly": 0.0008,
+                "unit": "GB"
             }
         ]
     }

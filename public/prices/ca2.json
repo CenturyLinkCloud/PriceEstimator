@@ -68,15 +68,6 @@
                 "descriptionHtml": "Per GB Stored (for archived virtual machines)",
                 "type": "hourly (used)",
                 "hourly": 0.0001
-            },
-            {
-                "key": "networking:object-storage:enabled",
-                "name": "Object Storage",
-                "descriptionHtml": "Flexible, scalable storage that's S3 compatible. Highly available large file storage accessible via HTTP, with automatic multi-site replication.",
-                "type": "usage (per GB per month)",
-                "monthly": 0.04,
-                "unit": "GB",
-                "href": "/object-storage"
             }
         ]
     },
@@ -111,16 +102,6 @@
                 "usage": 0.05,
                 "unit": "GB",
                 "href": "/bandwidth"
-            },
-            {
-                "key": "networking:bandwidth:object-storage",
-                "name": "Object Storage Data Transfer",
-                "descriptionHtml": "Outbound only, inbound is free. Price per GB transferred.",
-                "type": "usage (GB)",
-                "monthly": 0.05,
-                "usage": 0.05,
-                "unit": "GB",
-                "href": "/object-storage"
             },
             {
                 "key": "networking-services:vpn",
@@ -254,172 +235,6 @@
                 "descriptionHtml": "Per license per hour",
                 "type": "hourly (used)",
                 "hourly": 0.0062
-            }
-        ]
-    },
-    {
-        "key": "managed-operating-systems",
-        "name": "Managed Operating Systems",
-        "description": "Prices are for operating system management only. Software licensing is separate.",
-        "products": [
-            {
-                "key": "server:os:windows-managed",
-                "name": "Managed Microsoft Windows Server",
-                "descriptionHtml": "Per server",
-                "type": "hourly (used)",
-                "hourly": 0.21
-            },
-            {
-                "key": "server:os:redhat-managed",
-                "name": "Managed Red Hat Enterprise Linux",
-                "descriptionHtml": "Per server",
-                "type": "hourly (used)",
-                "hourly": 0.21
-            },
-            {
-                "key": "server:os:managed",
-                "name": "Managed Operating Systems",
-                "descriptionHtml": "Key administrative functions performed by our team of experts.",
-                "type": "hourly (used)",
-                "hourly": 0.21,
-                "unit": "VM"
-            }
-        ]
-    },
-    {
-        "key": "managed-applications",
-        "name": "Managed Applications",
-        "description": "Prices are for both application management and software licensing, unless indicated.",
-        "href": "/managed-services",
-        "products": [
-            {
-                "key": "managed-apps",
-                "name": "Managed Services",
-                "descriptionHtml": "Installation, configuration, and maintenance of operating systems and applications, performed by experts.",
-                "type": "Billed hourly, rates vary"
-            },
-            {
-                "key": "managed-apps:iis",
-                "name": "Managed Microsoft IIS",
-                "href": "/managed-services/iis",
-                "descriptionHtml": "Per server",
-                "type": "hourly (allocated)",
-                "hourly": 0.21
-            },
-            {
-                "key": "managed-apps:active-directory",
-                "name": "Managed Microsoft Active Directory",
-                "href": "/managed-services/active-directory",
-                "descriptionHtml": "Per server",
-                "type": "hourly (allocated)",
-                "hourly": 0.28,
-                "unit": "VM"
-            },
-            {
-                "key": "managed-apps:ms-sql",
-                "name": "Managed Microsoft SQL",
-                "descriptionHtml": "Per application instance, plus additional charge for software license. Refer to the Software section for pricing.",
-                "href": "/managed-services/ms-sql",
-                "type": "hourly (allocated)",
-                "hourly": 0.48
-            },
-            {
-                "key": "managed-apps:apache",
-                "name": "Managed Apache",
-                "descriptionHtml": "Per server",
-                "href": "/managed-services/apache-server",
-                "type": "hourly (allocated)",
-                "hourly": 0.21,
-                "unit": "VM"
-            },
-            {
-                "key": "managed-apps:tomcat",
-                "name": "Managed Tomcat",
-                "descriptionHtml": "Per server",
-                "href": "/managed-services/tomcat",
-                "type": "hourly (allocated)",
-                "hourly": 0.83
-            },
-            {
-                "key": "managed-apps:cloudera-express-unmanaged",
-                "name": "Cloudera Express",
-                "version": "Unmanaged",
-                "descriptionHtml": "Completely self-service.",
-                "href": "/managed-services/cloudera",
-                "type": "hourly (allocated)",
-                "hourly": 0
-            },
-            {
-                "key": "managed-apps:cloudera-express",
-                "name": "Cloudera Express",
-                "version": "Managed",
-                "descriptionHtml": "Per VM w/ licenses",
-                "href": "/managed-services/cloudera",
-                "type": "hourly (allocated)",
-                "hourly": 0.30
-            },
-            {
-                "key": "managed-apps:cloudera-cdh5-basic",
-                "name": "Cloudera Basic",
-                "version": "Managed",
-                "descriptionHtml": "Per VM w/ licenses",
-                "href": "/managed-services/cloudera",
-                "type": "hourly (allocated)",
-                "hourly": 0.54
-            },
-            {
-                "key": "managed-apps:cloudera-cdh5-basic-hbase",
-                "name": "Cloudera Basic w/ HBase",
-                "version": "Managed",
-                "descriptionHtml": "Per VM w/ licenses",
-                "href": "/managed-services/cloudera",
-                "type": "hourly (allocated)",
-                "hourly": 0.88
-            },
-            {
-                "key": "managed-apps:cloudera-enterprise-data-hub",
-                "name": "Cloudera Enterprise Data Hub",
-                "version": "Managed",
-                "descriptionHtml": "Per VM w/ licenses",
-                "href": "/managed-services/cloudera",
-                "type": "hourly (allocated)",
-                "hourly": 1.15
-            },
-            {
-                "key": "managed-apps:mysql",
-                "name": "Managed MySQL",
-                "descriptionHtml": "Per application instance",
-                "href": "/managed-services/mysql",
-                "type": "hourly (allocated)",
-                "hourly": 0.763
-            },
-            {
-                "key": "managed-apps:mysql-replication-master-master",
-                "name": "Managed MySQL Replication (Master/Master)",
-                "descriptionHtml": "Per application instance per hour",
-                "type": "hourly (allocated)",
-                "hourly": 0.5556
-            },
-            {
-                "key": "managed-apps:mysql-replication-master-slave",
-                "name": "Managed MySQL Replication (Master/Slave)",
-                "descriptionHtml": "Per application instance per hour",
-                "type": "hourly (allocated)",
-                "hourly": 0.3472
-            },
-            {
-                "key": "managed-apps:managed-geotrust-quick-ssl-certificate",
-                "name": "Managed GeoTrust Quick SSL Certificate",
-                "descriptionHtml": "Per certificate",
-                "type": "hourly (allocated)"
-            },
-            {
-                "key": "managed-apps:backup",
-                "name": "Managed Backup",
-                "descriptionHtml": "Price per GB depends on usage. Lower pricing available via contract agreement.",
-                "type": "monthly per GB",
-                "monthly": 1.10,
-                "unit": "GB"
             }
         ]
     },
@@ -687,7 +502,7 @@
                 "key": "service-tasks:remote-desktop",
                 "name": "Add / Install Remote Desktop Services",
                 "descriptionHtml": "Customers who want to run Microsoft Remote Desktop Services can purchase the work item. Then we provision the RDS licenses for use on CenturyLink Cloud.",
-                "details": "Our expertise in Microsoft software runs deep&mdash;put this to work for your business. Our team will provision Remote Desktop Services licenses for use on CenturyLink Cloud.</p><p><i>NOTE: while the Service Task incurs a one-time charge, the Microsoft Windows Remote Desktop Services license will be billed monthly. <a href=https://www.centurylinkcloud.com/pricing/#/ny1>See the Pricing Catalog</a> for the hourly cost of this software.</i>",
+                "details": "Our expertise in Microsoft software runs deep&mdash;put this to work for your business. Our team will provision Remote Desktop Services licenses for use on CenturyLink Cloud.</p><p><i>NOTE: while the Service Task incurs a one-time charge, the Microsoft Windows Remote Desktop Services license will be billed monthly. <a href=https://www.ctl.io/pricing/#/ny1>See the Pricing Catalog</a> for the hourly cost of this software.</i>",
                 "type": "$195/hour, 1 hour minimum",
                 "hourly": 195,
                 "monthly": "&mdash;",
