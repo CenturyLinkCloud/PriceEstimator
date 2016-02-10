@@ -35,7 +35,7 @@
         "links": [
             {
                 "rel": "pricing",
-                "href": "/prices/default.json"
+                "href": "/prices/ut1.json"
             }
         ]
     },
@@ -75,7 +75,7 @@
         "links": [
             {
                 "rel": "pricing",
-                "href": "/prices/default.json"
+                "href": "/prices/ca2.json"
             }
         ]
     },
@@ -85,7 +85,7 @@
         "links": [
             {
                 "rel": "pricing",
-                "href": "/prices/default.json"
+                "href": "/prices/ca1.json"
             }
         ]
     },
@@ -95,7 +95,7 @@
         "links": [
             {
                 "rel": "pricing",
-                "href": "/prices/default.json"
+                "href": "/prices/de1.json"
             }
         ]
     },
@@ -105,7 +105,7 @@
         "links": [
             {
                 "rel": "pricing",
-                "href": "/prices/default.json"
+                "href": "/prices/gb1.json"
             }
         ]
     },
