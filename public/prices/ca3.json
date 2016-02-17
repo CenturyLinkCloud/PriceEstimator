@@ -43,7 +43,7 @@
                 "name": "Virtual CPU for Hyperscale",
                 "descriptionHtml": "2 Ghz+ Processor (up to 16 CPU)",
                 "type": "hourly (used)",
-                "hourly": 0.0100,
+                "hourly": 0.01,
                 "href": "/hyperscale"
             },
             {
@@ -744,6 +744,62 @@
                 "type": "Priced per project, hourly rates of $195",
                 "hourly": 195,
                 "monthly": "&mdash;"
+            }
+        ]
+    },
+    {
+        "key": "rdbs",
+        "name": "Relational DB Service",
+        "description": "",
+        "href": "/relational-database",
+        "products": [
+            {
+                "key": "rdbs:single:cpu",
+                "name": "MySQL RDBS - Single Instance - CPU",
+                "descriptionHtml": "Price per CPU for a single MySQL RDBS instance",
+                "type": "hourly (allocated)",
+                "hourly": 0.009,
+                "unit": "vCPU"
+            },
+            {
+                "key": "rdbs:single:memory",
+                "name": "MySQL RDBS - Single instance - RAM",
+                "descriptionHtml": "Price per GB of RAM for a single MySQL RDBS instance",
+                "type": "hourly (allocated)",
+                "hourly": 0.0135,
+                "unit": "GB"
+            },
+            {
+                "key": "rdbs:single:storage",
+                "name": "MySQL RDBS - Single Instance - Storage",
+                "descriptionHtml": "Price per GB of storage for a single MySQL RDBS instance",
+                "type": "hourly (allocated)",
+                "hourly": 0.0004,
+                "unit": "GB"
+            },
+            {
+                "key": "rdbs:replicated:cpu",
+                "name": "MySQL DBaaS with Replication - CPU",
+                "descriptionHtml": "Price per CPU for a MySQL DBaaS instance with replication",
+                "type": "hourly (allocated)",
+                "hourly": 0.018,
+                "unit": "vCPU"
+            },
+            {
+                "key": "rdbs:replicated:memory",
+                "name": "MySQL DBaaS with Replication - RAM",
+                "descriptionHtml": "Price per GB of RAM for a MySQL DBaaS instance with replication",
+                "type": "hourly (allocated)",
+                "hourly": 0.027,
+                "unit": "GB"
+            },
+            {
+                "key": "rdbs:replicated:storage",
+                "name": "MySQL DBaaS with Replication - Storage",
+                "descriptionHtml": "Price per GB of storage for a MySQL DBaaS instance with replication",
+                "type": "hourly (allocated)",
+                "hourly": 0.0008,
+                "unit": "GB"
             }
         ]
     }

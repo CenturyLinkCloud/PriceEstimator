@@ -30,15 +30,6 @@
                 "href": "/block-storage"
             },
             {
-                "key": "server:storage:premium",
-                "name": "Block Storage w/ Premium Backup",
-                "descriptionHtml": "Persistent storage (single data center, 14 days of snapshot backup). Price per GB.",
-                "type": "hourly (allocated)",
-                "hourly": 0.0007,
-                "unit": "GB",
-                "href": "/block-storage"
-            },
-            {
                 "key": "server:cpu:hyperscale",
                 "name": "Virtual CPU for Hyperscale",
                 "descriptionHtml": "2 Ghz+ Processor (up to 16 CPU)",
@@ -63,20 +54,20 @@
                 "href": "/hyperscale"
             },
             {
+                "key": "server:storage:premium",
+                "name": "Block Storage w/ Premium Backup",
+                "descriptionHtml": "Persistent storage (single data center, 14 days of snapshot backup). Price per GB.",
+                "type": "hourly (allocated)",
+                "hourly": 0.0007,
+                "unit": "GB",
+                "href": "/block-storage"
+            },
+            {
                 "key": "server:storage:archive",
                 "name": "Archive Storage",
                 "descriptionHtml": "Per GB Stored (for archived virtual machines)",
                 "type": "hourly (used)",
                 "hourly": 0.0001
-            },
-            {
-                "key": "networking:object-storage:enabled",
-                "name": "Object Storage",
-                "descriptionHtml": "Flexible, scalable storage that's S3 compatible. Highly available large file storage accessible via HTTP, with automatic multi-site replication.",
-                "type": "usage (per GB per month)",
-                "monthly": 0.04,
-                "unit": "GB",
-                "href": "/object-storage"
             }
         ]
     },
@@ -98,22 +89,6 @@
         ]
     },
     {
-        "key": "appfog-application-deployments",
-        "name": "AppFog Application Deployments",
-        "description": "",
-        "products": [
-            {
-                "key": "appfog",
-                "name": "AppFog Application Deployment",
-                "descriptionHtml": "Per GB Memory per instance.",
-                "type": "hourly (used)",
-                "hourly": 0.04,
-                "unit": "GB",
-                "href": "/appfog"
-            }
-        ]
-    },
-    {
         "key": "networking",
         "name": "Networking",
         "description": "",
@@ -127,16 +102,6 @@
                 "usage": 0.05,
                 "unit": "GB",
                 "href": "/bandwidth"
-            },
-            {
-                "key": "networking:bandwidth:object-storage",
-                "name": "Object Storage Data Transfer",
-                "descriptionHtml": "Outbound only, inbound is free. Price per GB transferred.",
-                "type": "usage (GB)",
-                "monthly": 0.05,
-                "usage": 0.05,
-                "unit": "GB",
-                "href": "/object-storage"
             },
             {
                 "key": "networking-services:vpn",
@@ -248,14 +213,14 @@
                 "name": "Microsoft SQL Server Enterprise Edition",
                 "descriptionHtml": "Per vCPU license per hour",
                 "type": "hourly (used)",
-                "hourly": 0.4097
+                "hourly": 0.4153
             },
             {
                 "key": "software:microsoft-sql-server-standard-edition",
                 "name": "Microsoft SQL Server Standard Edition",
                 "descriptionHtml": "Per vCPU license per hour",
                 "type": "hourly (used)",
-                "hourly": 0.1068
+                "hourly": 0.1083
             },
             {
                 "key": "software:microsoft-sql-server-web-edition",
@@ -422,17 +387,6 @@
                 "prerequisite": "For load balancers that require licensing, the customer must provide licensing information or approve CenturyLink Cloud to purchase on their behalf."
             },
             {
-                "key": "service-tasks:openvpn-servers-deployment",
-                "name": "Deploy Custom OpenVPN Servers or Configurations",
-                "descriptionHtml": "CenturyLink's OpenVPN solution supports up to approximately 19 active sessions. Customers who need more than 19 sessions, a custom port, or a configuration in a secondary data center can request this work item.",
-                "details": "CenturyLink's OpenVPN solution supports up to approximately 19 active sessions. Customers who need more than 19 sessions, a custom port, or a configuration in a secondary data center can request this work item.",
-                "type": "$195/hour, 1 hour minimum",
-                "hourly": 195,
-                "monthly": "&mdash;",
-                "setupFee": 195,
-                "prerequisite": "None"
-            },
-            {
                 "key": "service-tasks:vpn-tunnels-deployment",
                 "name": "Deploy Site-to-Site VPN Tunnels or Direct Connect",
                 "descriptionHtml": "Provision specialized site-to-site tunnels for customers or connect CenturyLink Cloud to hardware in the same data center via Direct Connect.",
@@ -545,21 +499,10 @@
                 "prerequisite": "Available to Managed Microsoft SQL service customers"
             },
             {
-                "key": "service-tasks:mssql-alwayson-configuration",
-                "name": "MSSQL AlwaysOn Availability Groups",
-                "descriptionHtml": "This is a high-availability and DR solution that offers additional capabilities over mirroring. Available with the Enterprise Edition of MSSQL 2012 or later, one or more databases can be added to an Availability Group for which a singular network name (listener) exists for client connectivity. Replication and failover configurations are applied to the Availability Group, which can span 2 or more nodes&mdash;one primary (writable) replica and one or more secondary (optionally readable) replicas. Although asynchronous replication is available, synchronous replication allows for automatic failover.",
-                "details": "This is a high-availability and DR solution that offers additional capabilities over mirroring. Available with the Enterprise Edition of MSSQL 2012 or later, one or more databases can be added to an Availability Group for which a singular network name (listener) exists for client connectivity. Replication and failover configurations are applied to the Availability Group, which can span 2 or more nodes&mdash;one primary (writable) replica and one or more secondary (optionally readable) replicas. Although asynchronous replication is available, synchronous replication allows for automatic failover.",
-                "type": "$195/hour, 1 hour minimum",
-                "hourly": 195,
-                "monthly": "&mdash;",
-                "setupFee": 195,
-                "prerequisite": "Available to Managed Microsoft SQL service customers"
-            },
-            {
                 "key": "service-tasks:remote-desktop",
                 "name": "Add / Install Remote Desktop Services",
                 "descriptionHtml": "Customers who want to run Microsoft Remote Desktop Services can purchase the work item. Then we provision the RDS licenses for use on CenturyLink Cloud.",
-                "details": "Our expertise in Microsoft software runs deep&mdash;put this to work for your business. Our team will provision Remote Desktop Services licenses for use on CenturyLink Cloud.</p><p><i>NOTE: while the Service Task incurs a one-time charge, the Microsoft Windows Remote Desktop Services license will be billed monthly. <a href=https://www.centurylinkcloud.com/pricing/#/ny1>See the Pricing Catalog</a> for the hourly cost of this software.</i>",
+                "details": "Our expertise in Microsoft software runs deep&mdash;put this to work for your business. Our team will provision Remote Desktop Services licenses for use on CenturyLink Cloud.</p><p><i>NOTE: while the Service Task incurs a one-time charge, the Microsoft Windows Remote Desktop Services license will be billed monthly. <a href=https://www.ctl.io/pricing/#/ny1>See the Pricing Catalog</a> for the hourly cost of this software.</i>",
                 "type": "$195/hour, 1 hour minimum",
                 "hourly": 195,
                 "monthly": "&mdash;",
@@ -616,39 +559,6 @@
                 "type": "Priced per project, hourly rates of $195",
                 "hourly": 195,
                 "monthly": "&mdash;"
-            }
-        ]
-    },
-    {
-        "key": "api",
-        "name": "API",
-        "description": "Comprehensive REST based web services to enable amazing ideas",
-        "href": "/api",
-        "products": [
-            {
-                "key": "api",
-                "name": "API",
-                "type": "Included for all customers"
-            }
-        ]
-    },
-    {
-        "key": "blueprints",
-        "name": "Blueprints",
-        "description": "Comprehensive REST based web services to enable amazing ideas",
-        "href": "/blueprints",
-        "products": [
-            {
-                "key": "blueprints",
-                "name": "Blueprints",
-                "descriptionHtml": "\"Templates\" for cloud environments, cloud orchestration, and automation.",
-                "type": "Included"
-            },
-            {
-                "key": "blueprints:spark",
-                "name": "Self-Managed Apache Spark",
-                "descriptionHtml": "free add-on for existing VMs",
-                "type": "Included"
             }
         ]
     },

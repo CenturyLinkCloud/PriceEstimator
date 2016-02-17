@@ -43,7 +43,7 @@
                 "name": "Virtual CPU for Hyperscale",
                 "descriptionHtml": "2 Ghz+ Processor (up to 16 CPU)",
                 "type": "hourly (used)",
-                "hourly": 0.0100,
+                "hourly": 0.01,
                 "href": "/hyperscale"
             },
             {
@@ -773,7 +773,6 @@
                 "key": "rdbs:single:storage",
                 "name": "MySQL RDBS - Single Instance - Storage",
                 "descriptionHtml": "Price per GB of storage for a single MySQL RDBS instance",
-
                 "type": "hourly (allocated)",
                 "hourly": 0.0004,
                 "unit": "GB"
@@ -781,7 +780,8 @@
             {
                 "key": "rdbs:replicated:cpu",
                 "name": "MySQL DBaaS with Replication - CPU",
-                "descriptionHtml": "Price per CPU for a MySQL DBaaS instance with replication",                "type": "hourly (allocated)",
+                "descriptionHtml": "Price per CPU for a MySQL DBaaS instance with replication",
+                "type": "hourly (allocated)",
                 "hourly": 0.018,
                 "unit": "vCPU"
             },
