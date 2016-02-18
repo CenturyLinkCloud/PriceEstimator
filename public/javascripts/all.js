@@ -4103,6 +4103,23 @@ module.exports = IpsView;
 
 
 },{"../templates/ips.haml":23}],35:[function(require,module,exports){
+var LeadGenView;
+
+LeadGenView = Backbone.View.extend({
+  el: "#lead-gen",
+  events: {
+    "click .lead-gen__close": "closeLeadGen"
+  },
+  closeLeadGen: function() {
+    this.$el.slideUp("fast");
+    return $('body').removeClass("lead-gen-open");
+  }
+});
+
+module.exports = LeadGenView;
+
+
+},{}],36:[function(require,module,exports){
 var ManagedAppView;
 
 ManagedAppView = Backbone.View.extend({
@@ -4173,7 +4190,7 @@ ManagedAppView = Backbone.View.extend({
 module.exports = ManagedAppView;
 
 
-},{"../templates/managedApp.haml":24}],36:[function(require,module,exports){
+},{"../templates/managedApp.haml":24}],37:[function(require,module,exports){
 var Config, MonthlyTotalView;
 
 Config = require('../Config.coffee');
@@ -4304,7 +4321,7 @@ MonthlyTotalView = Backbone.View.extend({
 module.exports = MonthlyTotalView;
 
 
-},{"../Config.coffee":3}],37:[function(require,module,exports){
+},{"../Config.coffee":3}],38:[function(require,module,exports){
 var RdbsView;
 
 RdbsView = Backbone.View.extend({
@@ -4412,7 +4429,7 @@ RdbsView = Backbone.View.extend({
 module.exports = RdbsView;
 
 
-},{"../templates/rdbs.haml":25}],38:[function(require,module,exports){
+},{"../templates/rdbs.haml":25}],39:[function(require,module,exports){
 var RdbsModel, RdbsView, RdbssView;
 
 RdbsView = require('./RdbsView.coffee');
@@ -4503,7 +4520,7 @@ RdbssView = Backbone.View.extend({
 module.exports = RdbssView;
 
 
-},{"../models/RdbsModel.coffee":17,"./RdbsView.coffee":37}],39:[function(require,module,exports){
+},{"../models/RdbsModel.coffee":17,"./RdbsView.coffee":38}],40:[function(require,module,exports){
 var AddManagedAppView, ManagedAppView, ServerView;
 
 AddManagedAppView = require('./AddManagedAppView.coffee');
@@ -4700,7 +4717,7 @@ ServerView = Backbone.View.extend({
 module.exports = ServerView;
 
 
-},{"../templates/server.haml":26,"./AddManagedAppView.coffee":28,"./ManagedAppView.coffee":35}],40:[function(require,module,exports){
+},{"../templates/server.haml":26,"./AddManagedAppView.coffee":28,"./ManagedAppView.coffee":36}],41:[function(require,module,exports){
 var ServerModel, ServerView, ServersView;
 
 ServerView = require('./ServerView.coffee');
@@ -4795,7 +4812,7 @@ ServersView = Backbone.View.extend({
 module.exports = ServersView;
 
 
-},{"../models/ServerModel.coffee":18,"./ServerView.coffee":39}],41:[function(require,module,exports){
+},{"../models/ServerModel.coffee":18,"./ServerView.coffee":40}],42:[function(require,module,exports){
 var ServiceView;
 
 ServiceView = Backbone.View.extend({
@@ -4881,7 +4898,7 @@ ServiceView = Backbone.View.extend({
 module.exports = ServiceView;
 
 
-},{"../templates/service.haml":27}],42:[function(require,module,exports){
+},{"../templates/service.haml":27}],43:[function(require,module,exports){
 var ServiceModel, ServiceView, ServicesView;
 
 ServiceView = require('./ServiceView.coffee');
@@ -4938,7 +4955,7 @@ ServicesView = Backbone.View.extend({
 module.exports = ServicesView;
 
 
-},{"../models/ServiceModel.coffee":19,"./ServiceView.coffee":41}],43:[function(require,module,exports){
+},{"../models/ServiceModel.coffee":19,"./ServiceView.coffee":42}],44:[function(require,module,exports){
 var Config, SupportView;
 
 Config = require('../Config.coffee');
@@ -5027,8 +5044,8 @@ SupportView = Backbone.View.extend({
 module.exports = SupportView;
 
 
-},{"../Config.coffee":3}],44:[function(require,module,exports){
-var App, AppfogCollection, AppfogsView, BaremetalCollection, BaremetalConfigsView, Config, IpServicesView, IpsCollection, MonthlyTotalView, PricingMapsCollection, Q, RdbssCollection, RdbssView, ServersCollection, ServersView, ServicesCollection, ServicesView, SupportView, Utils, cb;
+},{"../Config.coffee":3}],45:[function(require,module,exports){
+var App, AppfogCollection, AppfogsView, BaremetalCollection, BaremetalConfigsView, Config, IpServicesView, IpsCollection, LeadGenView, MonthlyTotalView, PricingMapsCollection, Q, RdbssCollection, RdbssView, ServersCollection, ServersView, ServicesCollection, ServicesView, SupportView, Utils, cb;
 
 Config = require('./app/Config.coffee');
 
@@ -5047,6 +5064,8 @@ AppfogsView = require('./app/views/AppfogsView.coffee');
 BaremetalConfigsView = require('./app/views/BaremetalConfigsView.coffee');
 
 MonthlyTotalView = require('./app/views/MonthlyTotalView.coffee');
+
+LeadGenView = require('./app/views/LeadGenView.coffee');
 
 PricingMapsCollection = require('./app/collections/PricingMapsCollection.coffee');
 
@@ -5094,6 +5113,7 @@ App = {
       currency: this.currency,
       url: Config.PRICING_ROOT_PATH + ("" + ds + ".json")
     });
+    this.leadGenView = new LeadGenView();
     this.pricingMaps.on("sync", (function(_this) {
       return function() {
         return _this.onPricingMapsSynced();
@@ -5318,4 +5338,4 @@ $(function() {
 });
 
 
-},{"./app/Config.coffee":3,"./app/Utils.coffee":4,"./app/collections/AppfogCollection.coffee":5,"./app/collections/BaremetalCollection.coffee":6,"./app/collections/IpsCollection.coffee":7,"./app/collections/PricingMapsCollection.coffee":8,"./app/collections/RdbssCollection.coffee":9,"./app/collections/ServersCollection.coffee":10,"./app/collections/ServicesCollection.coffee":11,"./app/views/AppfogsView.coffee":30,"./app/views/BaremetalConfigsView.coffee":31,"./app/views/IpServicesView.coffee":33,"./app/views/MonthlyTotalView.coffee":36,"./app/views/RdbssView.coffee":38,"./app/views/ServersView.coffee":40,"./app/views/ServicesView.coffee":42,"./app/views/SupportView.coffee":43,"q":2}]},{},[44])
+},{"./app/Config.coffee":3,"./app/Utils.coffee":4,"./app/collections/AppfogCollection.coffee":5,"./app/collections/BaremetalCollection.coffee":6,"./app/collections/IpsCollection.coffee":7,"./app/collections/PricingMapsCollection.coffee":8,"./app/collections/RdbssCollection.coffee":9,"./app/collections/ServersCollection.coffee":10,"./app/collections/ServicesCollection.coffee":11,"./app/views/AppfogsView.coffee":30,"./app/views/BaremetalConfigsView.coffee":31,"./app/views/IpServicesView.coffee":33,"./app/views/LeadGenView.coffee":35,"./app/views/MonthlyTotalView.coffee":37,"./app/views/RdbssView.coffee":39,"./app/views/ServersView.coffee":41,"./app/views/ServicesView.coffee":43,"./app/views/SupportView.coffee":44,"q":2}]},{},[45])

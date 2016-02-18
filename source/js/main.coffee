@@ -17,6 +17,7 @@ IpServicesView = require './app/views/IpServicesView.coffee'
 AppfogsView = require './app/views/AppfogsView.coffee'
 BaremetalConfigsView = require './app/views/BaremetalConfigsView.coffee'
 MonthlyTotalView = require './app/views/MonthlyTotalView.coffee'
+LeadGenView = require './app/views/LeadGenView.coffee'
 PricingMapsCollection = require './app/collections/PricingMapsCollection.coffee'
 ServersCollection = require './app/collections/ServersCollection.coffee'
 RdbssCollection = require './app/collections/RdbssCollection.coffee'
@@ -62,6 +63,8 @@ App =
       datasource: ds
       currency: @currency
       url: Config.PRICING_ROOT_PATH + "#{ds}.json"
+
+    @leadGenView = new LeadGenView()
 
     @pricingMaps.on "sync", =>
       @onPricingMapsSynced()
