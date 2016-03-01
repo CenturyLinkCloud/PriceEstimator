@@ -49,8 +49,6 @@ MonthlyTotalView = Backbone.View.extend
       else
         $('.green-section.clone').remove()
 
-    $(window.top).scroll => @positionHeader()
-    
     $(".estimator-print", @$el).on 'click', (e) ->
       e.preventDefault()
       window.print()
@@ -78,12 +76,6 @@ MonthlyTotalView = Backbone.View.extend
       symbol: @app.currency.symbol
     )
     $(".price", @$el).html newTotal
-
-  positionHeader: ->
-    if $(window).scrollTop() > 289
-      @$el.css("position", "fixed") 
-    else
-      @$el.css("position", "absolute")
 
   changeDatacenter: (e) ->
     $target = $(e.target)

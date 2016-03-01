@@ -4244,11 +4244,6 @@ MonthlyTotalView = Backbone.View.extend({
         }
       };
     })(this));
-    $(window.top).scroll((function(_this) {
-      return function() {
-        return _this.positionHeader();
-      };
-    })(this));
     $(".estimator-print", this.$el).on('click', function(e) {
       e.preventDefault();
       return window.print();
@@ -4285,13 +4280,6 @@ MonthlyTotalView = Backbone.View.extend({
       symbol: this.app.currency.symbol
     });
     return $(".price", this.$el).html(newTotal);
-  },
-  positionHeader: function() {
-    if ($(window).scrollTop() > 289) {
-      return this.$el.css("position", "fixed");
-    } else {
-      return this.$el.css("position", "absolute");
-    }
   },
   changeDatacenter: function(e) {
     var $currencies, $selected, $target, currency, datasource;
