@@ -951,6 +951,14 @@
                 "type": "hourly (allocated)",
                 "hourly": 0.0008,
                 "unit": "GB"
+            },
+            {
+                "key": "rdbs:additional-backup-storage",
+                "name": "MySQL DBaaS Additional Backup Storage",
+                "descriptionHtml": "Price per GB of additional backup storage for a MySQL DBaaS instance",
+                "type": "hourly (used)",
+                "hourly": 0.000055,
+                "unit": "GB"
             }
         ]
     },
