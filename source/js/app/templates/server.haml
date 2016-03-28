@@ -10,12 +10,9 @@
     %option{value: "hours_per_day", selected: @model.get('usagePeriod') == 'hours_per_day'} hrs / day
 
 - if @model.get("type") is "hyperscale"
-  %input{type: "hidden", value: "hyperscale"}
+  %input{type: "hidden", name: "type", value: "hyperscale"}
 - else
-  %td.table-cell.type-cell
-    %select{name: "type"}
-      %option{value: "standard",  selected: @model.get('type') == 'standard' } standard
-      %option{value: "premium",  selected: @model.get('type') == 'premium' } premium
+  %input{type: "hidden", name: "type", value: "standard"}
 
 %td.table-cell.os-cell
   %select{name: "os"}

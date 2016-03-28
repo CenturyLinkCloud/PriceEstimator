@@ -24,8 +24,8 @@
                 "key": "server:storage:standard",
                 "name": "Block Storage w/ Standard Backup",
                 "descriptionHtml": "Persistent storage (single data center, 5 days of snapshot backup). Price per GB.",
-                "type": "hourly (allocated)",
-                "hourly": 0.00021,
+                "type": "monthly (allocated)",
+                "monthly": 0.12,
                 "unit": "GB",
                 "href": "/block-storage"
             },
@@ -33,8 +33,8 @@
                 "key": "server:storage:premium",
                 "name": "Block Storage w/ Premium Backup",
                 "descriptionHtml": "Persistent storage (single data center, 14 days of snapshot backup). Price per GB.",
-                "type": "hourly (allocated)",
-                "hourly": 0.0007,
+                "type": "monthly (allocated)",
+                "monthly": 0.12,
                 "unit": "GB",
                 "href": "/block-storage"
             },
@@ -614,6 +614,14 @@
                 "descriptionHtml": "Price per GB of storage for a MySQL DBaaS instance with replication",
                 "type": "hourly (allocated)",
                 "hourly": 0.0008,
+                "unit": "GB"
+            },
+            {
+                "key": "rdbs:additional-backup-storage",
+                "name": "MySQL DBaaS Additional Backup Storage",
+                "descriptionHtml": "Price per GB of additional backup storage for a MySQL DBaaS instance",
+                "type": "hourly (used)",
+                "hourly": 0.000055,
                 "unit": "GB"
             }
         ]

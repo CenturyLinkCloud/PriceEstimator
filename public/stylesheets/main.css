@@ -641,16 +641,13 @@ input[type=text], input[type=number] {
 @media print {
   h3 {
     font-size: 24px; }
-
   .page-form {
     padding-top: 0;
     padding-left: 2em;
     padding-right: 2em;
     min-width: 1012px; }
-
   #networking-services {
     page-break-before: always; }
-
   #monthly-total {
     position: relative !important;
     display: block !important;
@@ -659,43 +656,34 @@ input[type=text], input[type=number] {
     border-bottom: 1px solid #ddd; }
     #monthly-total h3 {
       font-size: 26px; }
-
   .total-box {
     width: auto !important; }
-
   .total-box .buttons {
     display: none; }
-
   #support {
     page-break-before: always; }
-
   .service {
     width: 30%; }
-
   #included {
     page-break-before: always; }
-
   .tooltip, .service__description {
     display: none !important; }
-
   .calculator-section .subtotal-wrapper {
     top: 100%;
     width: 100%; }
-
   .page-footer {
     padding-left: 40px; }
-
   .add-managed-app-row {
     display: none !important; }
-
   .rangeslider {
     display: none !important; }
-
   table {
     min-width: 100%; } }
+
 @media print {
   .no-print {
     display: none !important; } }
+
 .print-only {
   display: none; }
   .print-only--block {
@@ -813,5 +801,3 @@ body.lead-gen-open {
   float: left; }
   .lead-gen__form__sign-up:hover {
     background: #009f4b; }
-
-/*# sourceMappingURL=main.css.map */
