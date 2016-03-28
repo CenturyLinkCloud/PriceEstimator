@@ -42,10 +42,6 @@
             .tooltip-wrapper
               %a.has-tooltip{href:"#", data: {toggle: "tooltip", title: "VCPU and Memory are billed hourly when VMs are running; Storage is charged hourly based on what’s allocated."}}
             USAGE
-          %th.table-header.type-cell
-            .tooltip-wrapper
-              %a.has-tooltip{href:"#", data: {toggle: "tooltip", title: "Standard includes 5 days of rolling VM snapshots; Premium includes 14 days at a secondary data center.  There is no IOPS difference."}}
-            STORAGE TYPE
           %th.table-header.os-cell
             .tooltip-wrapper
               %a.has-tooltip{href:"#", data: {toggle: "tooltip", title: "Linux is free; Red Hat and Windows are priced hourly per vCPU"}}
@@ -114,7 +110,7 @@
       %table.table
         %tr.table-headers
           %th.table-header.quantity-cell QTY
-          %th.table-header.usage-cell USAGE
+          %th.table-header.quantity-cell.usage-cell USAGE
           %th.table-header.config-cell
             .tooltip-wrapper
               %a.has-tooltip{href:"#", data: {toggle: "tooltip", title: "Bare Metal servers are billed hourly once allocated."}}
@@ -129,7 +125,7 @@
       %ul
         %li
           High Performance, Enterprise-Grade MySQL-compatible Database on Hyperscale all-flash cloud servers.
-          <a href="/relational-databases" target="_blank" class="no-print">More info</a>.
+          <a href="/relational-database" target="_blank" class="no-print">More info</a>.
       .subtotal-wrapper
         %span.print-only--inline Relational DB Services&nbsp;|&nbsp;
         Sub-total
@@ -227,7 +223,7 @@
       %h3 Bandwidth
       %p
         Redundant, high-speed connectivity out of CenturyLink Cloud’s global network of data centers. All other bandwidth is free.
-        <a href="/bandwidth" target="_blank" class="no-print">More info</a>.
+        <a class="no-print" href="/bandwidth" target="_blank">More info</a>.
       .subtotal-wrapper
         %span.print-only--inline Bandwidth&nbsp;|&nbsp;
         Sub-total
@@ -239,7 +235,7 @@
       %h3 Support Tier
       %p
         Choose from 3 tiers–Developer, Professional, and Enterprise.
-        <a href="/support" target="_blank" class="no-print">Learn more about support</a>.
+        <a class="no-print" href="/support" target="_blank">Learn more about support</a>.
       .subtotal-wrapper
         %span.print-only--inline Support Tier&nbsp;|&nbsp;
         Sub-total
