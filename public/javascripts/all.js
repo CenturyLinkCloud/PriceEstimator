@@ -2225,7 +2225,7 @@ AppfogCollection = Backbone.Collection.extend({
 module.exports = AppfogCollection;
 
 
-},{"../models/AppfogModel.coffee":13}],6:[function(require,module,exports){
+},{"../models/AppfogModel.coffee":14}],6:[function(require,module,exports){
 var BaremetalCollection, BaremetalModel;
 
 BaremetalModel = require('../models/BaremetalModel.coffee');
@@ -2260,7 +2260,7 @@ BaremetalCollection = Backbone.Collection.extend({
 module.exports = BaremetalCollection;
 
 
-},{"../models/BaremetalModel.coffee":14}],7:[function(require,module,exports){
+},{"../models/BaremetalModel.coffee":15}],7:[function(require,module,exports){
 var IpsCollection, IpsModel;
 
 IpsModel = require('../models/IpsModel.coffee');
@@ -2295,7 +2295,7 @@ IpsCollection = Backbone.Collection.extend({
 module.exports = IpsCollection;
 
 
-},{"../models/IpsModel.coffee":15}],8:[function(require,module,exports){
+},{"../models/IpsModel.coffee":16}],8:[function(require,module,exports){
 var Config, DEFAULT_SERVER_DATA, HOURS_IN_MONTH, PricingMapsCollection, PricingModel;
 
 PricingModel = require('../models/PricingMapModel.coffee');
@@ -2345,6 +2345,7 @@ PricingMapsCollection = Backbone.Collection.extend({
         storage: {
           standard: 0.15,
           premium: 0.5,
+          sbs: 0.10,
           "hyperscale": "disabled"
         }
       }
@@ -2380,6 +2381,12 @@ PricingMapsCollection = Backbone.Collection.extend({
                   return server.options[ids[1]][ids[2]] = price;
                 } else if (ids[1] === 'storage') {
                   price = product.hourly * HOURS_IN_MONTH;
+                  if (!price) {
+                    price = product.monthly;
+                  }
+                  if (!price) {
+                    price = product.usage;
+                  }
                   return server.options[ids[1]][ids[2]] = price;
                 } else {
                   price = product.hourly || product.monthly;
@@ -2471,7 +2478,7 @@ PricingMapsCollection = Backbone.Collection.extend({
 module.exports = PricingMapsCollection;
 
 
-},{"../Config.coffee":3,"../data/server.coffee":12,"../models/PricingMapModel.coffee":16}],9:[function(require,module,exports){
+},{"../Config.coffee":3,"../data/server.coffee":13,"../models/PricingMapModel.coffee":17}],9:[function(require,module,exports){
 var RdbsModel, RdbssCollection;
 
 RdbsModel = require('../models/RdbsModel.coffee');
@@ -2508,7 +2515,44 @@ RdbssCollection = Backbone.Collection.extend({
 module.exports = RdbssCollection;
 
 
-},{"../models/RdbsModel.coffee":17}],10:[function(require,module,exports){
+},{"../models/RdbsModel.coffee":18}],10:[function(require,module,exports){
+var SbsModel, SbssCollection;
+
+SbsModel = require('../models/SbsModel.coffee');
+
+SbssCollection = Backbone.Collection.extend({
+  model: SbsModel,
+  parse: function(data) {
+    return data;
+  },
+  subtotal: function() {
+    return _.reduce(this.models, function(memo, sbs) {
+      return memo + sbs.totalPricePerMonth();
+    }, 0);
+  },
+  removeAll: function() {
+    return this.each((function(_this) {
+      return function(sbs) {
+        return sbs.destroy();
+      };
+    })(this));
+  },
+  initPricing: function(pricingMaps) {
+    this.each((function(_this) {
+      return function(sbs) {
+        var pricingMap;
+        pricingMap = pricingMaps.forKey("storage");
+        return sbs.updatePricing(pricingMap);
+      };
+    })(this));
+    return this.trigger('datacenterUpdate');
+  }
+});
+
+module.exports = SbssCollection;
+
+
+},{"../models/SbsModel.coffee":19}],11:[function(require,module,exports){
 var ServerModel, ServersCollection;
 
 ServerModel = require('../models/ServerModel.coffee');
@@ -2555,7 +2599,7 @@ ServersCollection = Backbone.Collection.extend({
 module.exports = ServersCollection;
 
 
-},{"../models/ServerModel.coffee":18}],11:[function(require,module,exports){
+},{"../models/ServerModel.coffee":20}],12:[function(require,module,exports){
 var ServiceModel, ServicesCollection;
 
 ServiceModel = require('../models/ServiceModel.coffee');
@@ -2588,7 +2632,7 @@ ServicesCollection = Backbone.Collection.extend({
 module.exports = ServicesCollection;
 
 
-},{"../models/ServiceModel.coffee":19}],12:[function(require,module,exports){
+},{"../models/ServiceModel.coffee":21}],13:[function(require,module,exports){
 module.exports = {
   type: "server",
   options: {
@@ -2608,7 +2652,7 @@ module.exports = {
 };
 
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 var AppfogModel;
 
 AppfogModel = Backbone.Model.extend({
@@ -2671,7 +2715,7 @@ AppfogModel = Backbone.Model.extend({
 module.exports = AppfogModel;
 
 
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 var BaremetalModel;
 
 BaremetalModel = Backbone.Model.extend({
@@ -2745,7 +2789,7 @@ BaremetalModel = Backbone.Model.extend({
 module.exports = BaremetalModel;
 
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 var IpsModel;
 
 IpsModel = Backbone.Model.extend({
@@ -2807,7 +2851,7 @@ IpsModel = Backbone.Model.extend({
 module.exports = IpsModel;
 
 
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 var PricingMapModel;
 
 PricingMapModel = Backbone.Model.extend({
@@ -2820,7 +2864,7 @@ PricingMapModel = Backbone.Model.extend({
 module.exports = PricingMapModel;
 
 
-},{}],17:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 var RdbsModel;
 
 RdbsModel = Backbone.Model.extend({
@@ -2904,7 +2948,82 @@ RdbsModel = Backbone.Model.extend({
 module.exports = RdbsModel;
 
 
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
+var SbsModel;
+
+SbsModel = Backbone.Model.extend({
+  HOURS_PER_DAY: "hours_per_day",
+  HOURS_PER_WEEK: "hours_per_week",
+  HOURS_PER_MONTH: "hours_per_month",
+  PERCENTAGE_OF_MONTH: "percentage_of_month",
+  HOURS_IN_MONTH: 720,
+  DAYS_IN_MONTH: 30.41666667,
+  WEEKS_IN_MONTH: 4.345238095,
+  defaults: {
+    retentionPeriod: 3,
+    storage: 1,
+    dataAddRate: 1,
+    dataDeleteRate: 1,
+    restore: 0
+  },
+  initialize: function() {
+    return this.initPricing();
+  },
+  parse: function(data) {
+    return data;
+  },
+  initPricing: function() {
+    var pricing;
+    pricing = this.get("pricingMap").attributes.options;
+    return this.set("pricing", pricing);
+  },
+  updatePricing: function(pricingMap) {
+    var pricing;
+    this.set("pricingMap", pricingMap);
+    if (this.get("pricingMap")) {
+      pricing = this.get("pricingMap").attributes.options;
+      return this.set("pricing", pricing);
+    }
+  },
+  totalPricePerMonth: function() {
+    var addedData, averageStorage, dataAddRate, dataDeleteRate, day, deletedData, droppedRetainedData, restore, retainedData, retentionPeriod, storage, storagePerDay, totalBackups, totalRestore, totalStorage;
+    retentionPeriod = this.get("retentionPeriod");
+    storage = this.get("storage") * 1.0;
+    restore = this.get("restore") * 1.0;
+    dataAddRate = this.get("dataAddRate") * 0.01;
+    dataDeleteRate = this.get("dataDeleteRate") * 0.01;
+    retainedData = [];
+    storagePerDay = [];
+    day = 1;
+    while (day <= this.DAYS_IN_MONTH) {
+      addedData = storage * dataAddRate;
+      deletedData = storage * dataDeleteRate;
+      droppedRetainedData = 0;
+      retainedData.push(deletedData);
+      if (retainedData.length > retentionPeriod) {
+        droppedRetainedData = retainedData.shift();
+      }
+      storage += addedData - droppedRetainedData;
+      if (storage < 0) {
+        storage = 0;
+      }
+      storagePerDay.push(storage);
+      day += 1;
+    }
+    totalStorage = storagePerDay.reduce(function(t, s) {
+      return t + s;
+    });
+    averageStorage = totalStorage / storagePerDay.length;
+    totalBackups = averageStorage * this.get("pricing").storage["sbs-backups"];
+    totalRestore = restore * this.get("pricing").storage["sbs-restore"];
+    return totalBackups + totalRestore;
+  }
+});
+
+module.exports = SbsModel;
+
+
+},{}],20:[function(require,module,exports){
 var ServerModel;
 
 ServerModel = Backbone.Model.extend({
@@ -3078,7 +3197,7 @@ ServerModel = Backbone.Model.extend({
 module.exports = ServerModel;
 
 
-},{}],19:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 var ServiceModel;
 
 ServiceModel = Backbone.Model.extend({
@@ -3114,7 +3233,7 @@ ServiceModel = Backbone.Model.extend({
 module.exports = ServiceModel;
 
 
-},{}],20:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 module.exports = function(options) {
 return (function() {
 var $c, $e, $o;
@@ -3150,7 +3269,7 @@ return $o.join("\n").replace(/\s(\w+)='true'/mg, ' $1').replace(/\s(\w+)='fa
 
 }).call(options)
 };
-},{}],21:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 module.exports = function(options) {
 return (function() {
 var $c, $e, $o;
@@ -3186,7 +3305,7 @@ return $o.join("\n").replace(/\s(\w+)='true'/mg, ' $1').replace(/\s(\w+)='fa
 
 }).call(options)
 };
-},{}],22:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 module.exports = function(options) {
 return (function() {
 var $c, $e, $o;
@@ -3222,7 +3341,7 @@ return $o.join("\n").replace(/\s(\w+)='true'/mg, ' $1').replace(/\s(\w+)='fa
 
 }).call(options)
 };
-},{}],23:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 module.exports = function(options) {
 return (function() {
 var $c, $e, $o;
@@ -3258,7 +3377,7 @@ return $o.join("\n").replace(/\s(\w+)='true'/mg, ' $1').replace(/\s(\w+)='fa
 
 }).call(options)
 };
-},{}],24:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 module.exports = function(options) {
 return (function() {
 var $c, $e, $o, soft, _i, _len, _ref;
@@ -3314,7 +3433,7 @@ return $o.join("\n").replace(/\s(\w+)='true'/mg, ' $1').replace(/\s(\w+)='fa
 
 }).call(options)
 };
-},{}],25:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 module.exports = function(options) {
 return (function() {
 var $c, $e, $o;
@@ -3350,7 +3469,43 @@ return $o.join("\n").replace(/\s(\w+)='true'/mg, ' $1').replace(/\s(\w+)='fa
 
 }).call(options)
 };
-},{}],26:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
+module.exports = function(options) {
+return (function() {
+var $c, $e, $o;
+
+$e = function(text, escape) {
+  return ("" + text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/'/g, '&#39;').replace(/\//g, '&#47;').replace(/"/g, '&quot;');
+};
+
+$c = function(text) {
+  switch (text) {
+    case null:
+    case void 0:
+      return '';
+    case true:
+    case false:
+      return '' + text;
+    default:
+      return text;
+  }
+};
+
+$o = [];
+
+$o.push("<td class='range-cell rate-cell table-cell'>\n  <input class='retention-period-text-input' data-name='retentionPeriod'>\n  <input class='range-slider' name='retentionPeriod' type='range' min='" + ($e($c(1))) + "' max='" + ($e($c(31))) + "' value='" + ($e($c(this.model.get("retentionPeriod")))) + "'>\n</td>\n<td class='range-cell storage-cell table-cell'>\n  <input class='storage-text-input' data-name='storage'>\n  <input class='range-slider' name='storage' type='range' min='" + ($e($c(1))) + "' max='" + ($e($c(4000))) + "' step='" + ($e($c(1))) + "' value='" + ($e($c(this.model.get("storage")))) + "'>\n</td>\n<td class='range-cell rate-cell table-cell'>\n  <input class='add-rate-text-input' data-name='dataAddRate'>\n  <input class='range-slider' name='dataAddRate' type='range' min='" + ($e($c(1))) + "' max='" + ($e($c(300))) + "' value='" + ($e($c(this.model.get("dataAddRate")))) + "'>\n</td>\n<td class='range-cell rate-cell table-cell'>\n  <input class='delete-rate-text-input' data-name='dataDeleteRate'>\n  <input class='range-slider' name='dataDeleteRate' type='range' min='" + ($e($c(1))) + "' max='" + ($e($c(300))) + "' value='" + ($e($c(this.model.get("dataDeleteRate")))) + "'>\n</td>\n<td class='range-cell storage-cell table-cell'>\n  <input class='restore-text-input' data-name='restore'>\n  <input class='range-slider' name='restore' type='range' min='" + ($e($c(0))) + "' max='" + ($e($c(4000))) + "' step='" + ($e($c(1))) + "' value='" + ($e($c(this.model.get("restore")))) + "'>\n</td>\n<td class='price-cell table-cell'>\n  <span class='price'>");
+
+$o.push("    " + $e($c(accounting.formatMoney(this.model.totalPricePerMonth() * this.app.currency.rate, {
+  "symbol": this.app.currency.symbol
+}))));
+
+$o.push("  </span>\n  <a class='remove-button' href='#'>X</a>\n</td>");
+
+return $o.join("\n").replace(/\s(\w+)='true'/mg, ' $1').replace(/\s(\w+)='false'/mg, '').replace(/\s(?:id|class)=(['"])(\1)/mg, "");
+
+}).call(options)
+};
+},{}],29:[function(require,module,exports){
 module.exports = function(options) {
 return (function() {
 var $c, $e, $o;
@@ -3402,7 +3557,7 @@ return $o.join("\n").replace(/\s(\w+)='true'/mg, ' $1').replace(/\s(\w+)='fa
 
 }).call(options)
 };
-},{}],27:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 module.exports = function(options) {
 return (function() {
 var $c, $e, $o;
@@ -3472,7 +3627,7 @@ return $o.join("\n").replace(/\s(\w+)='true'/mg, ' $1').replace(/\s(\w+)='fa
 
 }).call(options)
 };
-},{}],28:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 var AddManagedAppView;
 
 AddManagedAppView = Backbone.View.extend({
@@ -3544,7 +3699,7 @@ AddManagedAppView = Backbone.View.extend({
 module.exports = AddManagedAppView;
 
 
-},{"../templates/addManagedApp.haml":20}],29:[function(require,module,exports){
+},{"../templates/addManagedApp.haml":22}],32:[function(require,module,exports){
 var AppfogView;
 
 AppfogView = Backbone.View.extend({
@@ -3648,7 +3803,7 @@ AppfogView = Backbone.View.extend({
 module.exports = AppfogView;
 
 
-},{"../templates/appfog.haml":21}],30:[function(require,module,exports){
+},{"../templates/appfog.haml":23}],33:[function(require,module,exports){
 var AppfogModel, AppfogView, AppfogsView;
 
 AppfogView = require('./AppfogView.coffee');
@@ -3740,7 +3895,7 @@ AppfogsView = Backbone.View.extend({
 module.exports = AppfogsView;
 
 
-},{"../models/AppfogModel.coffee":13,"./AppfogView.coffee":29}],31:[function(require,module,exports){
+},{"../models/AppfogModel.coffee":14,"./AppfogView.coffee":32}],34:[function(require,module,exports){
 var BaremetalConfigsView, BaremetalModel, BaremetalView;
 
 BaremetalView = require('./BaremetalView.coffee');
@@ -3832,7 +3987,7 @@ BaremetalConfigsView = Backbone.View.extend({
 module.exports = BaremetalConfigsView;
 
 
-},{"../models/BaremetalModel.coffee":14,"./BaremetalView.coffee":32}],32:[function(require,module,exports){
+},{"../models/BaremetalModel.coffee":15,"./BaremetalView.coffee":35}],35:[function(require,module,exports){
 var BaremetalView;
 
 BaremetalView = Backbone.View.extend({
@@ -3908,7 +4063,7 @@ BaremetalView = Backbone.View.extend({
 module.exports = BaremetalView;
 
 
-},{"../templates/baremetal.haml":22}],33:[function(require,module,exports){
+},{"../templates/baremetal.haml":24}],36:[function(require,module,exports){
 var IpServicesView, IpsModel, IpsView;
 
 IpsView = require('./IpsView.coffee');
@@ -4000,7 +4155,7 @@ IpServicesView = Backbone.View.extend({
 module.exports = IpServicesView;
 
 
-},{"../models/IpsModel.coffee":15,"./IpsView.coffee":34}],34:[function(require,module,exports){
+},{"../models/IpsModel.coffee":16,"./IpsView.coffee":37}],37:[function(require,module,exports){
 var IpsView;
 
 IpsView = Backbone.View.extend({
@@ -4102,7 +4257,7 @@ IpsView = Backbone.View.extend({
 module.exports = IpsView;
 
 
-},{"../templates/ips.haml":23}],35:[function(require,module,exports){
+},{"../templates/ips.haml":25}],38:[function(require,module,exports){
 var LeadGenView;
 
 LeadGenView = Backbone.View.extend({
@@ -4119,7 +4274,7 @@ LeadGenView = Backbone.View.extend({
 module.exports = LeadGenView;
 
 
-},{}],36:[function(require,module,exports){
+},{}],39:[function(require,module,exports){
 var ManagedAppView;
 
 ManagedAppView = Backbone.View.extend({
@@ -4190,7 +4345,7 @@ ManagedAppView = Backbone.View.extend({
 module.exports = ManagedAppView;
 
 
-},{"../templates/managedApp.haml":24}],37:[function(require,module,exports){
+},{"../templates/managedApp.haml":26}],40:[function(require,module,exports){
 var Config, MonthlyTotalView;
 
 Config = require('../Config.coffee');
@@ -4309,7 +4464,7 @@ MonthlyTotalView = Backbone.View.extend({
 module.exports = MonthlyTotalView;
 
 
-},{"../Config.coffee":3}],38:[function(require,module,exports){
+},{"../Config.coffee":3}],41:[function(require,module,exports){
 var RdbsView;
 
 RdbsView = Backbone.View.extend({
@@ -4417,7 +4572,7 @@ RdbsView = Backbone.View.extend({
 module.exports = RdbsView;
 
 
-},{"../templates/rdbs.haml":25}],39:[function(require,module,exports){
+},{"../templates/rdbs.haml":27}],42:[function(require,module,exports){
 var RdbsModel, RdbsView, RdbssView;
 
 RdbsView = require('./RdbsView.coffee');
@@ -4508,7 +4663,210 @@ RdbssView = Backbone.View.extend({
 module.exports = RdbssView;
 
 
-},{"../models/RdbsModel.coffee":17,"./RdbsView.coffee":38}],40:[function(require,module,exports){
+},{"../models/RdbsModel.coffee":18,"./RdbsView.coffee":41}],43:[function(require,module,exports){
+var SbsView;
+
+SbsView = Backbone.View.extend({
+  tagName: "tr",
+  className: "table-row",
+  events: {
+    "keypress .number": "ensureNumber",
+    "click .remove-button": "removeSbs",
+    "change select[name]": "onFormChanged",
+    "change input[name]": "onFormChanged",
+    "input input[name]": "onFormChanged",
+    "keyup input[name]": "onFormChanged",
+    "keypress input:not([name])": "ensureNumber",
+    "input input:not([name])": "onSliderTextChanged"
+  },
+  initialize: function(options) {
+    this.options = options || {};
+    this.app = this.options.app;
+    this.appViews = [];
+    this.listenTo(this.model, 'change', (function(_this) {
+      return function(model) {
+        return _this.onModelChange(model);
+      };
+    })(this));
+    return this.app.on("currencyChange", (function(_this) {
+      return function() {
+        return _this.onModelChange(_this.model);
+      };
+    })(this));
+  },
+  render: function() {
+    var template;
+    template = require("../templates/sbs.haml");
+    this.$el.html(template({
+      model: this.model,
+      app: this.app
+    }));
+    this.$el.attr("id", this.model.cid);
+    _.defer((function(_this) {
+      return function() {
+        $('.range-slider', _this.$el).rangeslider({
+          polyfill: false
+        });
+        return $('.range-slider', _this.$el).css("opacity", 1);
+      };
+    })(this));
+    return this;
+  },
+  close: function() {
+    this.remove();
+    this.unbind();
+    return this.$el.remove();
+  },
+  removeSbs: function(e) {
+    e.preventDefault();
+    return this.model.destroy();
+  },
+  ensureNumber: function(e) {
+    var charCode;
+    charCode = (e.which ? e.which : e.keyCode);
+    return !(charCode > 31 && (charCode < 48 || charCode > 57));
+  },
+  onSliderTextChanged: function(e) {
+    var $this, data, name, value;
+    $this = $(e.currentTarget);
+    name = $this.data("name");
+    value = $this.val();
+    if (value === "") {
+      return;
+    }
+    data = Backbone.Syphon.serialize(this);
+    data.storage = value;
+    this.model.set(data);
+    return $("[name=" + name + "]", this.$el).val(value).change();
+  },
+  onFormChanged: function(e) {
+    var data;
+    e.preventDefault();
+    data = Backbone.Syphon.serialize(this);
+    return this.model.set(data);
+  },
+  onModelChange: function(model) {
+    var newTotal, total;
+    total = model.totalPricePerMonth() * this.app.currency.rate;
+    newTotal = accounting.formatMoney(total, {
+      symbol: this.app.currency.symbol
+    });
+    $(".price", this.$el).html(newTotal);
+    $(".retentionPeriod", this.$el).html(model.get("retentionPeriod"));
+    $(".storage", this.$el).html(model.get("storage"));
+    $(".dataAddRate", this.$el).html(model.get("dataAddRate"));
+    $(".dataDeleteRate", this.$el).html(model.get("dataDeleteRate"));
+    $(".restore", this.$el).html(model.get("restore"));
+    $(".retention-period-text-input", this.$el).val(model.get("retentionPeriod"));
+    $(".storage-text-input", this.$el).val(model.get("storage"));
+    $(".add-rate-text-input", this.$el).val(model.get("dataAddRate"));
+    $(".delete-rate-text-input", this.$el).val(model.get("dataDeleteRate"));
+    $(".restore-text-input", this.$el).val(model.get("restore"));
+    this.$el.attr("id", this.model.cid);
+    _.each(this.appViews, (function(_this) {
+      return function(appView) {
+        return appView.updateQuantityAndPrice();
+      };
+    })(this));
+    return this.options.parentView.collection.trigger('change');
+  }
+});
+
+module.exports = SbsView;
+
+
+},{"../templates/sbs.haml":28}],44:[function(require,module,exports){
+var SbsModel, SbsView, SbssView;
+
+SbsView = require('./SbsView.coffee');
+
+SbsModel = require('../models/SbsModel.coffee');
+
+SbssView = Backbone.View.extend({
+  events: {
+    "click .add-button": "addSbs"
+  },
+  initialize: function(options) {
+    this.options = options || {};
+    this.app = this.options.app;
+    this.collection.on("add", (function(_this) {
+      return function(model, collection, options) {
+        return _this.onSbsAdded(model);
+      };
+    })(this));
+    this.collection.on("remove", (function(_this) {
+      return function(model, collection, options) {
+        return _this.onSbsRemoved(model);
+      };
+    })(this));
+    this.collection.on("change", (function(_this) {
+      return function() {
+        return _this.updateSubtotal();
+      };
+    })(this));
+    this.app.on("currencyChange", (function(_this) {
+      return function() {
+        return _this.updateSubtotal();
+      };
+    })(this));
+    this.collection.on("datacenterUpdate", (function(_this) {
+      return function() {
+        _this.checkPricingMap();
+        return _this.updateSubtotal();
+      };
+    })(this));
+    this.checkPricingMap();
+    this.updateSubtotal();
+    this.sbsViews = [];
+    return $('.has-tooltip', this.$el).tooltip();
+  },
+  checkPricingMap: function() {
+    if (!this.options.pricingMap) {
+      this.$el.addClass("disabled");
+      this.collection.removeAll();
+      return false;
+    } else {
+      this.$el.removeClass("disabled");
+      return true;
+    }
+  },
+  addSbs: function(e) {
+    if (e) {
+      e.preventDefault();
+    }
+    return this.collection.add({
+      pricingMap: this.options.pricingMap
+    });
+  },
+  onSbsAdded: function(model) {
+    var sbsView;
+    sbsView = new SbsView({
+      model: model,
+      app: this.app,
+      parentView: this
+    });
+    this.sbsViews[model.cid] = sbsView;
+    $(".table", this.$el).append(sbsView.render().el);
+    return this.updateSubtotal();
+  },
+  onSbsRemoved: function(model) {
+    this.sbsViews[model.cid].close();
+    return this.updateSubtotal();
+  },
+  updateSubtotal: function() {
+    var newSubtotal, subTotal;
+    subTotal = this.collection.subtotal() * this.app.currency.rate;
+    newSubtotal = accounting.formatMoney(subTotal, {
+      symbol: this.app.currency.symbol
+    });
+    return $(".subtotal", this.$el).html(newSubtotal);
+  }
+});
+
+module.exports = SbssView;
+
+
+},{"../models/SbsModel.coffee":19,"./SbsView.coffee":43}],45:[function(require,module,exports){
 var AddManagedAppView, ManagedAppView, ServerView;
 
 AddManagedAppView = require('./AddManagedAppView.coffee');
@@ -4705,7 +5063,7 @@ ServerView = Backbone.View.extend({
 module.exports = ServerView;
 
 
-},{"../templates/server.haml":26,"./AddManagedAppView.coffee":28,"./ManagedAppView.coffee":36}],41:[function(require,module,exports){
+},{"../templates/server.haml":29,"./AddManagedAppView.coffee":31,"./ManagedAppView.coffee":39}],46:[function(require,module,exports){
 var ServerModel, ServerView, ServersView;
 
 ServerView = require('./ServerView.coffee');
@@ -4800,7 +5158,7 @@ ServersView = Backbone.View.extend({
 module.exports = ServersView;
 
 
-},{"../models/ServerModel.coffee":18,"./ServerView.coffee":40}],42:[function(require,module,exports){
+},{"../models/ServerModel.coffee":20,"./ServerView.coffee":45}],47:[function(require,module,exports){
 var ServiceView;
 
 ServiceView = Backbone.View.extend({
@@ -4886,7 +5244,7 @@ ServiceView = Backbone.View.extend({
 module.exports = ServiceView;
 
 
-},{"../templates/service.haml":27}],43:[function(require,module,exports){
+},{"../templates/service.haml":30}],48:[function(require,module,exports){
 var ServiceModel, ServiceView, ServicesView;
 
 ServiceView = require('./ServiceView.coffee');
@@ -4943,7 +5301,7 @@ ServicesView = Backbone.View.extend({
 module.exports = ServicesView;
 
 
-},{"../models/ServiceModel.coffee":19,"./ServiceView.coffee":42}],44:[function(require,module,exports){
+},{"../models/ServiceModel.coffee":21,"./ServiceView.coffee":47}],49:[function(require,module,exports){
 var Config, SupportView;
 
 Config = require('../Config.coffee');
@@ -5032,14 +5390,16 @@ SupportView = Backbone.View.extend({
 module.exports = SupportView;
 
 
-},{"../Config.coffee":3}],45:[function(require,module,exports){
-var App, AppfogCollection, AppfogsView, BaremetalCollection, BaremetalConfigsView, Config, IpServicesView, IpsCollection, LeadGenView, MonthlyTotalView, PricingMapsCollection, Q, RdbssCollection, RdbssView, ServersCollection, ServersView, ServicesCollection, ServicesView, SupportView, Utils, cb;
+},{"../Config.coffee":3}],50:[function(require,module,exports){
+var App, AppfogCollection, AppfogsView, BaremetalCollection, BaremetalConfigsView, Config, IpServicesView, IpsCollection, LeadGenView, MonthlyTotalView, PricingMapsCollection, Q, RdbssCollection, RdbssView, SbssCollection, SbssView, ServersCollection, ServersView, ServicesCollection, ServicesView, SupportView, Utils, cb;
 
 Config = require('./app/Config.coffee');
 
 ServersView = require('./app/views/ServersView.coffee');
 
 RdbssView = require('./app/views/RdbssView.coffee');
+
+SbssView = require('./app/views/SbssView.coffee');
 
 SupportView = require('./app/views/SupportView.coffee');
 
@@ -5060,6 +5420,8 @@ PricingMapsCollection = require('./app/collections/PricingMapsCollection.coffee'
 ServersCollection = require('./app/collections/ServersCollection.coffee');
 
 RdbssCollection = require('./app/collections/RdbssCollection.coffee');
+
+SbssCollection = require('./app/collections/SbssCollection.coffee');
 
 ServicesCollection = require('./app/collections/ServicesCollection.coffee');
 
@@ -5116,6 +5478,7 @@ App = {
   onPricingMapsSynced: function() {
     this.initServers();
     this.initRdbss();
+    this.initSbss();
     this.initHyperscaleServers();
     this.initIpsServices();
     this.initAppfogServices();
@@ -5218,6 +5581,20 @@ App = {
       collection: this.rdbssCollection,
       el: "#rdbss",
       pricingMap: this.pricingMaps.forKey("rdbs")
+    });
+  },
+  initSbss: function() {
+    this.sbssCollection = new SbssCollection;
+    this.sbssCollection.on("change remove add", (function(_this) {
+      return function() {
+        return _this.updateTotalPrice();
+      };
+    })(this));
+    return this.sbssView = new SbssView({
+      app: this,
+      collection: this.sbssCollection,
+      el: "#sbss",
+      pricingMap: this.pricingMaps.forKey("server")
     });
   },
   initHyperscaleServers: function() {
@@ -5326,4 +5703,4 @@ $(function() {
 });
 
 
-},{"./app/Config.coffee":3,"./app/Utils.coffee":4,"./app/collections/AppfogCollection.coffee":5,"./app/collections/BaremetalCollection.coffee":6,"./app/collections/IpsCollection.coffee":7,"./app/collections/PricingMapsCollection.coffee":8,"./app/collections/RdbssCollection.coffee":9,"./app/collections/ServersCollection.coffee":10,"./app/collections/ServicesCollection.coffee":11,"./app/views/AppfogsView.coffee":30,"./app/views/BaremetalConfigsView.coffee":31,"./app/views/IpServicesView.coffee":33,"./app/views/LeadGenView.coffee":35,"./app/views/MonthlyTotalView.coffee":37,"./app/views/RdbssView.coffee":39,"./app/views/ServersView.coffee":41,"./app/views/ServicesView.coffee":43,"./app/views/SupportView.coffee":44,"q":2}]},{},[45])
+},{"./app/Config.coffee":3,"./app/Utils.coffee":4,"./app/collections/AppfogCollection.coffee":5,"./app/collections/BaremetalCollection.coffee":6,"./app/collections/IpsCollection.coffee":7,"./app/collections/PricingMapsCollection.coffee":8,"./app/collections/RdbssCollection.coffee":9,"./app/collections/SbssCollection.coffee":10,"./app/collections/ServersCollection.coffee":11,"./app/collections/ServicesCollection.coffee":12,"./app/views/AppfogsView.coffee":33,"./app/views/BaremetalConfigsView.coffee":34,"./app/views/IpServicesView.coffee":36,"./app/views/LeadGenView.coffee":38,"./app/views/MonthlyTotalView.coffee":40,"./app/views/RdbssView.coffee":42,"./app/views/SbssView.coffee":44,"./app/views/ServersView.coffee":46,"./app/views/ServicesView.coffee":48,"./app/views/SupportView.coffee":49,"q":2}]},{},[50])

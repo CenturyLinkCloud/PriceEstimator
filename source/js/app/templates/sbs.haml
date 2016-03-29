@@ -1,0 +1,24 @@
+%td.table-cell.rate-cell.range-cell
+  %input.retention-period-text-input{data: {name: "retentionPeriod"}}
+  %input.range-slider{name: "retentionPeriod", type: "range", min: 1, max: 31, value: @model.get("retentionPeriod")}
+
+%td.table-cell.storage-cell.range-cell
+  %input.storage-text-input{data: {name: "storage"}}
+  %input.range-slider{name: "storage", type:"range", min: 1, max: 4000, step: 1, value: @model.get("storage")}
+
+%td.table-cell.rate-cell.range-cell
+  %input.add-rate-text-input{data: {name: "dataAddRate"}}
+  %input.range-slider{name: "dataAddRate", type: "range", min: 1, max: 300, value: @model.get("dataAddRate")}
+
+%td.table-cell.rate-cell.range-cell
+  %input.delete-rate-text-input{data: {name: "dataDeleteRate"}}
+  %input.range-slider{name: "dataDeleteRate", type: "range", min: 1, max: 300, value: @model.get("dataDeleteRate")}
+
+%td.table-cell.storage-cell.range-cell
+  %input.restore-text-input{data: {name: "restore"}}
+  %input.range-slider{name: "restore", type:"range", min: 0, max: 4000, step: 1, value: @model.get("restore")}
+
+%td.table-cell.price-cell
+  %span.price
+    = accounting.formatMoney(@model.totalPricePerMonth() * @app.currency.rate, {"symbol": @app.currency.symbol })
+  %a.remove-button{href: "#"} X

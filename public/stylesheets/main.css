@@ -333,7 +333,15 @@ input[type=text], input[type=number] {
 
 .storage-cell span {
   width: 35px; }
-.storage-cell .storage-text-input {
+.storage-cell .storage-text-input, .storage-cell .restore-text-input {
+  width: 35px;
+  padding-left: 3px;
+  margin-right: 2px;
+  font-size: 11px; }
+
+.rate-cell span {
+  width: 35px; }
+.rate-cell .add-rate-text-input, .rate-cell .delete-rate-text-input, .rate-cell .retention-period-text-input {
   width: 35px;
   padding-left: 3px;
   margin-right: 2px;

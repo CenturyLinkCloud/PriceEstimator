@@ -466,14 +466,25 @@ input[type=text], input[type=number] {
     width: 35px;
   }
 
-  .storage-text-input {
+  .storage-text-input, .restore-text-input {
     width: 35px;
     padding-left: 3px;
     margin-right: 2px;
     font-size: 11px;
   }
 }
+.rate-cell {
+  span {
+    width: 35px;
+  }
 
+  .add-rate-text-input, .delete-rate-text-input, .retention-period-text-input {
+    width: 35px;
+    padding-left: 3px;
+    margin-right: 2px;
+    font-size: 11px;
+  }
+}
 .config-cell {
   width: 330px;
   select {
