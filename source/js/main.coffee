@@ -233,11 +233,12 @@ App =
     return unless @initialized
 
     @totalPrice = @serversCollection.subtotal() +
-                  @rdbssCollection.subtotal() +
                   @hyperscaleServersCollection.subtotal() +
+                  @baremetalCollection.subtotal() +
+                  @rdbssCollection.subtotal() +
+                  @sbssCollection.subtotal() +
                   @ipsCollection.subtotal() +
                   @appfogServicesCollection.subtotal() +
-                  @baremetalCollection.subtotal() +
                   @networkingServices.subtotal() +
                   @additionalServices.subtotal() +
                   @bandwidthServices.subtotal()

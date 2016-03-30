@@ -5658,7 +5658,7 @@ App = {
     if (!this.initialized) {
       return;
     }
-    this.totalPrice = this.serversCollection.subtotal() + this.rdbssCollection.subtotal() + this.hyperscaleServersCollection.subtotal() + this.ipsCollection.subtotal() + this.appfogServicesCollection.subtotal() + this.baremetalCollection.subtotal() + this.networkingServices.subtotal() + this.additionalServices.subtotal() + this.bandwidthServices.subtotal();
+    this.totalPrice = this.serversCollection.subtotal() + this.hyperscaleServersCollection.subtotal() + this.baremetalCollection.subtotal() + this.rdbssCollection.subtotal() + this.sbssCollection.subtotal() + this.ipsCollection.subtotal() + this.appfogServicesCollection.subtotal() + this.networkingServices.subtotal() + this.additionalServices.subtotal() + this.bandwidthServices.subtotal();
     this.oSSubtotal = this.serversCollection.oSSubtotal() + this.hyperscaleServersCollection.oSSubtotal();
     this.managedTotal = this.serversCollection.managedTotal();
     this.totalPriceWithSupport = this.totalPrice + this.supportView.updateSubtotal();
