@@ -125,7 +125,7 @@
                 "name": "Intrusion Prevention Service (IPS)",
                 "descriptionHtml": "Per hour per instance.",
                 "type": "hourly (allocated)",
-                "hourly": 0.18,
+                "hourly": 0.07,
                 "monthly": "&mdash;",
                 "unit": "hour",
                 "href": "/intrusion-prevention-service"
