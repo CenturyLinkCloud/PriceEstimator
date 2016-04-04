@@ -27,7 +27,7 @@ To update prices (each data center the service is offered), edit the pricing JSO
 
 There are multiple pricing JSON files: `baseline.json`, one for each data center (e.g., `gb3.json`, and `default.json`. The `default.json` file is used if there is not a file for a particular data center.
 
-Pricing changes must be made to all of these files in bothe repositories.
+Pricing changes must be made to all of these files in both repositories.
 
 The file [data-center-prices.json](https://github.com/CenturyLinkCloud/PriceEstimator/blob/master/public/prices/data-center-prices.json) feeds the select dropdown for the data centers as well as specifies which pricing JSON file to use.
 
