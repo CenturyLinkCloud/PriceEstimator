@@ -154,6 +154,43 @@
 
       %a.add-button.no-print{href: "#"} <span class="plus"></span> Add Relational DB Service
 
+    #sbss.server-table.calculator-section
+      %h3 Simple Backup Services
+      %ul
+        %li
+          Protect your enterprise data with secure, file-level backups in the cloud.
+          <a href="/simple-backup-service" target="_blank" class="no-print">More info</a>.
+      .subtotal-wrapper
+        %span.print-only--inline Simple Backup Services&nbsp;|&nbsp;
+        Sub-total
+        .subtotal
+          $0.00
+      %table.table
+        %tr.table-headers
+          %th.table-header.rate-cell.range-cell
+            .tooltip-wrapper
+              %a.has-tooltip{href:"#", data: {toggle: "tooltip", title: "The number of days customers plan on retaining their backup data."}}
+            RETENTION PERIOD (days)
+          %th.table-header.storage-cell.range-cell
+            .tooltip-wrapper
+              %a.has-tooltip{href:"#", data: {toggle: "tooltip", title: "The amount of initial data in gigabytes on the target server to be backed up."}}
+            STORAGE (GB)
+          %th.table-header.rate-cell.range-cell
+            .tooltip-wrapper
+              %a.has-tooltip{href:"#", data: {toggle: "tooltip", title: "The percentage of the server data that will be added on a daily basis."}}
+            DATA ADD RATE (% per day)
+          %th.table-header.rate-cell.range-cell
+            .tooltip-wrapper
+              %a.has-tooltip{href:"#", data: {toggle: "tooltip", title: "The percentage of the server data that is estimated to be deleted/changed on a daily basis."}}
+            DATA DELETE RATE (% per day)
+          %th.table-header.storage-cell.range-cell
+            .tooltip-wrapper
+              %a.has-tooltip{href:"#", data: {toggle: "tooltip", title: "The amount of backed up data in gigabytes that is restored each month."}}
+            RESTORE (GB)
+          %th.table-header.price-cell MONTHLY COST
+
+      %a.add-button.no-print{href: "#"} <span class="plus"></span> Add Simple Backup Service
+
     #intrusion-prevention-service.calculator-section
       %h3 Intrusion Prevention Service (IPS)
       %p

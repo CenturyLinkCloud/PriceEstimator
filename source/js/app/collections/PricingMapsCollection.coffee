@@ -41,6 +41,7 @@ PricingMapsCollection = Backbone.Collection.extend
         storage:
           standard: 0.15
           premium: 0.5
+          sbs: 0.10
           "hyperscale": "disabled"
     baremetal =
       type: 'baremetal'
@@ -66,6 +67,10 @@ PricingMapsCollection = Backbone.Collection.extend
                 server.options[ids[1]][ids[2]] = price #* @currency.rate
               else if ids[1] is 'storage'
                 price = product.hourly * HOURS_IN_MONTH
+                if !price
+                  price = product.monthly
+                if !price
+                  price = product.usage
                 server.options[ids[1]][ids[2]] = price #* @currency.rate
               else
                 price = product.hourly || product.monthly

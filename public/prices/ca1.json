@@ -68,6 +68,24 @@
                 "descriptionHtml": "Per GB Stored (for archived virtual machines)",
                 "type": "hourly (used)",
                 "hourly": 0.0001
+            },
+            {
+                "key": "server:storage:sbs-backups",
+                "name": "Simple Backup Service Backups",
+                "descriptionHtml": "Protect your enterprise data with secure, file-level backups in the cloud.",
+                "type": "usage (per GB per month)",
+                "monthly": 0.10,
+                "unit": "GB",
+                "href": "/simple-backup-service"
+            },
+            {
+                "key": "server:storage:sbs-restore",
+                "name": "Simple Backup Service Restore",
+                "descriptionHtml": "Data that is restored from backup.",
+                "type": "usage (per GB restored)",
+                "usage": 0.10,
+                "unit": "GB",
+                "href": "/simple-backup-service"
             }
         ]
     },

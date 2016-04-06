@@ -11,6 +11,7 @@
 Config = require './app/Config.coffee'
 ServersView = require './app/views/ServersView.coffee'
 RdbssView = require './app/views/RdbssView.coffee'
+SbssView = require './app/views/SbssView.coffee'
 SupportView = require './app/views/SupportView.coffee'
 ServicesView = require './app/views/ServicesView.coffee'
 IpServicesView = require './app/views/IpServicesView.coffee'
@@ -21,6 +22,7 @@ LeadGenView = require './app/views/LeadGenView.coffee'
 PricingMapsCollection = require './app/collections/PricingMapsCollection.coffee'
 ServersCollection = require './app/collections/ServersCollection.coffee'
 RdbssCollection = require './app/collections/RdbssCollection.coffee'
+SbssCollection = require './app/collections/SbssCollection.coffee'
 ServicesCollection = require './app/collections/ServicesCollection.coffee'
 IpsCollection = require './app/collections/IpsCollection.coffee'
 AppfogCollection = require './app/collections/AppfogCollection.coffee'
@@ -76,6 +78,7 @@ App =
   onPricingMapsSynced: ->
     @initServers()
     @initRdbss()
+    @initSbss()
     @initHyperscaleServers()
     @initIpsServices()
     @initAppfogServices()
@@ -169,6 +172,18 @@ App =
       el: "#rdbss"
       pricingMap: @pricingMaps.forKey("rdbs")
 
+  initSbss: ->
+    @sbssCollection = new SbssCollection
+
+    @sbssCollection.on "change remove add", =>
+      @updateTotalPrice()
+
+    @sbssView = new SbssView
+      app: @
+      collection: @sbssCollection
+      el: "#sbss"
+      pricingMap: @pricingMaps.forKey("server")
+
   initHyperscaleServers: ->
     @hyperscaleServersCollection = new ServersCollection
     @hyperscaleServersCollection.on "change remove add", =>
@@ -218,11 +233,12 @@ App =
     return unless @initialized
 
     @totalPrice = @serversCollection.subtotal() +
-                  @rdbssCollection.subtotal() +
                   @hyperscaleServersCollection.subtotal() +
+                  @baremetalCollection.subtotal() +
+                  @rdbssCollection.subtotal() +
+                  @sbssCollection.subtotal() +
                   @ipsCollection.subtotal() +
                   @appfogServicesCollection.subtotal() +
-                  @baremetalCollection.subtotal() +
                   @networkingServices.subtotal() +
                   @additionalServices.subtotal() +
                   @bandwidthServices.subtotal()
