@@ -128,5 +128,15 @@
                 "href": "/prices/sg1.json"
             }
         ]
+    },
+    {
+        "alias": "AU1",
+        "name": "Australia (Sydney)",
+        "links": [
+            {
+                "rel": "pricing",
+                "href": "/prices/au1.json"
+            }
+        ]
     }
 ]
