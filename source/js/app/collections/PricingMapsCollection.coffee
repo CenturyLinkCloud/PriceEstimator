@@ -76,13 +76,13 @@ PricingMapsCollection = Backbone.Collection.extend
                 price = product.hourly || product.monthly
                 server.options[ids[1]] = price #* @currency.rate
             else if ids[0] is 'rdbs'
-              if ids[2]
-                if !rdbs.options[ids[2]]
-                  rdbs.options[ids[2]] = {}
+              if ids[1]
+                if !rdbs.options[ids[1]]
+                  rdbs.options[ids[1]] = {}
                 price = product.hourly
                 if ids[2] is 'storage'
                   price = price * HOURS_IN_MONTH
-                rdbs.options[ids[2]][ids[1]] = price #* @currency.rate          
+                rdbs.options[ids[1]][ids[2]] = price #* @currency.rate          
             else if ids[0] is 'networking-services'
               if ids[1] is 'shared-load-balancer'
                 price = product.hourly * HOURS_IN_MONTH

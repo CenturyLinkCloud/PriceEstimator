@@ -2114,8 +2114,8 @@ return Q;
 
 });
 
-}).call(this,require("FWaASH"))
-},{"FWaASH":1}],3:[function(require,module,exports){
+}).call(this,require("JkpR2F"))
+},{"JkpR2F":1}],3:[function(require,module,exports){
 var Config;
 
 Config = {
@@ -2393,15 +2393,15 @@ PricingMapsCollection = Backbone.Collection.extend({
                   return server.options[ids[1]] = price;
                 }
               } else if (ids[0] === 'rdbs') {
-                if (ids[2]) {
-                  if (!rdbs.options[ids[2]]) {
-                    rdbs.options[ids[2]] = {};
+                if (ids[1]) {
+                  if (!rdbs.options[ids[1]]) {
+                    rdbs.options[ids[1]] = {};
                   }
                   price = product.hourly;
                   if (ids[2] === 'storage') {
                     price = price * HOURS_IN_MONTH;
                   }
-                  return rdbs.options[ids[2]][ids[1]] = price;
+                  return rdbs.options[ids[1]][ids[2]] = price;
                 }
               } else if (ids[0] === 'networking-services') {
                 if (ids[1] === 'shared-load-balancer') {
