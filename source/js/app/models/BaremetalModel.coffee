@@ -43,10 +43,18 @@ BaremetalModel = Backbone.Model.extend
       selectedOs = @.get("os")
 
       configProduct = pricingMap.config[selectedConfig]
-      configPrice = @priceForMonth(configProduct.hourly * quantity)
+      if !configProduct
+        selectedConfig = Object.keys(pricingMap.config)[0]
+        configProduct = pricingMap.config[selectedConfig]
+
+      if configProduct
+        configPrice = @priceForMonth(configProduct.hourly * quantity)
+        sockets = configProduct.sockets
+      else
+        configPrice = 0
+        sockets = 0
 
       osProduct = pricingMap.os[selectedOs]
-      sockets = configProduct.sockets
       osPrice = @priceForMonth(osProduct.hourly * quantity * sockets)
 
       return configPrice + osPrice

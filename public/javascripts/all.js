@@ -2765,9 +2765,18 @@ BaremetalModel = Backbone.Model.extend({
       selectedConfig = this.get("config");
       selectedOs = this.get("os");
       configProduct = pricingMap.config[selectedConfig];
-      configPrice = this.priceForMonth(configProduct.hourly * quantity);
+      if (!configProduct) {
+        selectedConfig = Object.keys(pricingMap.config)[0];
+        configProduct = pricingMap.config[selectedConfig];
+      }
+      if (configProduct) {
+        configPrice = this.priceForMonth(configProduct.hourly * quantity);
+        sockets = configProduct.sockets;
+      } else {
+        configPrice = 0;
+        sockets = 0;
+      }
       osProduct = pricingMap.os[selectedOs];
-      sockets = configProduct.sockets;
       osPrice = this.priceForMonth(osProduct.hourly * quantity * sockets);
       return configPrice + osPrice;
     }
