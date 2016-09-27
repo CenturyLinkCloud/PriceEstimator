@@ -3329,7 +3329,41 @@ $c = function(text) {
 
 $o = [];
 
-$o.push("<td class='quantity-cell table-cell'>\n  <input class='number' name='quantity' value='" + ($e($c(this.model.get("quantity")))) + "' type='text'>\n</td>\n<td class='table-cell usage-cell'>\n  <input class='number' name='usage' value='" + ($e($c(this.model.get("usage")))) + "' type='text'>\n  <select name='usagePeriod'>\n    <option value='hours_per_month' selected='" + ($e($c(this.model.get('usagePeriod') === 'hours_per_month'))) + "'>hrs / month</option>\n    <option value='percentage_of_month' selected='" + ($e($c(this.model.get('usagePeriod') === 'percentage_of_month'))) + "'>% / month</option>\n    <option value='hours_per_week' selected='" + ($e($c(this.model.get('usagePeriod') === 'hours_per_week'))) + "'>hrs / week</option>\n    <option value='hours_per_day' selected='" + ($e($c(this.model.get('usagePeriod') === 'hours_per_day'))) + "'>hrs / day</option>\n  </select>\n</td>\n<td class='config-cell table-cell'>\n  <select class='baremetal-select' name='config'>\n    <option value='" + ($e($c(1))) + "' selected='" + ($e($c(this.model.get('config') === 1))) + "'>" + (this.model.get('pricing').config['1'].name) + "</option>\n    <option value='" + ($e($c(2))) + "' selected='" + ($e($c(this.model.get('config') === 2))) + "'>" + (this.model.get('pricing').config['2'].name) + "</option>\n    <option value='" + ($e($c(3))) + "' selected='" + ($e($c(this.model.get('config') === 3))) + "'>" + (this.model.get('pricing').config['3'].name) + "</option>\n    <option value='" + ($e($c(4))) + "' selected='" + ($e($c(this.model.get('config') === 4))) + "'>" + (this.model.get('pricing').config['4'].name) + "</option>\n    <option value='" + ($e($c(5))) + "' selected='" + ($e($c(this.model.get('config') === 5))) + "'>" + (this.model.get('pricing').config['5'].name) + "</option>\n    <option value='" + ($e($c(6))) + "' selected='" + ($e($c(this.model.get('config') === 6))) + "'>" + (this.model.get('pricing').config['6'].name) + "</option>\n    <option value='" + ($e($c(7))) + "' selected='" + ($e($c(this.model.get('config') === 7))) + "'>" + (this.model.get('pricing').config['7'].name) + "</option>\n    <option value='" + ($e($c(8))) + "' selected='" + ($e($c(this.model.get('config') === 8))) + "'>" + (this.model.get('pricing').config['8'].name) + "</option>\n  </select>\n</td>\n<td class='os-cell table-cell'>\n  <select name='os'>\n    <option value='" + ($e($c(1))) + "' selected='" + ($e($c(this.model.get('os') === 1))) + "' title='" + ($e($c(this.model.get('pricing').os['1'].descriptionHtml))) + "'>" + (this.model.get('pricing').os['1'].shortName) + "</option>\n    <option value='" + ($e($c(2))) + "' selected='" + ($e($c(this.model.get('os') === 2))) + "' title='" + ($e($c(this.model.get('pricing').os['2'].descriptionHtml))) + "'>" + (this.model.get('pricing').os['2'].shortName) + "</option>\n    <option value='" + ($e($c(3))) + "' selected='" + ($e($c(this.model.get('os') === 3))) + "' title='" + ($e($c(this.model.get('pricing').os['3'].descriptionHtml))) + "'>" + (this.model.get('pricing').os['3'].shortName) + "</option>\n    <option value='" + ($e($c(4))) + "' selected='" + ($e($c(this.model.get('os') === 4))) + "' title='" + ($e($c(this.model.get('pricing').os['4'].descriptionHtml))) + "'>" + (this.model.get('pricing').os['4'].shortName) + "</option>\n  </select>\n</td>\n<td class='price-cell table-cell'>\n  <span class='price'>");
+$o.push("<td class='quantity-cell table-cell'>\n  <input class='number' name='quantity' value='" + ($e($c(this.model.get("quantity")))) + "' type='text'>\n</td>\n<td class='table-cell usage-cell'>\n  <input class='number' name='usage' value='" + ($e($c(this.model.get("usage")))) + "' type='text'>\n  <select name='usagePeriod'>\n    <option value='hours_per_month' selected='" + ($e($c(this.model.get('usagePeriod') === 'hours_per_month'))) + "'>hrs / month</option>\n    <option value='percentage_of_month' selected='" + ($e($c(this.model.get('usagePeriod') === 'percentage_of_month'))) + "'>% / month</option>\n    <option value='hours_per_week' selected='" + ($e($c(this.model.get('usagePeriod') === 'hours_per_week'))) + "'>hrs / week</option>\n    <option value='hours_per_day' selected='" + ($e($c(this.model.get('usagePeriod') === 'hours_per_day'))) + "'>hrs / day</option>\n  </select>\n</td>\n<td class='config-cell table-cell'>\n  <select class='baremetal-select' name='config'>");
+
+if (this.model.get('pricing').config['1']) {
+  $o.push("    <option value='" + ($e($c(1))) + "' selected='" + ($e($c(this.model.get('config') === 1))) + "'>" + (this.model.get('pricing').config['1'].name) + "</option>");
+}
+
+if (this.model.get('pricing').config['2']) {
+  $o.push("    <option value='" + ($e($c(2))) + "' selected='" + ($e($c(this.model.get('config') === 2))) + "'>" + (this.model.get('pricing').config['2'].name) + "</option>");
+}
+
+if (this.model.get('pricing').config['3']) {
+  $o.push("    <option value='" + ($e($c(3))) + "' selected='" + ($e($c(this.model.get('config') === 3))) + "'>" + (this.model.get('pricing').config['3'].name) + "</option>");
+}
+
+if (this.model.get('pricing').config['4']) {
+  $o.push("    <option value='" + ($e($c(4))) + "' selected='" + ($e($c(this.model.get('config') === 4))) + "'>" + (this.model.get('pricing').config['4'].name) + "</option>");
+}
+
+if (this.model.get('pricing').config['5']) {
+  $o.push("    <option value='" + ($e($c(5))) + "' selected='" + ($e($c(this.model.get('config') === 5))) + "'>" + (this.model.get('pricing').config['5'].name) + "</option>");
+}
+
+if (this.model.get('pricing').config['6']) {
+  $o.push("    <option value='" + ($e($c(6))) + "' selected='" + ($e($c(this.model.get('config') === 6))) + "'>" + (this.model.get('pricing').config['6'].name) + "</option>");
+}
+
+if (this.model.get('pricing').config['7']) {
+  $o.push("    <option value='" + ($e($c(7))) + "' selected='" + ($e($c(this.model.get('config') === 7))) + "'>" + (this.model.get('pricing').config['7'].name) + "</option>");
+}
+
+if (this.model.get('pricing').config['8']) {
+  $o.push("    <option value='" + ($e($c(8))) + "' selected='" + ($e($c(this.model.get('config') === 8))) + "'>" + (this.model.get('pricing').config['8'].name) + "</option>");
+}
+
+$o.push("  </select>\n</td>\n<td class='os-cell table-cell'>\n  <select name='os'>\n    <option value='" + ($e($c(1))) + "' selected='" + ($e($c(this.model.get('os') === 1))) + "' title='" + ($e($c(this.model.get('pricing').os['1'].descriptionHtml))) + "'>" + (this.model.get('pricing').os['1'].shortName) + "</option>\n    <option value='" + ($e($c(2))) + "' selected='" + ($e($c(this.model.get('os') === 2))) + "' title='" + ($e($c(this.model.get('pricing').os['2'].descriptionHtml))) + "'>" + (this.model.get('pricing').os['2'].shortName) + "</option>\n    <option value='" + ($e($c(3))) + "' selected='" + ($e($c(this.model.get('os') === 3))) + "' title='" + ($e($c(this.model.get('pricing').os['3'].descriptionHtml))) + "'>" + (this.model.get('pricing').os['3'].shortName) + "</option>\n    <option value='" + ($e($c(4))) + "' selected='" + ($e($c(this.model.get('os') === 4))) + "' title='" + ($e($c(this.model.get('pricing').os['4'].descriptionHtml))) + "'>" + (this.model.get('pricing').os['4'].shortName) + "</option>\n  </select>\n</td>\n<td class='price-cell table-cell'>\n  <span class='price'>");
 
 $o.push("    " + $e($c(accounting.formatMoney(this.model.totalPricePerMonth() * this.app.currency.rate, {
   "symbol": this.app.currency.symbol
