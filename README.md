@@ -1,3 +1,5 @@
+******** NO ACTIVE DEVELOPMENT: REPO IS ARCHIVED ***********
+
 # CenturyLink Cloud Price Estimator
 
 A simple calculator for estimating monthly cost of using CenturyLink Cloud products and services.
